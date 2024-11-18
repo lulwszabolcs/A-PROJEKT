@@ -1,0 +1,27 @@
+.login-container {
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 20px;
+    width: 300px;
+    display: flex; 
+    flex-direction: column;
+    height: 400px; 
+}
+
+.center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.items {
+    margin-bottom: 5%;
+}
+
+.login-button {
+    align-self: center;
+    margin-top: 30px;
+  }
