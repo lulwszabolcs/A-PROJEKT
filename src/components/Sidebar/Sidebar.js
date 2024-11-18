@@ -25,6 +25,12 @@ import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 import ErrorIcon from '@mui/icons-material/Error';
 import LogoutIcon from '@mui/icons-material/Logout';
 import Homepage from '../Homepage-content/Homepage';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Outlet, Link } from "react-router-dom";
+import { Button, textFieldClasses } from '@mui/material';
+import { useNavigate } from "react-router-dom";
+import {withRouter} from 'react-router-dom';
+
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -106,6 +112,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function MiniDrawer() {
+  const navigate = useNavigate();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -116,6 +123,29 @@ export default function MiniDrawer() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+  
+const [primarytext,setPrimaryText] = React.useState();
+const handleChange = (text) =>{
+  switch (text) {
+    case "Főoldal":
+      navigate('/home')
+      break;
+      case "Dolgozók":
+        navigate('/workers')  
+        break;
+        case "Járműállomány":
+          navigate('/vehicles')  
+          break;
+          case "Hibák":
+            navigate('/errors')  
+            break;
+    case "Kijelentkezés":
+      navigate('/login')  
+      break;
+    default:
+      break;
+  }
+}
   const icons = [<HomeIcon/>,<BadgeIcon/>,<DirectionsCarIcon/>,<ErrorIcon/>,<LogoutIcon/>];
 
   return (
@@ -142,7 +172,7 @@ export default function MiniDrawer() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Főoldal
+            {primarytext}
           </Typography>
         </Toolbar>
       </AppBar>
@@ -155,8 +185,8 @@ export default function MiniDrawer() {
         <Divider />
         <List>
           {['Főoldal', 'Dolgozók', 'Járműállomány', 'Hibák', 'Kijelentkezés'].map((text,index) => (
-            <ListItem key={text} disablePadding sx={{ display: 'block', marginTop:'30px'}}>
-              <ListItemButton
+            <ListItem key={text} disablePadding sx={{ display: 'block', marginTop:'30px'}}> 
+              <ListItemButton onClick={()=>handleChange(text)}
                 sx={[
                   {
                     minHeight: 48,
@@ -205,7 +235,6 @@ export default function MiniDrawer() {
           ))}
         </List>
       </Drawer>
-      <Homepage/>
     </Box>
   );
 }
