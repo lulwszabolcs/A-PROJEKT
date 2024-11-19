@@ -12,3 +12,8 @@
     position: absolute;
     right: 15vw;
 }
+.flexCenter{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}

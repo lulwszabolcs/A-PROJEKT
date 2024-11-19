@@ -11,7 +11,12 @@ import CreateIcon from '@mui/icons-material/Create';
 import MiniDrawer from '../Sidebar/Sidebar';
 import AddIcon from '@mui/icons-material/Add';
 import Fab from '@mui/material/Fab';
+import Modal from '@mui/material/Modal';
 import './Errors.css'
+import { useState } from 'react';
+import Addproblem from './AddProblem/Addproblem';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 export default function Errors() {
     const problems = [
         {
@@ -37,8 +42,18 @@ export default function Errors() {
         desc: "Lebomlott a palfon",
         date: "2022-02-22",
         id: 4
+        },
+        {
+        name: "Lebomlott csempe",
+        desc: "Lebomlott a palfon",
+        date: "2022-02-22",
+        id: 5
         }
 ]
+    const [IsaddNewProblemOpen,setIsAddNewProblemOpen] = useState(false);
+    function closeAddProblemModal() {
+      setIsAddNewProblemOpen(false)
+    }
     return (
         <>
         <MiniDrawer></MiniDrawer>
@@ -73,10 +88,15 @@ export default function Errors() {
         
       </TableContainer>
       <div className='fabicon'>
-        <Fab color="primary" aria-label="add">
+        <Fab color="primary" aria-label="add" onClick={()=>setIsAddNewProblemOpen(true)}>
           <AddIcon />
         </Fab>
         </div>
+        <Modal open={IsaddNewProblemOpen} className='flexcenter'>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <Addproblem close={closeAddProblemModal}></Addproblem>
+          </LocalizationProvider>
+        </Modal>
             </div>
             
         </>

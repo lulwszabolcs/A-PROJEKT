@@ -6,6 +6,7 @@ import Loginpage from './components/Login/Loginpage';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NotFound from './components/NotFound/NotFound';
 import Errors from './components/Errors/Errors';
+import Workers from './components/Workers/Workers';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="home" element={<Homepage />} />
           <Route path="login" element={<Loginpage />} />
           <Route path="errors" element={<Errors />} />
+          <Route path="workers" element={<Workers />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
