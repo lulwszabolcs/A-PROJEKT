@@ -13,13 +13,15 @@ import AddIcon from '@mui/icons-material/Add';
 import Fab from '@mui/material/Fab';
 import Modal from '@mui/material/Modal';
 import './Errors.css'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Addproblem from './AddProblem/Addproblem';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import EditProblem from './EditProblem/EditProblem';
+import axios from 'axios'
 export default function Errors() {
-    const problems = [
+  /*  
+  const problems = [
         {
         name: "Lebomlott plafon",
         desc: "Lebomlott a palfon",
@@ -51,6 +53,17 @@ export default function Errors() {
         id: 5
         }
 ]
+        */
+const [problems,setProblems] = useState([]);
+useEffect(()=>{
+  axios.get('http://localhost:8080/api/problem').then(({data})=>{
+    const problems = data
+    setProblems(problems)
+    console.log(problems);
+}).catch((error)=>{
+    console.log(error)
+})
+},[])
     const [IsaddNewProblemOpen,setIsAddNewProblemOpen] = useState(false);
     const [IsEditModalOpen,setIsEditModalIOpen] = useState(false);
     function closeAddProblemModal() {
@@ -78,11 +91,11 @@ export default function Errors() {
           </TableHead>
           <TableBody>
             {problems.map((problem)=>(
-                <TableRow key={problem.id}>
+                <TableRow key={problem.problemID}>
                 <TableCell >{problem.name}</TableCell>
-                <TableCell >{problem.desc}</TableCell>
-                <TableCell >{problem.date}</TableCell>
-                <TableCell >{problem.id}</TableCell>
+                <TableCell >{problem.description}</TableCell>
+                <TableCell >{problem.datum}</TableCell>
+                <TableCell >{problem.problemId}</TableCell>
                 <TableCell >
                     <Button onClick={()=>setIsEditModalIOpen(true)}><CreateIcon/></Button>
                     <Button><DeleteIcon/></Button>
@@ -105,7 +118,7 @@ export default function Errors() {
         </Modal>
         <Modal open={IsEditModalOpen} className='flexcenter'>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <EditProblem close={closeEditModal} problem={problems[1]}></EditProblem>
+          <EditProblem close={closeEditModal} problem={problems}></EditProblem>
           </LocalizationProvider>
         </Modal>
             </div>
