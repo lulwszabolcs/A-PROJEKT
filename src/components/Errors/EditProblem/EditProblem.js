@@ -15,9 +15,8 @@ export default function EditProblem({close,problem,id}) {
 
                     
                      
-                <TextField defaultValue={problem[0].name} name='todo_text'  id="outlined-basic" label="Név" variant="outlined" />
+                <TextField defaultValue={problem[0].name} name='problem_text'  id="outlined-basic" label="Név" variant="outlined" />
                 <TextField name='todo_text'  id="outlined-basic" label="Leírás" variant="outlined" />
-                <DatePicker name='expire_at' label="Dátum" />
 
 
 

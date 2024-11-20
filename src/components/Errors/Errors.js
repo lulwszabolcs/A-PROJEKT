@@ -20,40 +20,6 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import EditProblem from './EditProblem/EditProblem';
 import axios from 'axios'
 export default function Errors() {
-  /*  
-  const problems = [
-        {
-        name: "Lebomlott plafon",
-        desc: "Lebomlott a palfon",
-        date: "2022-02-22",
-        id: 1
-        },
-        {
-        name: "Lebomlott fal",
-        desc: "Lebomlott a palfon",
-        date: "2022-02-22",
-        id: 2
-        },
-        {
-        name: "Lebomlott csempe",
-        desc: "Lebomlott a palfon",
-        date: "2022-02-22",
-        id: 3
-        },
-        {
-        name: "Lebomlott csempe",
-        desc: "Lebomlott a palfon",
-        date: "2022-02-22",
-        id: 4
-        },
-        {
-        name: "Lebomlott csempe",
-        desc: "Lebomlott a palfon",
-        date: "2022-02-22",
-        id: 5
-        }
-]
-        */
 const [problems,setProblems] = useState([]);
 useEffect(()=>{
   axios.get('http://localhost:8080/api/problem').then(({data})=>{
@@ -64,6 +30,7 @@ useEffect(()=>{
     console.log(error)
 })
 },[])
+
     const [IsaddNewProblemOpen,setIsAddNewProblemOpen] = useState(false);
     const [IsEditModalOpen,setIsEditModalIOpen] = useState(false);
     function closeAddProblemModal() {
@@ -91,7 +58,7 @@ useEffect(()=>{
           </TableHead>
           <TableBody>
             {problems.map((problem)=>(
-                <TableRow key={problem.problemID}>
+                <TableRow key={problem.problemId}>
                 <TableCell >{problem.name}</TableCell>
                 <TableCell >{problem.description}</TableCell>
                 <TableCell >{problem.datum}</TableCell>
