@@ -17,6 +17,7 @@ import { useState } from 'react';
 import Addproblem from './AddProblem/Addproblem';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import EditProblem from './EditProblem/EditProblem';
 export default function Errors() {
     const problems = [
         {
@@ -51,9 +52,14 @@ export default function Errors() {
         }
 ]
     const [IsaddNewProblemOpen,setIsAddNewProblemOpen] = useState(false);
+    const [IsEditModalOpen,setIsEditModalIOpen] = useState(false);
     function closeAddProblemModal() {
       setIsAddNewProblemOpen(false)
     }
+    function closeEditModal() {
+      setIsEditModalIOpen(false)
+    }
+
     return (
         <>
         <MiniDrawer></MiniDrawer>
@@ -78,7 +84,7 @@ export default function Errors() {
                 <TableCell >{problem.date}</TableCell>
                 <TableCell >{problem.id}</TableCell>
                 <TableCell >
-                    <Button><CreateIcon/></Button>
+                    <Button onClick={()=>setIsEditModalIOpen(true)}><CreateIcon/></Button>
                     <Button><DeleteIcon/></Button>
                     </TableCell>
               </TableRow>
@@ -95,6 +101,11 @@ export default function Errors() {
         <Modal open={IsaddNewProblemOpen} className='flexcenter'>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <Addproblem close={closeAddProblemModal}></Addproblem>
+          </LocalizationProvider>
+        </Modal>
+        <Modal open={IsEditModalOpen} className='flexcenter'>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <EditProblem close={closeEditModal} problem={problems[1]}></EditProblem>
           </LocalizationProvider>
         </Modal>
             </div>
