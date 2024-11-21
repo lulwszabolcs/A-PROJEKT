@@ -19,76 +19,14 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import EditProblem from './EditProblem/EditProblem';
 import axios from 'axios'
+import ErrorList from './ErrorList/ErrorList';
 export default function Errors() {
-const [problems,setProblems] = useState([]);
-useEffect(()=>{
-  axios.get('http://localhost:8080/api/problem').then(({data})=>{
-    const problems = data
-    setProblems(problems)
-    console.log(problems);
-}).catch((error)=>{
-    console.log(error)
-})
-},[])
 
-    const [IsaddNewProblemOpen,setIsAddNewProblemOpen] = useState(false);
-    const [IsEditModalOpen,setIsEditModalIOpen] = useState(false);
-    function closeAddProblemModal() {
-      setIsAddNewProblemOpen(false)
-    }
-    function closeEditModal() {
-      setIsEditModalIOpen(false)
-    }
 
     return (
         <>
         <MiniDrawer></MiniDrawer>
-        
-        <div className='table-container'>
-        <h1 className='error-primary-text'>Folyamatban lévő hibák</h1>
-        <TableContainer component={Paper} style={{minWidth:"100px", maxWidth:'70vw' , marginLeft:'auto', marginRight:'auto', marginBottom:'20px'}}>
-        <Table >
-          <TableHead>
-            <TableRow>
-              <TableCell>Név</TableCell>
-              <TableCell>Leírás</TableCell>
-              <TableCell>Hozzáadva</TableCell>
-              <TableCell>Hibakód</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {problems.map((problem)=>(
-                <TableRow key={problem.problemId}>
-                <TableCell >{problem.name}</TableCell>
-                <TableCell >{problem.description}</TableCell>
-                <TableCell >{problem.datum}</TableCell>
-                <TableCell >{problem.problemId}</TableCell>
-                <TableCell >
-                    <Button onClick={()=>setIsEditModalIOpen(true)}><CreateIcon/></Button>
-                    <Button><DeleteIcon/></Button>
-                    </TableCell>
-              </TableRow>
-            ))} 
-          </TableBody>
-        </Table>
-        
-      </TableContainer>
-      <div className='fabicon'>
-        <Fab color="primary" aria-label="add" onClick={()=>setIsAddNewProblemOpen(true)}>
-          <AddIcon />
-        </Fab>
-        </div>
-        <Modal open={IsaddNewProblemOpen} className='flexcenter'>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <Addproblem close={closeAddProblemModal}></Addproblem>
-          </LocalizationProvider>
-        </Modal>
-        <Modal open={IsEditModalOpen} className='flexcenter'>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <EditProblem close={closeEditModal} problem={problems}></EditProblem>
-          </LocalizationProvider>
-        </Modal>
-            </div>
+        <ErrorList></ErrorList>
             
         </>
     )

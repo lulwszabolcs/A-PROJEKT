@@ -8,7 +8,7 @@ import axios from 'axios'
 import './Addproblem.css'
 import { useState } from 'react';
 import Errors from '../Errors';
-export default function Addproblem({close}) {
+export default function Addproblem({close,refreshProblems}) {
     function formatDate(date){
         var d = new Date(date),
         dformat = [d.getFullYear(),
@@ -31,6 +31,7 @@ export default function Addproblem({close}) {
     const [problems,setProblems] = useState([]);
     function addNewProblem() {
         axios.post('http://localhost:8080/api/problem',formData).then(()=>{
+            refreshProblems()
             close()
         }).catch((error)=>{
             alert(error.message);
