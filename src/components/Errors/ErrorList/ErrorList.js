@@ -18,6 +18,9 @@ import axios from 'axios'
 import './ErrorList.css';
 import Addproblem from '../AddProblem/Addproblem';
 import EditProblem from '../EditProblem/EditProblem';
+import Slide from '@mui/material/Slide';
+import Snackbar from '@mui/material/Snackbar';
+
 export default function ErrorList() {
     const [problems,setProblems] = useState([]);
 useEffect(()=>{
@@ -44,6 +47,20 @@ function refreshProblemList() {
     const [IsaddNewProblemOpen,setIsAddNewProblemOpen] = useState(false);
     const [IsEditModalOpen,setIsEditModalIOpen] = useState(false);
     const [currentProb,setCurrentProb] = useState([]);
+
+    const [snackbarOpen,setSnackbarOpen] = useState(false);
+    const [snackbarMessage,setSnackbarMessage] = useState();
+    const openSnackbar = (message) => {
+      setSnackbarMessage(message)
+      setSnackbarOpen(true)
+    }
+    const closeSnackbar = () =>{
+      setSnackbarOpen(false)
+    }
+    const [state, setState] = useState({
+      open: false,
+      Transition: Slide,
+    });
     function closeAddProblemModal() {
       setIsAddNewProblemOpen(false)
     }
@@ -55,7 +72,7 @@ function refreshProblemList() {
       setIsEditModalIOpen(false)
     }
     function deleteSelectedProblem(id) {
-        axios.delete(`http://localhost:8080/api/problem/${id}`).then(refreshProblemList).catch((error)=>{console.log(error)})
+        axios.delete(`http://localhost:8080/api/problem/${id}`).then(refreshProblemList,openSnackbar("Hiba sikeresen törölve!")).catch((error)=>{console.log(error)})
     }
     return (
         <>
@@ -105,6 +122,19 @@ function refreshProblemList() {
           <EditProblem close={closeEditModal} problem={currentProb} refreshProblems={refreshProblemList}></EditProblem>
           </LocalizationProvider>
         </Modal>
+        <Snackbar
+        ContentProps={{
+          sx: {
+            background: "lightgreen"
+          }
+        }}
+          open={snackbarOpen}
+          onClose={closeSnackbar}
+          TransitionComponent={state.Transition}
+          message={snackbarMessage}
+          key={state.Transition.name}
+          autoHideDuration={1200}
+        />
         </>
     )
 }

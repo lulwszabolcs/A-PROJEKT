@@ -1,0 +1,11 @@
+.info_btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+img {
+    width: 150;
+    height: 150;
+    border-radius: 100;
+}
