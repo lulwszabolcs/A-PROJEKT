@@ -21,6 +21,10 @@ import EditProblem from '../EditProblem/EditProblem';
 import Slide from '@mui/material/Slide';
 import Snackbar from '@mui/material/Snackbar';
 
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogTitle from '@mui/material/DialogTitle';
+
 export default function ErrorList() {
     const [problems,setProblems] = useState([]);
 useEffect(()=>{
@@ -57,6 +61,13 @@ function refreshProblemList() {
     const closeSnackbar = () =>{
       setSnackbarOpen(false)
     }
+    const [openDialog,setOpenDialog] = useState(false)
+    const openDialogBox = () =>{
+        setOpenDialog(true)
+    }
+    const closeDialog = () =>{
+        setOpenDialog(false)
+    }
     const [state, setState] = useState({
       open: false,
       Transition: Slide,
@@ -72,7 +83,7 @@ function refreshProblemList() {
       setIsEditModalIOpen(false)
     }
     function deleteSelectedProblem(id) {
-        axios.delete(`http://localhost:8080/api/problem/${id}`).then(refreshProblemList,openSnackbar("Hiba sikeresen törölve!")).catch((error)=>{console.log(error)})
+        axios.delete(`http://localhost:8080/api/problem/${id}`).then(refreshProblemList,openSnackbar("Hiba sikeresen törölve!"),closeDialog()).catch((error)=>{console.log(error)})
     }
     return (
         <>
@@ -97,7 +108,7 @@ function refreshProblemList() {
                 <TableCell >{problem.problemId}</TableCell>
                 <TableCell >
                     <Button onClick={()=> openEditModal(problem)}><CreateIcon/></Button>
-                    <Button onClick={() => deleteSelectedProblem(problem.problemId)}><DeleteIcon/></Button>
+                    <Button onClick={() => {openDialogBox();setCurrentProb(problem)}}><DeleteIcon/></Button>
                     </TableCell>
               </TableRow>
             ))} 
@@ -112,20 +123,21 @@ function refreshProblemList() {
         </div>
         <Modal open={IsaddNewProblemOpen} className='flexcenter'>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <Addproblem close={closeAddProblemModal} refreshProblems={refreshProblemList}></Addproblem>
+          <Addproblem close={closeAddProblemModal} refreshProblems={refreshProblemList} displaySnackbar={openSnackbar}></Addproblem>
           </LocalizationProvider>
         </Modal>
         
             </div>
             <Modal open={IsEditModalOpen} className='flexcenter'>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <EditProblem close={closeEditModal} problem={currentProb} refreshProblems={refreshProblemList}></EditProblem>
+          <EditProblem close={closeEditModal} problem={currentProb} refreshProblems={refreshProblemList} displaySnackbar={openSnackbar}></EditProblem>
           </LocalizationProvider>
         </Modal>
         <Snackbar
         ContentProps={{
           sx: {
-            background: "lightgreen"
+            background: "#4BB543",
+            marginLeft:8
           }
         }}
           open={snackbarOpen}
@@ -135,6 +147,22 @@ function refreshProblemList() {
           key={state.Transition.name}
           autoHideDuration={1200}
         />
+        <Dialog
+        open={openDialog}
+        onClose={closeDialog}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+        >
+        <DialogTitle id="alert-dialog-title">
+          {"Biztosan törli a kiválasztott hibát?"}
+        </DialogTitle>
+        <DialogActions>
+          <Button onClick={closeDialog}>Mégsem</Button>
+          <Button onClick={()=>{deleteSelectedProblem(currentProb.problemId)}} autoFocus>
+            Törlés
+          </Button>
+        </DialogActions>
+      </Dialog>
         </>
     )
 }

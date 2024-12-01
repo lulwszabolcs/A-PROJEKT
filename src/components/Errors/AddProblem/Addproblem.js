@@ -8,7 +8,7 @@ import axios from 'axios'
 import './Addproblem.css'
 import { useState } from 'react';
 import Errors from '../Errors';
-export default function Addproblem({close,refreshProblems}) {
+export default function Addproblem({close,refreshProblems,displaySnackbar}) {
     function formatDate(date){
         var d = new Date(date),
         dformat = [d.getFullYear(),
@@ -32,6 +32,7 @@ export default function Addproblem({close,refreshProblems}) {
     function addNewProblem() {
         axios.post('http://localhost:8080/api/problem',formData).then(()=>{
             refreshProblems()
+            displaySnackbar("Hiba sikeresen hozzáadva")
             close()
         }).catch((error)=>{
             alert(error.message);

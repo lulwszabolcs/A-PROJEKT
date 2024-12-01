@@ -8,7 +8,7 @@ import axios from 'axios';
 import './EditProblem.css';
 import { useState } from 'react';
 import ErrorList from '../ErrorList/ErrorList';
-export default function EditProblem({close,problem,refreshProblems}) {
+export default function EditProblem({close,problem,refreshProblems,displaySnackbar}) {
     function formatDate(date){
         var d = new Date(date),
         dformat = [d.getFullYear(),
@@ -31,6 +31,7 @@ export default function EditProblem({close,problem,refreshProblems}) {
     function editProblem() {
         axios.put(`http://localhost:8080/api/problem/${problem.problemId}`,formData).then(()=>{
             refreshProblems()
+            displaySnackbar("Hiba sikeresen módosítva")
             close()
         }).catch((error)=>{
             alert(error.message);
