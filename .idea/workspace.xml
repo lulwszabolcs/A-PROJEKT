@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8391b517-9230-422b-afcd-ed50ee1e0d94" name="Changes" comment="" />
+    <list default="true" id="8391b517-9230-422b-afcd-ed50ee1e0d94" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/src/components/Errors/AddProblem/Addproblem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Errors/AddProblem/Addproblem.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -10,9 +12,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 5
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
   <component name="ProjectId" id="2pQWI7M0j6ANPG4WJ4GvOVAe1su" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -23,7 +25,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/szabo/OneDrive/Dokumentumok/teszt",
+    "last_opened_file_path": "C:/Users/szabo/Downloads/teszt",
     "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
   }
@@ -45,7 +47,11 @@
       <option name="presentableId" value="Default" />
       <updated>1732698696915</updated>
       <workItem from="1732698697981" duration="14000" />
+      <workItem from="1733304291483" duration="278000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
 </project>

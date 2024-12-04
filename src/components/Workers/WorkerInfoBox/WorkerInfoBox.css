@@ -23,3 +23,9 @@ img {
     margin-right: auto;
     margin-top: 25vh;
 }
+
+.cardcontainer {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}

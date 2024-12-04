@@ -39,25 +39,25 @@ export default function Addproblem({close,refreshProblems,displaySnackbar}) {
         })
     }
     return (
-        <div className='addError-container'>
-            <h3 style={{textAlign:'center'}}>Új probléma hozzáadása</h3>
-            <FormControl fullWidth className='addError-form'>
+            <div className='addError-container'>
+                <h3 style={{textAlign:'center'}}>Új probléma hozzáadása</h3>
+                <FormControl fullWidth className='addError-form'>
 
-                    
-                     
-                <TextField onInput={handleChange} name='name'  id="outlined-basic" label="Név" variant="outlined" />
-                <TextField onInput={handleChange} name='description'  id="outlined-basic" label="Leírás" variant="outlined" />
-
-
-
-                <Stack spacing={40} direction="row">
-                        <Button variant="outlined" color="error" onClick={()=>{close()}}>Bezár</Button>
-                        <Button variant="contained" onClick={addNewProblem}>Mentés</Button>
-                </Stack>
-
-            </FormControl>
+                        
+                        
+                    <TextField onInput={handleChange} name='name'  id="outlined-basic" label="Név" variant="outlined" />
+                    <TextField onInput={handleChange} name='description'  id="outlined-basic" label="Leírás" variant="outlined" />
 
 
-        </div>
+
+                    <Stack spacing={40} direction="row">
+                            <Button variant="outlined" color="error" onClick={()=>{close()}}>Bezár</Button>
+                            <Button variant="contained" onClick={addNewProblem}>Mentés</Button>
+                    </Stack>
+
+                </FormControl>
+
+
+            </div>
     )
 }
