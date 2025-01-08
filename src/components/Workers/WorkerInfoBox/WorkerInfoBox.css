@@ -29,3 +29,9 @@ img {
     flex-direction: row;
     gap: 20px;
 }
+
+.worker-main-text {
+    text-align: center;
+    margin-top: 15vh;
+    margin-bottom: 5vh;
+}

@@ -39,7 +39,8 @@ export default function WorkerInfoBox() {
     : workers;
   return (
     <>
-    <div style={{marginLeft:'10vw',marginTop:'20vh',marginBottom:'10vh'}}>
+    <h1 className='worker-main-text'>Dolgozók kezelése</h1>
+    <div style={{marginLeft:'10vw',marginBottom:'10vh'}}>
     <Select style={{width:'20vw'}}
     labelId="demo-simple-select"
     id="demo-simple-select"
@@ -56,7 +57,7 @@ export default function WorkerInfoBox() {
   ))}
   </Select>
     </div>
-    <Box sx={{ width: 250, marginLeft:20,textAlign:'center', borderRadius:1}}>
+    <Box sx={{ width: 250,marginLeft:'10vw',textAlign:'center', borderRadius:1}}>
     
     <div style={{display:'flex',flexDirection:'row',gap:'40px',minWidth:'fit-content'}}>
       {filteredWorkers.map((worker)=>(

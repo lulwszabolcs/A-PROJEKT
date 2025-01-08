@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NotFound from './components/NotFound/NotFound';
 import Errors from './components/Errors/Errors';
 import Workers from './components/Workers/Workers';
+import Vehicles from './components/Vehicles/Vehicles';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route index element={<Loginpage />} />
           <Route path="home" element={<Homepage />} />
           <Route path="login" element={<Loginpage />} />
+          <Route path="vehicles" element={<Vehicles />} />
           <Route path="errors" element={<Errors />} />
           <Route path="workers" element={<Workers />} />
           <Route path="*" element={<NotFound />} />
