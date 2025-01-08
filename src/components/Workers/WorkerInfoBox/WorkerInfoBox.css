@@ -14,14 +14,14 @@ img {
     justify-content: center;
     align-items: center;
 }
-.workerdetails-container {
-    background: white;
+.modalworker {
+    background-color: white;
     padding: 20px;
     border-radius: 10px;
     max-width: 500px;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 25vh;
+    margin-top: 10vh;
 }
 
 .cardcontainer {

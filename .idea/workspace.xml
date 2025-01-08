@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8391b517-9230-422b-afcd-ed50ee1e0d94" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/components/Errors/AddProblem/Addproblem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Errors/AddProblem/Addproblem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Workers/WorkerInfoBox/WorkerInfoBox.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Workers/WorkerInfoBox/WorkerInfoBox.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,14 +23,25 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Node.js.App.js.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/szabo/Downloads/teszt",
+    "last_opened_file_path": "C:/Users/szabo/OneDrive/Dokumentumok/teszt",
     "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RunManager">
+    <configuration name="App.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/src/App.js" working-dir="$PROJECT_DIR$/src">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Node.js.App.js" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -48,6 +60,8 @@
       <updated>1732698696915</updated>
       <workItem from="1732698697981" duration="14000" />
       <workItem from="1733304291483" duration="278000" />
+      <workItem from="1733331404871" duration="93000" />
+      <workItem from="1733333791625" duration="11000" />
     </task>
     <servers />
   </component>

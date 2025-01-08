@@ -1,11 +1,7 @@
-.workerdeatils_container {
-    background: white;
+.modalworker {
     padding: 20px;
     border-radius: 10px;
-    max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 25vh;
+    width: fit-content;
 }
 
 .worker_form {
