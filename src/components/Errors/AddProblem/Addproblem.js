@@ -21,11 +21,13 @@ export default function Addproblem({close,refreshProblems,displaySnackbar}) {
     const [formData,setFormData] = useState({
         name:null,
         description:null,
-        datum:null
+        datum:null,
+        problemType:null,
+        status:null
     })
     const handleChange = (event) => { 
         const { name, value } = event.target; 
-        setFormData((prevData) => ({ ...prevData, [name]: value,datum: formatDate(new Date)})); 
+        setFormData((prevData) => ({ ...prevData, [name]: value,datum: formatDate(new Date),problemType:"VEHICLE_FAILURE",status:"PENDING"})); 
         console.log(formData);
     }
     const [problems,setProblems] = useState([]);
@@ -39,6 +41,7 @@ export default function Addproblem({close,refreshProblems,displaySnackbar}) {
         })
     }
     return (
+        // addolásnál worker type kiválasztása selectel,
             <div className='addError-container'>
                 <h3 style={{textAlign:'center'}}>Új probléma hozzáadása</h3>
                 <FormControl fullWidth className='addError-form'>

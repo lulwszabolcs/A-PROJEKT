@@ -9,6 +9,7 @@ import { Button } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CreateIcon from '@mui/icons-material/Create';
 import AddIcon from '@mui/icons-material/Add';
+import CheckIcon from '@mui/icons-material/Check';
 import Fab from '@mui/material/Fab';
 import Modal from '@mui/material/Modal';
 import { useEffect, useState } from 'react';
@@ -24,6 +25,8 @@ import Snackbar from '@mui/material/Snackbar';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
+import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel';
 
 export default function ErrorList() {
     const [problems,setProblems] = useState([]);
@@ -54,6 +57,7 @@ function refreshProblemList() {
 
     const [snackbarOpen,setSnackbarOpen] = useState(false);
     const [snackbarMessage,setSnackbarMessage] = useState();
+    const [seeClosedProblems,setSeeClosedProblems] = useState(false);
     const openSnackbar = (message) => {
       setSnackbarMessage(message)
       setSnackbarOpen(true)
@@ -85,10 +89,29 @@ function refreshProblemList() {
     function deleteSelectedProblem(id) {
         axios.delete(`http://localhost:8080/api/problem/${id}`).then(refreshProblemList,openSnackbar("Hiba sikeresen törölve!"),closeDialog()).catch((error)=>{console.log(error)})
     }
+    function showClosedProblenms() {
+      setSeeClosedProblems(true)
+    }
+    const handleCheckboxChange = (event) => {
+      setSeeClosedProblems(event.target.checked);
+    };
+    function handleStatusChange(problem) {
+      problem.status = "CLOSED"
+      axios.put(`http://localhost:8080/api/problem/${problem.problemId}`,problem).then(()=>{
+        refreshProblemList();
+    }).catch((error)=>{
+        alert(error.message);
+    })
+    }
     return (
+      // beosztáshoz tartozó problémák megoldása
         <>
         <div className='table-container'>
         <h1 className='error-primary-text'>Folyamatban lévő hibák</h1>
+        <div className='checkBoxErrors'>
+        <FormControlLabel control={<Checkbox checked={seeClosedProblems} onChange={handleCheckboxChange}/>} label="Megoldott problémák mutatása" style={{fontSize:10}}/>
+        <FormControlLabel control={<Checkbox/>} label="Beosztáshoz tartozó problémák" style={{fontSize:10}}/>
+        </div>
         <TableContainer component={Paper} style={{minWidth:"100px", maxWidth:'70vw' , marginLeft:'auto', marginRight:'auto', marginBottom:'20px'}}>
         <Table >
           <TableHead>
@@ -100,18 +123,49 @@ function refreshProblemList() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {problems.map((problem)=>(
-                <TableRow key={problem.problemId}>
-                <TableCell >{problem.name}</TableCell>
-                <TableCell >{problem.description}</TableCell>
-                <TableCell >{problem.datum}</TableCell>
-                <TableCell >{problem.problemId}</TableCell>
-                <TableCell >
-                    <Button onClick={()=> openEditModal(problem)}><CreateIcon/></Button>
-                    <Button onClick={() => {openDialogBox();setCurrentProb(problem)}}><DeleteIcon/></Button>
-                    </TableCell>
-              </TableRow>
-            ))} 
+          {problems
+  .sort((a, b) => {
+    if (a.status === "PENDING" && b.status !== "PENDING") return -1;
+    if (a.status !== "PENDING" && b.status === "PENDING") return 1;
+    return 0;
+  })
+  .filter((problem) => seeClosedProblems || problem.status === "PENDING")
+  .map((problem) => (
+    <TableRow key={problem.problemId}>
+      <TableCell style={{ fontStyle: problem.status === "CLOSED" ? "italic" : "normal" }}>
+        {problem.name}
+      </TableCell>
+      <TableCell style={{ fontStyle: problem.status === "CLOSED" ? "italic" : "normal" }}>
+        {problem.description}
+      </TableCell>
+      <TableCell style={{ fontStyle: problem.status === "CLOSED" ? "italic" : "normal" }}>
+        {problem.datum}
+      </TableCell>
+      <TableCell style={{ fontStyle: problem.status === "CLOSED" ? "italic" : "normal" }}>
+        {problem.problemId}
+      </TableCell>
+      <TableCell>
+        {problem.status !== "CLOSED" && (
+          <>
+            <Button onClick={() => openEditModal(problem)}>
+              <CreateIcon />
+            </Button>
+            
+            <Button
+              onClick={() => {
+                openDialogBox();
+                setCurrentProb(problem);}}>
+              <DeleteIcon />
+            </Button>
+              <Button onClick={() => handleStatusChange(problem)}>
+              <CheckIcon />
+            </Button>
+          </>
+        )}
+      </TableCell>
+    </TableRow>
+  ))}
+
           </TableBody>
         </Table>
         

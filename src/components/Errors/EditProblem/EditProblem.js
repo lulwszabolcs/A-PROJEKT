@@ -38,6 +38,7 @@ export default function EditProblem({close,problem,refreshProblems,displaySnackb
         })
     }
     return (
+        // editelni lehessen a typeot
         <div className='editProblem-container'>
             <h3 style={{textAlign:'center'}}>Probléma szerkesztése</h3>
             <FormControl fullWidth className='editError-form'>     

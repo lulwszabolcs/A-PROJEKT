@@ -5,6 +5,7 @@ import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 export default function WorkerDetails({close}) {
     return (
+        // ha nem hr a role readonly, fizetés kell???, ha a role hr editelhessen, image megcsinálás
         <div className='modalworker'>
         <h3 style={{textAlign:'center'}}>Dolgozó információ</h3>
         <FormControl fullWidth className='worker_form'>

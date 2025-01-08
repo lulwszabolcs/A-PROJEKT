@@ -17,3 +17,9 @@
     justify-content: center;
     align-items: center;
 }
+.checkBoxErrors {
+    margin-left: 15vw;
+    margin-bottom: 3vh;
+    display: flex;
+    flex-direction: column;
+}

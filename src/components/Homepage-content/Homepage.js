@@ -6,6 +6,7 @@ import './Homepage.css'
 export default function Homepage() {
   let username = "test"
     return (
+      // diagramok, számok, dátum stb 
       <>
       <MiniDrawer></MiniDrawer>
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
