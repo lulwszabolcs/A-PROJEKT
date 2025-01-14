@@ -38,8 +38,6 @@ useEffect(()=>{
 }).catch((error)=>{
     console.log(error)
 })
-
-
 },[])
 function refreshProblemList() {
     axios.get("http://localhost:8080/api/problem")
