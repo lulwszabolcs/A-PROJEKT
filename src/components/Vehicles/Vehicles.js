@@ -1,17 +1,21 @@
 import MiniDrawer from "../Sidebar/Sidebar"
+import VehicleList from "./VehicleList/VehicleList"
 import styles from './Vehicles.module.css'
 export default function Vehicles() {
     return (
-        // Hibak: pipánál put helyett pacth, 
-        // hiba hozzáadásnál ki lehessen választani a problem typeot, 
+        // vehicle:   role alapjan update torles hozzaadas, osszes jarmu listazasa,
         // hibák editelésénél problem type kiválasztása, meg hogy működjön egyáltalán
+        //worker image megcsinalas
+        
+        
+        // hiba hozzáadásnál ki lehessen választani a problem typeot, 
         // beosztáshoz tartozó problémák megvalósítása
-
-        // vehicle: megcsinálni magát az oldalt valami jo design alapján. update, törlés mehet, további info
-
+        // Hibak: pipánál put helyett pacth, 
         //logout, sikeres loginnál kapjon tokent, átirányítson a homepagere, értesítsen ha nem jó
-
         // homepage implement: grafikonok, stb 
+        <>
         <MiniDrawer></MiniDrawer>
+        <VehicleList></VehicleList>
+        </>
     )
 }

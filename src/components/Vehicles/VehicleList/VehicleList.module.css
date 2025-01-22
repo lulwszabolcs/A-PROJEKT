@@ -1,0 +1,42 @@
+.vehicleTitle {
+    text-align: center;
+    margin-top: 15vh;
+    margin-bottom: 5vh;
+}
+
+.vehicleCard {
+    border: 1px solid gray;
+    border-radius: 5px;
+    min-width: 20vw;
+    min-height: 20vh;
+    padding-left: 15px;
+    padding-bottom: 15px;
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    background:none;
+}
+
+.flexbox {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-left: 8vw;
+}
+.vehicleInfoContainer {
+    display: flex;
+    flex-direction: column;
+    column-gap: 0px;
+}
+
+p {
+    line-height: 0;
+    font-size: 13px;
+}
+
+.vehicleImage {
+    height: 100px;
+    width: 100px;
+    margin-top: 5vh;
+}

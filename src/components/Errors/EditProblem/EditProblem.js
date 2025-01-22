@@ -8,7 +8,11 @@ import axios from 'axios';
 import './EditProblem.css';
 import { useState } from 'react';
 import ErrorList from '../ErrorList/ErrorList';
+import {MenuItem,Select } from '@mui/material';
+
 export default function EditProblem({close,problem,refreshProblems,displaySnackbar}) {
+    const types = ['Role1','Role 2','Role3']
+    console.log(" problem 0" + problem[0])
     function formatDate(date){
         var d = new Date(date),
         dformat = [d.getFullYear(),
@@ -44,9 +48,20 @@ export default function EditProblem({close,problem,refreshProblems,displaySnackb
             <FormControl fullWidth className='editError-form'>     
                 <TextField onChange={handleChange} defaultValue={problem.name} name='name'  id="outlined-basic" label="Név" variant="outlined" />
                 <TextField onChange={handleChange} defaultValue={problem.description} name='description'  id="outlined-basic" label="Leírás" variant="outlined" />
-
-
-
+                
+                <Select
+        onChange={handleChange}
+        inputProps={{ 'aria-label': 'Without label' }}
+        displayEmpty
+        value={types[0]}  // Use problem.name as the value for the Select
+        name='name'           // Add name attribute to match TextField for consistency in handling
+    >
+        {types.map((type) => (
+            <MenuItem key={type} value={type}>
+                {type}
+            </MenuItem>
+        ))}
+    </Select>
                 <Stack spacing={40} direction="row">
                         <Button variant="outlined" color="error" onClick={()=>{close()}}>Bezár</Button>
                         <Button variant="contained" onClick={editProblem} >Mentés</Button>
