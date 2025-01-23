@@ -29,6 +29,10 @@ import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 
 export default function ErrorList() {
+    const [problemTypes,setProblemTypes] = useState([]);
+    async function fetchProblemTypes() {
+      setProblemTypes(((await axios.get("http://localhost:8080/problemtypes/list")).data))
+  }
     const [problems,setProblems] = useState([]);
 useEffect(()=>{
   axios.get('http://localhost:8080/api/problem').then(({data})=>{
@@ -39,6 +43,7 @@ useEffect(()=>{
     console.log(error)
 })
 },[])
+fetchProblemTypes();
 function refreshProblemList() {
     axios.get("http://localhost:8080/api/problem")
         .then((response) => {
@@ -175,14 +180,14 @@ function refreshProblemList() {
         </div>
         <Modal open={IsaddNewProblemOpen} className='flexcenter'>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <Addproblem close={closeAddProblemModal} refreshProblems={refreshProblemList} displaySnackbar={openSnackbar}></Addproblem>
+          <Addproblem close={closeAddProblemModal} refreshProblems={refreshProblemList} displaySnackbar={openSnackbar} types={problemTypes}></Addproblem>
           </LocalizationProvider>
         </Modal>
         
             </div>
             <Modal open={IsEditModalOpen} className='flexcenter'>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <EditProblem close={closeEditModal} problem={currentProb} refreshProblems={refreshProblemList} displaySnackbar={openSnackbar}></EditProblem>
+          <EditProblem close={closeEditModal} problem={currentProb} refreshProblems={refreshProblemList} displaySnackbar={openSnackbar} types={problemTypes}></EditProblem>
           </LocalizationProvider>
         </Modal>
         <Snackbar

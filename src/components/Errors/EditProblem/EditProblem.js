@@ -6,13 +6,12 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import Stack from '@mui/material/Stack';
 import axios from 'axios';
 import './EditProblem.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ErrorList from '../ErrorList/ErrorList';
 import {MenuItem,Select } from '@mui/material';
 
-export default function EditProblem({close,problem,refreshProblems,displaySnackbar}) {
-    const types = ['Role1','Role 2','Role3']
-    console.log(" problem 0" + problem[0])
+export default function EditProblem({close,problem,refreshProblems,displaySnackbar,types}) {
+    
     function formatDate(date){
         var d = new Date(date),
         dformat = [d.getFullYear(),
@@ -25,13 +24,15 @@ export default function EditProblem({close,problem,refreshProblems,displaySnackb
     const [formData,setFormData] = useState({
         name:problem.name,
         description:problem.description,
-        datum:problem.date
+        datum:problem.date,
+        problemType:problem.problemType,
+        status:problem.status
     })
-    const handleChange = (event) => { 
-        const { name, value } = event.target; 
-        setFormData((prevData) => ({ ...prevData, [name]: value,datum: formatDate(new Date)})); 
-        console.log(formData);
-    }
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setFormData((prevData) => ({ ...prevData, [name]: value,datum: formatDate(new Date)}));     
+        console.log(formData)
+    };
     function editProblem() {
         axios.put(`http://localhost:8080/api/problem/${problem.problemId}`,formData).then(()=>{
             refreshProblems()
@@ -50,18 +51,19 @@ export default function EditProblem({close,problem,refreshProblems,displaySnackb
                 <TextField onChange={handleChange} defaultValue={problem.description} name='description'  id="outlined-basic" label="Leírás" variant="outlined" />
                 
                 <Select
-        onChange={handleChange}
-        inputProps={{ 'aria-label': 'Without label' }}
-        displayEmpty
-        value={types[0]}  // Use problem.name as the value for the Select
-        name='name'           // Add name attribute to match TextField for consistency in handling
-    >
-        {types.map((type) => (
-            <MenuItem key={type} value={type}>
-                {type}
-            </MenuItem>
-        ))}
-    </Select>
+    labelId="demo-simple-select"
+    id="demo-simple-select"
+    defaultValue={formData.problemType || ''} 
+    onChange={handleChange}
+    name='problemType'
+>   
+    <MenuItem value="" disabled>Típus kiválasztása</MenuItem>
+    {types.map((type) => (
+        <MenuItem key={type.id} value={type.problemTypeName}>
+            {type.problemTypeDescription}
+        </MenuItem>
+    ))}
+</Select>
                 <Stack spacing={40} direction="row">
                         <Button variant="outlined" color="error" onClick={()=>{close()}}>Bezár</Button>
                         <Button variant="contained" onClick={editProblem} >Mentés</Button>

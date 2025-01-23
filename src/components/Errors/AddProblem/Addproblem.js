@@ -7,8 +7,9 @@ import Stack from '@mui/material/Stack';
 import axios from 'axios'
 import './Addproblem.css'
 import { useState } from 'react';
+import {MenuItem,Select } from '@mui/material';
 import Errors from '../Errors';
-export default function Addproblem({close,refreshProblems,displaySnackbar}) {
+export default function Addproblem({close,refreshProblems,displaySnackbar,types}) {
     function formatDate(date){
         var d = new Date(date),
         dformat = [d.getFullYear(),
@@ -23,13 +24,13 @@ export default function Addproblem({close,refreshProblems,displaySnackbar}) {
         description:null,
         datum:null,
         problemType:null,
-        status:null
+        status:'PENDING'
     })
-    const handleChange = (event) => { 
-        const { name, value } = event.target; 
-        setFormData((prevData) => ({ ...prevData, [name]: value,datum: formatDate(new Date),problemType:"VEHICLE_FAILURE",status:"PENDING"})); 
-        console.log(formData);
-    }
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setFormData((prevData) => ({ ...prevData, [name]: value,datum: formatDate(new Date)}));     
+        console.log(formData)
+    };
     const [problems,setProblems] = useState([]);
     function addNewProblem() {
         axios.post('http://localhost:8080/api/problem',formData).then(()=>{
@@ -50,7 +51,20 @@ export default function Addproblem({close,refreshProblems,displaySnackbar}) {
                         
                     <TextField onInput={handleChange} name='name'  id="outlined-basic" label="Név" variant="outlined" />
                     <TextField onInput={handleChange} name='description'  id="outlined-basic" label="Leírás" variant="outlined" />
-
+                    <Select
+                        labelId="demo-simple-select"
+                        id="demo-simple-select"
+                        defaultValue={"tpus"} 
+                        onChange={handleChange}
+                        name='problemType'
+                    >
+                    <MenuItem value="tpus" disabled>Típus kiválasztása</MenuItem>
+    {types.map((type) => (
+        <MenuItem key={type.id} value={type.problemTypeName}>
+            {type.problemTypeDescription}
+        </MenuItem>
+    ))}
+</Select>
 
 
                     <Stack spacing={40} direction="row">

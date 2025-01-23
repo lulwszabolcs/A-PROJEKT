@@ -6,8 +6,10 @@ import InputLabel from '@mui/material/InputLabel';
 import { useForm } from "react-hook-form"
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { useNavigate } from "react-router-dom";
 export default function Loginpage() {
     const [usersList,setUsersList] = useState([]);
+    const navigate = useNavigate();
     const {
         register,
         handleSubmit,
@@ -18,7 +20,7 @@ export default function Loginpage() {
         console.log(data);
         const user = usersList.find(u => u.username === data.username && u.password === data.password);
         if (user) {
-            alert("siker")
+            navigate("/home")
         } else {
             alert("sikertelen")
         }
