@@ -34,7 +34,7 @@ export default function WorkerInfoBox() {
   useEffect(()=>{
     fetchWorkers();
   },[])
-  const filteredWorkers = selectedRole
+  const filteredWorkers = selectedRole && selectedRole != "all"
     ? workers.filter((worker) => worker.title === selectedRole)
     : workers;
   return (
@@ -45,9 +45,9 @@ export default function WorkerInfoBox() {
     labelId="demo-simple-select"
     id="demo-simple-select"
     onChange={handleChange}
-    defaultValue={"Minden alkalmazott"}
+    defaultValue={"all"}
   > 
-  <MenuItem>
+  <MenuItem value={"all"}>
       Minden alkalmazott
     </MenuItem>
     {[...new Set(workers.map((worker) => worker.title))].map((uniqueTitle) => (

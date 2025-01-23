@@ -8,8 +8,16 @@ import axios from 'axios'
 import './Addproblem.css'
 import { useState } from 'react';
 import {MenuItem,Select } from '@mui/material';
+import { useForm } from "react-hook-form"
 import Errors from '../Errors';
+import { CoPresentOutlined } from '@mui/icons-material';
 export default function Addproblem({close,refreshProblems,displaySnackbar,types}) {
+    const {
+            register,
+            handleSubmit,
+            watch,
+            formState: { errors },
+          } = useForm()
     function formatDate(date){
         var d = new Date(date),
         dformat = [d.getFullYear(),
@@ -41,24 +49,31 @@ export default function Addproblem({close,refreshProblems,displaySnackbar,types}
             alert(error.message);
         })
     }
+    const onSubmit = (data) => {
+        setFormData(data);
+        addNewProblem();
+        console.log(formData)
+    }
     return (
         // addolásnál worker type kiválasztása selectel,
             <div className='addError-container'>
                 <h3 style={{textAlign:'center'}}>Új probléma hozzáadása</h3>
+                <form onSubmit={handleSubmit(onSubmit)}>
+
                 <FormControl fullWidth className='addError-form'>
 
                         
                         
-                    <TextField onInput={handleChange} name='name'  id="outlined-basic" label="Név" variant="outlined" />
-                    <TextField onInput={handleChange} name='description'  id="outlined-basic" label="Leírás" variant="outlined" />
+                    <TextField onInput={handleChange} name='name'  id="outlined-basic" label="Név" variant="outlined" {...register("name",{required:true})} />
+                    <TextField onInput={handleChange} name='description'  id="outlined-basic" label="Leírás" variant="outlined" {...register("description",{required:true})}/>
                     <Select
                         labelId="demo-simple-select"
                         id="demo-simple-select"
-                        defaultValue={"tpus"} 
                         onChange={handleChange}
                         name='problemType'
-                    >
-                    <MenuItem value="tpus" disabled>Típus kiválasztása</MenuItem>
+                        defaultValue={'tpus'}
+                        >
+    <MenuItem value={'tpus'} disabled>Típus kiválasztása</MenuItem>
     {types.map((type) => (
         <MenuItem key={type.id} value={type.problemTypeName}>
             {type.problemTypeDescription}
@@ -66,13 +81,15 @@ export default function Addproblem({close,refreshProblems,displaySnackbar,types}
     ))}
 </Select>
 
-
+{errors.name && console.log("rq") }
+{errors.description && console.log("rq") }
+{errors.problemType && console.log("rq") }
                     <Stack spacing={40} direction="row">
                             <Button variant="outlined" color="error" onClick={()=>{close()}}>Bezár</Button>
-                            <Button variant="contained" onClick={addNewProblem}>Mentés</Button>
+                            <Button variant="contained" type='submit'>Mentés</Button>
                     </Stack>
-
                 </FormControl>
+    </form>
 
 
             </div>
