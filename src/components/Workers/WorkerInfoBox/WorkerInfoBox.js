@@ -13,14 +13,16 @@ import { InputLabel, MenuItem, Modal, Select } from '@mui/material';
 import { useState,useEffect } from 'react';
 import axios from 'axios';
 import { useFetcher } from 'react-router-dom';
+import { RoleProvider } from '../../../contexts/RoleProvider';
 export default function WorkerInfoBox() {
     const [workers,setWorkers] = useState([]);
     const [openWorkerDetails,setOpenWorkerDetails] = React.useState(false)
     const [selectedRole,setSelectedRole] = React.useState()
+    const [selectedWorker,setSelectedWorker] = useState()
     function closeWorkerDetails() {
         setOpenWorkerDetails(false)
     }
-  function fetchWorkers(properties) {
+  function fetchWorkers() {
     axios.get("http://localhost:8080/worker/list").then(({data})=>{
         setWorkers(data)
       }).catch((error)=>{
@@ -57,14 +59,22 @@ export default function WorkerInfoBox() {
   ))}
   </Select>
     </div>
-    <Box sx={{ width: 250,marginLeft:'10vw',textAlign:'center', borderRadius:1}}>
-    
-    <div style={{display:'flex',flexDirection:'row',gap:'40px',minWidth:'fit-content'}}>
+    <Box 
+    sx={{
+    marginLeft: '10vw',
+    marginBottom: '5vh',
+    textAlign: 'center',
+    borderRadius: 1,
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: '40px', // A belső div helyett itt állítsd be a távolságot
+  }}>
       {filteredWorkers.map((worker)=>(
         <Card variant="outlined" style={{paddingTop:10,position:'relative'}}>
         <CardContent>
-        <Button style={{position:'absolute',top:0,right:0}} onClick={()=>setOpenWorkerDetails(true)}><InfoIcon></InfoIcon></Button>
-        <img src='' style={{width:150, height:150, borderRadius:100}}></img>
+        <Button style={{position:'absolute',top:0,right:0}} onClick={()=>{setOpenWorkerDetails(true);setSelectedWorker(worker)}}><InfoIcon></InfoIcon></Button>
+        <img src={`./images/${worker.workerId}.jpg`} style={{width:150, height:150, borderRadius:100}}></img>
         <Typography variant="h6" component="div">
           {worker.name}
         </Typography>
@@ -72,10 +82,11 @@ export default function WorkerInfoBox() {
       </CardContent>
         </Card>
       ))}  
-      </div>
       </Box>
     <Modal open={openWorkerDetails} className='flexcenter'>
-      <WorkerDetails close={closeWorkerDetails} ></WorkerDetails>
+      <RoleProvider>
+      <WorkerDetails close={closeWorkerDetails} worker={selectedWorker} ></WorkerDetails>
+      </RoleProvider>
     </Modal>
     </>
   );

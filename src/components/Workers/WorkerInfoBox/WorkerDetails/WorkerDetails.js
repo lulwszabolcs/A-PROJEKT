@@ -3,7 +3,12 @@ import TextField from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-export default function WorkerDetails({close}) {
+import { RoleContext } from '../../../../contexts/RoleProvider';
+import { useContext } from 'react';
+import {MenuItem,Select } from '@mui/material';
+
+export default function WorkerDetails({close,worker}) {
+    let {roles} = useContext(RoleContext)
     return (
         // ha nem hr a role readonly, fizetés kell???, ha a role hr editelhessen, image megcsinálás
         <div className='modalworker'>
@@ -12,11 +17,23 @@ export default function WorkerDetails({close}) {
 
                 
                  
-            <TextField  name='name'  id="outlined-basic" label="Név" variant="outlined" />
-            <TextField  name='title'  id="outlined-basic" label="Beosztás" variant="outlined" />
-            <TextField  name='phonenumber'  id="outlined-basic" label="Telefonszám" variant="outlined" />
-            <TextField  name='email'  id="outlined-basic" label="E-mail" variant="outlined" />
-            <TextField  name='wage'  id="outlined-basic" label="Fizetés" variant="outlined" />
+            <TextField  name='name'  id="outlined-basic" label="Név" variant="outlined" defaultValue={worker.name} />
+            <Select
+    labelId="demo-simple-select"
+    id="demo-simple-select"
+    defaultValue={worker.title} 
+    name='title'
+>   
+    <MenuItem value="" disabled>Beosztás kiválasztása</MenuItem>
+    {roles.map((role) => (
+        <MenuItem key={role.roleName} value={role.roleDescription}>
+            {role.roleDescription}
+        </MenuItem>
+    ))}
+</Select>
+            <TextField  name='phonenumber'  id="outlined-basic" label="Telefonszám" variant="outlined" defaultValue={worker.phoneNumber}/>
+            <TextField  name='email'  id="outlined-basic" label="E-mail" variant="outlined" defaultValue={worker.email}/>
+            <TextField  name='wage'  id="outlined-basic" label="Fizetés" variant="outlined" defaultValue={worker.wage}/>
 
 
 

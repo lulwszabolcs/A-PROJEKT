@@ -35,3 +35,9 @@ img {
     margin-top: 15vh;
     margin-bottom: 5vh;
 }
+.flexbox {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 30px;
+}
