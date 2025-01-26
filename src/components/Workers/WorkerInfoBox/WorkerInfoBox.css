@@ -41,3 +41,9 @@ img {
     flex-wrap: wrap;
     gap: 30px;
 }
+
+.addicon {
+    position: fixed;
+    bottom: 3vh;
+    right: 3vw;
+}

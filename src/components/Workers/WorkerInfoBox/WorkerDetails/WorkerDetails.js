@@ -13,10 +13,7 @@ export default function WorkerDetails({close,worker}) {
         // ha nem hr a role readonly, fizetés kell???, ha a role hr editelhessen, image megcsinálás
         <div className='modalworker'>
         <h3 style={{textAlign:'center'}}>Dolgozó információ</h3>
-        <FormControl fullWidth className='worker_form'>
-
-                
-                 
+        <FormControl fullWidth className='worker_form'> 
             <TextField  name='name'  id="outlined-basic" label="Név" variant="outlined" defaultValue={worker.name} />
             <Select
     labelId="demo-simple-select"

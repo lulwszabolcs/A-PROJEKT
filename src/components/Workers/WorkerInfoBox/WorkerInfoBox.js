@@ -14,27 +14,29 @@ import { useState,useEffect } from 'react';
 import axios from 'axios';
 import { useFetcher } from 'react-router-dom';
 import { RoleProvider } from '../../../contexts/RoleProvider';
+import Fab from '@mui/material/Fab';
+import AddIcon from '@mui/icons-material/Add';
+import AddWorker from './AddWorker/AddWorker';
+import { WorkerContext } from '../../../contexts/WorkerProvider';
+
 export default function WorkerInfoBox() {
-    const [workers,setWorkers] = useState([]);
-    const [openWorkerDetails,setOpenWorkerDetails] = React.useState(false)
-    const [selectedRole,setSelectedRole] = React.useState()
+    const [openWorkerDetails,setOpenWorkerDetails] = useState(false)
+    const [openAddWorker,setOpenAddWorker] = useState(false)
+    const [selectedRole,setSelectedRole] = useState()
     const [selectedWorker,setSelectedWorker] = useState()
+    let {workers,getWorkers} = React.useContext(WorkerContext)
     function closeWorkerDetails() {
         setOpenWorkerDetails(false)
     }
-  function fetchWorkers() {
-    axios.get("http://localhost:8080/worker/list").then(({data})=>{
-        setWorkers(data)
-      }).catch((error)=>{
-      console.log(error);
-    })
-  }
    const handleChange = (event) => {
       setSelectedRole(event.target.value);
       console.log(selectedRole);
-}
+    }
+    const closeAddWorker = () => {
+      setOpenAddWorker(false)
+    }
   useEffect(()=>{
-    fetchWorkers();
+    getWorkers();
   },[])
   const filteredWorkers = selectedRole && selectedRole != "all"
     ? workers.filter((worker) => worker.title === selectedRole)
@@ -68,7 +70,7 @@ export default function WorkerInfoBox() {
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: '40px', // A belső div helyett itt állítsd be a távolságot
+    gap: '40px',
   }}>
       {filteredWorkers.map((worker)=>(
         <Card variant="outlined" style={{paddingTop:10,position:'relative'}}>
@@ -88,6 +90,17 @@ export default function WorkerInfoBox() {
       <WorkerDetails close={closeWorkerDetails} worker={selectedWorker} ></WorkerDetails>
       </RoleProvider>
     </Modal>
+    <Modal open={openAddWorker} className='flexcenter'>
+      <RoleProvider>
+      <AddWorker close={closeAddWorker}></AddWorker>
+      </RoleProvider>
+    </Modal>
+    <div className='addicon'>
+    <Fab color="primary" aria-label="add" onClick={()=>setOpenAddWorker(true)}>
+        <AddIcon/>
+    </Fab>
+
+    </div>
     </>
   );
 }
