@@ -12,7 +12,9 @@ import { useForm } from "react-hook-form"
 import Errors from '../Errors';
 import { CoPresentOutlined } from '@mui/icons-material';
 import { ErrorContext } from '../../../contexts/ErrorProvider';
-export default function Addproblem({close,refreshProblems,displaySnackbar,types}) {
+import { TypeContext } from '../../../contexts/TypeProvider';
+export default function Addproblem({close,refreshProblems,displaySnackbar}) {
+    let {problemTypes} = useContext(TypeContext);
     const {
         register,
         handleSubmit,
@@ -44,7 +46,6 @@ const [problems,setProblems] = useState([]);
 function addNewProblem() {
     axios.post('http://localhost:8080/api/problem',formData).then(()=>{
         refreshProblems()
-        displaySnackbar("Hiba sikeresen hozzáadva")
         close()
     }).catch((error)=>{
         alert(error.message);
@@ -56,7 +57,6 @@ const onSubmit = (data) => {
     console.log(formData)
 }
     return (
-        // addolásnál worker type kiválasztása selectel,
             <div className='addError-container'>
                 <h3 style={{textAlign:'center'}}>Új probléma hozzáadása</h3>
                 <form onSubmit={handleSubmit(onSubmit)}>
@@ -72,7 +72,7 @@ const onSubmit = (data) => {
                         defaultValue={'tpus'}
                         >
     <MenuItem value={'tpus'} disabled>Típus kiválasztása</MenuItem>
-    {types.map((type) => (
+    {problemTypes.map((type) => (
         <MenuItem key={type.id} value={type.problemTypeName}>
             {type.problemTypeDescription}
         </MenuItem>

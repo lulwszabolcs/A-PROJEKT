@@ -1,14 +1,20 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import styles from './VehicleList.module.css'
-import { VehicleContext } from '../../../contexts/VehicleProvider'
+import { VehicleContext, VehicleProvider } from '../../../contexts/VehicleProvider'
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import { InputLabel, MenuItem, Modal, Select } from '@mui/material';
-import { TypeContext } from '../../../contexts/TypeProvider';
+import { TypeContext, TypeProvider } from '../../../contexts/TypeProvider';
 import ReportProblemIcon from '@mui/icons-material/ReportProblem';
+import Addproblem from '../../Errors/AddProblem/Addproblem';
+import VehicleModify from '../VehicleModify/VehicleModify';
 export default function VehicleList() {
     let {vehicles} = useContext(VehicleContext)
     let {vehicleTypes,vehicleStatuses} = useContext(TypeContext)
+    const [isAddProblemOpen,setIsAddProblemOpen] = useState(false)
+    function closeAddProblem() {
+        setIsAddProblemOpen(false);
+    }
     return (
         <>
         <h1 className={styles.vehicleTitle}>  
@@ -45,16 +51,16 @@ export default function VehicleList() {
                     </MenuItem>
                 ))}
         </Select>
-        <ReportProblemIcon></ReportProblemIcon>
+        <ReportProblemIcon onClick={()=>setIsAddProblemOpen(true)} className={styles.reporticon}></ReportProblemIcon>
         </div>
         <div className={styles.flexbox}>
         {vehicles.map((vehicle)=>(
             <div className={styles.vehicleCard}>
                 <div className={styles.vehicleInfoContainer}>
-                    <h4>{vehicle.name} <i>#{vehicle.vehicleId}</i></h4>
+                    <h4>{vehicle.name}</h4>
                     <p>{vehicle.type}</p>
                     <p>{vehicle.vehicleYear}</p>
-                    <p style={{color: vehicle.status === 'Jármű működőképes' ? 'green' : 'orange'}}>{vehicle.status}</p>
+                    <p style={{color: vehicle.status === 'Működőképes' ? 'green' : 'orange'}}>{vehicle.status}</p>
                 </div>
                 <div className={styles.vehicleImageContainer}>
                 <img src='https://cdn2.iconfinder.com/data/icons/iconslandtransport/PNG/256x256/CarGrey.png' className={styles.vehicleImage}></img>
@@ -67,6 +73,14 @@ export default function VehicleList() {
             <AddIcon />
         </Fab>
         </div>
+        <Modal open={isAddProblemOpen}>
+            <TypeProvider>
+            <VehicleProvider>
+            <VehicleModify close={closeAddProblem}></VehicleModify>
+            </VehicleProvider>
+            </TypeProvider>
+        </Modal>
         </>
+
     )
 }

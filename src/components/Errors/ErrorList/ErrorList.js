@@ -28,6 +28,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { ErrorContext, ErrorProvider } from '../../../contexts/ErrorProvider';
+import { TypeContext, TypeProvider } from '../../../contexts/TypeProvider';
 
 export default function ErrorList() {
   const [problemTypes,setProblemTypes] = useState([]);
@@ -181,7 +182,9 @@ function refreshProblemList() {
         </div>
         <Modal open={IsaddNewProblemOpen} className='flexcenter'>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <Addproblem close={closeAddProblemModal} refreshProblems={refreshProblemList} displaySnackbar={openSnackbar} types={problemTypes}></Addproblem>
+          <TypeProvider>
+          <Addproblem close={closeAddProblemModal} refreshProblems={refreshProblemList} displaySnackbar={openSnackbar}></Addproblem>
+          </TypeProvider>
           </LocalizationProvider>
         </Modal>
         
