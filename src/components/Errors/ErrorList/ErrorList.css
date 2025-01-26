@@ -9,8 +9,9 @@
 }
 
 .fabicon {
-    position: absolute;
-    right: 15vw;
+    position: fixed;
+    right: 3vw;
+    bottom: 3vh;
 }
 .flexCenter{
     display:flex;

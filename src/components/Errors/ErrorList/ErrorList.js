@@ -12,7 +12,7 @@ import AddIcon from '@mui/icons-material/Add';
 import CheckIcon from '@mui/icons-material/Check';
 import Fab from '@mui/material/Fab';
 import Modal from '@mui/material/Modal';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import axios from 'axios'
@@ -27,85 +27,86 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import { ErrorContext, ErrorProvider } from '../../../contexts/ErrorProvider';
 
 export default function ErrorList() {
-    const [problemTypes,setProblemTypes] = useState([]);
-    async function fetchProblemTypes() {
-      setProblemTypes(((await axios.get("http://localhost:8080/problemtypes/list")).data))
-  }
-    const [problems,setProblems] = useState([]);
+  const [problemTypes,setProblemTypes] = useState([]);
+  async function fetchProblemTypes() {
+    setProblemTypes(((await axios.get("http://localhost:8080/problemtypes/list")).data))
+}
+  const [problems,setProblems] = useState([]);
 useEffect(()=>{
-  axios.get('http://localhost:8080/api/problem').then(({data})=>{
-    const problems = data
-    setProblems(problems)
-    console.log(problems);
+axios.get('http://localhost:8080/api/problem').then(({data})=>{
+  const problems = data
+  setProblems(problems)
+  console.log(problems);
 }).catch((error)=>{
-    console.log(error)
+  console.log(error)
 })
 },[])
 fetchProblemTypes();
 function refreshProblemList() {
-    axios.get("http://localhost:8080/api/problem")
-        .then((response) => {
-            setProblems(response.data);
-        })
-        .catch((error) => {
-            console.error("Failed to fetch problems:", error);
-        });
+  axios.get("http://localhost:8080/api/problem")
+      .then((response) => {
+          setProblems(response.data);
+      })
+      .catch((error) => {
+          console.error("Failed to fetch problems:", error);
+      });
 }
 
-    const [IsaddNewProblemOpen,setIsAddNewProblemOpen] = useState(false);
-    const [IsEditModalOpen,setIsEditModalIOpen] = useState(false);
-    const [currentProb,setCurrentProb] = useState([]);
+  const [IsaddNewProblemOpen,setIsAddNewProblemOpen] = useState(false);
+  const [IsEditModalOpen,setIsEditModalIOpen] = useState(false);
+  const [currentProb,setCurrentProb] = useState([]);
 
-    const [snackbarOpen,setSnackbarOpen] = useState(false);
-    const [snackbarMessage,setSnackbarMessage] = useState();
-    const [seeClosedProblems,setSeeClosedProblems] = useState(false);
-    const openSnackbar = (message) => {
-      setSnackbarMessage(message)
-      setSnackbarOpen(true)
-    }
-    const closeSnackbar = () =>{
-      setSnackbarOpen(false)
-    }
-    const [openDialog,setOpenDialog] = useState(false)
-    const openDialogBox = () =>{
-        setOpenDialog(true)
-    }
-    const closeDialog = () =>{
-        setOpenDialog(false)
-    }
-    const [state, setState] = useState({
-      open: false,
-      Transition: Slide,
-    });
-    function closeAddProblemModal() {
-      setIsAddNewProblemOpen(false)
-    }
-    function openEditModal(problem) {
-      setIsEditModalIOpen(true);   
-      setCurrentProb(problem);       
-    }
-    function closeEditModal() {
-      setIsEditModalIOpen(false)
-    }
-    function deleteSelectedProblem(id) {
-        axios.delete(`http://localhost:8080/api/problem/${id}`).then(refreshProblemList,openSnackbar("Hiba sikeresen törölve!"),closeDialog()).catch((error)=>{console.log(error)})
-    }
-    function showClosedProblenms() {
-      setSeeClosedProblems(true)
-    }
-    const handleCheckboxChange = (event) => {
-      setSeeClosedProblems(event.target.checked);
-    };
-    function handleStatusChange(problem) {
-      problem.status = "CLOSED"
-      axios.put(`http://localhost:8080/api/problem/${problem.problemId}`,problem).then(()=>{
-        refreshProblemList();
-    }).catch((error)=>{
-        alert(error.message);
-    })
-    }
+  const [snackbarOpen,setSnackbarOpen] = useState(false);
+  const [snackbarMessage,setSnackbarMessage] = useState();
+  const [seeClosedProblems,setSeeClosedProblems] = useState(false);
+  const openSnackbar = (message) => {
+    setSnackbarMessage(message)
+    setSnackbarOpen(true)
+  }
+  const closeSnackbar = () =>{
+    setSnackbarOpen(false)
+  }
+  const [openDialog,setOpenDialog] = useState(false)
+  const openDialogBox = () =>{
+      setOpenDialog(true)
+  }
+  const closeDialog = () =>{
+      setOpenDialog(false)
+  }
+  const [state, setState] = useState({
+    open: false,
+    Transition: Slide,
+  });
+  function closeAddProblemModal() {
+    setIsAddNewProblemOpen(false)
+  }
+  function openEditModal(problem) {
+    setIsEditModalIOpen(true);   
+    setCurrentProb(problem);       
+  }
+  function closeEditModal() {
+    setIsEditModalIOpen(false)
+  }
+  function deleteSelectedProblem(id) {
+      axios.delete(`http://localhost:8080/api/problem/${id}`).then(refreshProblemList,openSnackbar("Hiba sikeresen törölve!"),closeDialog()).catch((error)=>{console.log(error)})
+  }
+  function showClosedProblenms() {
+    setSeeClosedProblems(true)
+  }
+  const handleCheckboxChange = (event) => {
+    setSeeClosedProblems(event.target.checked);
+  };
+  function handleStatusChange(problem) {
+    problem.status = "CLOSED"
+    axios.put(`http://localhost:8080/api/problem/${problem.problemId}`,problem).then(()=>{
+      refreshProblemList();
+  }).catch((error)=>{
+      alert(error.message);
+  })
+  }
     return (
       // beosztáshoz tartozó problémák megoldása
         <>

@@ -41,3 +41,16 @@ p {
     margin-top: 5vh;
     margin-right: 2vw;
 }
+
+.addicon {
+    position: fixed;
+    bottom: 3vh;
+    right: 3vw;
+}
+
+.filtervehicles {
+    margin-left: 15vw;
+    margin-bottom: 5vh;
+    display: flex;
+    gap: 4vw;
+}

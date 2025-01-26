@@ -1,3 +1,4 @@
+import { TypeProvider } from "../../contexts/TypeProvider"
 import { VehicleProvider } from "../../contexts/VehicleProvider"
 import MiniDrawer from "../Sidebar/Sidebar"
 import VehicleList from "./VehicleList/VehicleList"
@@ -5,17 +6,23 @@ import styles from './Vehicles.module.css'
 export default function Vehicles() {
     return (
         // homepage implement: grafikonok, stb 
-        //worker image megcsinalas
-        // vehicle:   role alapjan update torles hozzaadas, osszes jarmu listazasa,
+        //                     activity beállítás usernél
+        //                     sticky notes hagyás lehetőség
+        //worker image megcsinalas, worker edit
+        // vehicle:   role alapjan update torles hozzaadas,
         //snackbar context 
         // Hibak: pipánál put helyett pacth, 
-        
+        //profile tab
+        // add user tab
         // beosztáshoz tartozó problémák megvalósítása
         //logout, sikeres loginnál kapjon tokent, átirányítson a homepagere, értesítsen ha nem jó
+        // errornal problemtypes lekérdezés helyett ocntext
         <>
         <MiniDrawer></MiniDrawer>
         <VehicleProvider>
-            <VehicleList></VehicleList>
+            <TypeProvider>
+                <VehicleList></VehicleList>
+            </TypeProvider>
         </VehicleProvider>
         </>
     )
