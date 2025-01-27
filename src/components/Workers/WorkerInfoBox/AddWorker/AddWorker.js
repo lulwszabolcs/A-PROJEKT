@@ -23,29 +23,30 @@ export default function AddWorker({close}) {
 
 
     async function onSubmit(data) {
-        await (axios.post("http://localhost:8080/worker/",data)).then(()=>{
-          getWorkers();
-          close();
-        })
+        const response  = await (axios.post("http://localhost:8080/worker/",data));
+        if (selectedFile) {
+          const imageSave = {
+            fileName: response.data.workerId+selectedFile.name.substring(selectedFile.name.lastIndexOf(".")), 
+            filePatch: "./images", 
+            worker_id: response.data.workerId, 
+          };
+          uploadImage(selectedFile,imageSave);
+        }
+        getWorkers();
+        close();
     }
 
 
 
     const handleFileChange = (event) => {
         const file = event.target.files[0]; 
-        setSelectedFile(file.name)
-        // if (file) {
-        //   uploadImage(file);
-        // }
+        setSelectedFile(file)
+        
       };
       
-    const uploadImage = async (file) => {
+    const uploadImage = async (file,imageSave) => {
         try {
-          const imageSave = {
-            fileName: "1.jpg", 
-            filePatch: "./images", 
-            worker_id: 123, 
-          };
+          
       
           const formData = new FormData();
           formData.append("file", file); 
@@ -61,6 +62,7 @@ export default function AddWorker({close}) {
         } catch (error) {
           console.error(error);
         }
+        
         
       };
     return (
@@ -85,7 +87,7 @@ export default function AddWorker({close}) {
                 ))}
                 </Select>
                 <div className={styles.imagelabel}>
-                <label for="imageinput" class="btn" >{selectedFile ? selectedFile :"Kép kiválasztása"}</label>
+                <label for="imageinput" class="btn" >{selectedFile ? selectedFile.name :"Kép kiválasztása"}</label>
                 <input
                     type="file"
                     accept="image/*"

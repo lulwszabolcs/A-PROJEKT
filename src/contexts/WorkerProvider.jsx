@@ -6,7 +6,8 @@ const WorkerProvider = ({children})=>{
 
     let [workers,setWorkers] = useState([])
     async function getWorkers() {
-        setWorkers(((await axios.get("http://localhost:8080/worker/list")).data))
+        const respone = await axios.get("http://localhost:8080/worker/list")
+        setWorkers(respone.data);
     }
     useEffect(()=>{
         getWorkers()

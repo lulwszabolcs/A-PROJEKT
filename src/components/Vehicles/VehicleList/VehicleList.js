@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import styles from './VehicleList.module.css'
 import { VehicleContext, VehicleProvider } from '../../../contexts/VehicleProvider'
 import Fab from '@mui/material/Fab';
@@ -8,12 +8,17 @@ import { TypeContext, TypeProvider } from '../../../contexts/TypeProvider';
 import ReportProblemIcon from '@mui/icons-material/ReportProblem';
 import Addproblem from '../../Errors/AddProblem/Addproblem';
 import VehicleModify from '../VehicleModify/VehicleModify';
+import AddVehicle from '../AddVehicle/AddVehicle';
 export default function VehicleList() {
-    let {vehicles} = useContext(VehicleContext)
+    let {vehicles,getVehicles} = useContext(VehicleContext)
     let {vehicleTypes,vehicleStatuses} = useContext(TypeContext)
     const [isAddProblemOpen,setIsAddProblemOpen] = useState(false)
+    const [isAddVehicleOpen,setIsAddVehicleOpen] = useState(false)
     function closeAddProblem() {
         setIsAddProblemOpen(false);
+    }
+    function closeAddVehicle() {
+        setIsAddVehicleOpen(false);
     }
     return (
         <>
@@ -70,13 +75,20 @@ export default function VehicleList() {
         </div>
         <div className={styles.addicon}>
         <Fab color="primary" aria-label="add">
-            <AddIcon />
+            <AddIcon onClick={()=>setIsAddVehicleOpen(true)} />
         </Fab>
         </div>
         <Modal open={isAddProblemOpen}>
             <TypeProvider>
             <VehicleProvider>
             <VehicleModify close={closeAddProblem}></VehicleModify>
+            </VehicleProvider>
+            </TypeProvider>
+        </Modal>
+        <Modal open={isAddVehicleOpen}>
+            <TypeProvider>
+            <VehicleProvider>
+            <AddVehicle close={closeAddVehicle}></AddVehicle>
             </VehicleProvider>
             </TypeProvider>
         </Modal>
