@@ -8,7 +8,7 @@ export default function Vehicles() {
         // homepage implement: grafikonok, stb 
         //                     activity beállítás usernél
         //                     sticky notes hagyás lehetőség
-        //worker image megcsinalas, worker edit
+        //worker edit
         // vehicle:   role alapjan update torles hozzaadas,
         //snackbar context 
         // Hibak: pipánál put helyett pacth, 

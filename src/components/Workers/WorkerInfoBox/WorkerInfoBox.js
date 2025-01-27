@@ -76,7 +76,7 @@ export default function WorkerInfoBox() {
         <Card variant="outlined" style={{paddingTop:10,position:'relative'}}>
         <CardContent>
         <Button style={{position:'absolute',top:0,right:0}} onClick={()=>{setOpenWorkerDetails(true);setSelectedWorker(worker)}}><InfoIcon></InfoIcon></Button>
-        <img src={`http://localhost:8080/images/${worker.workerId}.jpgÖ`} style={{width:150, height:150, borderRadius:100}}></img>
+        <img src={`http://localhost:8080/images/${worker.workerId}.jpg`} style={{width:150, height:150, borderRadius:100}}></img>
         <Typography variant="h6" component="div">
           {worker.name}
         </Typography>
