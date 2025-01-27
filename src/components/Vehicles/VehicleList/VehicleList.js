@@ -14,12 +14,19 @@ export default function VehicleList() {
     let {vehicleTypes,vehicleStatuses} = useContext(TypeContext)
     const [isAddProblemOpen,setIsAddProblemOpen] = useState(false)
     const [isAddVehicleOpen,setIsAddVehicleOpen] = useState(false)
+    const [selectedType, setSelectedType] = useState('all');
+    const [selectedStatus, setSelectedStatus] = useState('all');
     function closeAddProblem() {
         setIsAddProblemOpen(false);
     }
     function closeAddVehicle() {
         setIsAddVehicleOpen(false);
     }
+    const filteredVehicles = vehicles.filter(vehicle => {
+        const matchesType = selectedType === 'all' || vehicle.type === selectedType;
+        const matchesStatus = selectedStatus === 'all' || vehicle.status === selectedStatus;
+        return matchesType && matchesStatus;
+    });
     return (
         <>
         <h1 className={styles.vehicleTitle}>  
@@ -29,7 +36,7 @@ export default function VehicleList() {
         <Select style={{width:'20vw'}}
             labelId="demo-simple-select"
             id="demo-simple-select"
-            onChange={()=>console.log("ping")}
+            onChange={(e) => setSelectedType(e.target.value)}
             defaultValue={"all"}
             > 
             <MenuItem value={"all"}>
@@ -44,7 +51,7 @@ export default function VehicleList() {
         <Select style={{width:'20vw'}}
             labelId="demo-simple-select"
             id="demo-simple-select"
-            onChange={()=>console.log("ping")}
+            onChange={(e) => setSelectedStatus(e.target.value)}
             defaultValue={"all"}
             > 
             <MenuItem value={"all"}>
@@ -59,7 +66,7 @@ export default function VehicleList() {
         <ReportProblemIcon onClick={()=>setIsAddProblemOpen(true)} className={styles.reporticon}></ReportProblemIcon>
         </div>
         <div className={styles.flexbox}>
-        {vehicles.map((vehicle)=>(
+        {filteredVehicles.map((vehicle)=>(
             <div className={styles.vehicleCard}>
                 <div className={styles.vehicleInfoContainer}>
                     <h4>{vehicle.name}</h4>
