@@ -9,11 +9,18 @@ const WorkerProvider = ({children})=>{
         const respone = await axios.get("http://localhost:8080/worker/list")
         setWorkers(respone.data);
     }
+    async function updateWorker(id,data) {
+        const respone = await axios.put(`http://localhost:8080/worker/${id}`,data)
+        let modified = workers.find((x)=>x.id===id)
+        modified = respone.data;
+        setWorkers([modified,...workers])
+        getWorkers();
+    }
     useEffect(()=>{
         getWorkers()
     },[])
 
-    return <WorkerContext.Provider value={{workers,getWorkers}}>
+    return <WorkerContext.Provider value={{workers,getWorkers,updateWorker}}>
         {children}
     </WorkerContext.Provider>
 }
