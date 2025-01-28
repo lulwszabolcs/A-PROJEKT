@@ -2,7 +2,7 @@ import FormControl from '@mui/material/FormControl';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import axios from 'axios'
-import './VehicleModify.module.css'
+import styles from './VehicleModify.module.css'
 import { useContext, useEffect, useState } from 'react';
 import {MenuItem,Select } from '@mui/material';
 import { useForm } from "react-hook-form"
@@ -22,10 +22,10 @@ export default function VehicleModify({close}) {
         console.log(data)
     }
     return (
-            <div className='modifyvehicle-container'>
+            <div className={styles.modifyvehicleform}>
                 <h3 style={{textAlign:'center'}}>Jármű állapot változtatása</h3>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                <FormControl fullWidth className='modifyvehicle-form'>
+                <FormControl fullWidth className={styles.modifyvehicleform}>
                     <Select
                         labelId="demo-simple-select"
                         id="demo-simple-select"

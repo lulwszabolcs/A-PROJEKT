@@ -52,7 +52,7 @@ export default function WorkerDetails({close,worker}) {
 
 
 
-            <Stack spacing={40} direction="row">
+            <Stack className='buttons' direction="row">
                     <Button variant="outlined" color="error" onClick={()=>{close()}}>Bezár</Button>
                     <Button variant="contained" type='submit'>Mentés</Button>
             </Stack>

@@ -111,7 +111,7 @@ export default function AddWorker({close}) {
             <TextField  name='phonenumber'  id="outlined-basic" label="Telefonszám" variant="outlined" required {...register("phoneNumber",{required:true})}/>
             <TextField  name='email'  id="outlined-basic" label="E-mail" variant="outlined" required {...register("email",{required:true})}/>
             <TextField  name='wage'  id="outlined-basic" label="Fizetés" variant="outlined" required {...register("wage",{required:true})} />
-            <Stack spacing={40} direction="row">
+            <Stack className={styles.buttons} direction="row">
                     <Button variant="outlined" color="error" onClick={()=>{close()}}>Bezár</Button>
                     <Button variant="contained" type='submit'>Mentés</Button>
             </Stack>

@@ -1,4 +1,4 @@
-.addError-container {
+.modifyvehiclecontainer {
     background: white;
     padding: 20px;
     border-radius: 10px;
@@ -8,7 +8,7 @@
     margin-top: 25vh;
 }
 
-.addError-form {
+.modifyvehicleform {
     display: flex;
     gap: 40px;
 }
