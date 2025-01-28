@@ -10,7 +10,7 @@ import { TypeContext } from '../../../contexts/TypeProvider';
 import { VehicleContext } from '../../../contexts/VehicleProvider';
 export default function VehicleModify({close}) {
     let {vehicleStatuses} = useContext(TypeContext);
-    let {vehicles} = useContext(VehicleContext)
+    let {vehicles,modifyVehicle,getVehicles} = useContext(VehicleContext)
     const {
         register,
         handleSubmit,
@@ -18,11 +18,13 @@ export default function VehicleModify({close}) {
         formState: { errors },
       } = useForm()
 
-    const onSubmit = (data) => {
-        console.log(data)
-    }
+      const onSubmit = async (data) => {
+        console.log("Űrlap adatok:", data); // Ellenőrizd az űrlap adatait
+        await modifyVehicle(data.license, data.value);
+        close();
+      };
     return (
-            <div className={styles.modifyvehicleform}>
+            <div className={styles.modifyvehiclecontainer}>
                 <h3 style={{textAlign:'center'}}>Jármű állapot változtatása</h3>
                 <form onSubmit={handleSubmit(onSubmit)}>
                 <FormControl fullWidth className={styles.modifyvehicleform}>
@@ -45,11 +47,11 @@ export default function VehicleModify({close}) {
                         id="demo-simple-select"
                         name='problemType'
                         defaultValue={'tpus'}
-                        {...register("status")}
+                        {...register("value")}
                         >
                         <MenuItem value={'tpus'} disabled>Állapot kiválasztása</MenuItem>
                         {vehicleStatuses.map((status) => (
-                            <MenuItem key={status.vehicleStatusDescription} value={status.vehicleStatusDescription}>
+                            <MenuItem key={status.vehicleStatusDescription} value={status.vehicleStatusName}>
                                 {status.vehicleStatusDescription}
                             </MenuItem>
                         ))}

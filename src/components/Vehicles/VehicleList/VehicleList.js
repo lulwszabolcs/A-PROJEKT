@@ -9,8 +9,9 @@ import ReportProblemIcon from '@mui/icons-material/ReportProblem';
 import Addproblem from '../../Errors/AddProblem/Addproblem';
 import VehicleModify from '../VehicleModify/VehicleModify';
 import AddVehicle from '../AddVehicle/AddVehicle';
+import axios from 'axios';
 export default function VehicleList() {
-    let {vehicles,getVehicles} = useContext(VehicleContext)
+    let {vehicles,getVehicles,setVehicles} = useContext(VehicleContext)
     let {vehicleTypes,vehicleStatuses} = useContext(TypeContext)
     const [isAddProblemOpen,setIsAddProblemOpen] = useState(false)
     const [isAddVehicleOpen,setIsAddVehicleOpen] = useState(false)
@@ -27,6 +28,9 @@ export default function VehicleList() {
         const matchesStatus = selectedStatus === 'all' || vehicle.status === selectedStatus;
         return matchesType && matchesStatus;
     });
+    useEffect(() => {
+        console.log("Vehicles állapot változott:", vehicles);
+      }, [vehicles]);
     return (
         <>
         <h1 className={styles.vehicleTitle}>  
@@ -67,7 +71,7 @@ export default function VehicleList() {
         </div>
         <div className={styles.flexbox}>
         {filteredVehicles.map((vehicle)=>(
-            <div className={styles.vehicleCard}>
+            <div className={styles.vehicleCard} key={vehicle.vehicleId}>
                 <div className={styles.vehicleInfoContainer}>
                     <h4>{vehicle.name}</h4>
                     <p>{vehicle.license}</p>
