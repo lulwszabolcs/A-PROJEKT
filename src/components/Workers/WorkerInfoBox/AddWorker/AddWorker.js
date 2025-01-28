@@ -36,7 +36,6 @@ export default function AddWorker({close}) {
       
           await uploadImage(selectedFile, imageSave);
       
-          // Kép hozzáadása az ImageContext állapotához
           const newImage = {
             imageName: imageSave.fileName,
             worker_id: imageSave.worker_id,
@@ -45,7 +44,7 @@ export default function AddWorker({close}) {
         }
       
         close();
-        getWorkers(); // Frissítjük a workereket
+        getWorkers();
       }
       
 
