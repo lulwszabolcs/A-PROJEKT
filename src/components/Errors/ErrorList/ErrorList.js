@@ -27,7 +27,6 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import { ErrorContext, ErrorProvider } from '../../../contexts/ErrorProvider';
 import { TypeContext, TypeProvider } from '../../../contexts/TypeProvider';
 
 export default function ErrorList() {

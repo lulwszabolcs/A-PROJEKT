@@ -11,7 +11,6 @@ import {MenuItem,Select } from '@mui/material';
 import { useForm } from "react-hook-form"
 import Errors from '../Errors';
 import { CoPresentOutlined } from '@mui/icons-material';
-import { ErrorContext } from '../../../contexts/ErrorProvider';
 import { TypeContext } from '../../../contexts/TypeProvider';
 export default function Addproblem({close,refreshProblems,displaySnackbar}) {
     let {problemTypes} = useContext(TypeContext);

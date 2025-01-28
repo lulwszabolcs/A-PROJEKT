@@ -20,7 +20,6 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import EditProblem from './EditProblem/EditProblem';
 import axios from 'axios'
 import ErrorList from './ErrorList/ErrorList';
-import { ErrorProvider } from '../../contexts/ErrorProvider';
 export default function Errors() {
 
 
