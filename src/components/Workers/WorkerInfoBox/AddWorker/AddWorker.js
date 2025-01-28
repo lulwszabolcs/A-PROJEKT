@@ -9,9 +9,11 @@ import {MenuItem,Select } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { WorkerContext } from '../../../../contexts/WorkerProvider';
+import { ImageContext } from '../../../../contexts/ImageProvider';
 export default function AddWorker({close}) {
     let {roles} = useContext(RoleContext)
     let {getWorkers} = useContext(WorkerContext)
+    let {images,setImages,getImages} = useContext(ImageContext)
     const [selectedFile,setSelectedFile] = useState();
     const {
         register,
@@ -22,19 +24,30 @@ export default function AddWorker({close}) {
 
 
 
-    async function onSubmit(data) {
-        const response  = await (axios.post("http://localhost:8080/worker/",data));
+      async function onSubmit(data) {
+        const response = await axios.post("http://localhost:8080/worker/", data);
+      
         if (selectedFile) {
           const imageSave = {
-            fileName: response.data.workerId+selectedFile.name.substring(selectedFile.name.lastIndexOf(".")), 
-            filePatch: "./images", 
-            worker_id: response.data.workerId, 
+            fileName: response.data.workerId + selectedFile.name.substring(selectedFile.name.lastIndexOf(".")),
+            filePatch: "./images",
+            worker_id: response.data.workerId,
           };
-          uploadImage(selectedFile,imageSave);
+      
+          await uploadImage(selectedFile, imageSave);
+      
+          // Kép hozzáadása az ImageContext állapotához
+          const newImage = {
+            imageName: imageSave.fileName,
+            worker_id: imageSave.worker_id,
+          };
+          setImages((prevImages) => [...prevImages, newImage]);
         }
-        getWorkers();
+      
         close();
-    }
+        getWorkers(); // Frissítjük a workereket
+      }
+      
 
 
 

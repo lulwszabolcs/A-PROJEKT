@@ -4,7 +4,7 @@ import FormControl from '@mui/material/FormControl';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import { RoleContext } from '../../../../contexts/RoleProvider';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import {MenuItem,Select } from '@mui/material';
 import { Update } from '@mui/icons-material';
 import { WorkerContext } from '../../../../contexts/WorkerProvider';
@@ -24,6 +24,9 @@ export default function WorkerDetails({close,worker}) {
         getWorkers();
         close();
     }
+    useEffect(()=>{
+        getWorkers()
+    })
     return (
         <div className='modalworker'>
         <h3 style={{textAlign:'center'}}>Dolgozó információ</h3>

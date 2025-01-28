@@ -1,7 +1,6 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import axios from 'axios'
 const WorkerContext = createContext()
-
 const WorkerProvider = ({children})=>{
 
     let [workers,setWorkers] = useState([])
@@ -16,6 +15,7 @@ const WorkerProvider = ({children})=>{
         setWorkers([modified,...workers])
         getWorkers();
     }
+    
     useEffect(()=>{
         getWorkers()
     },[])
