@@ -35,8 +35,8 @@ export default function VehicleModify({close}) {
                         >
                         <MenuItem value={'tpus'} disabled>Jármű kiválasztása</MenuItem>
                         {vehicles.map((vehicle) => (
-                            <MenuItem key={vehicle.vehicleId} value={vehicle.vehicleId}>
-                                {vehicle.vehicleId}
+                            <MenuItem key={vehicle.license} value={vehicle.vehicleId}>
+                                {vehicle.license}
                             </MenuItem>
                         ))}
                     </Select>

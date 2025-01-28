@@ -9,7 +9,6 @@ export default function Vehicles() {
         //                     activity beállítás usernél
         //                     sticky notes hagyás lehetőség
         //worker edit
-        // vehicle:   role alapjan update torles hozzaadas,
         //snackbar context 
         // Hibak: pipánál put helyett pacth, 
         //profile tab

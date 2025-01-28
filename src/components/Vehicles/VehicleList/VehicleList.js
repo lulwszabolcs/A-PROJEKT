@@ -70,6 +70,7 @@ export default function VehicleList() {
             <div className={styles.vehicleCard}>
                 <div className={styles.vehicleInfoContainer}>
                     <h4>{vehicle.name}</h4>
+                    <p>{vehicle.license}</p>
                     <p>{vehicle.type}</p>
                     <p>{vehicle.vehicleYear}</p>
                     <p style={{color: vehicle.status === 'Működőképes' ? 'green' : 'orange'}}>{vehicle.status}</p>

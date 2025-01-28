@@ -4,13 +4,11 @@ import Button from '@mui/material/Button';
 import InputLabel from '@mui/material/InputLabel';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import Stack from '@mui/material/Stack';
-import axios from 'axios'
-import './Addproblem.css'
+import axios from 'axios';
+import styles from './Addproblem.module.css';
 import { useContext, useEffect, useState } from 'react';
 import {MenuItem,Select } from '@mui/material';
 import { useForm } from "react-hook-form"
-import Errors from '../Errors';
-import { CoPresentOutlined } from '@mui/icons-material';
 import { TypeContext } from '../../../contexts/TypeProvider';
 export default function Addproblem({close,refreshProblems,displaySnackbar}) {
     let {problemTypes} = useContext(TypeContext);
@@ -46,7 +44,7 @@ function addNewProblem() {
     axios.post('http://localhost:8080/api/problem',formData).then(()=>{
         refreshProblems()
         close()
-    }).catch((error)=>{
+    }).catch((error)=>{ 
         alert(error.message);
     })
 }
@@ -56,11 +54,11 @@ const onSubmit = (data) => {
     console.log(formData)
 }
     return (
-            <div className='addError-container'>
+            <div className={styles.addproblemcontainer}>
                 <h3 style={{textAlign:'center'}}>Új probléma hozzáadása</h3>
                 <form onSubmit={handleSubmit(onSubmit)}>
 
-                <FormControl fullWidth className='addError-form'>
+                <FormControl fullWidth className={styles.addproblemform}>
                     <TextField onInput={handleChange} name='name'  id="outlined-basic" label="Név" variant="outlined" {...register("name",{required:true})} />
                     <TextField onInput={handleChange} name='description'  id="outlined-basic" label="Leírás" variant="outlined" {...register("description",{required:true})}/>
                     <Select
