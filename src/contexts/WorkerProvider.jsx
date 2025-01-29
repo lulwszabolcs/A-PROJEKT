@@ -1,9 +1,11 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import axios from 'axios'
+import { UserContext } from "./UserProvider";
 const WorkerContext = createContext()
 const WorkerProvider = ({children})=>{
-
+    let {generateUser} = useContext(UserContext)
     let [workers,setWorkers] = useState([])
+
     async function getWorkers() {
         const respone = await axios.get("http://localhost:8080/worker/list")
         setWorkers(respone.data);

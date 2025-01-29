@@ -17,10 +17,17 @@ const UserProvider = ({children}) => {
     function getUsersLenght() {
         return users.length
     }
+    async function generateUser(userData) {
+        const response = await (axios.post("http://localhost:8080/api/generateuser",userData)).catch((error)=>{
+            console.log(error)
+        })
+        setUsers([response.data,...users])
+        console.log("siker" + response.data)
+    }
     useEffect(()=>{
         getUsers();
     })
-    return <UserContext.Provider value={{users,getUsers,getOnlineUsers,getUsersLenght}}>
+    return <UserContext.Provider value={{users,getUsers,getOnlineUsers,getUsersLenght,generateUser}}>
         {children}
     </UserContext.Provider>
 }

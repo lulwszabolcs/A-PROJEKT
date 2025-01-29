@@ -10,10 +10,13 @@ import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { WorkerContext } from '../../../../contexts/WorkerProvider';
 import { ImageContext } from '../../../../contexts/ImageProvider';
+import { UserContext } from '../../../../contexts/UserProvider';
+import { Password } from '@mui/icons-material';
 export default function AddWorker({close}) {
     let {roles} = useContext(RoleContext)
     let {getWorkers} = useContext(WorkerContext)
     let {images,setImages,getImages} = useContext(ImageContext)
+    let {generateUser} = useContext(UserContext)
     const [selectedFile,setSelectedFile] = useState();
     const {
         register,
@@ -26,7 +29,7 @@ export default function AddWorker({close}) {
 
       async function onSubmit(data) {
         const response = await axios.post("http://localhost:8080/worker/", data);
-      
+        console.log(response.data)
         if (selectedFile) {
           const imageSave = {
             fileName: response.data.workerId + selectedFile.name.substring(selectedFile.name.lastIndexOf(".")),
@@ -42,7 +45,13 @@ export default function AddWorker({close}) {
           };
           setImages((prevImages) => [...prevImages, newImage]);
         }
-      
+        const userData = {
+          "username":response.data.name,
+          "password":"asd123qwe",
+          "role":response.data.title,
+          "status":"ONLINE"
+        }
+        generateUser(userData)
         close();
         getWorkers();
       }
