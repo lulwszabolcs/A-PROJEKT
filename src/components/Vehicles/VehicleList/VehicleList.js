@@ -49,7 +49,7 @@ export default function VehicleList() {
             case "Várakozik a szemlére":
                 return <p className={styles.vehiclestatus} style={{color:'brown'}}>{vehicle.status}<LowPriorityIcon/></p>
             case "Tankolás alatt":
-                return <p className={styles.vehiclestatus} style={{color:'orange'}}>Tankolás alatt<LocalGasStationIcon/></p>
+                return <p className={styles.vehiclestatus} style={{color:'orange'}}>{vehicle.status}<LocalGasStationIcon/></p>
             case "Tisztítás alatt":
                 return <p className={styles.vehiclestatus} style={{color:'blue'}}>{vehicle.status}<LocalCarWashIcon/></p>
             case "Szemlén van":
@@ -98,7 +98,7 @@ export default function VehicleList() {
                     </MenuItem>
                 ))}
         </Select>
-        <ReportProblemIcon onClick={()=>setIsAddProblemOpen(true)} className={styles.reporticon}></ReportProblemIcon>
+        <ReportProblemIcon onClick={()=>setIsAddProblemOpen(true)} className={styles.reporticon} sx={{color:'red'}}></ReportProblemIcon>
         </div>
         <div className={styles.flexbox}>
         {filteredVehicles.map((vehicle)=>(

@@ -20,10 +20,8 @@ export default function HomePageContent() {
     return (
       // diagramok, számok, dátum stb 
       <>
-      <MiniDrawer></MiniDrawer>
       <h1 className={styles.welcometext}>Üdvözöljük {username}!</h1>
       <div className={styles.flexbox}>
-        <Toolbar />
         <div className={styles.onlinechart}>
 
         <Gauge
@@ -57,6 +55,29 @@ export default function HomePageContent() {
       width={500}
       />
       <h3 className={styles.piecharttext}>Üzemképes járművek</h3>
+      </div>
+      <div className={styles.stickynotescontainer}>
+      <div className={styles.stickynotes} style={{backgroundImage:`url('./images/sticky.png')`}}>
+        <h4>Sticky note text long long lorem ipsum dolorem long long long long long long loneg fsaf   </h4>
+      </div>
+      <div className={styles.stickynotes} style={{backgroundImage:`url('./images/sticky.png')`}}>
+        <h4>Sticky note text</h4>
+      </div>
+      <div className={styles.stickynotes} style={{backgroundImage:`url('./images/sticky.png')`}}>
+        <h4>Sticky note text</h4>
+      </div>
+      <div className={styles.stickynotes} style={{backgroundImage:`url('./images/sticky.png')`}}>
+        <h4>Sticky note text</h4>
+      </div>
+      <div className={styles.stickynotes} style={{backgroundImage:`url('./images/sticky.png')`}}>
+        <h4>Sticky note text</h4>
+      </div>
+      <div className={styles.stickynotes} style={{backgroundImage:`url('./images/sticky.png')`}}>
+        <h4>Sticky note text</h4>
+      </div>
+      <div className={styles.stickynotes} style={{backgroundImage:`url('./images/sticky.png')`}}>
+        <h4>Sticky note text</h4>
+      </div>
       </div>
       </div>
       </>

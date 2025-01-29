@@ -149,7 +149,7 @@ const handleChange = (text) =>{
       break;
   }
 }
-  const icons = [<AccountBoxIcon/>,<HomeIcon/>,<BadgeIcon/>,<DirectionsCarIcon/>,<ErrorIcon/>,<LogoutIcon/>];
+  const icons = [<HomeIcon/>,<AccountBoxIcon/>,<BadgeIcon/>,<DirectionsCarIcon/>,<ErrorIcon/>,<LogoutIcon/>];
 
   return (
     <Box sx={{ display: 'flex'}}>
@@ -187,7 +187,7 @@ const handleChange = (text) =>{
         </DrawerHeader>
         <Divider />
         <List>
-          {['Profil','Főoldal', 'Dolgozók', 'Járműállomány', 'Hibák', 'Kijelentkezés'].map((text,index) => (
+          {['Főoldal','Profil', 'Dolgozók', 'Járműállomány', 'Hibák', 'Kijelentkezés'].map((text,index) => (
             <ListItem key={text} disablePadding sx={{ display: 'block', marginTop:'30px'}}> 
               <ListItemButton onClick={()=>handleChange(text)}
                 sx={[

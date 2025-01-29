@@ -1,5 +1,7 @@
 .welcometext {
     text-align: center;
+    margin-top: 15vh;
+    margin-bottom: 10vh;
 }
 
 .mainelements {
@@ -28,12 +30,35 @@
     flex-direction: row;
     gap: 10vw;
     margin-top: 5vh;
-    margin-right: 5vw;
+    margin-left: 10vw;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
+    margin-bottom: 5vh;
+    max-width: 80vw;
 }
 
 .piecharttext {
     margin-right: 3vw;
+}
+
+.stickynotes {
+    background-size:cover;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    text-align: justify;
+    flex-wrap: wrap;
+}
+
+.stickynotescontainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 3vw;
+    justify-content: center;
+    align-items: center;
 }
