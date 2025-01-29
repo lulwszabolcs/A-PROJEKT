@@ -8,6 +8,7 @@ import { UserContext, UserProvider } from "../../contexts/UserProvider";
 import { PieChart } from '@mui/x-charts/PieChart';
 import { VehicleContext, VehicleProvider } from "../../contexts/VehicleProvider";
 import HomePageContent from "./HomePageContent";
+import { NoteProvider } from "../../contexts/NoteProvider";
 
 export default function Homepage() {
   return (
@@ -15,9 +16,12 @@ export default function Homepage() {
     <MiniDrawer>
     </MiniDrawer>
     <VehicleProvider>
+      <NoteProvider>
+
       <UserProvider>
       <HomePageContent></HomePageContent>
       </UserProvider>
+      </NoteProvider>
     </VehicleProvider>
     </>
   )
