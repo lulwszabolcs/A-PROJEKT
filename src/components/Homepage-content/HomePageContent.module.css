@@ -1,0 +1,39 @@
+.welcometext {
+    text-align: center;
+}
+
+.mainelements {
+    margin-left: 10vw;
+}
+
+.onlinechart {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: fit-content;
+    padding: 15px;
+    box-shadow: 5px 5px 5px 5px rgba(173, 216, 230, 0.616);
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.vehiclechart {
+    display: flex;
+    flex-direction: column;
+}
+
+.flexbox {
+    display: flex;
+    flex-direction: row;
+    gap: 10vw;
+    margin-top: 5vh;
+    margin-right: 5vw;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.piecharttext {
+    margin-right: 3vw;
+}

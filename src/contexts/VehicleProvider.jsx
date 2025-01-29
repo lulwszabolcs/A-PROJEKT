@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { TypeContext} from "./TypeProvider";
+import { TypeContext, TypeProvider} from "./TypeProvider";
 
 const VehicleContext = createContext();
 const VehicleProvider = ({ children }) => {
@@ -53,17 +53,27 @@ const VehicleProvider = ({ children }) => {
     const imageSrc = `http://localhost:8080/images/vehicle_images/${convertType(vehicle.type)}.png`
     return imageSrc;
   }
-  
+  function getActiveVehicles() {
+    let result = vehicles.filter((x)=>x.status === 'Működőképes')
+    return result.length
+  }
+  function getInActiveVehicles() {
+    let result = vehicles.filter((x)=>x.status !== 'Működőképes')
+    return result.length
+  }
   useEffect(() => {
     getVehicles();
   }, []);
 
   return (
+    <TypeProvider>
+
     <VehicleContext.Provider
-      value={{ vehicles, addVehicle, getVehicles, modifyVehicle, setVehicles, pickImage }}
-    >
+      value={{ vehicles, addVehicle, getVehicles, modifyVehicle, setVehicles, pickImage,getActiveVehicles,getInActiveVehicles }}
+      >
       {children}
     </VehicleContext.Provider>
+      </TypeProvider>
   );
 };
 

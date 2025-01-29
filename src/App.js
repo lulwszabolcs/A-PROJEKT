@@ -9,9 +9,15 @@ import Errors from './components/Errors/Errors';
 import Workers from './components/Workers/Workers';
 import Vehicles from './components/Vehicles/Vehicles';
 import Profile from './components/Profile/Profile';
+import { UserProvider } from './contexts/UserProvider';
+import { VehicleProvider } from './contexts/VehicleProvider';
+import { TypeProvider } from './contexts/TypeProvider';
 
 function App() {
   return (
+    <UserProvider>
+      <TypeProvider>
+
     <BrowserRouter>
       <Routes>
         <Route path="/">
@@ -26,6 +32,8 @@ function App() {
         </Route>
       </Routes>
     </BrowserRouter>
+      </TypeProvider>
+    </UserProvider>
   );
 }
 
