@@ -30,7 +30,7 @@ import { Outlet, Link } from "react-router-dom";
 import { Button, textFieldClasses } from '@mui/material';
 import { useNavigate } from "react-router-dom";
 import {withRouter} from 'react-router-dom';
-
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -127,6 +127,9 @@ export default function MiniDrawer() {
 const [primarytext,setPrimaryText] = React.useState();
 const handleChange = (text) =>{
   switch (text) {
+    case "Profil":
+      navigate('/profile')
+      break;
     case "Főoldal":
       navigate('/home')
       break;
@@ -146,7 +149,7 @@ const handleChange = (text) =>{
       break;
   }
 }
-  const icons = [<HomeIcon/>,<BadgeIcon/>,<DirectionsCarIcon/>,<ErrorIcon/>,<LogoutIcon/>];
+  const icons = [<AccountBoxIcon/>,<HomeIcon/>,<BadgeIcon/>,<DirectionsCarIcon/>,<ErrorIcon/>,<LogoutIcon/>];
 
   return (
     <Box sx={{ display: 'flex'}}>
@@ -184,7 +187,7 @@ const handleChange = (text) =>{
         </DrawerHeader>
         <Divider />
         <List>
-          {['Főoldal', 'Dolgozók', 'Járműállomány', 'Hibák', 'Kijelentkezés'].map((text,index) => (
+          {['Profil','Főoldal', 'Dolgozók', 'Járműállomány', 'Hibák', 'Kijelentkezés'].map((text,index) => (
             <ListItem key={text} disablePadding sx={{ display: 'block', marginTop:'30px'}}> 
               <ListItemButton onClick={()=>handleChange(text)}
                 sx={[

@@ -8,6 +8,7 @@ import NotFound from './components/NotFound/NotFound';
 import Errors from './components/Errors/Errors';
 import Workers from './components/Workers/Workers';
 import Vehicles from './components/Vehicles/Vehicles';
+import Profile from './components/Profile/Profile';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Routes>
         <Route path="/">
           <Route index element={<Loginpage />} />
+          <Route path="profile" element={<Profile />} />
           <Route path="home" element={<Homepage />} />
           <Route path="login" element={<Loginpage />} />
           <Route path="vehicles" element={<Vehicles />} />
