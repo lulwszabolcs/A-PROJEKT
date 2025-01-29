@@ -50,7 +50,7 @@ const VehicleProvider = ({ children }) => {
       return result.vehicleTypeName
   }
   function pickImage(vehicle) {
-    const imageSrc = `http://localhost:8080/images/vehicle_images/${convertType(vehicle.type)}.webp`
+    const imageSrc = `http://localhost:8080/images/vehicle_images/${convertType(vehicle.type)}.png`
     return imageSrc;
   }
   

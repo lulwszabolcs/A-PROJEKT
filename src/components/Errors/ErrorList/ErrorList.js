@@ -30,21 +30,16 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import { TypeContext, TypeProvider } from '../../../contexts/TypeProvider';
 
 export default function ErrorList() {
-  const [problemTypes,setProblemTypes] = useState([]);
-  async function fetchProblemTypes() {
-    setProblemTypes(((await axios.get("http://localhost:8080/problemtypes/list")).data))
-}
+  let {problemTypes} = useContext(TypeContext)
   const [problems,setProblems] = useState([]);
-useEffect(()=>{
-axios.get('http://localhost:8080/api/problem').then(({data})=>{
-  const problems = data
-  setProblems(problems)
-  console.log(problems);
-}).catch((error)=>{
-  console.log(error)
-})
-},[])
-fetchProblemTypes();
+  useEffect(()=>{
+    axios.get('http://localhost:8080/api/problem').then(({data})=>{
+    const problems = data
+    setProblems(problems)
+    }).catch((error)=>{
+      console.log(error)
+    })
+      },[])
 function refreshProblemList() {
   axios.get("http://localhost:8080/api/problem")
       .then((response) => {
@@ -100,8 +95,7 @@ function refreshProblemList() {
     setSeeClosedProblems(event.target.checked);
   };
   function handleStatusChange(problem) {
-    problem.status = "CLOSED"
-    axios.put(`http://localhost:8080/api/problem/${problem.problemId}`,problem).then(()=>{
+    axios.patch(`http://localhost:8080/api/problem/${problem.problemId}`,{"key": "STATUS","value":"CLOSED"}).then(()=>{
       refreshProblemList();
   }).catch((error)=>{
       alert(error.message);

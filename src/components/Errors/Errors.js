@@ -20,13 +20,16 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import EditProblem from './EditProblem/EditProblem';
 import axios from 'axios'
 import ErrorList from './ErrorList/ErrorList';
+import { TypeProvider } from '../../contexts/TypeProvider';
 export default function Errors() {
 
 
     return (
         <>
         <MiniDrawer></MiniDrawer>
+        <TypeProvider>
             <ErrorList></ErrorList>
+        </TypeProvider>
             
         </>
     )
