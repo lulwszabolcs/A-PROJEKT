@@ -11,7 +11,7 @@ import VehicleModify from '../VehicleModify/VehicleModify';
 import AddVehicle from '../AddVehicle/AddVehicle';
 import axios from 'axios';
 export default function VehicleList() {
-    let {vehicles,getVehicles,setVehicles} = useContext(VehicleContext)
+    let {vehicles,getVehicles,setVehicles,pickImage} = useContext(VehicleContext)
     let {vehicleTypes,vehicleStatuses} = useContext(TypeContext)
     const [isAddProblemOpen,setIsAddProblemOpen] = useState(false)
     const [isAddVehicleOpen,setIsAddVehicleOpen] = useState(false)
@@ -80,7 +80,8 @@ export default function VehicleList() {
                     <p style={{color: vehicle.status === 'Működőképes' ? 'green' : 'orange'}}>{vehicle.status}</p>
                 </div>
                 <div className={styles.vehicleImageContainer}>
-                <img src='https://cdn2.iconfinder.com/data/icons/iconslandtransport/PNG/256x256/CarGrey.png' className={styles.vehicleImage}></img>
+                <img src={pickImage(vehicle)} className={styles.vehicleImage}></img>
+                {console.log(pickImage(vehicle))}
                 </div>
             </div>
         ))}

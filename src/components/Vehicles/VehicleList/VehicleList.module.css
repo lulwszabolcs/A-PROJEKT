@@ -41,10 +41,11 @@ p {
 }
 
 .vehicleImage {
-    height: 100px;
-    width: 100px;
+    height: 150px;
+    width: 150px;
     margin-top: 5vh;
     margin-right: 3vw;
+    border-radius: 10px;
 }
 
 .addicon {

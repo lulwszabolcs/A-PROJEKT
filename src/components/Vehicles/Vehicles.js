@@ -18,11 +18,11 @@ export default function Vehicles() {
         // errornal problemtypes lekérdezés helyett ocntext
         <>
         <MiniDrawer></MiniDrawer>
-        <VehicleProvider>
             <TypeProvider>
+        <VehicleProvider>
                 <VehicleList></VehicleList>
-            </TypeProvider>
         </VehicleProvider>
+            </TypeProvider>
         </>
     )
 }

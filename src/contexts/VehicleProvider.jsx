@@ -1,12 +1,12 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
+import { TypeContext} from "./TypeProvider";
 
 const VehicleContext = createContext();
-
 const VehicleProvider = ({ children }) => {
+  let {vehicleTypes} = useContext(TypeContext)
   const [vehicles, setVehicles] = useState([]);
 
-  // Adatok lekérése
   async function getVehicles() {
     try {
       const response = await axios.get("http://localhost:8080/vehicle/list");
@@ -16,7 +16,6 @@ const VehicleProvider = ({ children }) => {
     }
   }
 
-  // Új jármű hozzáadása
   async function addVehicle(vehicle) {
     try {
       const result = await axios.post("http://localhost:8080/vehicle/", vehicle);
@@ -26,7 +25,6 @@ const VehicleProvider = ({ children }) => {
     }
   }
 
-  // Jármű módosítása
   async function modifyVehicle(id, newStatus) {
     try {
       const result = await axios.patch(`http://localhost:8080/vehicle/${id}`, {
@@ -34,9 +32,8 @@ const VehicleProvider = ({ children }) => {
         value: newStatus,
       });
   
-      console.log("API válasz:", result.data); // Ellenőrizd, mit küld vissza az API
+      console.log("API válasz:", result.data); 
   
-      // Ellenőrizd, hogy az állapot frissítése jól működik
       setVehicles((prevVehicles) =>
         prevVehicles.map((vehicle) =>
           vehicle.vehicleId === id ? { ...vehicle, status: newStatus } : vehicle
@@ -48,14 +45,22 @@ const VehicleProvider = ({ children }) => {
       console.error("Hiba történt jármű módosításakor:", error);
     }
   }
-
+  function convertType(type) {
+      let result = vehicleTypes.find((x)=>x.vehicleTypeDescription === type)
+      return result.vehicleTypeName
+  }
+  function pickImage(vehicle) {
+    const imageSrc = `http://localhost:8080/images/vehicle_images/${convertType(vehicle.type)}.webp`
+    return imageSrc;
+  }
+  
   useEffect(() => {
     getVehicles();
   }, []);
 
   return (
     <VehicleContext.Provider
-      value={{ vehicles, addVehicle, getVehicles, modifyVehicle, setVehicles }}
+      value={{ vehicles, addVehicle, getVehicles, modifyVehicle, setVehicles, pickImage }}
     >
       {children}
     </VehicleContext.Provider>
