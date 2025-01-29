@@ -19,7 +19,6 @@ export default function VehicleModify({close}) {
       } = useForm()
 
       const onSubmit = async (data) => {
-        console.log("Űrlap adatok:", data); // Ellenőrizd az űrlap adatait
         await modifyVehicle(data.license, data.value);
         close();
       };

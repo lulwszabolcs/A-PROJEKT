@@ -30,17 +30,10 @@ const VehicleProvider = ({ children }) => {
       const result = await axios.patch(`http://localhost:8080/vehicle/${id}`, {
         key: "STATUS",
         value: newStatus,
-      });
-  
-      console.log("API válasz:", result.data); 
-  
-      setVehicles((prevVehicles) =>
-        prevVehicles.map((vehicle) =>
-          vehicle.vehicleId === id ? { ...vehicle, status: newStatus } : vehicle
-        )
-      );
-  
-      console.log("Frissített vehicles állapot:", vehicles);
+      });  
+      let modified = vehicles.find((x)=>x.vehicleId === result.data.vehicleId)
+      modified.status = result.data.status
+      setVehicles([modified,...vehicles])
     } catch (error) {
       console.error("Hiba történt jármű módosításakor:", error);
     }
@@ -63,7 +56,7 @@ const VehicleProvider = ({ children }) => {
   }
   useEffect(() => {
     getVehicles();
-  }, []);
+  }, [vehicles]);
 
   return (
     <TypeProvider>
