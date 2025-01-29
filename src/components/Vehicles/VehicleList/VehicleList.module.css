@@ -66,3 +66,8 @@ p {
     cursor: pointer;
     margin-top: 2vh;
 }
+.vehiclestatus {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}

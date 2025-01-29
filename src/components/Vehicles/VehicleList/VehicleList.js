@@ -10,6 +10,14 @@ import Addproblem from '../../Errors/AddProblem/Addproblem';
 import VehicleModify from '../VehicleModify/VehicleModify';
 import AddVehicle from '../AddVehicle/AddVehicle';
 import axios from 'axios';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import ReportIcon from '@mui/icons-material/Report';
+import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
+import BuildIcon from '@mui/icons-material/Build';
+import LowPriorityIcon from '@mui/icons-material/LowPriority';
+import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
+import LocalCarWashIcon from '@mui/icons-material/LocalCarWash';
+import LocalGasStationIcon from '@mui/icons-material/LocalGasStation';
 export default function VehicleList() {
     let {vehicles,getVehicles,setVehicles,pickImage} = useContext(VehicleContext)
     let {vehicleTypes,vehicleStatuses} = useContext(TypeContext)
@@ -28,6 +36,29 @@ export default function VehicleList() {
         const matchesStatus = selectedStatus === 'all' || vehicle.status === selectedStatus;
         return matchesType && matchesStatus;
     });
+    function pickIcon(vehicle) {
+        switch (vehicle.status) {
+            case "Működőképes":
+                return <p className={styles.vehiclestatus} style={{color:'green'}}>{vehicle.status}<CheckCircleIcon/></p>
+            case "Karbantartás alatt":
+                return <p className={styles.vehiclestatus} style={{color:'gray'}}>{vehicle.status}<ReportIcon/></p>
+            case "Javítás alatt":
+                return <p className={styles.vehiclestatus} style={{color:'gray'}}>{vehicle.status}<BuildIcon/></p>
+            case "Üzemen kívül":
+                return <p className={styles.vehiclestatus} style={{color:'red'}}>{vehicle.status}<RemoveCircleIcon/></p>
+            case "Várakozik a szemlére":
+                return <p className={styles.vehiclestatus} style={{color:'brown'}}>{vehicle.status}<LowPriorityIcon/></p>
+            case "Tankolás alatt":
+                return <p className={styles.vehiclestatus} style={{color:'orange'}}>Tankolás alatt<LocalGasStationIcon/></p>
+            case "Tisztítás alatt":
+                return <p className={styles.vehiclestatus} style={{color:'blue'}}>{vehicle.status}<LocalCarWashIcon/></p>
+            case "Szemlén van":
+                return <p className={styles.vehiclestatus} style={{color:'brown'}}>{vehicle.status}<FormatListBulletedIcon/></p>
+        
+            default:
+                break;
+        }
+    }
     useEffect(() => {
         console.log("Vehicles állapot változott:", vehicles);
       }, [vehicles]);
@@ -77,7 +108,7 @@ export default function VehicleList() {
                     <p>{vehicle.license}</p>
                     <p>{vehicle.type}</p>
                     <p>{vehicle.vehicleYear}</p>
-                    <p style={{color: vehicle.status === 'Működőképes' ? 'green' : 'orange'}}>{vehicle.status}</p>
+                    <p>{pickIcon(vehicle)}</p>
                 </div>
                 <div className={styles.vehicleImageContainer}>
                 <img src={pickImage(vehicle)} className={styles.vehicleImage}></img>
