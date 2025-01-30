@@ -1,10 +1,12 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import axios from 'axios'
 import { UserContext } from "./UserProvider";
+import { SnackbarContext } from "./SnackbarProvider";
 const WorkerContext = createContext()
 const WorkerProvider = ({children})=>{
     let {generateUser} = useContext(UserContext)
     let [workers,setWorkers] = useState([])
+    let {displaySnackbar} = useContext(SnackbarContext)
 
     async function getWorkers() {
         const respone = await axios.get("http://localhost:8080/worker/list")
@@ -15,6 +17,7 @@ const WorkerProvider = ({children})=>{
         let modified = workers.find((x)=>x.id===id)
         modified = respone.data;
         setWorkers([modified,...workers])
+        displaySnackbar("Dolgozó frissítve")
         getWorkers();
     }
     

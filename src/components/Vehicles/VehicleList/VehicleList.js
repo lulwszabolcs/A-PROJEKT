@@ -3,7 +3,7 @@ import styles from './VehicleList.module.css'
 import { VehicleContext, VehicleProvider } from '../../../contexts/VehicleProvider'
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
-import { InputLabel, MenuItem, Modal, Select } from '@mui/material';
+import { InputLabel, MenuItem, Modal, Select, SnackbarContent } from '@mui/material';
 import { TypeContext, TypeProvider } from '../../../contexts/TypeProvider';
 import ReportProblemIcon from '@mui/icons-material/ReportProblem';
 import Addproblem from '../../Errors/AddProblem/Addproblem';
@@ -18,10 +18,13 @@ import LowPriorityIcon from '@mui/icons-material/LowPriority';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import LocalCarWashIcon from '@mui/icons-material/LocalCarWash';
 import LocalGasStationIcon from '@mui/icons-material/LocalGasStation';
+import SnackbarComponent from '../../Snackbar/SnackbarComponent'
+import { SnackbarContext } from '../../../contexts/SnackbarProvider';
 
 export default function VehicleList() {
     let {vehicles,getVehicles,setVehicles,pickImage} = useContext(VehicleContext)
     let {vehicleTypes,vehicleStatuses} = useContext(TypeContext)
+    let {SnackbarOpen,SnackbarMessage,closeSnackbar} = useContext(SnackbarContext)
     const [isAddProblemOpen,setIsAddProblemOpen] = useState(false)
     const [isAddVehicleOpen,setIsAddVehicleOpen] = useState(false)
     const [selectedType, setSelectedType] = useState('all');
@@ -60,9 +63,6 @@ export default function VehicleList() {
                 break;
         }
     }
-    useEffect(() => {
-        console.log("Vehicles állapot változott:", vehicles);
-      }, [vehicles]);
     return (
         <>
         <h1 className={styles.vehicleTitle}>  
@@ -113,7 +113,6 @@ export default function VehicleList() {
                 </div>
                 <div className={styles.vehicleImageContainer}>
                 <img src={pickImage(vehicle)} className={styles.vehicleImage}></img>
-                {console.log(pickImage(vehicle))}
                 </div>
             </div>
         ))}
@@ -137,6 +136,7 @@ export default function VehicleList() {
             </VehicleProvider>
             </TypeProvider>
         </Modal>
+        <SnackbarComponent snackbarOpen={SnackbarOpen} message={SnackbarMessage} close={closeSnackbar}/>
         </>
 
     )

@@ -36,7 +36,7 @@ export default function EditProblem({close,problem,refreshProblems,displaySnackb
     function editProblem() {
         axios.put(`http://localhost:8080/api/problem/${problem.problemId}`,formData).then(()=>{
             refreshProblems()
-            displaySnackbar("Hiba sikeresen módosítva")
+            displaySnackbar("Hiba sikeresen módosítva!")
             close()
         }).catch((error)=>{
             alert(error.message);

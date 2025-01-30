@@ -12,10 +12,13 @@ import AddIcon from '@mui/icons-material/Add';
 import AddStickyNote from "./AddStickyNote/AddStickyNote";
 import { NoteContext } from "../../contexts/NoteProvider";
 import DeleteIcon from '@mui/icons-material/Delete';
+import SnackbarComponent from "../Snackbar/SnackbarComponent";
+import { SnackbarContext } from "../../contexts/SnackbarProvider";
 export default function HomePageContent() {
   let {getOnlineUsers,getUsersLenght} = useContext(UserContext)
   let {getActiveVehicles,getInActiveVehicles} = useContext(VehicleContext)
   let {notes,deleteNote} = useContext(NoteContext)
+  let {SnackbarMessage, SnackbarOpen, closeSnackbar} = useContext(SnackbarContext)
   const [addStickyNotesOpen,setAddStickyNotesOpen] = useState(false)
   function close() {
     setAddStickyNotesOpen(false)
@@ -79,6 +82,8 @@ export default function HomePageContent() {
       <Modal open={addStickyNotesOpen}>
         <AddStickyNote close={close}></AddStickyNote>
       </Modal>
+      <SnackbarComponent snackbarOpen={SnackbarOpen} message={SnackbarMessage} close={closeSnackbar}/>
+      
       </>
     )
 }

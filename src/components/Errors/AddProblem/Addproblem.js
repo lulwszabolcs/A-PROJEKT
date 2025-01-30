@@ -39,10 +39,10 @@ const handleChange = (event) => {
     setFormData((prevData) => ({ ...prevData, [name]: value,datum: formatDate(new Date)}));     
     console.log(formData)
 };
-const [problems,setProblems] = useState([]);
 function addNewProblem() {
     axios.post('http://localhost:8080/api/problem',formData).then(()=>{
         refreshProblems()
+        displaySnackbar("Hiba hozzádava!")
         close()
     }).catch((error)=>{ 
         alert(error.message);

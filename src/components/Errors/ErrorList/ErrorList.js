@@ -5,7 +5,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Button } from '@mui/material';
+import { Button, SnackbarContent } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CreateIcon from '@mui/icons-material/Create';
 import AddIcon from '@mui/icons-material/Add';
@@ -19,8 +19,6 @@ import axios from 'axios'
 import './ErrorList.css';
 import Addproblem from '../AddProblem/Addproblem';
 import EditProblem from '../EditProblem/EditProblem';
-import Slide from '@mui/material/Slide';
-import Snackbar from '@mui/material/Snackbar';
 
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -28,9 +26,12 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { TypeContext, TypeProvider } from '../../../contexts/TypeProvider';
+import { SnackbarContext } from '../../../contexts/SnackbarProvider';
+import SnackbarComponent from '../../Snackbar/SnackbarComponent';
 
 export default function ErrorList() {
   let {problemTypes} = useContext(TypeContext)
+  let {SnackbarOpen,displaySnackbar,closeSnackbar,SnackbarMessage} = useContext(SnackbarContext)
   const [problems,setProblems] = useState([]);
   useEffect(()=>{
     axios.get('http://localhost:8080/api/problem').then(({data})=>{
@@ -54,16 +55,7 @@ function refreshProblemList() {
   const [IsEditModalOpen,setIsEditModalIOpen] = useState(false);
   const [currentProb,setCurrentProb] = useState([]);
 
-  const [snackbarOpen,setSnackbarOpen] = useState(false);
-  const [snackbarMessage,setSnackbarMessage] = useState();
   const [seeClosedProblems,setSeeClosedProblems] = useState(false);
-  const openSnackbar = (message) => {
-    setSnackbarMessage(message)
-    setSnackbarOpen(true)
-  }
-  const closeSnackbar = () =>{
-    setSnackbarOpen(false)
-  }
   const [openDialog,setOpenDialog] = useState(false)
   const openDialogBox = () =>{
       setOpenDialog(true)
@@ -71,10 +63,7 @@ function refreshProblemList() {
   const closeDialog = () =>{
       setOpenDialog(false)
   }
-  const [state, setState] = useState({
-    open: false,
-    Transition: Slide,
-  });
+ 
   function closeAddProblemModal() {
     setIsAddNewProblemOpen(false)
   }
@@ -86,7 +75,8 @@ function refreshProblemList() {
     setIsEditModalIOpen(false)
   }
   function deleteSelectedProblem(id) {
-      axios.delete(`http://localhost:8080/api/problem/${id}`).then(refreshProblemList,openSnackbar("Hiba sikeresen törölve!"),closeDialog()).catch((error)=>{console.log(error)})
+      axios.delete(`http://localhost:8080/api/problem/${id}`).then(refreshProblemList,closeDialog()).catch((error)=>{console.log(error)})
+      displaySnackbar("Hiba sikeresen törölve!")
   }
   function showClosedProblenms() {
     setSeeClosedProblems(true)
@@ -96,6 +86,7 @@ function refreshProblemList() {
   };
   function handleStatusChange(problem) {
     axios.patch(`http://localhost:8080/api/problem/${problem.problemId}`,{"key": "STATUS","value":"CLOSED"}).then(()=>{
+      displaySnackbar("Hiba sikeresen lezárva!")
       refreshProblemList();
   }).catch((error)=>{
       alert(error.message);
@@ -176,7 +167,7 @@ function refreshProblemList() {
         <Modal open={IsaddNewProblemOpen} className='flexcenter'>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <TypeProvider>
-          <Addproblem close={closeAddProblemModal} refreshProblems={refreshProblemList} displaySnackbar={openSnackbar}></Addproblem>
+          <Addproblem close={closeAddProblemModal} refreshProblems={refreshProblemList} displaySnackbar={displaySnackbar}></Addproblem>
           </TypeProvider>
           </LocalizationProvider>
         </Modal>
@@ -184,23 +175,9 @@ function refreshProblemList() {
             </div>
             <Modal open={IsEditModalOpen} className='flexcenter'>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <EditProblem close={closeEditModal} problem={currentProb} refreshProblems={refreshProblemList} displaySnackbar={openSnackbar} types={problemTypes}></EditProblem>
+          <EditProblem close={closeEditModal} problem={currentProb} refreshProblems={refreshProblemList} displaySnackbar={displaySnackbar} types={problemTypes}></EditProblem>
           </LocalizationProvider>
         </Modal>
-        <Snackbar
-        ContentProps={{
-          sx: {
-            background: "#4BB543",
-            marginLeft:8
-          }
-        }}
-          open={snackbarOpen}
-          onClose={closeSnackbar}
-          TransitionComponent={state.Transition}
-          message={snackbarMessage}
-          key={state.Transition.name}
-          autoHideDuration={1200}
-        />
         <Dialog
         open={openDialog}
         onClose={closeDialog}
@@ -217,6 +194,7 @@ function refreshProblemList() {
           </Button>
         </DialogActions>
       </Dialog>
+      <SnackbarComponent snackbarOpen={SnackbarOpen} message={SnackbarMessage} close={closeSnackbar}/>
         </>
     )
 }

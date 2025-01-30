@@ -5,18 +5,21 @@ import FormControl from '@mui/material/FormControl';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import { RoleContext } from '../../../../contexts/RoleProvider';
-import {MenuItem,Select } from '@mui/material';
+import {MenuItem,Select, SnackbarContent } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { WorkerContext } from '../../../../contexts/WorkerProvider';
 import { ImageContext } from '../../../../contexts/ImageProvider';
 import { UserContext } from '../../../../contexts/UserProvider';
 import { Password } from '@mui/icons-material';
+import { SnackbarContext } from '../../../../contexts/SnackbarProvider';
+import SnackbarComponent from '../../../Snackbar/SnackbarComponent';
 export default function AddWorker({close}) {
     let {roles} = useContext(RoleContext)
     let {getWorkers} = useContext(WorkerContext)
     let {images,setImages,getImages} = useContext(ImageContext)
     let {generateUser} = useContext(UserContext)
+    let {SnackbarOpen,displaySnackbar,closeSnackbar,SnackbarMessage} = useContext(SnackbarContext)
     const [selectedFile,setSelectedFile] = useState();
     const {
         register,
@@ -52,6 +55,7 @@ export default function AddWorker({close}) {
           "status":"ONLINE"
         }
         generateUser(userData)
+        displaySnackbar("Dolgozó hozzáadva")
         close();
         getWorkers();
       }
@@ -126,6 +130,7 @@ export default function AddWorker({close}) {
             </Stack>
         </FormControl>
         </form>
+        <SnackbarComponent snackbarOpen={SnackbarOpen} message={SnackbarMessage} close={closeSnackbar}/>
     </div>
     )
 }

@@ -21,8 +21,12 @@ export default function AddVehicle({close}) {
     const onSubmit = (data) => {
         data.status = "Működőképes"
         data.vehicleYear = Number(data.vehicleYear)
-        addVehicle(data);
-        close();
+        if (data.vehicleYear <= 1960 || data.vehicleYear > 2025 ) {
+            alert("Nem megfelelő évjárat!")
+        } else {
+            addVehicle(data);
+            close();
+        }
     }
     return (
             <div className={styles.addvehiclecontainer}>

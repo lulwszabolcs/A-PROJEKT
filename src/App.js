@@ -12,12 +12,14 @@ import Profile from './components/Profile/Profile';
 import { UserProvider } from './contexts/UserProvider';
 import { VehicleProvider } from './contexts/VehicleProvider';
 import { TypeProvider } from './contexts/TypeProvider';
+import { SnackbarProvider } from './contexts/SnackbarProvider';
 
 function App() {
   return (
     <UserProvider>
       <TypeProvider>
-
+<SnackbarProvider>
+  
     <BrowserRouter>
       <Routes>
         <Route path="/">
@@ -32,6 +34,7 @@ function App() {
         </Route>
       </Routes>
     </BrowserRouter>
+</SnackbarProvider>
       </TypeProvider>
     </UserProvider>
   );

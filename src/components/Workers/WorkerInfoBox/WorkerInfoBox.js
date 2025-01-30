@@ -9,7 +9,7 @@
   import InfoRoundedIcon from '@mui/icons-material/InfoRounded';
   import styles from './WorkerInfoBox.css'
   import WorkerDetails from './WorkerDetails/WorkerDetails';
-  import { InputLabel, MenuItem, Modal, Select, useColorScheme } from '@mui/material';
+  import { InputLabel, MenuItem, Modal, Select, SnackbarContent, useColorScheme } from '@mui/material';
   import { useState,useEffect, useContext} from 'react';
   import axios from 'axios';
   import { useFetcher } from 'react-router-dom';
@@ -19,6 +19,8 @@
   import AddWorker from './AddWorker/AddWorker';
   import { WorkerContext } from '../../../contexts/WorkerProvider';
   import { ImageContext } from '../../../contexts/ImageProvider';
+import SnackbarComponent from '../../Snackbar/SnackbarComponent';
+import { SnackbarContext } from '../../../contexts/SnackbarProvider';
 
   export default function WorkerInfoBox() {
       let {images,getImages} = useContext(ImageContext)
@@ -27,6 +29,7 @@
       const [selectedRole,setSelectedRole] = useState()
       const [selectedWorker,setSelectedWorker] = useState()
       let {workers,getWorkers} = useContext(WorkerContext)
+      let {SnackbarOpen,closeSnackbar,SnackbarMessage} = useContext(SnackbarContext)
       function closeWorkerDetails() {
           setOpenWorkerDetails(false)
       }
@@ -114,6 +117,8 @@
       </Fab>
 
       </div>
+        <SnackbarComponent snackbarOpen={SnackbarOpen} message={SnackbarMessage} close={closeSnackbar}/>
+      
       </>
     );
   }
