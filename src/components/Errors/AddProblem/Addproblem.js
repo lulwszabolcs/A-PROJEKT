@@ -69,7 +69,7 @@ const onSubmit = (data) => {
                         defaultValue={'tpus'}
                         >
     <MenuItem value={'tpus'} disabled>Típus kiválasztása</MenuItem>
-    {problemTypes.map((type) => (
+    {problemTypes.sort().map((type) => (
         <MenuItem key={type.id} value={type.problemTypeName}>
             {type.problemTypeDescription}
         </MenuItem>

@@ -74,6 +74,80 @@ function refreshProblemList() {
   function closeEditModal() {
     setIsEditModalIOpen(false)
   }
+  const problemTypeConverter = (problemType) => {
+    let result = problemTypes.find((x)=> x.problemTypeName === problemType)
+    if (result) {
+      return result.problemTypeDescription
+    }
+  }
+  const problemColorPicker = (problemType) => {
+    let color = "";
+    switch (problemType) {
+      case "Berendezés meghibásodása":
+      case "Kommunikációs hiba":
+      case "Navigációs hiba":
+      case "Légi forgalomirányítási hiba":
+      case "Rendszerhiba":
+        color = "purple";
+        break;
+
+      case "Üzemanyag szivárgás":
+      case "Üzemanyag ellátási probléma":
+      case "Üzemanyag teherautó késés":
+        color = "#f08737";
+        break;
+
+      case "Áramszünet":
+      case "Világítási hiba":
+      case "Biztonsági rendszer hiba":
+      case "Rádió meghibásodás":
+        color = "#d1ce0f";
+        break;
+
+      case "Kifutópálya akadály":
+      case "Kifutó pálya repedés":
+      case "Madárütközés":
+      case "Kifutó pálya túlfutás":
+      case "Járműhiba":
+        color = "gray";
+        break;
+
+      case "Időjárási zavar":
+      case "Jégtelenítési probléma":
+      case "Hóeltakarítási probléma":
+        color = "blue";
+        break;
+
+      case "Elveszett poggyász":
+      case "Vámdelay":
+      case "Check-in hiba":
+      case "Beszállási késés":
+      case "Poggyászátvilágítási hiba":
+        color = "brown";
+        break;
+
+      case "Tűzriadó":
+      case "Mellékhelyiség meghibásodás":
+      case "Elveszett gyermek":
+      case "Fűtési hiba":
+      case "Hűtési hiba":
+      case "Illetéktelen személy":
+      case "Vészkijárat probléma":
+        color = "red";
+        break;
+
+      case "Jegykezelési hiba":
+      case "Orvosi vészhelyzet":
+      case "Parkolóhely hiány":
+      case "Rakomány biztonsági rés":
+        color = "#ff14b5";
+        break;
+      default:
+        color = "#0fe6fa";
+        break;
+    }
+    return color;
+};
   function deleteSelectedProblem(id) {
       axios.delete(`http://localhost:8080/api/problem/${id}`).then(refreshProblemList,closeDialog()).catch((error)=>{console.log(error)})
       displaySnackbar("Hiba sikeresen törölve!")
@@ -91,9 +165,11 @@ function refreshProblemList() {
   }).catch((error)=>{
       alert(error.message);
   })
+
+  
+
   }
     return (
-      // beosztáshoz tartozó problémák megoldása
         <>
         <div className='table-container'>
         <h1 className='error-primary-text'>Folyamatban lévő hibák</h1>
@@ -108,6 +184,7 @@ function refreshProblemList() {
               <TableCell>Név</TableCell>
               <TableCell>Leírás</TableCell>
               <TableCell>Hozzáadva</TableCell>
+              <TableCell>Típus</TableCell>
               <TableCell>Hibakód</TableCell>
             </TableRow>
           </TableHead>
@@ -127,8 +204,18 @@ function refreshProblemList() {
       <TableCell style={{ fontStyle: problem.status === "CLOSED" ? "italic" : "normal" }}>
         {problem.description}
       </TableCell>
-      <TableCell style={{ fontStyle: problem.status === "CLOSED" ? "italic" : "normal" }}>
+      <TableCell style={{ fontStyle: problem.status === "CLOSED" ? "italic" : "normal"}}>
         {problem.datum}
+      </TableCell>
+      <TableCell style={{ fontStyle: problem.status === "CLOSED" ? "italic" : "normal",color: problemColorPicker(problemTypeConverter(problem.problemType))}}>
+      <div style={{ 
+            display: "inline-block", 
+            padding: "6px", 
+            border: `1px solid ${problemColorPicker(problemTypeConverter(problem.problemType))}`,
+            borderRadius:'8px',
+      }}>
+            {problemTypeConverter(problem.problemType)}
+  </div>
       </TableCell>
       <TableCell style={{ fontStyle: problem.status === "CLOSED" ? "italic" : "normal" }}>
         {problem.problemId}

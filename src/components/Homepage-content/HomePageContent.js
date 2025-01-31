@@ -132,7 +132,7 @@ export default function HomePageContent() {
           })}
           <div
             className={styles.stickynotes}
-            style={{ backgroundImage: `url('./images/sticky.png')`, cursor: 'pointer', marginLeft:'3vw'}}
+            style={{ backgroundImage: `url('./images/sticky.png')`, cursor: 'pointer'}}
             onClick={() => setAddStickyNotesOpen(true)}
           >
             <AddIcon />
