@@ -56,11 +56,10 @@
     flex-wrap: wrap;
 }
 
-.stickynotescontainer {
+.stickynotescontainer { 
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 3vw;
     justify-content: center;
     align-items: center;
 }
@@ -70,4 +69,8 @@
     top: 5px; 
     right: 5px;
     cursor: pointer; 
+}
+
+body {
+    user-select: none;
 }
