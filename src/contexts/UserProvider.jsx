@@ -1,10 +1,12 @@
 import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
+import { SnackbarContext, SnackbarProvider } from "./SnackbarProvider";
 
 const UserContext = createContext();
 
 const UserProvider = ({children}) => {
     const [users,setUsers] = useState([])
+    let {displaySnackbar} = useContext(SnackbarContext)
     async function getUsers() {
         const response = await axios.get("http://localhost:8080/api/user")
         setUsers(response.data)
@@ -24,10 +26,20 @@ const UserProvider = ({children}) => {
         setUsers([response.data,...users])
         console.log("siker" + response.data)
     }
+
+    async function changeUserStatus(id,changedStatus) {
+        const response = await axios.patch(`http://localhost:8080/api/user/${id}`,{"key":"STATUS","value":changedStatus})
+        if (response) {
+            let result = users.find((x)=>x.id === response.data.id)
+            result.status = response.data.status
+            setUsers([result,...users])
+            displaySnackbar(`Mostantól ${response.data.status} vagy!`)
+        }
+    }
     useEffect(()=>{
         getUsers();
     })
-    return <UserContext.Provider value={{users,getUsers,getOnlineUsers,getUsersLenght,generateUser}}>
+    return <UserContext.Provider value={{users,getUsers,getOnlineUsers,getUsersLenght,generateUser,changeUserStatus}}>
         {children}
     </UserContext.Provider>
 }

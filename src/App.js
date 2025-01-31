@@ -16,9 +16,9 @@ import { SnackbarProvider } from './contexts/SnackbarProvider';
 
 function App() {
   return (
-    <UserProvider>
-      <TypeProvider>
+    <TypeProvider>
 <SnackbarProvider>
+        <UserProvider>
   
     <BrowserRouter>
       <Routes>
@@ -34,9 +34,9 @@ function App() {
         </Route>
       </Routes>
     </BrowserRouter>
+    </UserProvider>
 </SnackbarProvider>
       </TypeProvider>
-    </UserProvider>
   );
 }
 
