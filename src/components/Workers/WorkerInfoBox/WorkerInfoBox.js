@@ -29,7 +29,7 @@ import { SnackbarContext } from '../../../contexts/SnackbarProvider';
       const [selectedRole,setSelectedRole] = useState()
       const [selectedWorker,setSelectedWorker] = useState()
       let {workers,getWorkers} = useContext(WorkerContext)
-      let {SnackbarOpen,closeSnackbar,SnackbarMessage} = useContext(SnackbarContext)
+      let {SnackbarOpen,closeSnackbar,SnackbarMessage,SnackbarSuccess} = useContext(SnackbarContext)
       function closeWorkerDetails() {
           setOpenWorkerDetails(false)
       }
@@ -117,7 +117,7 @@ import { SnackbarContext } from '../../../contexts/SnackbarProvider';
       </Fab>
 
       </div>
-        <SnackbarComponent snackbarOpen={SnackbarOpen} message={SnackbarMessage} close={closeSnackbar}/>
+        <SnackbarComponent snackbarOpen={SnackbarOpen} message={SnackbarMessage} close={closeSnackbar} success={SnackbarSuccess}/>
       
       </>
     );

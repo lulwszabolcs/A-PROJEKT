@@ -1,6 +1,6 @@
-import {Modal} from "@mui/material";
+import {getPopoverUtilityClass, Modal} from "@mui/material";
 import { Gauge, gaugeClasses } from '@mui/x-charts/Gauge';
-import { useCallback, useContext, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { UserContext } from "../../contexts/UserProvider";
 import { PieChart } from '@mui/x-charts/PieChart';
 import { VehicleContext } from "../../contexts/VehicleProvider";
@@ -11,14 +11,16 @@ import { NoteContext } from "../../contexts/NoteProvider";
 import DeleteIcon from '@mui/icons-material/Delete';
 import SnackbarComponent from "../Snackbar/SnackbarComponent";
 import { SnackbarContext } from "../../contexts/SnackbarProvider";
+import { BarChart } from '@mui/x-charts/BarChart';
+import { TypeContext } from "../../contexts/TypeProvider";
+
 export default function HomePageContent() {
   let { getOnlineUsers, getUsersLenght } = useContext(UserContext);
   let { getActiveVehicles, getInActiveVehicles } = useContext(VehicleContext);
   let { notes, deleteNote } = useContext(NoteContext);
   let { SnackbarMessage, SnackbarOpen, closeSnackbar, SnackbarSuccess } = useContext(SnackbarContext);
-  
+  let {getProblemTypeDescriptions,problemTypeDescriptions,getProblemNumberSeries,problemTypeSeries} = useContext(TypeContext)
   const [addStickyNotesOpen, setAddStickyNotesOpen] = useState(false);
-  
   const [notePositions, setNotePositions] = useState({});
 
   const [draggingNote, setDraggingNote] = useState(null);
@@ -64,7 +66,10 @@ export default function HomePageContent() {
     height: 200,
     value: getOnlineUsers(),
   };
-
+  useEffect(()=>{
+    problemTypeDescriptions = getProblemTypeDescriptions()
+    problemTypeSeries = getProblemNumberSeries()    
+  })
   return (
     <>
       <h1 className={styles.welcometext}>Üdvözöljük {username}!</h1>
@@ -99,6 +104,22 @@ export default function HomePageContent() {
           />
           <h3 className={styles.piecharttext}>Üzemképes járművek</h3>
         </div>
+
+
+
+        <div className={styles.onlinechart}>
+        <BarChart
+          xAxis={[{ scaleType: 'band', data: problemTypeDescriptions }]}
+          series={[{ data: problemTypeSeries }]}
+          width={1000}
+          height={400}
+        />
+        <h3>Problémák száma típusonként</h3>
+        </div>
+
+
+
+
         <div className={styles.stickynotescontainer}>
           {notes.map((note,index) => {
             const position = notePositions[note.id] || { x: 250 + (index * 250), y: 650 };

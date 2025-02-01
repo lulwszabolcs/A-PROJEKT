@@ -19,7 +19,7 @@ export default function AddWorker({close}) {
     let {getWorkers} = useContext(WorkerContext)
     let {images,setImages,getImages} = useContext(ImageContext)
     let {generateUser} = useContext(UserContext)
-    let {SnackbarOpen,displaySnackbar,closeSnackbar,SnackbarMessage} = useContext(SnackbarContext)
+    let {SnackbarOpen,displaySnackbar,closeSnackbar,SnackbarMessage,SnackbarSuccess} = useContext(SnackbarContext)
     const [selectedFile,setSelectedFile] = useState();
     const {
         register,
@@ -31,32 +31,38 @@ export default function AddWorker({close}) {
 
 
       async function onSubmit(data) {
-        const response = await axios.post("http://localhost:8080/worker/", data);
-        if (selectedFile) {
-          const imageSave = {
-            fileName: response.data.workerId + selectedFile.name.substring(selectedFile.name.lastIndexOf(".")),
-            filePatch: "./images",
-            worker_id: response.data.workerId,
-          };
-      
-          await uploadImage(selectedFile, imageSave);
-      
-          const newImage = {
-            imageName: imageSave.fileName,
-            worker_id: imageSave.worker_id,
-          };
-          setImages((prevImages) => [...prevImages, newImage]);
+        let name = data.name
+        if (!name.includes(" ")) {
+          displaySnackbar("A névnek két részből kell állnia!",false)
+        } else {
+          const response = await axios.post("http://localhost:8080/worker/", data);
+          if (selectedFile) {
+            const imageSave = {
+              fileName: response.data.workerId + selectedFile.name.substring(selectedFile.name.lastIndexOf(".")),
+              filePatch: "./images",
+              worker_id: response.data.workerId,
+            };
+        
+            await uploadImage(selectedFile, imageSave);
+        
+            const newImage = {
+              imageName: imageSave.fileName,
+              worker_id: imageSave.worker_id,
+            };
+            setImages((prevImages) => [...prevImages, newImage]);
+          }
+          const userData = {
+            "username":response.data.name,
+            "password":"asd123qwe",
+            "role":response.data.title,
+            "status":"ONLINE"
+          }
+          generateUser(userData)
+          displaySnackbar("Dolgozó hozzáadva!",true)
+          close();
+          getWorkers();
         }
-        const userData = {
-          "username":response.data.name,
-          "password":"asd123qwe",
-          "role":response.data.title,
-          "status":"ONLINE"
-        }
-        generateUser(userData)
-        displaySnackbar("Dolgozó hozzáadva",true)
-        close();
-        getWorkers();
+        
       }
       
 
@@ -129,7 +135,7 @@ export default function AddWorker({close}) {
             </Stack>
         </FormControl>
         </form>
-        <SnackbarComponent snackbarOpen={SnackbarOpen} message={SnackbarMessage} close={closeSnackbar}/>
+        <SnackbarComponent snackbarOpen={SnackbarOpen} message={SnackbarMessage} close={closeSnackbar} success={SnackbarSuccess}/>
     </div>
     )
 }

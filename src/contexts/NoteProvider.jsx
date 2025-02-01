@@ -12,18 +12,26 @@ const NoteProvider = ({children}) => {
         setNotes(response.data)
     }
     async function addNote(data) {
-        const response  = await axios.post("http://localhost:8080/notes",data)
-        setNotes([response.data,...notes])
-        displaySnackbar("Jegyzet hozzáadva!",true)
-        
+        try {
+            const response  = await axios.post("http://localhost:8080/notes",data)
+            setNotes([response.data,...notes])
+            displaySnackbar("Jegyzet hozzáadva!",true)
+        } catch (error) {
+            displaySnackbar("Hiba történet a jegyzet hozzáadásakor!",false)
+        }   
     }
     async function deleteNote(id) {
-        const response = (await axios.delete(`http://localhost:8080/note/${id}`)).data
-        console.log(response)
-        let modified = notes.filter((x)=>x.id !== response.id)
-        setNotes(modified)
-        displaySnackbar("Jegyzet törölve!",true)
-
+        try {
+            const response = (await axios.delete(`http://localhost:8080/note/${id}`)).data
+        if (response) {
+            let modified = notes.filter((x)=>x.id !== response.id)
+            setNotes(modified)
+            displaySnackbar("Jegyzet törölve!",true)
+        }
+        } catch (error) {
+            displaySnackbar("Hiba történet a jegyzet törlésekor!",false)
+        }
+        
     }
     useEffect(()=>{
         getNotes();

@@ -20,11 +20,14 @@ const UserProvider = ({children}) => {
         return users.length
     }
     async function generateUser(userData) {
-        const response = await (axios.post("http://localhost:8080/api/generateuser",userData)).catch((error)=>{
-            console.log(error)
-        })
-        setUsers([response.data,...users])
-        console.log("siker" + response.data)
+        try {
+            const response = await (axios.post("http://localhost:8080/api/generateuser",userData))
+            if (response) {
+                setUsers([response.data,...users])
+            }
+        } catch (error) {
+            displaySnackbar("Hiba a felhasználó hozzáadásakor!",false)
+        }
     }
 
     async function changeUserStatus(id,changedStatus) {
