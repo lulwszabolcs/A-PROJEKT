@@ -1,6 +1,6 @@
 import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
-import { SnackbarContext, SnackbarProvider } from "./SnackbarProvider";
+import { SnackbarContext} from "./SnackbarProvider";
 
 const UserContext = createContext();
 

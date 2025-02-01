@@ -1,7 +1,4 @@
-import { Button, Modal, Typography } from "@mui/material";
-import MiniDrawer from "../Sidebar/Sidebar";
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
+import {Modal} from "@mui/material";
 import { Gauge, gaugeClasses } from '@mui/x-charts/Gauge';
 import { useCallback, useContext, useState } from "react";
 import { UserContext } from "../../contexts/UserProvider";

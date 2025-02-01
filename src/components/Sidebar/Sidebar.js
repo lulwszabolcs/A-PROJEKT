@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState,useContext } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
@@ -16,23 +17,25 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 import HomeIcon from '@mui/icons-material/Home';
-import { Home } from '@mui/icons-material';
+import { AccountBox, Home } from '@mui/icons-material';
 import BadgeIcon from '@mui/icons-material/Badge';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 import ErrorIcon from '@mui/icons-material/Error';
 import LogoutIcon from '@mui/icons-material/Logout';
-import Homepage from '../Homepage-content/Homepage';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Outlet, Link } from "react-router-dom";
-import { Button, textFieldClasses } from '@mui/material';
 import { useNavigate } from "react-router-dom";
-import {withRouter} from 'react-router-dom';
-import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import Avatar from '@mui/material/Avatar';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import Tooltip from '@mui/material/Tooltip';
+import PersonAdd from '@mui/icons-material/PersonAdd';
+import Settings from '@mui/icons-material/Settings';
+import BedtimeIcon from '@mui/icons-material/Bedtime';
+import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
+import { UserContext } from '../../contexts/UserProvider';
+import { SnackbarContext } from '../../contexts/SnackbarProvider';
+import SnackbarComponent from '../Snackbar/SnackbarComponent';
 const drawerWidth = 240;
-
 const openedMixin = (theme) => ({
   width: drawerWidth,
   transition: theme.transitions.create('width', {
@@ -59,7 +62,6 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   alignItems: 'center',
   justifyContent: 'flex-end',
   padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
   ...theme.mixins.toolbar,
 }));
 
@@ -112,9 +114,20 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function MiniDrawer() {
+  let {changeUserStatus} = useContext(UserContext)
+  let {SnackbarOpen,closeSnackbar,SnackbarMessage} = useContext(SnackbarContext)
+
+  const [anchorEl, setAnchorEl] = useState(null);
+  const openToolbar = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   const navigate = useNavigate();
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -124,12 +137,9 @@ export default function MiniDrawer() {
     setOpen(false);
   };
   
-const [primarytext,setPrimaryText] = React.useState();
+const [primarytext,setPrimaryText] = useState();
 const handleChange = (text) =>{
   switch (text) {
-    case "Profil":
-      navigate('/profile')
-      break;
     case "Főoldal":
       navigate('/home')
       break;
@@ -149,9 +159,81 @@ const handleChange = (text) =>{
       break;
   }
 }
-  const icons = [<HomeIcon/>,<AccountBoxIcon/>,<BadgeIcon/>,<DirectionsCarIcon/>,<ErrorIcon/>,<LogoutIcon/>];
-
+  const icons = [<HomeIcon/>,
+    <Tooltip title="Profil beállítások">
+    <IconButton
+      onClick={handleClick}
+      size="small"
+      aria-controls={openToolbar ? 'account-menu' : undefined}
+      aria-haspopup="true"
+      aria-expanded={openToolbar ? 'true' : undefined}
+    >
+      <AccountBox/>
+    </IconButton>
+  </Tooltip>
+  ,<BadgeIcon/>,<DirectionsCarIcon/>,<ErrorIcon/>,<LogoutIcon/>];
+  
   return (
+    <>
+    <Menu
+        anchorEl={anchorEl}
+        id="account-menu"
+        open={openToolbar}
+        onClose={handleClose}
+        onClick={handleClose}
+        slotProps={{
+          paper: {
+            elevation: 0,
+            sx: {
+              overflow: 'visible',
+              filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+              mt: 1.5,
+              '& .MuiAvatar-root': {
+                width: 32,
+                height: 32,
+                ml: -0.5,
+                mr: 1,
+              },
+              '&::before': {
+                content: '""',
+                display: 'block',
+                position: 'absolute',
+                top: 0,
+                left: 14,
+                width: 10,
+                height: 10,
+                bgcolor: 'background.paper',
+                transform: 'translateY(-50%) rotate(45deg)',
+                zIndex: 0,
+              },
+            },
+          },
+        }}
+        transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+      >
+        <MenuItem onClick={()=>{handleClose();navigate('/profile')}}>
+          <Avatar/> Profil
+        </MenuItem>
+        <Divider />
+        <MenuItem onClick={()=>{handleClose();changeUserStatus(74,"ONLINE")}}>
+          <NotificationsActiveIcon style={{marginRight:'1vw'}}>
+            <PersonAdd fontSize="small" />
+          </NotificationsActiveIcon>
+          Online
+        </MenuItem>
+        <MenuItem onClick={()=>{handleClose();changeUserStatus(74,"OFFLINE")}}>
+          <BedtimeIcon style={{marginRight:'1vw'}}>
+            <Settings fontSize="small" />
+          </BedtimeIcon>
+          Offline
+        </MenuItem>
+        <MenuItem onClick={()=>{handleClose();changeUserStatus(74,"OFFLINE")}}>
+          <HomeIcon style={{marginRight:'1vw'}}>
+          </HomeIcon>
+        Szabadságon
+        </MenuItem>
+      </Menu> 
     <Box sx={{ display: 'flex'}}>
       <CssBaseline />
       <AppBar position="fixed" open={open}>
@@ -239,5 +321,7 @@ const handleChange = (text) =>{
         </List>
       </Drawer>
     </Box>
+    <SnackbarComponent snackbarOpen={SnackbarOpen} message={SnackbarMessage} close={closeSnackbar}/>
+    </>
   );
 }
