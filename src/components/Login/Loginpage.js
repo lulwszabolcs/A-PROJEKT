@@ -39,8 +39,8 @@ export default function Loginpage() {
             <h2 style={{textAlign:'center'}}>Belépés</h2>
             <form onSubmit={handleSubmit(onSubmit)}>
             <FormControl fullWidth style={{gap:'40px'}}>
-            <TextField id="outlined-basic" label="Username" variant="outlined" {...register("username",{required:true})}/>
-            <TextField id="outlined-basic" label="Password" variant="outlined" type='password' {...register("password",{required:true})} />
+            <TextField id="outlined-basic" label="Felhasználónév" variant="outlined" {...register("username",{required:true})}/>
+            <TextField id="outlined-basic" label="Jelszó" variant="outlined" type='password' {...register("password",{required:true})} />
             {errors.username && console.log("rq") }
             {errors.password && console.log("rq") }
             <Button type='submit' variant="contained" className='login-button'>Login</Button>

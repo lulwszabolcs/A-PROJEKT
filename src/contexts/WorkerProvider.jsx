@@ -17,7 +17,7 @@ const WorkerProvider = ({children})=>{
         let modified = workers.find((x)=>x.id===id)
         modified = respone.data;
         setWorkers([modified,...workers])
-        displaySnackbar("Dolgozó frissítve")
+        displaySnackbar("Dolgozó frissítve",true)
         getWorkers();
     }
     

@@ -28,12 +28,17 @@ const UserProvider = ({children}) => {
     }
 
     async function changeUserStatus(id,changedStatus) {
-        const response = await axios.patch(`http://localhost:8080/api/user/${id}`,{"key":"STATUS","value":changedStatus})
-        if (response) {
-            let result = users.find((x)=>x.id === response.data.id)
-            result.status = response.data.status
-            setUsers([result,...users])
-            displaySnackbar(`Mostantól ${response.data.status} vagy!`)
+        let changingUser = users.find((x)=>x.id == id)
+        if (changingUser.status === changedStatus) {
+            displaySnackbar(`Már ${changedStatus} vagy!`,false)
+        } else {
+            const response = await axios.patch(`http://localhost:8080/api/user/${id}`,{"key":"STATUS","value":changedStatus})
+            if (response) {
+                let result = users.find((x)=>x.id === response.data.id)
+                result.status = response.data.status
+                setUsers([result,...users])
+                displaySnackbar(`Mostantól ${response.data.status} vagy!`,true)
+            }
         }
     }
     useEffect(()=>{

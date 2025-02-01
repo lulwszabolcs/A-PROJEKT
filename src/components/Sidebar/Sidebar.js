@@ -28,13 +28,10 @@ import Avatar from '@mui/material/Avatar';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Tooltip from '@mui/material/Tooltip';
-import PersonAdd from '@mui/icons-material/PersonAdd';
-import Settings from '@mui/icons-material/Settings';
-import BedtimeIcon from '@mui/icons-material/Bedtime';
-import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import { UserContext } from '../../contexts/UserProvider';
 import { SnackbarContext } from '../../contexts/SnackbarProvider';
 import SnackbarComponent from '../Snackbar/SnackbarComponent';
+import CircleIcon from '@mui/icons-material/Circle';
 const drawerWidth = 240;
 const openedMixin = (theme) => ({
   width: drawerWidth,
@@ -213,24 +210,22 @@ const handleChange = (text) =>{
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
         <MenuItem onClick={()=>{handleClose();navigate('/profile')}}>
-          <Avatar/> Profil
+          <Avatar style={{marginRight:'10px'}}/> Profil
         </MenuItem>
         <Divider />
         <MenuItem onClick={()=>{handleClose();changeUserStatus(74,"ONLINE")}}>
-          <NotificationsActiveIcon style={{marginRight:'1vw'}}>
-            <PersonAdd fontSize="small" />
-          </NotificationsActiveIcon>
+          <CircleIcon style={{marginRight:'1vw',color:'green'}} sx={{height:'18px'}}>
+          </CircleIcon>
           Online
         </MenuItem>
         <MenuItem onClick={()=>{handleClose();changeUserStatus(74,"OFFLINE")}}>
-          <BedtimeIcon style={{marginRight:'1vw'}}>
-            <Settings fontSize="small" />
-          </BedtimeIcon>
+          <CircleIcon style={{marginRight:'1vw',color:'gray'}} sx={{height:'18px'}}>
+          </CircleIcon>
           Offline
         </MenuItem>
-        <MenuItem onClick={()=>{handleClose();changeUserStatus(74,"OFFLINE")}}>
-          <HomeIcon style={{marginRight:'1vw'}}>
-          </HomeIcon>
+        <MenuItem onClick={()=>{handleClose();changeUserStatus(74,"ON_VACATION")}}>
+          <CircleIcon style={{marginRight:'1vw',color:'orange'}} sx={{height:'18px'}}>
+          </CircleIcon>
         Szabadságon
         </MenuItem>
       </Menu> 

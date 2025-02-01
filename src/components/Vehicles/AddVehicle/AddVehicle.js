@@ -8,9 +8,11 @@ import {MenuItem,Select, TextField } from '@mui/material';
 import { useForm } from "react-hook-form"
 import { TypeContext } from '../../../contexts/TypeProvider';
 import { VehicleContext } from '../../../contexts/VehicleProvider';
+import { SnackbarContext } from '../../../contexts/SnackbarProvider';
 export default function AddVehicle({close}) {
     let {vehicleTypes} = useContext(TypeContext);
     let {addVehicle,getVehicles} = useContext(VehicleContext)
+    let {displaySnackbar} = useContext(SnackbarContext)
     const {
         register,
         handleSubmit,
@@ -22,7 +24,7 @@ export default function AddVehicle({close}) {
         data.status = "Működőképes"
         data.vehicleYear = Number(data.vehicleYear)
         if (data.vehicleYear <= 1960 || data.vehicleYear > 2025 ) {
-            alert("Nem megfelelő évjárat!")
+            displaySnackbar("Nem megfelelő évjárat!",false)
         } else {
             addVehicle(data);
             close();

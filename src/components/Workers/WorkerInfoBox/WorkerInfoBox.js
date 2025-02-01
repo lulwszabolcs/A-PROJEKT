@@ -19,7 +19,7 @@
   import AddWorker from './AddWorker/AddWorker';
   import { WorkerContext } from '../../../contexts/WorkerProvider';
   import { ImageContext } from '../../../contexts/ImageProvider';
-import SnackbarComponent from '../../Snackbar/SnackbarComponent';
+import SnackbarComponent from "../../Snackbar/SnackbarComponent";
 import { SnackbarContext } from '../../../contexts/SnackbarProvider';
 
   export default function WorkerInfoBox() {

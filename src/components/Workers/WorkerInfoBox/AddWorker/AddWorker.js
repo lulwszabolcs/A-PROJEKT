@@ -13,7 +13,7 @@ import { ImageContext } from '../../../../contexts/ImageProvider';
 import { UserContext } from '../../../../contexts/UserProvider';
 import { Password } from '@mui/icons-material';
 import { SnackbarContext } from '../../../../contexts/SnackbarProvider';
-import SnackbarComponent from '../../../Snackbar/SnackbarComponent';
+import SnackbarComponent from "../../../Snackbar/SnackbarComponent";
 export default function AddWorker({close}) {
     let {roles} = useContext(RoleContext)
     let {getWorkers} = useContext(WorkerContext)
@@ -32,7 +32,6 @@ export default function AddWorker({close}) {
 
       async function onSubmit(data) {
         const response = await axios.post("http://localhost:8080/worker/", data);
-        console.log(response.data)
         if (selectedFile) {
           const imageSave = {
             fileName: response.data.workerId + selectedFile.name.substring(selectedFile.name.lastIndexOf(".")),
@@ -55,7 +54,7 @@ export default function AddWorker({close}) {
           "status":"ONLINE"
         }
         generateUser(userData)
-        displaySnackbar("Dolgozó hozzáadva")
+        displaySnackbar("Dolgozó hozzáadva",true)
         close();
         getWorkers();
       }

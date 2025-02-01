@@ -2,7 +2,7 @@ import Snackbar from '@mui/material/Snackbar';
 import { useState } from 'react';
 import Slide from '@mui/material/Slide';
 
-export default function SnackbarComponent({message,snackbarOpen,close}) {
+export default function SnackbarComponent({message,snackbarOpen,close,success}) {
     const [state, setState] = useState({
         open: false,
         Transition: Slide,
@@ -11,7 +11,7 @@ export default function SnackbarComponent({message,snackbarOpen,close}) {
         <Snackbar
         ContentProps={{
           sx: {
-            background: "#4BB543",
+            background: success != null && success == false ? "red" : "#4BB543",
             marginLeft:8
           }
         }}

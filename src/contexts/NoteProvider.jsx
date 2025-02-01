@@ -14,7 +14,7 @@ const NoteProvider = ({children}) => {
     async function addNote(data) {
         const response  = await axios.post("http://localhost:8080/notes",data)
         setNotes([response.data,...notes])
-        displaySnackbar("Jegyzet hozzáadva!")
+        displaySnackbar("Jegyzet hozzáadva!",true)
         
     }
     async function deleteNote(id) {
@@ -22,7 +22,7 @@ const NoteProvider = ({children}) => {
         console.log(response)
         let modified = notes.filter((x)=>x.id !== response.id)
         setNotes(modified)
-        displaySnackbar("Jegyzet törölve!")
+        displaySnackbar("Jegyzet törölve!",true)
 
     }
     useEffect(()=>{

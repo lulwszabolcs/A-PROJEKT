@@ -24,7 +24,7 @@ import { SnackbarContext } from '../../../contexts/SnackbarProvider';
 export default function VehicleList() {
     let {vehicles,getVehicles,setVehicles,pickImage} = useContext(VehicleContext)
     let {vehicleTypes,vehicleStatuses} = useContext(TypeContext)
-    let {SnackbarOpen,SnackbarMessage,closeSnackbar} = useContext(SnackbarContext)
+    let {SnackbarOpen,SnackbarMessage,closeSnackbar,SnackbarSuccess} = useContext(SnackbarContext)
     const [isAddProblemOpen,setIsAddProblemOpen] = useState(false)
     const [isAddVehicleOpen,setIsAddVehicleOpen] = useState(false)
     const [selectedType, setSelectedType] = useState('all');
@@ -136,7 +136,7 @@ export default function VehicleList() {
             </VehicleProvider>
             </TypeProvider>
         </Modal>
-        <SnackbarComponent snackbarOpen={SnackbarOpen} message={SnackbarMessage} close={closeSnackbar}/>
+        <SnackbarComponent snackbarOpen={SnackbarOpen} message={SnackbarMessage} close={closeSnackbar} success={SnackbarSuccess}/>
         </>
 
     )

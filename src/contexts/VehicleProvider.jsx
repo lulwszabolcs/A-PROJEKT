@@ -2,7 +2,6 @@ import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { TypeContext, TypeProvider} from "./TypeProvider";
 import { SnackbarContext } from "./SnackbarProvider";
-import SnackbarComponent from "../components/Snackbar/SnackbarComponent";
 
 const VehicleContext = createContext();
 const VehicleProvider = ({ children }) => {
@@ -22,7 +21,7 @@ const VehicleProvider = ({ children }) => {
     try {
       const result = await axios.post("http://localhost:8080/vehicle/", vehicle);
       setVehicles((prev) => [result.data, ...prev]);
-      displaySnackbar("Jármű hozzáadva!")
+      displaySnackbar("Jármű hozzáadva!",true)
     } catch (error) {
       console.error("Hiba történt jármű hozzáadásakor:", error.message);
     }
@@ -37,7 +36,7 @@ const VehicleProvider = ({ children }) => {
       let modified = vehicles.find((x)=>x.vehicleId === result.data.vehicleId)
       modified.status = result.data.status
       setVehicles([modified,...vehicles])
-      displaySnackbar("Jármű állapot módosítva!")
+      displaySnackbar("Jármű állapot módosítva!",true)
     } catch (error) {
       console.error("Hiba történt jármű módosításakor:", error);
     }

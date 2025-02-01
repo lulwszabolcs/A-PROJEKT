@@ -15,7 +15,7 @@ export default function HomePageContent() {
   let { getOnlineUsers, getUsersLenght } = useContext(UserContext);
   let { getActiveVehicles, getInActiveVehicles } = useContext(VehicleContext);
   let { notes, deleteNote } = useContext(NoteContext);
-  let { SnackbarMessage, SnackbarOpen, closeSnackbar } = useContext(SnackbarContext);
+  let { SnackbarMessage, SnackbarOpen, closeSnackbar, SnackbarSuccess } = useContext(SnackbarContext);
   
   const [addStickyNotesOpen, setAddStickyNotesOpen] = useState(false);
   
@@ -139,7 +139,7 @@ export default function HomePageContent() {
       <Modal open={addStickyNotesOpen}>
         <AddStickyNote close={close} />
       </Modal>
-      <SnackbarComponent snackbarOpen={SnackbarOpen} message={SnackbarMessage} close={closeSnackbar} />
+      <SnackbarComponent snackbarOpen={SnackbarOpen} message={SnackbarMessage} close={closeSnackbar} success={SnackbarSuccess} />
     </>
   );
 }
