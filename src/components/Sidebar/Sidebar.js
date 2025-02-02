@@ -32,6 +32,7 @@ import { UserContext } from '../../contexts/UserProvider';
 import { SnackbarContext } from '../../contexts/SnackbarProvider';
 import SnackbarComponent from '../Snackbar/SnackbarComponent';
 import CircleIcon from '@mui/icons-material/Circle';
+import ChatIcon from '@mui/icons-material/Chat';
 const drawerWidth = 240;
 const openedMixin = (theme) => ({
   width: drawerWidth,
@@ -149,6 +150,9 @@ const handleChange = (text) =>{
           case "Hibák":
             navigate('/errors')  
             break;
+          case "Ügyfélszolgálat":
+            navigate('/support')  
+            break;
     case "Kijelentkezés":
       navigate('/login')  
       break;
@@ -168,7 +172,7 @@ const handleChange = (text) =>{
       <AccountBox/>
     </IconButton>
   </Tooltip>
-  ,<BadgeIcon/>,<DirectionsCarIcon/>,<ErrorIcon/>,<LogoutIcon/>];
+  ,<BadgeIcon/>,<DirectionsCarIcon/>,<ErrorIcon/>,<ChatIcon/>,<LogoutIcon/>];
   
   return (
     <>
@@ -264,7 +268,7 @@ const handleChange = (text) =>{
         </DrawerHeader>
         <Divider />
         <List>
-          {['Főoldal','Profil', 'Dolgozók', 'Járműállomány', 'Hibák', 'Kijelentkezés'].map((text,index) => (
+          {['Főoldal','Profil', 'Dolgozók', 'Járműállomány', 'Hibák','Ügyfélszolgálat', 'Kijelentkezés'].map((text,index) => (
             <ListItem key={text} disablePadding sx={{ display: 'block', marginTop:'30px'}}> 
               <ListItemButton onClick={()=>handleChange(text)}
                 sx={[

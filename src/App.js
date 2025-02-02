@@ -13,6 +13,7 @@ import { UserProvider } from './contexts/UserProvider';
 import { VehicleProvider } from './contexts/VehicleProvider';
 import { TypeProvider } from './contexts/TypeProvider';
 import { SnackbarProvider } from './contexts/SnackbarProvider';
+import Support from './components/Support/Support';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="vehicles" element={<Vehicles />} />
           <Route path="errors" element={<Errors />} />
           <Route path="workers" element={<Workers />} />
+          <Route path="support" element={<Support />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
