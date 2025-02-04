@@ -30,13 +30,13 @@ export default function HomePageContent() {
     if (!notePositions[noteId]) {
       setNotePositions((prev) => ({
         ...prev,
-        [noteId]: { x: 250, y: 650 },
+        [noteId]: { x: 250, y: 1280 },
       }));
     }
     setDraggingNote(noteId);
     setRelativeCoords({
       x: e.clientX - (notePositions[noteId]?.x || 250),
-      y: e.clientY - (notePositions[noteId]?.y || 650),
+      y: e.clientY - (notePositions[noteId]?.y || 1280),
     });
   }, [notePositions]);
 
