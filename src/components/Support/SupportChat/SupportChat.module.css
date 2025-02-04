@@ -1,13 +1,19 @@
 .chatmaincontainer {
     display: flex;
     flex-wrap: wrap;
-    flex-direction: column;
-    height: 60vh;
+    flex-direction:column;
     width: 70vw; 
+    min-height: 50vh;
     border: 1px solid black;
     border-radius: 10px;
     justify-content: space-between;
-    padding: 20px;
+    padding: 2rem;
+    gap: 30px;
+}
+
+.supportmaintext {
+    margin-top: 15vh;
+    margin-bottom: 3vh;
 }
 
 .chatinput {
@@ -20,6 +26,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin-bottom: 5vh;
 }
 
 .sendcontainer {
@@ -34,28 +41,28 @@
     gap: 20px;
 }
 
-.usertext {
-    text-align: right;
-}
-
 .usertextcontainer {
     display: flex;
     flex-direction: column;
-    justify-content: end;
-    padding: 10px;
-    border-radius: 10px;
-    background-color: lightblue;
-    max-width: fit-content;
     align-self: flex-end;
+    width: fit-content;
+    max-width: 25vw;
+    justify-content: end;
+    padding: 1rem;
+    border-radius: 10px;
+    background-color: #7d7675;
+    color: white;
 }
 
 .systemtextcontainer {
     display: flex;
     flex-direction: column;
-    justify-content: start;
-    padding: 10px;
+    align-items: flex-start; /* Balra igazítja a szöveget */
+    width: fit-content; /* Engedi, hogy a méret igazodjon a tartalomhoz */
+    max-width: 25vw; /* Megakadályozza, hogy túl széles legyen */
+    padding: 1rem;
     border-radius: 10px;
-    background-color: lightgreen;
-    max-width: fit-content;
-    align-self: flex-start;
+    background-color: #309ed9;
+    color: white;
 }
+

@@ -122,7 +122,7 @@ export default function HomePageContent() {
 
         <div className={styles.stickynotescontainer}>
           {notes.map((note,index) => {
-            const position = notePositions[note.id] || { x: 250 + (index * 250), y: 650 };
+            const position = notePositions[note.id] || { x: 250 + (index * 250), y: 1280 };
             return (
               <div
                 key={note.id}
