@@ -27,17 +27,23 @@ const TypeProvider = ({children}) => {
     }
 
     async function getProblemNumberSeries() {
-        const response = await (axios.get("http://localhost:8080/api/problem/typeseries"))
-        setProblemTypeSeries(response.data)
-        return problemTypeSeries
+        try {
+            const response = await axios.get("http://localhost:8080/api/problem/typeseries");
+            setProblemTypeSeries(response.data);  // Állapot frissítése
+        } catch (error) {
+            console.error("Hiba történt a problématípus sorozat adatainak lekérésénél:", error);
+            setProblemTypeSeries([]);  // Hibakezelés: üres tömb
+        }
     }
+    
+    
     useEffect(()=>{
         getVehicleTypes();
         getVehicleStatuses()
         getProblemTypes()
     },[])
     return (
-        <TypeContext.Provider value={{vehicleTypes,vehicleStatuses,problemTypes,getProblemTypeDescriptions,problemTypeDescriptions,getProblemNumberSeries,problemTypeSeries}}>
+        <TypeContext.Provider value={{vehicleTypes,vehicleStatuses,problemTypes,getProblemTypeDescriptions,problemTypeDescriptions,getProblemNumberSeries,problemTypeSeries,setProblemTypeDescriptions,setProblemTypeSeries}}>
             {children}
         </TypeContext.Provider>
     )

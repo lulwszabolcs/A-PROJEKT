@@ -19,7 +19,7 @@ export default function HomePageContent() {
   let { getActiveVehicles, getInActiveVehicles } = useContext(VehicleContext);
   let { notes, deleteNote } = useContext(NoteContext);
   let { SnackbarMessage, SnackbarOpen, closeSnackbar, SnackbarSuccess } = useContext(SnackbarContext);
-  let {getProblemTypeDescriptions,problemTypeDescriptions,getProblemNumberSeries,problemTypeSeries} = useContext(TypeContext)
+  let {getProblemTypeDescriptions,problemTypeDescriptions,getProblemNumberSeries,problemTypeSeries,setProblemTypeDescriptions,setProblemTypeSeries} = useContext(TypeContext)
   const [addStickyNotesOpen, setAddStickyNotesOpen] = useState(false);
   const [notePositions, setNotePositions] = useState({});
 
@@ -66,10 +66,8 @@ export default function HomePageContent() {
     height: 200,
     value: getOnlineUsers(),
   };
-  useEffect(()=>{
-    problemTypeDescriptions = getProblemTypeDescriptions()
-    problemTypeSeries = getProblemNumberSeries()    
-  })
+
+  
   return (
     <>
       <h1 className={styles.welcometext}>Üdvözöljük {username}!</h1>
@@ -104,19 +102,6 @@ export default function HomePageContent() {
           />
           <h3 className={styles.piecharttext}>Üzemképes járművek</h3>
         </div>
-
-
-
-        <div className={styles.onlinechart}>
-        <BarChart
-          xAxis={[{ scaleType: 'band', data: problemTypeDescriptions }]}
-          series={[{ data: problemTypeSeries }]}
-          width={1000}
-          height={400}
-        />
-        <h3>Problémák száma típusonként</h3>
-        </div>
-
 
 
 

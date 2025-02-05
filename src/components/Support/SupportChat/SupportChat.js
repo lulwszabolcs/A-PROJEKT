@@ -3,26 +3,12 @@ import styles from './SupportChat.module.css'
 import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material';
 import OpenAI from "openai";
-require('dotenv').config();
-const openai = new OpenAI({
-    apiKey: process.env.API_KEY, 
-    baseURL: "https://api.x.ai/v1",
-  });
-export default async function SupportChat() {
-    
-       const completion =  openai.chat.completions.create({
-        model: "grok-2-vision-1212",
-        messages: [
-          { role: "system", content: "You are Grok, a chatbot inspired by the Hitchhiker's Guide to the Galaxy." },
-          {
-            role: "user",
-            content: "What is the meaning of life, the universe, and everything?",
-          },
-        ],
-      });
-      
-      console.log(completion.choices[0].message);
-
+import axios from 'axios'
+// const openai = new OpenAI({
+//     apiKey: "", 
+//     baseURL: "https://api.x.ai/v1",
+//   });
+export default function SupportChat() {
     const [input,setInput] = useState("")
     const [messages,setMessages] = useState([])
     const handleSend = () => {
@@ -30,6 +16,7 @@ export default async function SupportChat() {
         setMessages((prev) => [...prev, { text: input, type: "sent" }]);
         }
     }
+
     return (
         <div className={styles.flexbox}>
         <h1 className={styles.supportmaintext}>Ügyfélszolgálat</h1>
