@@ -217,17 +217,17 @@ const handleChange = (text) =>{
           <Avatar style={{marginRight:'10px'}}/> Profil
         </MenuItem>
         <Divider />
-        <MenuItem onClick={()=>{handleClose();changeUserStatus(74,"ONLINE")}}>
+        <MenuItem onClick={()=>{handleClose();changeUserStatus(78,"ONLINE")}}>
           <CircleIcon style={{marginRight:'1vw',color:'green'}} sx={{height:'18px'}}>
           </CircleIcon>
           Online
         </MenuItem>
-        <MenuItem onClick={()=>{handleClose();changeUserStatus(74,"OFFLINE")}}>
+        <MenuItem onClick={()=>{handleClose();changeUserStatus(78,"OFFLINE")}}>
           <CircleIcon style={{marginRight:'1vw',color:'gray'}} sx={{height:'18px'}}>
           </CircleIcon>
           Offline
         </MenuItem>
-        <MenuItem onClick={()=>{handleClose();changeUserStatus(74,"ON_VACATION")}}>
+        <MenuItem onClick={()=>{handleClose();changeUserStatus(78,"ON_VACATION")}}>
           <CircleIcon style={{marginRight:'1vw',color:'orange'}} sx={{height:'18px'}}>
           </CircleIcon>
         Szabadságon
