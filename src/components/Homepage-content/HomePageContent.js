@@ -103,16 +103,16 @@ export default function HomePageContent() {
   }
 
   function displayWeatherAlert() {
-    if (weatherData.temperature < 3) {
+    if (weatherData.temperature != null && weatherData.temperature < 2) {
       setWeatherAlertMessage("Veszélyesen alacsony hőmérséklet! Fokozottan ügyeljenek biztonságukra!")
       setWeatherAlertVisible(true);
-    } else if (weatherData.visibility < 10) {
+    } else if (weatherData.visibility != null && weatherData.visibility < 10) {
       setWeatherAlertMessage("Veszélyesen alacsony látótávolság! Fokozottan ügyeljenek biztonságukra!")
       setWeatherAlertVisible(true);
-    } else if (weatherData.rain > 1) {
+    } else if (weatherData.rain != null && weatherData.rain > 1) {
       setWeatherAlertMessage("Veszélyesen sok csapadék! Fokozottan ügyeljenek biztonságukra!")
       setWeatherAlertVisible(true);
-    } else if (weatherData.wind_speed > 10) {
+    } else if (weatherData.wind_speed != null && weatherData.wind_speed > 10) {
       setWeatherAlertMessage("Veszélyesen erős szélsebesség! Fokozottan ügyeljenek biztonságukra!")
       setWeatherAlertVisible(true);
     } else {
@@ -123,11 +123,12 @@ export default function HomePageContent() {
 
   useEffect(()=>{
     getWeather()
-    displayWeatherAlert()
   },[])
 
   useEffect(()=>{
-    displayWeatherAlert();    
+    if (weatherData) {
+      displayWeatherAlert();    
+    }
   },[weatherData])
   return (
     <>
