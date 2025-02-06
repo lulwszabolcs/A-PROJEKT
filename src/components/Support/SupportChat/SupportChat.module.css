@@ -2,12 +2,13 @@
     display: flex;
     flex-wrap: wrap;
     flex-direction:column;
-    width: 70vw; 
-    min-height: 50vh;
-    border: 1px solid black;
+    width: 60vw;
+    min-width: fit-content;
+    height: 60vh;
     border-radius: 10px;
     justify-content: space-between;
     padding: 2rem;
+    box-shadow: 5px 5px 5px 5px rgba(173, 216, 230, 0.616);
     gap: 30px;
 }
 
@@ -31,14 +32,19 @@
 
 .sendcontainer {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    gap: 1vw;
 }
 
 .messagecontainer {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    overflow: auto;
+    overflow-x: hidden;
+    padding-right: 20px;
 }
 
 .usertextcontainer {
