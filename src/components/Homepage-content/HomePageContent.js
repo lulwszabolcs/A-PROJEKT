@@ -13,43 +13,59 @@ import SnackbarComponent from "../Snackbar/SnackbarComponent";
 import { SnackbarContext } from "../../contexts/SnackbarProvider";
 import { BarChart } from '@mui/x-charts/BarChart';
 import { TypeContext } from "../../contexts/TypeProvider";
+import axios from "axios";
+import WaterDropIcon from '@mui/icons-material/WaterDrop';
+import ThermostatIcon from '@mui/icons-material/Thermostat';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import AirIcon from '@mui/icons-material/Air';
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
 
 export default function HomePageContent() {
   let { getOnlineUsers, getUsersLenght } = useContext(UserContext);
   let { getActiveVehicles, getInActiveVehicles } = useContext(VehicleContext);
   let { notes, deleteNote } = useContext(NoteContext);
   let { SnackbarMessage, SnackbarOpen, closeSnackbar, SnackbarSuccess } = useContext(SnackbarContext);
-  let {getProblemTypeDescriptions,problemTypeDescriptions,getProblemNumberSeries,problemTypeSeries,setProblemTypeDescriptions,setProblemTypeSeries} = useContext(TypeContext)
+
   const [addStickyNotesOpen, setAddStickyNotesOpen] = useState(false);
   const [notePositions, setNotePositions] = useState({});
 
   const [draggingNote, setDraggingNote] = useState(null);
   const [relativeCoords, setRelativeCoords] = useState({ x: 0, y: 0 });
+  const [weatherData,setWeatherData] = useState({
+    rain:null,
+    temperature:null,
+    visibility:null,
+    wind_speed:null
+  });
+
+  const [weatherAlertVisible,setWeatherAlertVisible] = useState(false)
+  const [weatherAlertMessage,setWeatherAlertMessage] = useState("")
 
   const handleDragStart = useCallback((e, noteId) => {
-    if (!notePositions[noteId]) {
-      setNotePositions((prev) => ({
-        ...prev,
-        [noteId]: { x: 250, y: 1280 },
-      }));
-    }
-    setDraggingNote(noteId);
-    setRelativeCoords({
-      x: e.clientX - (notePositions[noteId]?.x || 250),
-      y: e.clientY - (notePositions[noteId]?.y || 1280),
-    });
-  }, [notePositions]);
+        if (!notePositions[noteId]) {
+          setNotePositions((prev) => ({
+            ...prev,
+            [noteId]: { x: 250, y: 775 },
+          }));
+        }
+        setDraggingNote(noteId);
+        setRelativeCoords({
+          x: e.clientX - (notePositions[noteId]?.x || 250),
+          y: e.clientY - (notePositions[noteId]?.y || 775),
+        });
+      }, [notePositions]);
 
   const handleDrag = useCallback((e) => {
-    if (draggingNote !== null) {
-      setNotePositions((prevPositions) => ({
-        ...prevPositions,
-        [draggingNote]: {
-          x: e.clientX - relativeCoords.x,
-          y: e.clientY - relativeCoords.y,
-        },
-      }));
-    }
+        if (draggingNote !== null) {
+          setNotePositions((prevPositions) => ({
+            ...prevPositions,
+            [draggingNote]: {
+              x: e.clientX - relativeCoords.x,
+              y: e.clientY - relativeCoords.y,
+            },
+          }));
+        }
   }, [draggingNote, relativeCoords]);
 
   const handleDragEnd = useCallback(() => {
@@ -67,10 +83,81 @@ export default function HomePageContent() {
     value: getOnlineUsers(),
   };
 
+  function formatDate(date){
+    var d = new Date(date),
+    dformat = d.getHours()
+    return dformat
+  }
   
+  async function getWeather() {
+      let hour = formatDate(new Date)
+      const response = await axios.get("https://api.open-meteo.com/v1/forecast?latitude=47.4984&longitude=19.0404&hourly=temperature_2m,rain,showers,visibility,wind_speed_120m&forecast_days=1");
+      const weatherData = {
+        rain:response.data.hourly.rain[hour],
+        temperature:response.data.hourly.temperature_2m[hour],
+        visibility:response.data.hourly.visibility[hour]/1000,
+        wind_speed:response.data.hourly.wind_speed_120m[hour]
+      }
+      setWeatherData(weatherData)
+      console.log(response.data)
+  }
+
+  function displayWeatherAlert() {
+    if (weatherData.temperature < 3) {
+      setWeatherAlertMessage("Veszélyesen alacsony hőmérséklet! Fokozottan ügyeljenek biztonságukra!")
+      setWeatherAlertVisible(true);
+    } else if (weatherData.visibility < 10) {
+      setWeatherAlertMessage("Veszélyesen alacsony látótávolság! Fokozottan ügyeljenek biztonságukra!")
+      setWeatherAlertVisible(true);
+    } else if (weatherData.rain > 1) {
+      setWeatherAlertMessage("Veszélyesen sok csapadék! Fokozottan ügyeljenek biztonságukra!")
+      setWeatherAlertVisible(true);
+    } else if (weatherData.wind_speed > 10) {
+      setWeatherAlertMessage("Veszélyesen erős szélsebesség! Fokozottan ügyeljenek biztonságukra!")
+      setWeatherAlertVisible(true);
+    } else {
+      setWeatherAlertVisible(false)
+    }
+    console.log(weatherData)
+  }
+
+  useEffect(()=>{
+    getWeather()
+    displayWeatherAlert()
+  },[])
+
+  useEffect(()=>{
+    displayWeatherAlert();    
+  },[weatherData])
   return (
     <>
       <h1 className={styles.welcometext}>Üdvözöljük {username}!</h1>
+      {weatherAlertVisible && (
+          <div className={styles.alertcontainer}>
+            <Alert variant="filled" severity="warning" style={{ width: '50vw' }}>
+              {weatherAlertMessage}
+            </Alert>
+          </div>
+      )}
+
+      <div className={styles.weathercontainer}>
+        <div className={styles.tempcontainer}>
+          <WaterDropIcon></WaterDropIcon> 
+          <p>{weatherData.rain} mm</p>
+        </div>
+        <div className={styles.tempcontainer}>
+          <ThermostatIcon sx={{color:'red'}}/> 
+          <p>{weatherData.temperature} °C</p>
+        </div>
+        <div className={styles.tempcontainer}>
+          <VisibilityIcon sx={{color:'orange'}}/>
+          <p>{weatherData.visibility} km</p>
+        </div>
+        <div className={styles.tempcontainer}>
+          <AirIcon sx={{color:'gray'}}/>
+          <p>{weatherData.wind_speed} km/h</p>
+        </div>
+        </div>
       <div className={styles.flexbox}>
         <div className={styles.onlinechart}>
           <Gauge
@@ -102,12 +189,9 @@ export default function HomePageContent() {
           />
           <h3 className={styles.piecharttext}>Üzemképes járművek</h3>
         </div>
-
-
-
         <div className={styles.stickynotescontainer}>
           {notes.map((note,index) => {
-            const position = notePositions[note.id] || { x: 250 + (index * 250), y: 1280 };
+            const position = notePositions[note.id] || { x: 250 + (index * 250), y: 775 };
             return (
               <div
                 key={note.id}

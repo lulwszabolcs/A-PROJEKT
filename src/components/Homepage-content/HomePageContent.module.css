@@ -1,7 +1,7 @@
 .welcometext {
     text-align: center;
     margin-top: 15vh;
-    margin-bottom: 10vh;
+    margin-bottom: 5vh;
 }
 
 .mainelements {
@@ -19,7 +19,28 @@
     justify-content: center;
     align-items: center;
 }
-
+.weathercontainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    width: fit-content;
+    min-height: fit-content;
+    margin-left: 35%;
+    box-shadow: 5px 5px 5px 5px rgba(173, 216, 230, 0.616);
+    border-radius: 10px;
+    padding: 15px;
+}
+.tempcontainer {
+    color: #095fb0;
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    gap: 1vw;
+    min-width: fit-content;
+}
 .vehiclechart {
     display: flex;
     flex-direction: column;
@@ -29,7 +50,7 @@
     display: flex;
     flex-direction: row;
     gap: 10vw;
-    margin-top: 5vh;
+    margin-top: 10vh;
     margin-left: 10vw;
     justify-content: center;
     align-items: center;
@@ -72,4 +93,12 @@
 
 body {
     user-select: none;
+}
+
+.alertcontainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5vh;
+    margin-left: 5vw;
 }
