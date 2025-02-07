@@ -17,6 +17,7 @@
     gap: 40px;
     background:none;
     justify-content: space-between;
+    box-shadow: 5px 5px 5px 5px rgba(173, 216, 230, 0.616);
 }
 
 .flexbox {

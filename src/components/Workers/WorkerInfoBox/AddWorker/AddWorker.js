@@ -55,7 +55,8 @@ export default function AddWorker({close}) {
             "username":response.data.name,
             "password":"asd123qwe",
             "role":response.data.title,
-            "status":"ONLINE"
+            "status":"ONLINE",
+            "worker_id":response.data.workerId
           }
           generateUser(userData)
           displaySnackbar("Dolgozó hozzáadva!",true)

@@ -86,10 +86,10 @@ import { SnackbarContext } from '../../../contexts/SnackbarProvider';
       display: 'flex',
       flexDirection: 'row',
       flexWrap: 'wrap',
-      gap: '40px',
+      gap: '40px'
     }}>
         {filteredWorkers.map((worker)=>( 
-          <Card variant="outlined" style={{paddingTop:10,position:'relative'}}>
+          <Card variant="outlined" style={{paddingTop:10,position:'relative',boxShadow:'5px 5px 5px 5px rgba(173, 216, 230, 0.616)'}}>
           <CardContent>
           <Button style={{position:'absolute',top:0,right:0}} onClick={()=>{setOpenWorkerDetails(true);setSelectedWorker(worker)}}><InfoIcon></InfoIcon></Button>
           <img src={`http://localhost:8080/images/${findImage(worker)}`} style={{width:150, height:150, borderRadius:100}}></img>

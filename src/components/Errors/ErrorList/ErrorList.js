@@ -177,7 +177,8 @@ function refreshProblemList() {
         <FormControlLabel control={<Checkbox checked={seeClosedProblems} onChange={handleCheckboxChange}/>} label="Megoldott problémák mutatása" style={{fontSize:10}}/>
         <FormControlLabel control={<Checkbox/>} label="Beosztáshoz tartozó problémák" style={{fontSize:10}}/>
         </div>
-        <TableContainer component={Paper} style={{minWidth:"100px", maxWidth:'70vw' , marginLeft:'auto', marginRight:'auto', marginBottom:'20px'}}>
+        <TableContainer component={Paper} style={{minWidth:"100px", maxWidth:'70vw' , marginLeft:'auto', marginRight:'auto', marginBottom:'20px',boxShadow:'5px 5px 5px 5px rgba(173, 216, 230, 0.616)'
+}}>
         <Table >
           <TableHead>
             <TableRow>

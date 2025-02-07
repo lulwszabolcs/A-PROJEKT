@@ -1,13 +1,16 @@
-import './Loginpage.css'
+import styles from './Loginpage.module.css'
 import TextField from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
 import Button from '@mui/material/Button';
-import InputLabel from '@mui/material/InputLabel';
 import { useForm } from "react-hook-form"
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import { SnackbarContent } from '@mui/material';
+import SnackbarComponent from '../../Snackbar/SnackbarComponent';
+import { SnackbarContext } from '../../../contexts/SnackbarProvider';
 export default function Loginpage() {
+    let { SnackbarMessage, SnackbarOpen, closeSnackbar, SnackbarSuccess,displaySnackbar } = useContext(SnackbarContext);
     const [usersList,setUsersList] = useState([]);
     const navigate = useNavigate();
     const {
@@ -22,7 +25,7 @@ export default function Loginpage() {
         if (user) {
             navigate("/home")
         } else {
-            alert("sikertelen")
+            displaySnackbar("Sikertelen bejelentkezés!",false)
         }
     }
     
@@ -35,17 +38,19 @@ export default function Loginpage() {
         })
     },[])
     return (
-        <div className="login-container center">
+        <div className={styles.logincontainer}>
+            <div className={styles.loginform}>
             <h2 style={{textAlign:'center'}}>Belépés</h2>
             <form onSubmit={handleSubmit(onSubmit)}>
             <FormControl fullWidth style={{gap:'40px'}}>
-            <TextField id="outlined-basic" label="Felhasználónév" variant="outlined" {...register("username",{required:true})}/>
-            <TextField id="outlined-basic" label="Jelszó" variant="outlined" type='password' {...register("password",{required:true})} />
-            {errors.username && console.log("rq") }
-            {errors.password && console.log("rq") }
-            <Button type='submit' variant="contained" className='login-button'>Login</Button>
+            <TextField id="outlined-basic" label="Felhasználónév" variant="outlined" required {...register("username",{required:true})}/>
+            <TextField id="outlined-basic" label="Jelszó" variant="outlined" type='password' required {...register("password",{required:true})} />
+            <Button type='submit' variant="contained" className={styles.loginbutton}>Login</Button>
             </FormControl>  
             </form>
+            </div>
+            <SnackbarComponent snackbarOpen={SnackbarOpen} message={SnackbarMessage} close={closeSnackbar} success={SnackbarSuccess}/>
         </div>
+
     )
 }   

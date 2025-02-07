@@ -19,8 +19,7 @@ import ThermostatIcon from '@mui/icons-material/Thermostat';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import AirIcon from '@mui/icons-material/Air';
 import Alert from '@mui/material/Alert';
-import AlertTitle from '@mui/material/AlertTitle';
-
+import AcUnitIcon from '@mui/icons-material/AcUnit';
 export default function HomePageContent() {
   let { getOnlineUsers, getUsersLenght } = useContext(UserContext);
   let { getActiveVehicles, getInActiveVehicles } = useContext(VehicleContext);
@@ -36,7 +35,8 @@ export default function HomePageContent() {
     rain:null,
     temperature:null,
     visibility:null,
-    wind_speed:null
+    wind_speed:null,
+    snowfall:null
   });
 
   const [weatherAlertVisible,setWeatherAlertVisible] = useState(false)
@@ -91,12 +91,13 @@ export default function HomePageContent() {
   
   async function getWeather() {
       let hour = formatDate(new Date)
-      const response = await axios.get("https://api.open-meteo.com/v1/forecast?latitude=47.4984&longitude=19.0404&hourly=temperature_2m,rain,showers,visibility,wind_speed_120m&forecast_days=1");
+      const response = await axios.get("https://api.open-meteo.com/v1/forecast?latitude=47.9839&longitude=21.6923&hourly=temperature_2m,rain,snowfall,visibility,wind_speed_120m&timezone=auto&forecast_days=1");
       const weatherData = {
         rain:response.data.hourly.rain[hour],
         temperature:response.data.hourly.temperature_2m[hour],
         visibility:response.data.hourly.visibility[hour]/1000,
-        wind_speed:response.data.hourly.wind_speed_120m[hour]
+        wind_speed:response.data.hourly.wind_speed_120m[hour],
+        snowfall:response.data.hourly.snowfall[hour]
       }
       setWeatherData(weatherData)
       console.log(response.data)
@@ -118,7 +119,6 @@ export default function HomePageContent() {
     } else {
       setWeatherAlertVisible(false)
     }
-    console.log(weatherData)
   }
 
   useEffect(()=>{
@@ -157,6 +157,10 @@ export default function HomePageContent() {
         <div className={styles.tempcontainer}>
           <AirIcon sx={{color:'gray'}}/>
           <p>{weatherData.wind_speed} km/h</p>
+        </div>
+        <div className={styles.tempcontainer}>
+          <AcUnitIcon sx={{color:'#4DA8DA'}}/>
+          <p>{weatherData.snowfall} cm</p>
         </div>
         </div>
       <div className={styles.flexbox}>

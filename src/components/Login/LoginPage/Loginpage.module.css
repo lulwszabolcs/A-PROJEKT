@@ -1,0 +1,28 @@
+.loginform {
+    border: 1px solid gray;
+    border-radius: 10px;
+    padding: 20px;
+    width: 300px;
+    display: flex; 
+    flex-direction: column;
+    height: 400px; 
+    box-shadow: 5px 5px 5px 5px rgba(173, 216, 230, 0.616);
+}
+
+.logincontainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin-left: 5vw;
+    margin-right: 5vw;
+}
+
+.items {
+    margin-bottom: 5%;
+}
+
+.loginbutton {
+    align-self: center;
+    margin-top: 30px;
+  }
