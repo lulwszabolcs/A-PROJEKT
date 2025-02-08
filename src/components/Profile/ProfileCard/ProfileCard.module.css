@@ -6,6 +6,7 @@
 
 .cardcontainer {
     max-width: 30vw;
+    min-width: fit-content;
     margin-left: auto;
     margin-right: auto;
     margin-top: 15vh;
@@ -14,10 +15,19 @@
     align-items: center;
     padding: 20px;
     box-shadow: 5px 5px 5px 5px rgba(173, 216, 230, 0.616);
+    position: relative;
+    border-radius: 10px;
 
 }
 
 .infotext {
     font-size: large;
     text-align: center;
+}
+
+.downloadicon {
+    position: absolute;
+    top: 2vh;
+    right: 1vw;
+    cursor: pointer;
 }

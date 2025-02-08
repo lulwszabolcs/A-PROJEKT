@@ -4,6 +4,7 @@ import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material';
 import OpenAI from "openai";
 import axios from 'axios'
+import SendIcon from '@mui/icons-material/Send';
 const openai = new OpenAI({
     apiKey: "PASTE_HERE",dangerouslyAllowBrowser: true, 
     baseURL: "https://api.x.ai/v1",
@@ -11,26 +12,42 @@ const openai = new OpenAI({
 export default function SupportChat() {
     const [input,setInput] = useState("")
     const [messages,setMessages] = useState([])
+    const [waitingForResponse,setWaitingForResponse] = useState(false);
     const handleSend = () => {
-        if (input !== "") {
+        if (input !== "" && !waitingForResponse) {
             setMessages((prev) => [...prev, { text: input, type: "sent" }]);
+            setWaitingForResponse(true);
+            setMessages((prev) => [...prev, { text: "...", type: "received", id: "loading" }]);
             sendChat(input)
             setInput("")
         }
     }
     async function sendChat(message) {
-        const completion = await openai.chat.completions.create({
-            model: "grok-2-vision-1212",
-            messages: [
-              { role: "system", content: "You are Grok, a chatbot who speaks hungarian and answers people's questions" },
-              {
-                role: "user",
-                content: message,
-              },
-            ],
-          });
-          setMessages((prev) => [...prev, { text: completion.choices[0].message.content, type: "received" }]);
+        try {
+            const completion = await openai.chat.completions.create({
+                model: "grok-2-vision-1212",
+                messages: [
+                  { role: "system", content: "You are Grok, a chatbot who speaks Hungarian and answers people's questions" },
+                  { role: "user", content: message },
+                ],
+            });
+            
+            setMessages((prev) =>
+                prev.map((msg) =>
+                    msg.id === "loading" ? { text: completion.choices[0].message.content, type: "received" } : msg
+                )
+            );
+        } catch (error) {
+            console.error("Hiba történt a chat küldésekor:", error);
+        } finally {
+            setWaitingForResponse(false);
+        }    
     }
+    const handleInputChange = (event) => {
+        event.persist(); 
+        setInput(event.target.value);
+    };
+    
     
     return (
         <div className={styles.flexbox}>
@@ -58,10 +75,15 @@ export default function SupportChat() {
                     className={styles.chatinput}
                     style={{ borderRadius: "10px" }}
                     rows={2}
-                    onChange={(e) => setInput(e.target.value)}
-                />
-                <Button onClick={handleSend}>Küldés</Button>
-                </div>
+                    maxRows={5}
+                    disabled={waitingForResponse}
+                    onChange={handleInputChange}
+                    sx={{resize:'vertical'}}
+                    />
+                    <Button onClick={handleSend} disabled={waitingForResponse}>
+                        {waitingForResponse ? <SendIcon style={{ color: "gray" }} /> : <SendIcon />}
+                    </Button>                
+                    </div>
             </div>
             ) : (
             <div className={styles.sendcontainer}>
@@ -73,9 +95,12 @@ export default function SupportChat() {
                 className={styles.chatinput}
                 style={{ borderRadius: "10px" }}
                 rows={2}
-                onChange={(e) => setInput(e.target.value)}
+                maxRows={5}
+                disabled={waitingForResponse}
+                onChange={handleInputChange}
+                sx={{resize:'vertical'}}
                 />
-                <Button onClick={handleSend}>Küldés</Button>
+                <Button onClick={handleSend}><SendIcon/></Button>
             </div>
             )}
         </div>
