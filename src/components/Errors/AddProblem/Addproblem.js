@@ -79,7 +79,7 @@ const onSubmit = (data) => {
 {errors.name && console.log("rq") }
 {errors.description && console.log("rq") }
 {errors.problemType && console.log("rq") }
-                    <Stack spacing={40} direction="row">
+                    <Stack direction="row" justifyContent={"space-between"}>
                             <Button variant="outlined" color="error" onClick={()=>{close()}}>Bezár</Button>
                             <Button variant="contained" type='submit'>Mentés</Button>
                     </Stack>

@@ -177,16 +177,16 @@ function refreshProblemList() {
         <FormControlLabel control={<Checkbox checked={seeClosedProblems} onChange={handleCheckboxChange}/>} label="Megoldott problémák mutatása" style={{fontSize:10}}/>
         <FormControlLabel control={<Checkbox/>} label="Beosztáshoz tartozó problémák" style={{fontSize:10}}/>
         </div>
-        <TableContainer component={Paper} style={{minWidth:"100px", maxWidth:'70vw' , marginLeft:'auto', marginRight:'auto', marginBottom:'20px',boxShadow:'5px 5px 5px 5px rgba(173, 216, 230, 0.616)'
-}}>
-        <Table >
-          <TableHead>
+        <TableContainer component={Paper} className='problemstable'>
+        <Table>
+          <TableHead className='fixedtable'>
             <TableRow>
               <TableCell>Név</TableCell>
               <TableCell>Leírás</TableCell>
-              <TableCell>Hozzáadva</TableCell>
+              <TableCell >Hozzáadva</TableCell>
               <TableCell>Típus</TableCell>
               <TableCell>Hibakód</TableCell>
+              <TableCell></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

@@ -43,7 +43,6 @@ export default function EditProblem({close,problem,refreshProblems,displaySnackb
         })
     }
     return (
-        // editelni lehessen a typeot
         <div className='editProblem-container'>
             <h3 style={{textAlign:'center'}}>Probléma szerkesztése</h3>
             <FormControl fullWidth className='editError-form'>     
@@ -64,14 +63,11 @@ export default function EditProblem({close,problem,refreshProblems,displaySnackb
         </MenuItem>
     ))}
 </Select>
-                <Stack spacing={40} direction="row">
+                <Stack direction="row" justifyContent={"space-between"}>
                         <Button variant="outlined" color="error" onClick={()=>{close()}}>Bezár</Button>
                         <Button variant="contained" onClick={editProblem} >Mentés</Button>
                 </Stack>
-
             </FormControl>
-
-
         </div>
     )
 }
