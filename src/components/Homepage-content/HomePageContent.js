@@ -177,7 +177,7 @@ export default function HomePageContent() {
           />
           <h3>Online felhasználók</h3>
         </div>
-        <div className={styles.onlinechart}>
+        <div className={styles.vehiclechart}>
           <PieChart
             series={[
               {

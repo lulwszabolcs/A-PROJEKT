@@ -176,7 +176,7 @@ const handleChange = (text) =>{
   ,<BadgeIcon/>,<DirectionsCarIcon/>,<ErrorIcon/>,<ChatIcon/>,<LogoutIcon/>];
   
   return (
-    <>
+    <div classname="sidebarcontainer">
     <Menu
         anchorEl={anchorEl}
         id="account-menu"
@@ -322,6 +322,6 @@ const handleChange = (text) =>{
       </Drawer>
     </Box>
     <SnackbarComponent snackbarOpen={SnackbarOpen} message={SnackbarMessage} close={closeSnackbar}/>
-    </>
+    </div>
   );
 }

@@ -33,7 +33,7 @@ export default function AddStickyNote({close}) {
           {...register("text",{required:true})}
         />
                 {errors.name && console.log("rq") }
-                    <Stack spacing={40} direction="row">
+                    <Stack direction="row" justifyContent={"space-between"}>
                             <Button variant="outlined" color="error" onClick={()=>{close()}}>Bezár</Button>
                             <Button variant="contained" type='submit'>Mentés</Button>
                     </Stack>

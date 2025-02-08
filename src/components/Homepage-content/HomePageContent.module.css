@@ -102,3 +102,41 @@ body {
     margin-bottom: 5vh;
     margin-left: 5vw;
 }
+
+.vehiclechart {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: fit-content;
+    padding: 15px;
+    box-shadow: 5px 5px 5px 5px rgba(173, 216, 230, 0.616);
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (max-width: 320px) {
+    .welcometext {
+        margin-left: 70vw;
+    }
+    .weathercontainer {
+        margin-left: 60vw;
+        width: 70vw;
+        flex-direction: column;
+    }
+    .alertcontainer {
+        margin-left: 70vw;
+        min-width: 50vw;
+    }
+    .onlinechart {
+        margin-left: 90vw;
+    }
+    .vehiclechart {
+        margin-left: 100vw;
+        max-width: fit-content;
+    }
+    .stickynotescontainer {
+        margin-left: 90vw;
+    }
+
+}
