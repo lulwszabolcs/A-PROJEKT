@@ -6,7 +6,7 @@ import OpenAI from "openai";
 import axios from 'axios'
 import SendIcon from '@mui/icons-material/Send';
 const openai = new OpenAI({
-    apiKey: "PASTE_HERE",dangerouslyAllowBrowser: true, 
+    apiKey: "xai-0pqtoeMTuAzR9k9bS9fnZMQKtGqpwAjlHZZjGBGlbSoQ4JnnhgjFAHJ7QUKHfieb00J7KYOXrhns3rbw",dangerouslyAllowBrowser: true, 
     baseURL: "https://api.x.ai/v1",
   });
 export default function SupportChat() {

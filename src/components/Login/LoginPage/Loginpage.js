@@ -9,8 +9,10 @@ import { useNavigate } from "react-router-dom";
 import { SnackbarContent } from '@mui/material';
 import SnackbarComponent from '../../Snackbar/SnackbarComponent';
 import { SnackbarContext } from '../../../contexts/SnackbarProvider';
+import { UserContext } from '../../../contexts/UserProvider';
 export default function Loginpage() {
     let { SnackbarMessage, SnackbarOpen, closeSnackbar, SnackbarSuccess,displaySnackbar } = useContext(SnackbarContext);
+    let {userLogin} = useContext(UserContext);
     const [usersList,setUsersList] = useState([]);
     const navigate = useNavigate();
     const {
@@ -20,23 +22,16 @@ export default function Loginpage() {
         formState: { errors },
       } = useForm()
     const onSubmit = (data) => {
-        console.log(data);
-        const user = usersList.find(u => u.username === data.username && u.password === data.password);
-        if (user) {
-            navigate("/home")
+        if (userLogin(data)) {
+            displaySnackbar("Sikeres bejelentkezés!",true)
+            setTimeout(()=>{
+                navigate('/profile')
+            },2000)
         } else {
             displaySnackbar("Sikertelen bejelentkezés!",false)
         }
     }
     
-    useEffect(()=>{
-        axios.get("http://localhost:8080/api/user").then((response)=>{
-            const userss = response.data;
-            setUsersList(userss);
-        }).catch((err)=>{
-            console.log(err)
-        })
-    },[])
     return (
         <div className={styles.logincontainer}>
             <div className={styles.loginform}>
