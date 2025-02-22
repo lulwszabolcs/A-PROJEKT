@@ -2,18 +2,23 @@ import { createContext, useContext, useEffect, useState } from "react"
 import axios from 'axios'
 import { convertFieldResponseIntoMuiTextFieldProps } from "@mui/x-date-pickers/internals"
 import { SnackbarContext } from "./SnackbarProvider"
+import { UserContext } from "./UserProvider"
 const NoteContext = createContext()
 const NoteProvider = ({children}) => {
     let {displaySnackbar} = useContext(SnackbarContext)
-
+    let {token} = useContext(UserContext)
     const [notes,setNotes] = useState([])
     async function getNotes() {
-        const response = await axios.get("http://localhost:8080/notes/list")
+        const response = await axios.get("/notes/list",{
+            headers: {
+                'Authorization': token ? `Bearer ${token}` : ""
+            }
+        })
         setNotes(response.data)
     }
     async function addNote(data) {
         try {
-            const response  = await axios.post("http://localhost:8080/notes",data)
+            const response  = await axios.post("/notes",data)
             setNotes([response.data,...notes])
             displaySnackbar("Jegyzet hozzáadva!",true)
         } catch (error) {
@@ -22,7 +27,7 @@ const NoteProvider = ({children}) => {
     }
     async function deleteNote(id) {
         try {
-            const response = (await axios.delete(`http://localhost:8080/note/${id}`)).data
+            const response = (await axios.delete(`/note/${id}`)).data
         if (response) {
             let modified = notes.filter((x)=>x.id !== response.id)
             setNotes(modified)

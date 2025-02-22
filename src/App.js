@@ -1,41 +1,99 @@
 import './App.css';
 import Homepage from './components/Homepage-content/Homepage';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import NotFound from './components/NotFound/NotFound';
 import Errors from './components/Errors/Errors';
 import Workers from './components/Workers/Workers';
 import Vehicles from './components/Vehicles/Vehicles';
 import Profile from './components/Profile/Profile';
-import { UserProvider } from './contexts/UserProvider';
+import { UserProvider, UserContext } from './contexts/UserProvider';
 import { TypeProvider } from './contexts/TypeProvider';
 import { SnackbarProvider } from './contexts/SnackbarProvider';
 import Support from './components/Support/Support';
 import Login from './components/Login/Login';
+import { VehicleProvider } from './contexts/VehicleProvider';
+import { useContext } from 'react';
+
+// Védett útvonal komponens
+function ProtectedRoute({ children }) {
+  const { token } = useContext(UserContext);
+
+  if (!token) {
+    return <Navigate to="/login" replace />;
+  }
+
+  return <VehicleProvider>{children}</VehicleProvider>;
+}
 
 function App() {
   return (
-    <TypeProvider>
-<SnackbarProvider>
-        <UserProvider>
-  
-    <BrowserRouter>
-      <Routes>
-        <Route path="/">
-          <Route index element={<Login />} />
-          <Route path="profile" element={<Profile />} />
-          <Route path="home" element={<Homepage />} />
-          <Route path="login" element={<Login />} />
-          <Route path="vehicles" element={<Vehicles />} />
-          <Route path="errors" element={<Errors />} />
-          <Route path="workers" element={<Workers />} />
-          <Route path="support" element={<Support />} />
-          <Route path="*" element={<NotFound />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
-    </UserProvider>
-</SnackbarProvider>
-      </TypeProvider>
+    <SnackbarProvider>
+      <UserProvider>
+        <TypeProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/">
+                {/* Nyilvános útvonalak */}
+                <Route index element={<Login />} />
+                <Route path="login" element={<Login />} />
+                
+                {/* Védett útvonalak */}
+                <Route
+                  path="profile"
+                  element={
+                    <ProtectedRoute>
+                      <Profile />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="home"
+                  element={
+                    <ProtectedRoute>
+                      <Homepage />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="vehicles"
+                  element={
+                    <ProtectedRoute>
+                      <Vehicles />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="errors"
+                  element={
+                    <ProtectedRoute>
+                      <Errors />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="workers"
+                  element={
+                    <ProtectedRoute>
+                      <Workers />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="support"
+                  element={
+                    <ProtectedRoute>
+                      <Support />
+                    </ProtectedRoute>
+                  }
+                />
+                {/* 404-es oldal */}
+                <Route path="*" element={<NotFound />} />
+              </Route>
+            </Routes>
+          </BrowserRouter>
+        </TypeProvider>
+      </UserProvider>
+    </SnackbarProvider>
   );
 }
 

@@ -35,7 +35,7 @@ export default function AddWorker({close}) {
         if (!name.includes(" ")) {
           displaySnackbar("A névnek két részből kell állnia!",false)
         } else {
-          const response = await axios.post("http://localhost:8080/worker/", data);
+          const response = await axios.post("/worker/", data);
           if (selectedFile) {
             const imageSave = {
               fileName: response.data.workerId + selectedFile.name.substring(selectedFile.name.lastIndexOf(".")),
@@ -55,9 +55,10 @@ export default function AddWorker({close}) {
             "username":response.data.name,
             "password":"asd123qwe",
             "role":response.data.title,
-            "status":"ONLINE",
+            "status":"User is currently online",
             "worker_id":response.data.workerId
           }
+          console.log("userdata",userData)
           generateUser(userData)
           displaySnackbar("Dolgozó hozzáadva!",true)
           close();
@@ -83,7 +84,7 @@ export default function AddWorker({close}) {
           formData.append("file", file); 
           formData.append("imageSave", JSON.stringify(imageSave)); 
       
-          const response = await axios.post("http://localhost:8080/images/upload", formData, {
+          const response = await axios.post("/images/upload", formData, {
             headers: {
               "Content-Type": "multipart/form-data",
             },

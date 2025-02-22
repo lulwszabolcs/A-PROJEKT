@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 const UserContext = createContext();
 
 const UserProvider = ({children}) => {
+    const [token,setToken] = useState()
     const [users,setUsers] = useState([])
     const [userProfile,setUserProfile] = useState({
         name:"",
@@ -15,7 +16,6 @@ const UserProvider = ({children}) => {
         workerId:""
     })
     let {displaySnackbar} = useContext(SnackbarContext)
-    const [token,setToken] = useState("")
     async function userLogin(data) {
         try {
             const response = await axios.post(
@@ -28,7 +28,7 @@ const UserProvider = ({children}) => {
                 }
             );
             console.log("All Headers:", response.headers);
-            console.log("Authorization Header:", response.headers['authorization']);
+            console.log("Authorization Header:", response.headers['jwt_token']);
             setUserProfile({
                 "name":response.data.worker.name,
                 "email":response.data.worker.email,
@@ -37,9 +37,8 @@ const UserProvider = ({children}) => {
                 "workerId":response.data.worker.workerId,
 
             });
-            console.log(response.data)
-            if (response.headers.authorization || response.headers.Authorization) {
-                const token = (response.headers.authorization || response.headers.Authorization).split(' ')[1];
+            if (response.headers.jwt_token || response.headers.Authorization) {
+                const token = response.headers.jwt_token
                 setToken(token)
                 console.log("JWT Token:", token);
             } else {
@@ -53,13 +52,18 @@ const UserProvider = ({children}) => {
     
 
     async function getUsers() {
-        axios.get('http://localhost:8080/api/user', {
+        axios.get('/api/user', {
             headers: {
                 'Accept': 'application/json',
                 'Authorization': token ? `Bearer ${token}` : ""
             }
         })
         
+    }
+
+    function getToken() {
+        console.log(token)
+        return token;
     }
 
     function getOnlineUsers() {
@@ -74,7 +78,7 @@ const UserProvider = ({children}) => {
     }
     async function generateUser(userData) {
         try {
-            const response = await (axios.post("http://localhost:8080/api/generateuser",userData))
+            const response = await (axios.post("/api/user",userData))
             if (response) {
                 setUsers([response.data,...users])
             }
@@ -88,7 +92,7 @@ const UserProvider = ({children}) => {
         if (changingUser.status === changedStatus) {
             displaySnackbar(`Már ${changedStatus} vagy!`,false)
         } else {
-            const response = await axios.patch(`http://localhost:8080/api/user/${id}`,{"key":"STATUS","value":changedStatus})
+            const response = await axios.patch(`/api/user/${id}`,{"key":"STATUS","value":changedStatus})
             if (response) {
                 let result = users.find((x)=>x.id === response.data.id)
                 result.status = response.data.status
@@ -97,10 +101,7 @@ const UserProvider = ({children}) => {
             }
         }
     }
-    useEffect(()=>{
-        console.log("profile",userProfile)
-    })
-    return <UserContext.Provider value={{users,getUsers,getOnlineUsers,getUsersLenght,generateUser,changeUserStatus,userLogin,userProfile,getUserProfile}}>
+    return <UserContext.Provider value={{users,getUsers,getOnlineUsers,getUsersLenght,generateUser,changeUserStatus,userLogin,userProfile,token,getToken}}>
         {children}
     </UserContext.Provider>
 }

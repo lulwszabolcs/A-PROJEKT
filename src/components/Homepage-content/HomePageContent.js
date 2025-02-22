@@ -12,7 +12,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import SnackbarComponent from "../Snackbar/SnackbarComponent";
 import { SnackbarContext } from "../../contexts/SnackbarProvider";
 import { BarChart } from '@mui/x-charts/BarChart';
-import { TypeContext } from "../../contexts/TypeProvider";
 import axios from "axios";
 import WaterDropIcon from '@mui/icons-material/WaterDrop';
 import ThermostatIcon from '@mui/icons-material/Thermostat';

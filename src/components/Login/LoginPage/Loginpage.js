@@ -25,7 +25,7 @@ export default function Loginpage() {
         if (userLogin(data)) {
             displaySnackbar("Sikeres bejelentkezés!",true)
             setTimeout(()=>{
-                navigate('/profile')
+                navigate('/vehicles')
             },2000)
         } else {
             displaySnackbar("Sikertelen bejelentkezés!",false)
@@ -38,8 +38,8 @@ export default function Loginpage() {
             <h2 style={{textAlign:'center'}}>Belépés</h2>
             <form onSubmit={handleSubmit(onSubmit)}>
             <FormControl fullWidth style={{gap:'40px'}}>
-            <TextField id="outlined-basic" label="Felhasználónév" variant="outlined" required {...register("username",{required:true})}/>
-            <TextField id="outlined-basic" label="Jelszó" variant="outlined" type='password' required {...register("password",{required:true})} />
+            <TextField id="outlined-basic" label="Felhasználónév" variant="outlined" defaultValue={"viccelek"} required {...register("username",{required:true})}/>
+            <TextField id="outlined-basic" label="Jelszó" variant="outlined" type='password' defaultValue={"viccelek123"} required {...register("password",{required:true})} />
             <Button type='submit' variant="contained" className={styles.loginbutton}>Login</Button>
             </FormControl>  
             </form>

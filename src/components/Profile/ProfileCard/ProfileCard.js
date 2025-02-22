@@ -12,7 +12,6 @@ import { SnackbarContext } from '../../../contexts/SnackbarProvider';
 import DownloadIcon from '@mui/icons-material/Download';
 export default function ProfileCard() {
     let {userProfile} = useContext(UserContext)
-    console.log(userProfile)
     return ( 
          <>
         <div className={styles.cardcontainer}>

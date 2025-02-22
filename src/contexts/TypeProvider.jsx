@@ -1,52 +1,57 @@
 import axios from "axios";
-import { createContext, useEffect, useState } from "react";
-
+import { createContext, useContext, useEffect, useState } from "react";
+import { UserContext, UserProvider} from "./UserProvider";
 const TypeContext = createContext();
 
 const TypeProvider = ({children}) => {
+    let {token} = useContext(UserContext);
     const [vehicleTypes,setVehicleTypes] = useState([]);
     const [vehicleStatuses,setVehicleStatuses] = useState([]);
     const [problemTypes,setProblemTypes] = useState([]);
     const [problemTypeDescriptions,setProblemTypeDescriptions] = useState([]);
     const [problemTypeSeries,setProblemTypeSeries] = useState([]);
     async function getVehicleTypes() {
-        setVehicleTypes(await axios.get("http://localhost:8080/vehicletypes/list").data)   
-
+        setVehicleTypes(await axios.get("/vehicletypes/list",{
+            headers: {
+                'Authorization': token ? `Bearer ${token}` : ""
+            }
+        }).data)   
         }
     async function getVehicleStatuses() {
-        setVehicleStatuses(((await axios.get("http://localhost:8080/vehiclestatuses/list")).data))
+        setVehicleStatuses(((await axios.get("/vehiclestatuses/list",{
+            headers: {
+                'Authorization': token ? `Bearer ${token}` : ""
+            }
+        })).data))
     }
     
     async function getProblemTypes() {
-        setProblemTypes(((await axios.get("http://localhost:8080/problemtypes/list")).data))
+        setProblemTypes((await axios.get("/problemtypes/list",{
+            headers: {
+                'Authorization': token ? `Bearer ${token}` : ""
+            }
+        }).data))
     }
 
     function getProblemTypeDescriptions() {
         const descriptions = problemTypes.map(problem => problem.problemTypeDescription);
         setProblemTypeDescriptions(descriptions)
         return problemTypeDescriptions
-    }
-
-    async function getProblemNumberSeries() {
-        try {
-            const response = await axios.get("http://localhost:8080/api/problem/typeseries");
-            setProblemTypeSeries(response.data); 
-        } catch (error) {
-            console.error("Hiba történt a problématípus sorozat adatainak lekérésénél:", error);
-            setProblemTypeSeries([]);  
-        }
-    }
-    
+    }    
     
     useEffect(()=>{
-        getVehicleTypes();
-        getVehicleStatuses()
-        getProblemTypes()
+        if (token) {
+            getVehicleTypes();
+            getVehicleStatuses()
+            getProblemTypes()
+        }
     },[])
     return (
-        <TypeContext.Provider value={{vehicleTypes,vehicleStatuses,problemTypes,getProblemTypeDescriptions,problemTypeDescriptions,getProblemNumberSeries,problemTypeSeries,setProblemTypeDescriptions,setProblemTypeSeries}}>
+        <UserProvider>
+        <TypeContext.Provider value={{vehicleTypes,vehicleStatuses,problemTypes,getProblemTypeDescriptions,problemTypeDescriptions,problemTypeSeries,setProblemTypeDescriptions,setProblemTypeSeries}}>
             {children}
         </TypeContext.Provider>
+        </UserProvider>
     )
 }
 

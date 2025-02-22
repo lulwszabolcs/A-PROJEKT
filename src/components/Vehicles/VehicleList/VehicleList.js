@@ -20,15 +20,18 @@ import LocalCarWashIcon from '@mui/icons-material/LocalCarWash';
 import LocalGasStationIcon from '@mui/icons-material/LocalGasStation';
 import SnackbarComponent from '../../Snackbar/SnackbarComponent'
 import { SnackbarContext } from '../../../contexts/SnackbarProvider';
+import { UserContext } from '../../../contexts/UserProvider';
 
 export default function VehicleList() {
-    let {vehicles,getVehicles,setVehicles,pickImage} = useContext(VehicleContext)
+    const { vehicles } = useContext(VehicleContext) || { vehicles: [] }; // Alapértelmezett üres tömb
+    let {getVehicles,setVehicles,pickImage} = useContext(VehicleContext)
     let {vehicleTypes,vehicleStatuses} = useContext(TypeContext)
     let {SnackbarOpen,SnackbarMessage,closeSnackbar,SnackbarSuccess} = useContext(SnackbarContext)
     const [isAddProblemOpen,setIsAddProblemOpen] = useState(false)
     const [isAddVehicleOpen,setIsAddVehicleOpen] = useState(false)
     const [selectedType, setSelectedType] = useState('all');
     const [selectedStatus, setSelectedStatus] = useState('all');
+
     function closeAddProblem() {
         setIsAddProblemOpen(false);
     }
@@ -63,6 +66,9 @@ export default function VehicleList() {
                 break;
         }
     }
+    useEffect(()=>{
+        getVehicles()
+    },[vehicles])
     return (
         <>
         <h1 className={styles.vehicleTitle}>  

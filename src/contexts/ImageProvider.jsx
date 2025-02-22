@@ -4,7 +4,7 @@ const ImageContext = createContext()
 const ImageProvider = ({children})=>{
     let [images,setImages] = useState([])
     async function getImages() {
-        setImages(((await axios.get("http://localhost:8080/images")).data))
+        setImages(((await axios.get("/images")).data))
     }
     useEffect(()=>{
         getImages()
