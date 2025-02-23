@@ -7,24 +7,21 @@ import VehicleList from "./VehicleList/VehicleList"
 import styles from './Vehicles.module.css'
 export default function Vehicles() {
     return (
-        // homepage implement: grafikonok, stb 
-        //                     activity beállítás usernél
-        //                     sticky notes hagyás lehetőség
-        //worker edit
-        //snackbar context 
-        // Hibak: pipánál put helyett pacth, 
-        //profile tab
-        // add user tab
+        // home: online felhasznalo counter fix, jarmuvek chart fix, note fix
+        // profile tab: image megcsinalas, letoltes gomb megcsinalasa, profile status change 
+        // worker: image mutassa, az adott role tudja editelni,hozzaadni
+        // vehicle: csak azokat a typeokat mutassa amik vannak?, allapotot mutassa, status change, image mutassa, hozzadas
+        // problem: contextbe ujrairas, beosztashoz tartozo, problem add, edit, torol, csak ranghoz, lezar mindenki
+        // chat: ne legyen buta, tudja folytatni a beszelgetest
+        // logout: nullazza a tokent, user profilet.    
         // beosztáshoz tartozó problémák megvalósítása
-        //logout, sikeres loginnál kapjon tokent, átirányítson a homepagere, értesítsen ha nem jó
-        // errornal problemtypes lekérdezés helyett ocntext
+
+        // reszponzivitas, atiras vite-re?
         <>
         <MiniDrawer></MiniDrawer>
-            <TypeProvider>
             <SnackbarProvider>
-                <VehicleList></VehicleList>
+                    <VehicleList></VehicleList>
             </SnackbarProvider>
-            </TypeProvider>
         </>
     )
 }

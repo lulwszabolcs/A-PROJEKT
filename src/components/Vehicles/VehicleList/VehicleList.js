@@ -23,7 +23,8 @@ import { SnackbarContext } from '../../../contexts/SnackbarProvider';
 import { UserContext } from '../../../contexts/UserProvider';
 
 export default function VehicleList() {
-    const { vehicles } = useContext(VehicleContext) || { vehicles: [] }; // Alapértelmezett üres tömb
+    let {token} = useContext(UserContext)
+    let { vehicles } = useContext(VehicleContext)
     let {getVehicles,setVehicles,pickImage} = useContext(VehicleContext)
     let {vehicleTypes,vehicleStatuses} = useContext(TypeContext)
     let {SnackbarOpen,SnackbarMessage,closeSnackbar,SnackbarSuccess} = useContext(SnackbarContext)
@@ -67,8 +68,8 @@ export default function VehicleList() {
         }
     }
     useEffect(()=>{
-        getVehicles()
-    },[vehicles])
+        console.log("vehicles a listben",vehicles)
+    },[])
     return (
         <>
         <h1 className={styles.vehicleTitle}>  
@@ -84,11 +85,11 @@ export default function VehicleList() {
             <MenuItem value={"all"}>
                 Minden típus
             </MenuItem>
-                {vehicleTypes.map((type)=>(
+                {/* {vehicleTypes.map((type)=>(
                     <MenuItem value={type.vehicleTypeDescription} key={type.vehicleTypeDescription}>
                         {type.vehicleTypeDescription}
                     </MenuItem>
-                ))}
+                ))} */}
         </Select>
         <Select style={{width:'20vw'}}
             labelId="demo-simple-select"
@@ -118,7 +119,9 @@ export default function VehicleList() {
                     <p>{pickIcon(vehicle)}</p>
                 </div>
                 <div className={styles.vehicleImageContainer}>
-                <img src={pickImage(vehicle)} className={styles.vehicleImage}></img>
+                {/* <img src={pickImage(vehicle)} className={styles.vehicleImage}></img> */}
+                <img src={"http://localhost:3000/images/vehicle_images/AIRCRAFT.png"} className={styles.vehicleImage}></img>
+                {console.log(pickImage(vehicle))}
                 </div>
             </div>
         ))}
@@ -129,18 +132,14 @@ export default function VehicleList() {
         </Fab>
         </div>
         <Modal open={isAddProblemOpen}>
-            <TypeProvider>
             <VehicleProvider>
             <VehicleModify close={closeAddProblem}></VehicleModify>
             </VehicleProvider>
-            </TypeProvider>
         </Modal>
         <Modal open={isAddVehicleOpen}>
-            <TypeProvider>
             <VehicleProvider>
             <AddVehicle close={closeAddVehicle}></AddVehicle>
             </VehicleProvider>
-            </TypeProvider>
         </Modal>
         <SnackbarComponent snackbarOpen={SnackbarOpen} message={SnackbarMessage} close={closeSnackbar} success={SnackbarSuccess}/>
         </>

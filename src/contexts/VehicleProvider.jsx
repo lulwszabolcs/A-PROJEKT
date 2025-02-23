@@ -10,24 +10,18 @@ const VehicleProvider = ({ children }) => {
   let {vehicleTypes} = useContext(TypeContext)
   const [vehicles, setVehicles] = useState([]);
   let {displaySnackbar} = useContext(SnackbarContext)
-  async function getVehicles() {
-    console.log("getVehicles called, token:", token);
-    if (!token) {
-      console.log("Token missing, skipping request");
+  async function getVehicles(auth) {
+    if (!auth) {
       return;
     }
     try {
       const response = await axios.get("/vehicle/list", {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${auth}`,
         },
       });
-      console.log("Response data before setVehicles:", response.data);
-      console.log("Response data type:", typeof response.data);
-      console.log("Response data is array:", Array.isArray(response.data));
-      setVehicles(response.data);
-      console.log("setVehicles called with:", response.data);
-    } catch (error) {
+      setVehicles([...response.data]);   
+     } catch (error) {
       console.error("Hiba történt a járművek lekérésekor:", error.message);
       console.error("Error response:", error.response);
     }
@@ -68,9 +62,23 @@ const VehicleProvider = ({ children }) => {
       let result = vehicleTypes.find((x)=>x.vehicleTypeDescription === type)
       return result.vehicleTypeName
   }
-  function pickImage(vehicle) {
-    const imageSrc = `http://localhost:8080/images/vehicle_images/${convertType(vehicle.type)}.png`
-    return imageSrc;
+
+  async function pickImage(vehicle) {
+    try {
+      const response = await axios.get(
+        `http://localhost:3000/images/vehicle_images/${convertType(vehicle.type)}.png`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          responseType: "blob", // Blobként kérjük a képet
+        }
+      );
+      const imageUrl = URL.createObjectURL(response.data); // Blob-ból URL generálása
+      return imageUrl;
+    } catch (error) {
+      console.error("Hiba a kép lekérésekor:", error);
+    }
   }
   function getActiveVehicles() {
     let result = vehicles.filter((x)=>x.status === 'Működőképes')
@@ -82,10 +90,9 @@ const VehicleProvider = ({ children }) => {
   }
 
   useEffect(() => {
-    console.log("useEffect ran, token:", token);
     if (token) {
       console.log("Token available, fetching vehicles...");
-      getVehicles();
+      getVehicles(token);
     } else {
       console.log("No token yet in VehicleProvider");
     }
@@ -97,9 +104,8 @@ const VehicleProvider = ({ children }) => {
 
   return (
     
-
     <VehicleContext.Provider
-      value={{ vehicles, addVehicle, getVehicles, modifyVehicle, setVehicles, pickImage,getActiveVehicles,getInActiveVehicles }}
+      value={{ vehicles, addVehicle, getVehicles, modifyVehicle, setVehicles,getActiveVehicles,getInActiveVehicles,pickImage}}
       >
       {children}
     </VehicleContext.Provider>

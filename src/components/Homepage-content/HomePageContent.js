@@ -20,7 +20,7 @@ import AirIcon from '@mui/icons-material/Air';
 import Alert from '@mui/material/Alert';
 import AcUnitIcon from '@mui/icons-material/AcUnit';
 export default function HomePageContent() {
-  let { getOnlineUsers, getUsersLenght } = useContext(UserContext);
+  let { getOnlineUsers, getUsersLenght, userProfile } = useContext(UserContext);
   let { getActiveVehicles, getInActiveVehicles } = useContext(VehicleContext);
   let { notes, deleteNote } = useContext(NoteContext);
   let { SnackbarMessage, SnackbarOpen, closeSnackbar, SnackbarSuccess } = useContext(SnackbarContext);
@@ -75,7 +75,6 @@ export default function HomePageContent() {
     setAddStickyNotesOpen(false);
   }
 
-  let username = "test";
   const settings = {
     width: 200,
     height: 200,
@@ -131,7 +130,7 @@ export default function HomePageContent() {
   },[weatherData])
   return (
     <>
-      <h1 className={styles.welcometext}>Üdvözöljük {username}!</h1>
+      <h1 className={styles.welcometext}>Üdvözöljük {userProfile.name}!</h1>
       {weatherAlertVisible && (
           <div className={styles.alertcontainer}>
             <Alert variant="filled" severity="warning" style={{ width: '50vw' }}>

@@ -18,12 +18,7 @@ export default function Homepage() {
     </MiniDrawer>
     <VehicleProvider>
       <NoteProvider>
-      <TypeProvider>
-
-      <UserProvider>
       <HomePageContent></HomePageContent>
-      </UserProvider>
-      </TypeProvider>
       </NoteProvider>
     </VehicleProvider>
     </>

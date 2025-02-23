@@ -10,12 +10,16 @@ const TypeProvider = ({children}) => {
     const [problemTypes,setProblemTypes] = useState([]);
     const [problemTypeDescriptions,setProblemTypeDescriptions] = useState([]);
     const [problemTypeSeries,setProblemTypeSeries] = useState([]);
-    async function getVehicleTypes() {
-        setVehicleTypes(await axios.get("/vehicletypes/list",{
+    async function getVehicleTypes(auth) {
+        if (!auth) {
+            return;
+          }
+        const response = await axios.get("/vehicletypes/list",{
             headers: {
-                'Authorization': token ? `Bearer ${token}` : ""
+                'Authorization': `Bearer ${auth}`
             }
-        }).data)   
+        }) 
+        setVehicleTypes([...response.data])
         }
     async function getVehicleStatuses() {
         setVehicleStatuses(((await axios.get("/vehiclestatuses/list",{
@@ -41,17 +45,13 @@ const TypeProvider = ({children}) => {
     
     useEffect(()=>{
         if (token) {
-            getVehicleTypes();
-            getVehicleStatuses()
-            getProblemTypes()
+            getVehicleTypes(token)
         }
-    },[])
+    },[token])
     return (
-        <UserProvider>
         <TypeContext.Provider value={{vehicleTypes,vehicleStatuses,problemTypes,getProblemTypeDescriptions,problemTypeDescriptions,problemTypeSeries,setProblemTypeDescriptions,setProblemTypeSeries}}>
             {children}
         </TypeContext.Provider>
-        </UserProvider>
     )
 }
 

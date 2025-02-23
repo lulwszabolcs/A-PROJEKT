@@ -18,7 +18,7 @@ export default function AddWorker({close}) {
     let {roles} = useContext(RoleContext)
     let {getWorkers} = useContext(WorkerContext)
     let {images,setImages,getImages} = useContext(ImageContext)
-    let {generateUser} = useContext(UserContext)
+    let {token,generateUser} = useContext(UserContext)
     let {SnackbarOpen,displaySnackbar,closeSnackbar,SnackbarMessage,SnackbarSuccess} = useContext(SnackbarContext)
     const [selectedFile,setSelectedFile] = useState();
     const {
@@ -35,7 +35,10 @@ export default function AddWorker({close}) {
         if (!name.includes(" ")) {
           displaySnackbar("A névnek két részből kell állnia!",false)
         } else {
-          const response = await axios.post("/worker/", data);
+          const response = await axios.post("/worker/",{
+            headers: {
+            'Authorization': token ? `Bearer ${token}` : ""
+        }}, data);
           if (selectedFile) {
             const imageSave = {
               fileName: response.data.workerId + selectedFile.name.substring(selectedFile.name.lastIndexOf(".")),
