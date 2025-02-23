@@ -52,13 +52,14 @@ const UserProvider = ({children}) => {
     
 
     async function getUsers() {
-        axios.get('/api/user', {
+        const response = await axios.get('/api/user', {
             headers: {
                 'Accept': 'application/json',
                 'Authorization': token ? `Bearer ${token}` : ""
             }
         })
-        
+        console.log(response.data)
+        setUsers(response.data)
     }
 
     function getToken() {
@@ -67,10 +68,12 @@ const UserProvider = ({children}) => {
     }
 
     function getOnlineUsers() {
-        let result = users.filter((x)=>x.status==='ONLINE')
+        let result = users.filter((x)=>x.status==='User is currently online')
+        console.log(result.length)
         return result.length
     }
     function getUsersLenght() {
+        console.log("lenght",users.length)
         return users.length
     }
     function getUserProfile() {

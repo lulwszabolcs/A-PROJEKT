@@ -1,3 +1,4 @@
+import { ImageProvider } from "../../contexts/ImageProvider"
 import { SnackbarProvider } from "../../contexts/SnackbarProvider"
 import { TypeProvider } from "../../contexts/TypeProvider"
 import { UserProvider } from "../../contexts/UserProvider"
@@ -20,7 +21,9 @@ export default function Vehicles() {
         <>
         <MiniDrawer></MiniDrawer>
             <SnackbarProvider>
+                        <ImageProvider>
                     <VehicleList></VehicleList>
+                        </ImageProvider>
             </SnackbarProvider>
         </>
     )

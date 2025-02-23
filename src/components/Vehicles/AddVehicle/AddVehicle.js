@@ -21,7 +21,7 @@ export default function AddVehicle({close}) {
       } = useForm()
 
     const onSubmit = (data) => {
-        data.status = "Működőképes"
+        data.status = "Jármű működőképes"
         data.vehicleYear = Number(data.vehicleYear)
         if (data.vehicleYear <= 1960 || data.vehicleYear > 2025 ) {
             displaySnackbar("Nem megfelelő évjárat!",false)

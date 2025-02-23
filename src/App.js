@@ -13,6 +13,7 @@ import Support from './components/Support/Support';
 import Login from './components/Login/Login';
 import { VehicleProvider } from './contexts/VehicleProvider';
 import { useContext } from 'react';
+import { ImageProvider } from './contexts/ImageProvider';
 
 // Védett útvonal komponens
 function ProtectedRoute({ children }) {
@@ -33,11 +34,8 @@ function App() {
           <BrowserRouter>
             <Routes>
               <Route path="/">
-                {/* Nyilvános útvonalak */}
                 <Route index element={<Login />} />
-                <Route path="login" element={<Login />} />
-                
-                {/* Védett útvonalak */}
+                <Route path="login" element={<Login />} />                
                 <Route
                   path="profile"
                   element={
@@ -45,7 +43,7 @@ function App() {
                       <Profile />
                     </ProtectedRoute>
                   }
-                />
+                  />
                 <Route
                   path="home"
                   element={
@@ -53,7 +51,7 @@ function App() {
                       <Homepage />
                     </ProtectedRoute>
                   }
-                />
+                  />
                 <Route
                   path="vehicles"
                   element={
@@ -61,7 +59,7 @@ function App() {
                       <Vehicles />
                     </ProtectedRoute>
                   }
-                />
+                  />
                 <Route
                   path="errors"
                   element={
@@ -69,7 +67,7 @@ function App() {
                       <Errors />
                     </ProtectedRoute>
                   }
-                />
+                  />
                 <Route
                   path="workers"
                   element={
@@ -77,7 +75,7 @@ function App() {
                       <Workers />
                     </ProtectedRoute>
                   }
-                />
+                  />
                 <Route
                   path="support"
                   element={
@@ -85,12 +83,12 @@ function App() {
                       <Support />
                     </ProtectedRoute>
                   }
-                />
-                {/* 404-es oldal */}
+                  />
                 <Route path="*" element={<NotFound />} />
               </Route>
             </Routes>
           </BrowserRouter>
+         
         </TypeProvider>
       </UserProvider>
     </SnackbarProvider>

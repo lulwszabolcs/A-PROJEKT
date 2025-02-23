@@ -36,26 +36,27 @@ const VehicleProvider = ({ children }) => {
       setVehicles((prev) => [result.data, ...prev]);
       displaySnackbar("Jármű hozzáadva!",true)
     } catch (error) {
-      console.error("Hiba történt jármű hozzáadásakor:", error.message);
+      displaySnackbar("Nincs jogosultsága ehhez a művelethez!",false)
     }
   }
 
-  async function modifyVehicle(id, newStatus) {
+  async function modifyVehicle(id, newStatus,auth) {
+    console.log(id,newStatus)
     try {
-      const result = await axios.patch(`/vehicle/${id},`, {
+      const result = await axios.patch(`/vehicle/${id}`, {
         key: "STATUS",
         value: newStatus,
-      },{
-        headers: {
-          'Authorization': token ? `Bearer ${token}` : ""
+    },{
+      headers: {
+        'Authorization': auth ? `Bearer ${auth}` : ""
       }
-      });  
+    });  
       let modified = vehicles.find((x)=>x.vehicleId === result.data.vehicleId)
       modified.status = result.data.status
-      setVehicles([modified,...vehicles])
+      setVehicles([...vehicles])
       displaySnackbar("Jármű állapot módosítva!",true)
     } catch (error) {
-      console.error("Hiba történt jármű módosításakor:", error);
+      displaySnackbar("Nincs jogosultsága ehhez a művelethez!",false)
     }
   }
   function convertType(type) {
@@ -63,23 +64,7 @@ const VehicleProvider = ({ children }) => {
       return result.vehicleTypeName
   }
 
-  async function pickImage(vehicle) {
-    try {
-      const response = await axios.get(
-        `http://localhost:3000/images/vehicle_images/${convertType(vehicle.type)}.png`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          responseType: "blob", // Blobként kérjük a képet
-        }
-      );
-      const imageUrl = URL.createObjectURL(response.data); // Blob-ból URL generálása
-      return imageUrl;
-    } catch (error) {
-      console.error("Hiba a kép lekérésekor:", error);
-    }
-  }
+  
   function getActiveVehicles() {
     let result = vehicles.filter((x)=>x.status === 'Működőképes')
     return result.length
@@ -98,14 +83,10 @@ const VehicleProvider = ({ children }) => {
     }
   }, [token]);
 
-  useEffect(() => {
-    console.log("Vehicles state updated:", vehicles);
-  }, [vehicles]);
-
   return (
     
     <VehicleContext.Provider
-      value={{ vehicles, addVehicle, getVehicles, modifyVehicle, setVehicles,getActiveVehicles,getInActiveVehicles,pickImage}}
+      value={{ vehicles, addVehicle, getVehicles, modifyVehicle, setVehicles,getActiveVehicles,getInActiveVehicles,convertType}}
       >
       {children}
     </VehicleContext.Provider>

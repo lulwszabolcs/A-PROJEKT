@@ -21,17 +21,20 @@ import LocalGasStationIcon from '@mui/icons-material/LocalGasStation';
 import SnackbarComponent from '../../Snackbar/SnackbarComponent'
 import { SnackbarContext } from '../../../contexts/SnackbarProvider';
 import { UserContext } from '../../../contexts/UserProvider';
+import { ImageContext } from '../../../contexts/ImageProvider';
 
 export default function VehicleList() {
     let {token} = useContext(UserContext)
     let { vehicles } = useContext(VehicleContext)
-    let {getVehicles,setVehicles,pickImage} = useContext(VehicleContext)
+    let {getVehicles,setVehicles} = useContext(VehicleContext)
+    let {pickImageForVehicle} = useContext(ImageContext)
     let {vehicleTypes,vehicleStatuses} = useContext(TypeContext)
     let {SnackbarOpen,SnackbarMessage,closeSnackbar,SnackbarSuccess} = useContext(SnackbarContext)
     const [isAddProblemOpen,setIsAddProblemOpen] = useState(false)
     const [isAddVehicleOpen,setIsAddVehicleOpen] = useState(false)
     const [selectedType, setSelectedType] = useState('all');
     const [selectedStatus, setSelectedStatus] = useState('all');
+    const [imageUrls, setImageUrls] = useState({});
 
     function closeAddProblem() {
         setIsAddProblemOpen(false);
@@ -46,7 +49,7 @@ export default function VehicleList() {
     });
     function pickIcon(vehicle) {
         switch (vehicle.status) {
-            case "Működőképes":
+            case "Jármű működőképes":
                 return <p className={styles.vehiclestatus} style={{color:'green'}}>{vehicle.status}<CheckCircleIcon/></p>
             case "Karbantartás alatt":
                 return <p className={styles.vehiclestatus} style={{color:'gray'}}>{vehicle.status}<ReportIcon/></p>
@@ -67,9 +70,21 @@ export default function VehicleList() {
                 break;
         }
     }
-    useEffect(()=>{
-        console.log("vehicles a listben",vehicles)
-    },[])
+    useEffect(() => {
+        const loadImages = async () => {
+          const urls = {};
+          for (const vehicle of vehicles) {
+            urls[vehicle.vehicleId] = await pickImageForVehicle(vehicle);
+          }
+          setImageUrls(urls);
+        };
+    
+        if (vehicles.length > 0) {
+          loadImages();
+        }
+      }, [pickImageForVehicle]);
+
+    
     return (
         <>
         <h1 className={styles.vehicleTitle}>  
@@ -85,11 +100,11 @@ export default function VehicleList() {
             <MenuItem value={"all"}>
                 Minden típus
             </MenuItem>
-                {/* {vehicleTypes.map((type)=>(
+                {vehicleTypes.map((type)=>(
                     <MenuItem value={type.vehicleTypeDescription} key={type.vehicleTypeDescription}>
                         {type.vehicleTypeDescription}
                     </MenuItem>
-                ))} */}
+                ))}
         </Select>
         <Select style={{width:'20vw'}}
             labelId="demo-simple-select"
@@ -109,7 +124,7 @@ export default function VehicleList() {
         <ReportProblemIcon onClick={()=>setIsAddProblemOpen(true)} className={styles.reporticon} sx={{color:'red'}}></ReportProblemIcon>
         </div>
         <div className={styles.flexbox}>
-        {filteredVehicles.map((vehicle)=>(
+        {filteredVehicles.sort((a,b)=>(a.license.localeCompare(b.license))).map((vehicle)=>(
             <div className={styles.vehicleCard} key={vehicle.vehicleId}>
                 <div className={styles.vehicleInfoContainer}>
                     <h4>{vehicle.name}</h4>
@@ -119,9 +134,7 @@ export default function VehicleList() {
                     <p>{pickIcon(vehicle)}</p>
                 </div>
                 <div className={styles.vehicleImageContainer}>
-                {/* <img src={pickImage(vehicle)} className={styles.vehicleImage}></img> */}
-                <img src={"http://localhost:3000/images/vehicle_images/AIRCRAFT.png"} className={styles.vehicleImage}></img>
-                {console.log(pickImage(vehicle))}
+                <img src={imageUrls[vehicle.vehicleId]} className={styles.vehicleImage}></img>
                 </div>
             </div>
         ))}
@@ -132,14 +145,10 @@ export default function VehicleList() {
         </Fab>
         </div>
         <Modal open={isAddProblemOpen}>
-            <VehicleProvider>
             <VehicleModify close={closeAddProblem}></VehicleModify>
-            </VehicleProvider>
         </Modal>
         <Modal open={isAddVehicleOpen}>
-            <VehicleProvider>
             <AddVehicle close={closeAddVehicle}></AddVehicle>
-            </VehicleProvider>
         </Modal>
         <SnackbarComponent snackbarOpen={SnackbarOpen} message={SnackbarMessage} close={closeSnackbar} success={SnackbarSuccess}/>
         </>

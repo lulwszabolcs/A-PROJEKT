@@ -8,9 +8,11 @@ import {MenuItem,Select } from '@mui/material';
 import { useForm } from "react-hook-form"
 import { TypeContext } from '../../../contexts/TypeProvider';
 import { VehicleContext } from '../../../contexts/VehicleProvider';
+import { UserContext } from '../../../contexts/UserProvider';
 export default function VehicleModify({close}) {
     let {vehicleStatuses} = useContext(TypeContext);
     let {vehicles,modifyVehicle,getVehicles} = useContext(VehicleContext)
+    let {token} = useContext(UserContext)
     const {
         register,
         handleSubmit,
@@ -19,7 +21,8 @@ export default function VehicleModify({close}) {
       } = useForm()
 
       const onSubmit = async (data) => {
-        await modifyVehicle(data.license, data.value);
+        console.log(data)
+        await modifyVehicle(data.id, data.value,token);
         close();
       };
     return (
@@ -32,10 +35,10 @@ export default function VehicleModify({close}) {
                         id="demo-simple-select"
                         name='problemType'
                         defaultValue={'tpus'}
-                        {...register("license")}
+                        {...register("id")}
                         >
                         <MenuItem value={'tpus'} disabled>Jármű kiválasztása</MenuItem>
-                        {vehicles.map((vehicle) => (
+                        {vehicles.sort((a,b)=>(a.license.localeCompare(b.license))).map((vehicle) => (
                             <MenuItem key={vehicle.license} value={vehicle.vehicleId}>
                                 {vehicle.license}
                             </MenuItem>

@@ -46,6 +46,7 @@ const TypeProvider = ({children}) => {
     useEffect(()=>{
         if (token) {
             getVehicleTypes(token)
+            getVehicleStatuses()
         }
     },[token])
     return (
