@@ -18,7 +18,11 @@ const NoteProvider = ({children}) => {
     }
     async function addNote(data) {
         try {
-            const response  = await axios.post("/notes",data)
+            const response  = await axios.post("/notes",data,{
+                headers: {
+                    'Authorization': token ? `Bearer ${token}` : ""
+                }
+            })
             setNotes([response.data,...notes])
             displaySnackbar("Jegyzet hozzáadva!",true)
         } catch (error) {
@@ -27,7 +31,11 @@ const NoteProvider = ({children}) => {
     }
     async function deleteNote(id) {
         try {
-            const response = (await axios.delete(`/note/${id}`)).data
+            const response = (await axios.delete(`/note/${id}`,{
+                headers: {
+                    'Authorization': token ? `Bearer ${token}` : ""
+                }
+            })).data
         if (response) {
             let modified = notes.filter((x)=>x.id !== response.id)
             setNotes(modified)

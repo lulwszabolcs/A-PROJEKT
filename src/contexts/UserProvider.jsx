@@ -27,8 +27,6 @@ const UserProvider = ({children}) => {
                     }
                 }
             );
-            console.log("All Headers:", response.headers);
-            console.log("Authorization Header:", response.headers['jwt_token']);
             setUserProfile({
                 "name":response.data.worker.name,
                 "email":response.data.worker.email,
@@ -58,22 +56,18 @@ const UserProvider = ({children}) => {
                 'Authorization': token ? `Bearer ${token}` : ""
             }
         })
-        console.log("users",response.data)
         setUsers(response.data)
     }
 
     function getToken() {
-        console.log(token)
         return token;
     }
 
     function getOnlineUsers() {
         let result = users.filter((x)=>x.status==='User is currently online')
-        console.log(result.length)
         return result.length
     }
     function getUsersLenght() {
-        console.log("lenght",users.length)
         return users.length
     }
     function getUserProfile() {

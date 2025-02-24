@@ -16,11 +16,9 @@ export default function Homepage() {
     <>
     <MiniDrawer>
     </MiniDrawer>
-    <VehicleProvider>
       <NoteProvider>
       <HomePageContent></HomePageContent>
       </NoteProvider>
-    </VehicleProvider>
     </>
   )
 }

@@ -66,11 +66,11 @@ const VehicleProvider = ({ children }) => {
 
   
   function getActiveVehicles() {
-    let result = vehicles.filter((x)=>x.status === 'Működőképes')
+    let result = vehicles.filter((x)=>x.status === 'Jármű működőképes')
     return result.length
   }
   function getInActiveVehicles() {
-    let result = vehicles.filter((x)=>x.status !== 'Működőképes')
+    let result = vehicles.filter((x)=>x.status !== 'Jármű működőképes')
     return result.length
   }
 
