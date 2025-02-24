@@ -23,7 +23,24 @@ const ImageProvider = ({children})=>{
         } catch (error) {
           console.error("Hiba a kép lekérésekor:", error);
         }
+    }
+    async function pickImageForWorker(worker) {
+      try {
+        const response = await axios.get(
+          `/images/${worker.workerId}.jpg`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+            responseType: "blob",
+          }
+        );
+        const imageUrl = URL.createObjectURL(response.data); 
+        return imageUrl;
+      } catch (error) {
+        console.error("Hiba a kép lekérésekor:", error);
       }
+    }
     async function getImages() {
         setImages(((await axios.get("/images")).data))
     }
@@ -31,7 +48,7 @@ const ImageProvider = ({children})=>{
         getImages()
     },[])
 
-    return <ImageContext.Provider value={{images,getImages,setImages,pickImageForVehicle}}>
+    return <ImageContext.Provider value={{images,getImages,setImages,pickImageForVehicle,pickImageForWorker}}>
         {children}
     </ImageContext.Provider>
 }

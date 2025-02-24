@@ -23,13 +23,14 @@ import SnackbarComponent from "../../Snackbar/SnackbarComponent";
 import { SnackbarContext } from '../../../contexts/SnackbarProvider';
 
   export default function WorkerInfoBox() {
-      let {images,getImages} = useContext(ImageContext)
+      let {images,getImages,pickImageForWorker} = useContext(ImageContext)
       const [openWorkerDetails,setOpenWorkerDetails] = useState(false)
       const [openAddWorker,setOpenAddWorker] = useState(false)
       const [selectedRole,setSelectedRole] = useState()
       const [selectedWorker,setSelectedWorker] = useState()
       let {workers,getWorkers} = useContext(WorkerContext)
       let {SnackbarOpen,closeSnackbar,SnackbarMessage,SnackbarSuccess} = useContext(SnackbarContext)
+      const [imageUrls, setImageUrls] = useState({});
       function closeWorkerDetails() {
           setOpenWorkerDetails(false)
       }
@@ -47,16 +48,19 @@ import { SnackbarContext } from '../../../contexts/SnackbarProvider';
     const filteredWorkers = selectedRole && selectedRole != "all"
       ? workers.filter((worker) => worker.title === selectedRole)
       : workers;
-      function findImage(worker) {
-        let result = images.find(
-          (x) => x.worker_id === worker.workerId
-        );
-        if (result && result.imageName) {
-          return result.imageName; 
+      useEffect(() => {
+        const loadImages = async () => {
+          const urls = {};
+          for (const worker of workers) {
+            urls[worker.workerId] = await pickImageForWorker(worker);
+          }
+          setImageUrls(urls);
+        };
+    
+        if (workers.length > 0) {
+          loadImages();
         }
-      
-        return null;
-      }
+      }, [workers,pickImageForWorker]);
     return (
       <>
       <h1 className='worker-main-text'>Dolgozók kezelése</h1>
@@ -89,10 +93,10 @@ import { SnackbarContext } from '../../../contexts/SnackbarProvider';
       gap: '40px'
     }}>
         {filteredWorkers.map((worker)=>( 
-          <Card variant="outlined" style={{paddingTop:10,position:'relative',boxShadow:'5px 5px 5px 5px rgba(173, 216, 230, 0.616)'}}>
+          <Card variant="outlined" style={{paddingTop:10,position:'relative',boxShadow:'5px 5px 5px 5px rgba(173, 216, 230, 0.616)',width:'15rem'}}>
           <CardContent>
           <Button style={{position:'absolute',top:0,right:0}} onClick={()=>{setOpenWorkerDetails(true);setSelectedWorker(worker)}}><InfoIcon></InfoIcon></Button>
-          <img src={`http://localhost:8080/images/${findImage(worker)}`} style={{width:150, height:150, borderRadius:100}}></img>
+          <img src={imageUrls[worker.workerId]} style={{width:150, height:150, borderRadius:100}}></img>
           <Typography variant="h6" component="div">
             {worker.name}
           </Typography>

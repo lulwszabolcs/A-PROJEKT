@@ -79,9 +79,13 @@ const UserProvider = ({children}) => {
     function getUserProfile() {
         return userProfile;
     }
-    async function generateUser(userData) {
+    async function generateUser(userData,auth) {
         try {
-            const response = await (axios.post("/api/user",userData))
+            const response = await (axios.post("/api/user",userData,{
+                headers: {
+                    'Authorization': auth ? `Bearer ${auth}` : ""
+                }
+            }))
             if (response) {
                 setUsers([response.data,...users])
             }

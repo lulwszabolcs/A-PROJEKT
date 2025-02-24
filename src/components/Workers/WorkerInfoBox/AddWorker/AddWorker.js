@@ -35,10 +35,11 @@ export default function AddWorker({close}) {
         if (!name.includes(" ")) {
           displaySnackbar("A névnek két részből kell állnia!",false)
         } else {
-          const response = await axios.post("/worker/",{
+          const response = await axios.post("/worker/", data,{
             headers: {
-            'Authorization': token ? `Bearer ${token}` : ""
-        }}, data);
+              'Authorization': token ? `Bearer ${token}` : ""
+          }
+          });
           if (selectedFile) {
             const imageSave = {
               fileName: response.data.workerId + selectedFile.name.substring(selectedFile.name.lastIndexOf(".")),
@@ -46,7 +47,7 @@ export default function AddWorker({close}) {
               worker_id: response.data.workerId,
             };
         
-            await uploadImage(selectedFile, imageSave);
+            await uploadImage(selectedFile, imageSave,token);
         
             const newImage = {
               imageName: imageSave.fileName,
@@ -62,7 +63,7 @@ export default function AddWorker({close}) {
             "worker_id":response.data.workerId
           }
           console.log("userdata",userData)
-          generateUser(userData)
+          generateUser(userData,token)
           displaySnackbar("Dolgozó hozzáadva!",true)
           close();
           getWorkers();
@@ -79,7 +80,7 @@ export default function AddWorker({close}) {
         
       };
       
-    const uploadImage = async (file,imageSave) => {
+    const uploadImage = async (file,imageSave,auth) => {
         try {
           
       
@@ -89,6 +90,7 @@ export default function AddWorker({close}) {
       
           const response = await axios.post("/images/upload", formData, {
             headers: {
+              'Authorization': auth ? `Bearer ${auth}` : "",
               "Content-Type": "multipart/form-data",
             },
           });
