@@ -74,7 +74,7 @@ export default function VehicleList() {
         const loadImages = async () => {
           const urls = {};
           for (const vehicle of vehicles) {
-            urls[vehicle.vehicleId] = await pickImageForVehicle(vehicle);
+            urls[vehicle.vehicleId] = await pickImageForVehicle(vehicle.type);
           }
           setImageUrls(urls);
         };

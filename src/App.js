@@ -88,7 +88,6 @@ function App() {
               </Route>
             </Routes>
           </BrowserRouter>
-         
         </TypeProvider>
       </UserProvider>
     </SnackbarProvider>

@@ -28,7 +28,6 @@ const WorkerProvider = ({children})=>{
         displaySnackbar("Dolgozó frissítve",true)
         getWorkers();
     }
-    
     useEffect(()=>{
         getWorkers()
     },[])

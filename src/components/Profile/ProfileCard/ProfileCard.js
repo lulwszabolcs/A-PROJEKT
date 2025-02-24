@@ -10,13 +10,24 @@ import { UserContext } from '../../../contexts/UserProvider';
 import SnackbarComponent from '../../Snackbar/SnackbarComponent';
 import { SnackbarContext } from '../../../contexts/SnackbarProvider';
 import DownloadIcon from '@mui/icons-material/Download';
+import { ImageContext } from '../../../contexts/ImageProvider';
+import { WorkerContext } from '../../../contexts/WorkerProvider';
 export default function ProfileCard() {
     let {userProfile} = useContext(UserContext)
+    let {pickImageForWorker} = useContext(ImageContext)
+    const [workerImageUrl,setWorkerImageUrl] = useState("");
+    async function loadWorkerImage(worker) {
+        setWorkerImageUrl(await pickImageForWorker(worker))
+    }
+    useEffect(()=>{
+        console.log(userProfile)
+        loadWorkerImage(userProfile.workerId)
+    },[userProfile])
     return ( 
          <>
         <div className={styles.cardcontainer}>
             <DownloadIcon className={styles.downloadicon} sx={{color:'gray'}}/>
-            <img src={`http://localhost:8080/images/${userProfile.workerId}.jpg`} className={styles.profilepic}></img>
+            <img src={workerImageUrl} className={styles.profilepic}></img>
             <h2>{userProfile.name}</h2>
             <p className={styles.infotext}>{userProfile.workerId}</p>
             <p className={styles.infotext}>{userProfile.role}</p>

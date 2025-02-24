@@ -7,10 +7,10 @@ const ImageProvider = ({children})=>{
     let [images,setImages] = useState([])
     let {token} = useContext(UserContext)
     let {convertType} = useContext(VehicleContext)
-    async function pickImageForVehicle(vehicle) {
+    async function pickImageForVehicle(type) {
         try {
           const response = await axios.get(
-            `http://localhost:3000/images/vehicle_images/${convertType(vehicle.type)}.png`,
+            `http://localhost:3000/images/vehicle_images/${convertType(type)}.png`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -24,10 +24,10 @@ const ImageProvider = ({children})=>{
           console.error("Hiba a kép lekérésekor:", error);
         }
     }
-    async function pickImageForWorker(worker) {
+    async function pickImageForWorker(workerId) {
       try {
         const response = await axios.get(
-          `/images/${worker.workerId}.jpg`,
+          `/images/${workerId}.jpg`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

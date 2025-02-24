@@ -25,7 +25,7 @@ export default function Loginpage() {
         if (userLogin(data)) {
             displaySnackbar("Sikeres bejelentkezés!",true)
             setTimeout(()=>{
-                navigate('/workers')
+                navigate('/profile')
             },2000)
         } else {
             displaySnackbar("Sikertelen bejelentkezés!",false)
