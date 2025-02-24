@@ -58,7 +58,7 @@ const UserProvider = ({children}) => {
                 'Authorization': token ? `Bearer ${token}` : ""
             }
         })
-        console.log(response.data)
+        console.log("users",response.data)
         setUsers(response.data)
     }
 
@@ -93,21 +93,40 @@ const UserProvider = ({children}) => {
             displaySnackbar("Hiba a felhasználó hozzáadásakor!",false)
         }
     }
-
+    function userStatusConverter(status) {
+        if (status === "User is currently offline") {
+            return "OFFLINE"
+        } else if (status === "User is currently online") {
+            return "ONLINE"
+        } else if (status === "ONLINE") {
+            return "User is currently online"
+        } else if (status === "OFFLINE") {
+            return "User is currently offline"
+        }
+    }
     async function changeUserStatus(id,changedStatus) {
         let changingUser = users.find((x)=>x.id == id)
-        if (changingUser.status === changedStatus) {
+        if (changingUser.status === userStatusConverter(changedStatus)) {
             displaySnackbar(`Már ${changedStatus} vagy!`,false)
         } else {
-            const response = await axios.patch(`/api/user/${id}`,{"key":"STATUS","value":changedStatus})
+            const response = await axios.patch(`/api/user/${id}`,{"key":"STATUS","value":changedStatus},{
+                headers: {
+                    'Authorization': token ? `Bearer ${token}` : ""
+                }
+            })
             if (response) {
                 let result = users.find((x)=>x.id === response.data.id)
                 result.status = response.data.status
                 setUsers([result,...users])
-                displaySnackbar(`Mostantól ${response.data.status} vagy!`,true)
+                displaySnackbar(`Mostantól ${userStatusConverter(response.data.status)} vagy!`,true)
             }
         }
     }
+    useEffect(()=>{
+        if (token) {
+            getUsers();
+        }
+    },[token])
     return <UserContext.Provider value={{users,getUsers,getOnlineUsers,getUsersLenght,generateUser,changeUserStatus,userLogin,userProfile,token,getToken}}>
         {children}
     </UserContext.Provider>

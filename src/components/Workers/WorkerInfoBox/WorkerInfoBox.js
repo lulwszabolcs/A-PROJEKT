@@ -52,7 +52,7 @@ import { SnackbarContext } from '../../../contexts/SnackbarProvider';
         const loadImages = async () => {
           const urls = {};
           for (const worker of workers) {
-            urls[worker.workerId] = await pickImageForWorker(worker);
+            urls[worker.workerId] = await pickImageForWorker(worker.workerId);
           }
           setImageUrls(urls);
         };

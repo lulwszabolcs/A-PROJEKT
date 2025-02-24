@@ -218,12 +218,12 @@ const handleChange = (text) =>{
           <Avatar style={{marginRight:'10px'}}/> Profil
         </MenuItem>
         <Divider />
-        <MenuItem onClick={()=>{handleClose();changeUserStatus(78,"User currently online")}}>
+        <MenuItem onClick={()=>{handleClose();changeUserStatus(1,"ONLINE")}}>
           <CircleIcon style={{marginRight:'1vw',color:'green'}} sx={{height:'18px'}}>
           </CircleIcon>
           Online
         </MenuItem>
-        <MenuItem onClick={()=>{handleClose();changeUserStatus(78,"User currently offline")}}>
+        <MenuItem onClick={()=>{handleClose();changeUserStatus(1,"OFFLINE")}}>
           <CircleIcon style={{marginRight:'1vw',color:'gray'}} sx={{height:'18px'}}>
           </CircleIcon>
           Offline

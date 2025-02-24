@@ -15,6 +15,7 @@ import { WorkerContext } from '../../../contexts/WorkerProvider';
 export default function ProfileCard() {
     let {userProfile} = useContext(UserContext)
     let {pickImageForWorker} = useContext(ImageContext)
+    let {SnackbarOpen,SnackbarMessage,closeSnackbar,SnackbarSuccess} = useContext(SnackbarContext)
     const [workerImageUrl,setWorkerImageUrl] = useState("");
     async function loadWorkerImage(worker) {
         setWorkerImageUrl(await pickImageForWorker(worker))
@@ -34,6 +35,7 @@ export default function ProfileCard() {
             <p className={styles.infotext}>{userProfile.email}</p>
              <p className={styles.infotext}>{userProfile.phoneNumber}</p>
          </div>
+        <SnackbarComponent snackbarOpen={SnackbarOpen} message={SnackbarMessage} close={closeSnackbar} success={SnackbarSuccess}/> 
             </>
     )
 }
