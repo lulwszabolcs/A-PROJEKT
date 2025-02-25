@@ -64,12 +64,18 @@
 .systemtextcontainer {
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* Balra igazítja a szöveget */
-    width: fit-content; /* Engedi, hogy a méret igazodjon a tartalomhoz */
-    max-width: 25vw; /* Megakadályozza, hogy túl széles legyen */
+    align-items: flex-start; 
+    width: fit-content; 
+    max-width: 25vw; 
     padding: 1rem;
     border-radius: 10px;
     background-color: #309ed9;
     color: white;
 }
 
+.transitionedMsgContainer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    height: 100%;
+}

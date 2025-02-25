@@ -1,3 +1,4 @@
+import styles from "./ErrorList.module.css"
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -15,7 +16,6 @@ import Modal from '@mui/material/Modal';
 import { useContext, useState } from 'react';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import './ErrorList.css';
 import Addproblem from '../AddProblem/Addproblem';
 import EditProblem from '../EditProblem/EditProblem';
 import Dialog from '@mui/material/Dialog';
@@ -66,15 +66,15 @@ export default function ErrorList() {
   };
   return (
     <>
-        <div className='table-container'>
-        <h1 className='error-primary-text'>Folyamatban lévő hibák</h1>
-        <div className='checkBoxErrors'>
+        <div className={styles.tablecontainer}>
+        <h1 className={styles.errorprimarytext}>Folyamatban lévő hibák</h1>
+        <div className={styles.checkBoxErrors}>
         <FormControlLabel control={<Checkbox checked={seeClosedProblems} onChange={handleCheckboxChange}/>} label="Megoldott problémák mutatása" style={{fontSize:10}}/>
         <FormControlLabel control={<Checkbox/>} checked={onlySeeClosedProblems} onChange={handleRoleCheckboxChange} label="Beosztáshoz tartozó problémák" style={{fontSize:10}}/>
         </div>
-        <TableContainer component={Paper} className='problemstable'>
+        <TableContainer component={Paper} className={styles.problemstable}>
         <Table>
-          <TableHead className='fixedtable'>
+          <TableHead className={styles.fixedtable}>
             <TableRow>
               <TableCell>Név</TableCell>
               <TableCell>Leírás</TableCell>
@@ -143,18 +143,18 @@ export default function ErrorList() {
           </TableBody>
         </Table>
       </TableContainer>
-      <div className='fabicon'>
+      <div className={styles.fabicon}>
         <Fab color="primary" aria-label="add" onClick={()=>setIsAddNewProblemOpen(true)}>
           <AddIcon />
         </Fab>
         </div>
-        <Modal open={IsaddNewProblemOpen} className='flexcenter'>
+        <Modal open={IsaddNewProblemOpen} className={styles.flexcenter}>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <Addproblem close={closeAddProblemModal} ></Addproblem>
           </LocalizationProvider>
         </Modal>
             </div>
-            <Modal open={IsEditModalOpen} className='flexcenter'>
+            <Modal open={IsEditModalOpen} className={styles.flexcenter}>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
           <EditProblem close={closeEditModal} problem={currentProb}></EditProblem>
           </LocalizationProvider>

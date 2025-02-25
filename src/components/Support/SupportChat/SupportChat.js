@@ -1,14 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styles from './SupportChat.module.css'
 import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material';
 import OpenAI from "openai";
-import axios from 'axios'
 import SendIcon from '@mui/icons-material/Send';
+
 const openai = new OpenAI({
     apiKey: "xai-0pqtoeMTuAzR9k9bS9fnZMQKtGqpwAjlHZZjGBGlbSoQ4JnnhgjFAHJ7QUKHfieb00J7KYOXrhns3rbw",dangerouslyAllowBrowser: true, 
     baseURL: "https://api.x.ai/v1",
   });
+
 export default function SupportChat() {
     const [input,setInput] = useState("")
     const [messages,setMessages] = useState([])
@@ -48,11 +49,9 @@ export default function SupportChat() {
         setInput(event.target.value);
     };
     
-    
     return (
         <div className={styles.flexbox}>
         <h1 className={styles.supportmaintext}>Ügyfélszolgálat</h1>
-
         <div className={styles.chatmaincontainer}>
             <div className={styles.messagecontainer}>
                 <div className={styles.systemtextcontainer}>
@@ -65,7 +64,7 @@ export default function SupportChat() {
                 ))}
             </div>
             {messages.length !== 0 ? (
-            <div style={{display:'flex',justifyContent:'flex-end',alignItems:'flex-end',height:'100%'}}>
+            <div className={styles.transitionedMsgContainer}>
                 <div className={styles.sendcontainer}>
                 <TextField
                     id="outlined-multiline-static"
@@ -103,7 +102,7 @@ export default function SupportChat() {
                 <Button onClick={handleSend}><SendIcon/></Button>
             </div>
             )}
-        </div>
+            </div>
         </div>
     )
 }

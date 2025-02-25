@@ -1,15 +1,13 @@
 import { useContext, useEffect, useState } from 'react'
 import styles from './VehicleList.module.css'
-import { VehicleContext, VehicleProvider } from '../../../contexts/VehicleProvider'
+import {VehicleContext} from '../../../contexts/VehicleProvider'
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
-import { InputLabel, MenuItem, Modal, Select, SnackbarContent } from '@mui/material';
-import { TypeContext, TypeProvider } from '../../../contexts/TypeProvider';
+import {MenuItem, Modal, Select} from '@mui/material';
+import {TypeContext} from '../../../contexts/TypeProvider';
 import ReportProblemIcon from '@mui/icons-material/ReportProblem';
-import Addproblem from '../../Errors/AddProblem/Addproblem';
 import VehicleModify from '../VehicleModify/VehicleModify';
 import AddVehicle from '../AddVehicle/AddVehicle';
-import axios from 'axios';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ReportIcon from '@mui/icons-material/Report';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
@@ -20,13 +18,10 @@ import LocalCarWashIcon from '@mui/icons-material/LocalCarWash';
 import LocalGasStationIcon from '@mui/icons-material/LocalGasStation';
 import SnackbarComponent from '../../Snackbar/SnackbarComponent'
 import { SnackbarContext } from '../../../contexts/SnackbarProvider';
-import { UserContext } from '../../../contexts/UserProvider';
 import { ImageContext } from '../../../contexts/ImageProvider';
 
 export default function VehicleList() {
-    let {token} = useContext(UserContext)
     let { vehicles } = useContext(VehicleContext)
-    let {getVehicles,setVehicles} = useContext(VehicleContext)
     let {pickImageForVehicle} = useContext(ImageContext)
     let {vehicleTypes,vehicleStatuses} = useContext(TypeContext)
     let {SnackbarOpen,SnackbarMessage,closeSnackbar,SnackbarSuccess} = useContext(SnackbarContext)
@@ -49,7 +44,7 @@ export default function VehicleList() {
     });
     function pickIcon(vehicle) {
         switch (vehicle.status) {
-            case "Jármű működőképes":
+            case "Működőképes":
                 return <p className={styles.vehiclestatus} style={{color:'green'}}>{vehicle.status}<CheckCircleIcon/></p>
             case "Karbantartás alatt":
                 return <p className={styles.vehiclestatus} style={{color:'gray'}}>{vehicle.status}<ReportIcon/></p>
@@ -83,7 +78,6 @@ export default function VehicleList() {
           loadImages();
         }
       }, [pickImageForVehicle]);
-
     
     return (
         <>

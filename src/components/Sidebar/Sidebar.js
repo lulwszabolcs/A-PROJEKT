@@ -177,7 +177,7 @@ const handleChange = (text) =>{
   ,<BadgeIcon/>,<DirectionsCarIcon/>,<ErrorIcon/>,<ChatIcon/>,<LogoutIcon/>];
   
   return (
-    <div classname="sidebarcontainer">
+    <div>
     <Menu
         anchorEl={anchorEl}
         id="account-menu"

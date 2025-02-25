@@ -8,7 +8,7 @@ export default function Workers() {
             <MiniDrawer></MiniDrawer>
             <WorkerProvider>
                 <ImageProvider>
-            <WorkerInfoBox/>
+                     <WorkerInfoBox/>
                 </ImageProvider>
             </WorkerProvider>
         </>

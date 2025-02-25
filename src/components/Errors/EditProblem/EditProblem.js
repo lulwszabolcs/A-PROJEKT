@@ -1,8 +1,8 @@
+import styles from "./EditProblem.module.css"
 import TextField from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import './EditProblem.css';
 import { useContext} from 'react';
 import {MenuItem,Select } from '@mui/material';
 import { useForm } from 'react-hook-form';
@@ -30,10 +30,10 @@ export default function EditProblem({close,problem}) {
         }
     }
     return (
-        <div className='editProblem-container'>
-            <h3 style={{textAlign:'center'}}>Probléma szerkesztése</h3>
+        <div className={styles.editProblemContainer}>
+            <h3 className={styles.modaltitle}>Probléma szerkesztése</h3>
             <form onSubmit={handleSubmit(onSubmit)}>
-            <FormControl fullWidth className='editError-form'>     
+            <FormControl fullWidth className={styles.editErrorForm}>     
                 <TextField defaultValue={problem.name} required name='name'  id="outlined-basic" label="Név" variant="outlined" {...register("name",{required:true})} />
                 <TextField defaultValue={problem.description} required name='description'  id="outlined-basic" label="Leírás" variant="outlined" {...register("description",{required:true})} />
                 <Select

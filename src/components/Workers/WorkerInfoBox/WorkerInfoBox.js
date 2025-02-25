@@ -1,26 +1,22 @@
   import * as React from 'react';
   import Box from '@mui/material/Box';
   import Card from '@mui/material/Card';
-  import CardActions from '@mui/material/CardActions';
   import CardContent from '@mui/material/CardContent';
   import Button from '@mui/material/Button';
   import Typography from '@mui/material/Typography';
   import InfoIcon from '@mui/icons-material/Info';
-  import InfoRoundedIcon from '@mui/icons-material/InfoRounded';
   import styles from './WorkerInfoBox.css'
   import WorkerDetails from './WorkerDetails/WorkerDetails';
-  import { InputLabel, MenuItem, Modal, Select, SnackbarContent, useColorScheme } from '@mui/material';
+  import { MenuItem, Modal, Select, SnackbarContent, useColorScheme } from '@mui/material';
   import { useState,useEffect, useContext} from 'react';
-  import axios from 'axios';
-  import { useFetcher } from 'react-router-dom';
   import { RoleProvider } from '../../../contexts/RoleProvider';
   import Fab from '@mui/material/Fab';
   import AddIcon from '@mui/icons-material/Add';
   import AddWorker from './AddWorker/AddWorker';
   import { WorkerContext } from '../../../contexts/WorkerProvider';
   import { ImageContext } from '../../../contexts/ImageProvider';
-import SnackbarComponent from "../../Snackbar/SnackbarComponent";
-import { SnackbarContext } from '../../../contexts/SnackbarProvider';
+  import SnackbarComponent from "../../Snackbar/SnackbarComponent";
+  import { SnackbarContext } from '../../../contexts/SnackbarProvider';
 
   export default function WorkerInfoBox() {
       let {images,getImages,pickImageForWorker} = useContext(ImageContext)

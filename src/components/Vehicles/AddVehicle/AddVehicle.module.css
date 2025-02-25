@@ -12,3 +12,7 @@
     display: flex;
     gap: 40px;
 }
+
+.addVehicleTitle {
+    text-align: center;
+}

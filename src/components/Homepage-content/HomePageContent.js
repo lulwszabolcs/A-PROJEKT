@@ -1,4 +1,4 @@
-import {getPopoverUtilityClass, Modal} from "@mui/material";
+import {Modal} from "@mui/material";
 import { Gauge, gaugeClasses } from '@mui/x-charts/Gauge';
 import { useCallback, useContext, useEffect, useState } from "react";
 import { UserContext } from "../../contexts/UserProvider";
@@ -11,7 +11,6 @@ import { NoteContext } from "../../contexts/NoteProvider";
 import DeleteIcon from '@mui/icons-material/Delete';
 import SnackbarComponent from "../Snackbar/SnackbarComponent";
 import { SnackbarContext } from "../../contexts/SnackbarProvider";
-import { BarChart } from '@mui/x-charts/BarChart';
 import axios from "axios";
 import WaterDropIcon from '@mui/icons-material/WaterDrop';
 import ThermostatIcon from '@mui/icons-material/Thermostat';
@@ -19,6 +18,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import AirIcon from '@mui/icons-material/Air';
 import Alert from '@mui/material/Alert';
 import AcUnitIcon from '@mui/icons-material/AcUnit';
+
 export default function HomePageContent() {
   let { getOnlineUsers, getUsersLenght, userProfile } = useContext(UserContext);
   let { getActiveVehicles, getInActiveVehicles } = useContext(VehicleContext);
@@ -160,7 +160,8 @@ export default function HomePageContent() {
           <AcUnitIcon sx={{color:'#4DA8DA'}}/>
           <p>{weatherData.snowfall} cm</p>
         </div>
-        </div>
+      </div>
+
       <div className={styles.flexbox}>
         <div className={styles.onlinechart}>
           <Gauge
@@ -175,6 +176,7 @@ export default function HomePageContent() {
           />
           <h3>Online felhasználók</h3>
         </div>
+
         <div className={styles.vehiclechart}>
           <PieChart
             series={[
@@ -220,11 +222,11 @@ export default function HomePageContent() {
               </div>
             );
           })}
-          <div
-            className={styles.stickynotes}
-            style={{ backgroundImage: `url('./images/sticky.png')`, cursor: 'pointer'}}
-            onClick={() => setAddStickyNotesOpen(true)}
-          >
+            <div
+              className={styles.stickynotes}
+              style={{ backgroundImage: `url('./images/sticky.png')`, cursor: 'pointer'}}
+              onClick={() => setAddStickyNotesOpen(true)}
+            >
             <AddIcon />
           </div>
         </div>

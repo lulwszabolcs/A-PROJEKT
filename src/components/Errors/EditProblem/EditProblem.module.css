@@ -1,4 +1,4 @@
-.editProblem-container {
+.editProblemContainer {
     background: white;
     padding: 20px;
     border-radius: 10px;
@@ -8,7 +8,11 @@
     margin-top: 25vh;
 }
 
-.editError-form {
+.editErrorForm {
     display: flex;
     gap: 40px;
+}
+
+.modaltitle {
+    text-align: center;
 }
