@@ -30,11 +30,16 @@ const TypeProvider = ({children}) => {
     }
     
     async function getProblemTypes() {
-        setProblemTypes((await axios.get("/problemtypes/list",{
-            headers: {
-                'Authorization': token ? `Bearer ${token}` : ""
-            }
-        }).data))
+        try {
+            const response = (await axios.get("/problemtypes/list",{
+                headers: {
+                    'Authorization': token ? `Bearer ${token}` : ""
+                }
+            }))
+            setProblemTypes([...response.data])
+        } catch (error) {
+            console.log(error)
+        } 
     }
 
     function getProblemTypeDescriptions() {
@@ -47,10 +52,11 @@ const TypeProvider = ({children}) => {
         if (token) {
             getVehicleTypes(token)
             getVehicleStatuses()
+            getProblemTypes()
         }
     },[token])
     return (
-        <TypeContext.Provider value={{vehicleTypes,vehicleStatuses,problemTypes,getProblemTypeDescriptions,problemTypeDescriptions,problemTypeSeries,setProblemTypeDescriptions,setProblemTypeSeries}}>
+        <TypeContext.Provider value={{vehicleTypes,vehicleStatuses,problemTypes,getProblemTypeDescriptions,problemTypeDescriptions,problemTypeSeries,setProblemTypeDescriptions}}>
             {children}
         </TypeContext.Provider>
     )

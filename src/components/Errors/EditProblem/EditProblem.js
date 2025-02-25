@@ -6,68 +6,60 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import Stack from '@mui/material/Stack';
 import axios from 'axios';
 import './EditProblem.css';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import ErrorList from '../ErrorList/ErrorList';
 import {MenuItem,Select } from '@mui/material';
+import { useForm } from 'react-hook-form';
+import { TypeContext } from '../../../contexts/TypeProvider';
+import { ProblemContext } from '../../../contexts/ProblemProvider';
 
-export default function EditProblem({close,problem,refreshProblems,displaySnackbar,types}) {
-    
-    function formatDate(date){
-        var d = new Date(date),
-        dformat = [d.getFullYear(),
-                   d.getMonth()+1,
-                   d.getDate()].join('-')+' '+
-                  [d.getHours(),
-                   d.getMinutes()].join(':');
-        return dformat
-    }
-    const [formData,setFormData] = useState({
-        name:problem.name,
-        description:problem.description,
-        datum:problem.date,
-        problemType:problem.problemType,
-        status:problem.status
-    })
-    const handleChange = (event) => {
-        const { name, value } = event.target;
-        setFormData((prevData) => ({ ...prevData, [name]: value,datum: formatDate(new Date)}));     
-        console.log(formData)
-    };
-    function editProblem() {
-        axios.put(`http://localhost:8080/api/problem/${problem.problemId}`,formData).then(()=>{
-            refreshProblems()
-            displaySnackbar("Hiba sikeresen módosítva!")
+export default function EditProblem({close,problem}) {
+    let {problemTypes} = useContext(TypeContext)
+    let {editSelectedProblem} = useContext(ProblemContext)
+    const {
+            register,
+            handleSubmit,
+            watch,
+            formState: { errors },
+          } = useForm()
+    const onSubmit = (data) => {
+        data.status = "Függőben"
+        data.datum = problem.datum
+        try {
+            editSelectedProblem(problem.problemId,data)
+        } catch (error) {
+            console.log(error)
+        } finally {
             close()
-        }).catch((error)=>{
-            alert(error.message);
-        })
+        }
     }
     return (
         <div className='editProblem-container'>
             <h3 style={{textAlign:'center'}}>Probléma szerkesztése</h3>
+            <form onSubmit={handleSubmit(onSubmit)}>
             <FormControl fullWidth className='editError-form'>     
-                <TextField onChange={handleChange} defaultValue={problem.name} name='name'  id="outlined-basic" label="Név" variant="outlined" />
-                <TextField onChange={handleChange} defaultValue={problem.description} name='description'  id="outlined-basic" label="Leírás" variant="outlined" />
-                
+                <TextField defaultValue={problem.name} required name='name'  id="outlined-basic" label="Név" variant="outlined" {...register("name",{required:true})} />
+                <TextField defaultValue={problem.description} required name='description'  id="outlined-basic" label="Leírás" variant="outlined" {...register("description",{required:true})} />
                 <Select
-    labelId="demo-simple-select"
-    id="demo-simple-select"
-    defaultValue={formData.problemType || ''} 
-    onChange={handleChange}
-    name='problemType'
->   
-    <MenuItem value="" disabled>Típus kiválasztása</MenuItem>
-    {types.map((type) => (
-        <MenuItem key={type.id} value={type.problemTypeName}>
-            {type.problemTypeDescription}
-        </MenuItem>
-    ))}
-</Select>
+                    labelId="demo-simple-select"
+                    id="demo-simple-select"
+                    defaultValue={problem.problemType || ''} 
+                    name='problemType'
+                    {...register("problemType",{required:true})}
+                    >
+                    <MenuItem value="" disabled>Típus kiválasztása</MenuItem>
+                    {problemTypes.map((type) => (
+                        <MenuItem key={type.id} value={type.problemTypeDescription}>
+                            {type.problemTypeDescription}
+                        </MenuItem>
+                    ))}
+                </Select>
                 <Stack direction="row" justifyContent={"space-between"}>
                         <Button variant="outlined" color="error" onClick={()=>{close()}}>Bezár</Button>
-                        <Button variant="contained" onClick={editProblem} >Mentés</Button>
+                        <Button variant="contained" type='submit' >Mentés</Button>
                 </Stack>
-            </FormControl>
+            </FormControl>  
+            </form>
         </div>
     )
 }

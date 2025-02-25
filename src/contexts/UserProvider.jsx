@@ -118,7 +118,7 @@ const UserProvider = ({children}) => {
     }
     useEffect(()=>{
         if (token) {
-            getUsers();
+            getUsers()
         }
     },[token])
     return <UserContext.Provider value={{users,getUsers,getOnlineUsers,getUsersLenght,generateUser,changeUserStatus,userLogin,userProfile,token,getToken}}>

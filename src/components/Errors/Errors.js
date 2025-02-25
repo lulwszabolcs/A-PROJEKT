@@ -21,15 +21,18 @@ import EditProblem from './EditProblem/EditProblem';
 import axios from 'axios'
 import ErrorList from './ErrorList/ErrorList';
 import { TypeProvider } from '../../contexts/TypeProvider';
+import { ProblemProvider } from '../../contexts/ProblemProvider';
 export default function Errors() {
 
 
     return (
         <>
         <MiniDrawer></MiniDrawer>
+        <ProblemProvider>
         <TypeProvider>
             <ErrorList></ErrorList>
         </TypeProvider>
+        </ProblemProvider>
             
         </>
     )
