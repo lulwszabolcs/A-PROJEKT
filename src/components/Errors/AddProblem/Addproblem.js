@@ -1,12 +1,9 @@
 import TextField from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
 import Button from '@mui/material/Button';
-import InputLabel from '@mui/material/InputLabel';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import Stack from '@mui/material/Stack';
-import axios from 'axios';
 import styles from './Addproblem.module.css';
-import { useContext, useEffect, useState } from 'react';
+import { useContext} from 'react';
 import {MenuItem,Select } from '@mui/material';
 import { useForm } from "react-hook-form"
 import { TypeContext } from '../../../contexts/TypeProvider';
@@ -14,7 +11,6 @@ import { ProblemContext } from '../../../contexts/ProblemProvider';
 export default function Addproblem({close}) {
     let {problemTypes} = useContext(TypeContext);
     let {addNewProblem} = useContext(ProblemContext)
-    
     const {
         register,
         handleSubmit,

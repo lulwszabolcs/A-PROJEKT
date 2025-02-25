@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 const UserContext = createContext();
 
 const UserProvider = ({children}) => {
+    let {displaySnackbar} = useContext(SnackbarContext)
     const [token,setToken] = useState()
     const [users,setUsers] = useState([])
     const [userProfile,setUserProfile] = useState({
@@ -15,7 +16,6 @@ const UserProvider = ({children}) => {
         role:"",
         workerId:""
     })
-    let {displaySnackbar} = useContext(SnackbarContext)
     async function userLogin(data) {
         try {
             const response = await axios.post(
@@ -39,15 +39,23 @@ const UserProvider = ({children}) => {
                 const token = response.headers.jwt_token
                 setToken(token)
                 console.log("JWT Token:", token);
-            } else {
-                console.log("No token found in headers");
             }
             return true;
         } catch (error) {
-            console.error("Hiba történt a bejelentkezésnél:", error.response?.data || error.message);
+            displaySnackbar("Hibás felhasználói adatok!",false)
         }
     }
-    
+
+    function logout() {
+        setToken(null)
+        setUserProfile({
+            name:"",
+            email:"",
+            phoneNumber:"",
+            role:"",
+            workerId:""
+        })
+    }
 
     async function getUsers() {
         const response = await axios.get('/api/user', {
@@ -69,9 +77,6 @@ const UserProvider = ({children}) => {
     }
     function getUsersLenght() {
         return users.length
-    }
-    function getUserProfile() {
-        return userProfile;
     }
     async function generateUser(userData,auth) {
         try {
@@ -121,7 +126,7 @@ const UserProvider = ({children}) => {
             getUsers()
         }
     },[token])
-    return <UserContext.Provider value={{users,getUsers,getOnlineUsers,getUsersLenght,generateUser,changeUserStatus,userLogin,userProfile,token,getToken}}>
+    return <UserContext.Provider value={{users,getUsers,getOnlineUsers,getUsersLenght,generateUser,changeUserStatus,userLogin,userProfile,token,getToken,logout}}>
         {children}
     </UserContext.Provider>
 }

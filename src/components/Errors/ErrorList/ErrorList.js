@@ -5,43 +5,41 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Button, SnackbarContent } from '@mui/material';
+import { Button} from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CreateIcon from '@mui/icons-material/Create';
 import AddIcon from '@mui/icons-material/Add';
 import CheckIcon from '@mui/icons-material/Check';
 import Fab from '@mui/material/Fab';
 import Modal from '@mui/material/Modal';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import axios from 'axios'
 import './ErrorList.css';
 import Addproblem from '../AddProblem/Addproblem';
 import EditProblem from '../EditProblem/EditProblem';
-
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import { TypeContext, TypeProvider } from '../../../contexts/TypeProvider';
 import { SnackbarContext } from '../../../contexts/SnackbarProvider';
 import SnackbarComponent from '../../Snackbar/SnackbarComponent';
 import { ProblemContext } from '../../../contexts/ProblemProvider';
 import { UserContext } from '../../../contexts/UserProvider';
 
 export default function ErrorList() {
-  let {SnackbarOpen,displaySnackbar,closeSnackbar,SnackbarMessage} = useContext(SnackbarContext)
+  let {SnackbarOpen,closeSnackbar,SnackbarMessage} = useContext(SnackbarContext)
   let {problems,deleteSelectedProblem,closeSelectedProblem,problemColorPicker} = useContext(ProblemContext)
   let {userProfile} = useContext(UserContext)
+
   const [IsaddNewProblemOpen,setIsAddNewProblemOpen] = useState(false);
   const [IsEditModalOpen,setIsEditModalIOpen] = useState(false);
   const [currentProb,setCurrentProb] = useState([]);
-
   const [seeClosedProblems,setSeeClosedProblems] = useState(false);
   const [onlySeeClosedProblems,setOnlySeeClosedProblems] = useState(false);
   const [openDialog,setOpenDialog] = useState(false)
+
   const openDialogBox = () =>{
       setOpenDialog(true)
   }
@@ -59,9 +57,6 @@ export default function ErrorList() {
     setIsEditModalIOpen(false)
   }
   
-  function showClosedProblenms() {
-    setSeeClosedProblems(true)
-  }
   const handleCheckboxChange = (event) => {
     setSeeClosedProblems(event.target.checked);
   };
@@ -155,15 +150,13 @@ export default function ErrorList() {
         </div>
         <Modal open={IsaddNewProblemOpen} className='flexcenter'>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <TypeProvider>
-          <Addproblem close={closeAddProblemModal} displaySnackbar={displaySnackbar}></Addproblem>
-          </TypeProvider>
+          <Addproblem close={closeAddProblemModal} ></Addproblem>
           </LocalizationProvider>
         </Modal>
             </div>
             <Modal open={IsEditModalOpen} className='flexcenter'>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <EditProblem close={closeEditModal} problem={currentProb} displaySnackbar={displaySnackbar}></EditProblem>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <EditProblem close={closeEditModal} problem={currentProb}></EditProblem>
           </LocalizationProvider>
         </Modal>
         <Dialog

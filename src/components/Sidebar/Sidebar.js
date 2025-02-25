@@ -18,7 +18,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import HomeIcon from '@mui/icons-material/Home';
-import { AccountBox, Home } from '@mui/icons-material';
+import { AccountBox, Home, Logout } from '@mui/icons-material';
 import BadgeIcon from '@mui/icons-material/Badge';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 import ErrorIcon from '@mui/icons-material/Error';
@@ -112,7 +112,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function MiniDrawer() {
-  let {changeUserStatus} = useContext(UserContext)
+  let {changeUserStatus,logout} = useContext(UserContext)
   let {SnackbarOpen,closeSnackbar,SnackbarMessage} = useContext(SnackbarContext)
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -154,7 +154,8 @@ const handleChange = (text) =>{
             navigate('/support')  
             break;
     case "Kijelentkezés":
-      navigate('/login')  
+      logout()
+      navigate("/login")
       break;
     default:
       break;

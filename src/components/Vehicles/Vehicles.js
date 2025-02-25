@@ -10,7 +10,6 @@ export default function Vehicles() {
     return (
         // profile tab: letoltes gomb megcsinalasa
         // chat: ne legyen buta, tudja folytatni a beszelgetest
-        // logout: nullazza a tokent, user profilet.    
         // reszponzivitas, atiras vite-re?
         <>
         <MiniDrawer></MiniDrawer>
