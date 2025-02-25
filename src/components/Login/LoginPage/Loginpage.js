@@ -21,16 +21,19 @@ export default function Loginpage() {
         watch,
         formState: { errors },
       } = useForm()
-    const onSubmit = (data) => {
-        if (userLogin(data)) {
-            displaySnackbar("Sikeres bejelentkezés!",true)
-            setTimeout(()=>{
-                navigate('/errors')
-            },2000)
+      const onSubmit = async (data) => {
+        const isLoggedIn = await userLogin(data);
+    
+        if (isLoggedIn) {
+            displaySnackbar("Sikeres bejelentkezés!", true);
+            setTimeout(() => {
+                navigate('/home');
+            }, 1000);
         } else {
-            displaySnackbar("Sikertelen bejelentkezés!",false)
+            displaySnackbar("Sikertelen bejelentkezés!", false);
         }
-    }
+    };
+    
     
     return (
         <div className={styles.logincontainer}>

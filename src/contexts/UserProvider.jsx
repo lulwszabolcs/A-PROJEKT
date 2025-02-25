@@ -116,7 +116,7 @@ const UserProvider = ({children}) => {
             if (response) {
                 let result = users.find((x)=>x.id === response.data.id)
                 result.status = response.data.status
-                setUsers([result,...users])
+                setUsers([...users])
                 displaySnackbar(`Mostantól ${userStatusConverter(response.data.status)} vagy!`,true)
             }
         }
