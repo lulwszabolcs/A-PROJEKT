@@ -1,0 +1,54 @@
+.tablecontainer {
+    margin-top: 100px;
+    margin-bottom: 30px;
+}
+
+.errorprimarytext {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.fabicon {
+    position: fixed;
+    right: 3vw;
+    bottom: 3vh;
+}
+.flexCenter{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.checkBoxErrors {
+    margin-left: 15vw;
+    margin-bottom: 3vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.fixedtable {
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 1000;
+}
+.problemstable {
+    min-width: 100px;
+    max-width: 70vw;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    box-shadow: 5px 5px 5px 5px rgba(173, 216, 230, 0.616);
+    max-height: 70vh;
+    overflow: auto;
+}
+@media (max-width: 320px) {
+    .errorprimarytext {
+        margin-left: 20vw;
+    }
+    .checkBoxErrors {
+        margin-left: 20vw;
+    }
+    .problemstable {
+        margin-left: 20vw;
+    }
+}

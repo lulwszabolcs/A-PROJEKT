@@ -1,0 +1,26 @@
+.modalworker {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10vh;
+}
+
+.workerform {
+    display: flex;
+    gap: 25px;
+}
+.flexCenter{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttons {
+    justify-content: space-between;
+}
+.detailstitle {
+    text-align: center;
+}

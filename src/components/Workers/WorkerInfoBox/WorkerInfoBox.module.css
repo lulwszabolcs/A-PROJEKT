@@ -1,0 +1,54 @@
+.infobtn {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+img {
+    width: 150;
+    height: 150;
+    border-radius: 100;
+}
+.flexCenter{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.modalworker {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10vh;
+}
+
+.cardcontainer {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.workermaintext {
+    text-align: center;
+    margin-top: 15vh;
+    margin-bottom: 5vh;
+}
+.flexbox {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.addicon {
+    position: fixed;
+    bottom: 3vh;
+    right: 3vw;
+}
+
+.filtercontainer {
+    margin-left: 10vw;
+    margin-bottom: 10vh;
+}

@@ -1,0 +1,142 @@
+.welcometext {
+    text-align: center;
+    margin-top: 15vh;
+    margin-bottom: 5vh;
+}
+
+.mainelements {
+    margin-left: 10vw;
+}
+
+.onlinechart {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: fit-content;
+    padding: 15px;
+    box-shadow: 5px 5px 5px 5px rgba(173, 216, 230, 0.616);
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+}
+.weathercontainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    width: fit-content;
+    min-height: fit-content;
+    margin-left: 30%;
+    box-shadow: 5px 5px 5px 5px rgba(173, 216, 230, 0.616);
+    border-radius: 10px;
+    padding: 15px;
+}
+.tempcontainer {
+    color: #095fb0;
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    gap: 1vw;
+    min-width: fit-content;
+}
+.vehiclechart {
+    display: flex;
+    flex-direction: column;
+}
+
+.flexbox {
+    display: flex;
+    flex-direction: row;
+    gap: 10vw;
+    margin-top: 10vh;
+    margin-left: 10vw;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 5vh;
+    max-width: 80vw;
+}
+
+.piecharttext {
+    margin-right: 3vw;
+}
+
+.stickynotes {
+    position: relative; 
+    background-size:cover;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;
+    padding: 10px;
+    text-align: justify;
+    flex-wrap: wrap;
+}
+
+.stickynotescontainer { 
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.delete {
+    position: absolute;
+    top: 5px; 
+    right: 5px;
+    cursor: pointer; 
+}
+
+body {
+    user-select: none;
+}
+
+.alertcontainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5vh;
+    margin-left: 5vw;
+}
+
+.vehiclechart {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: fit-content;
+    padding: 15px;
+    box-shadow: 5px 5px 5px 5px rgba(173, 216, 230, 0.616);
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (max-width: 320px) {
+    .welcometext {
+        margin-left: 70vw;
+    }
+    .weathercontainer {
+        margin-left: 60vw;
+        width: 70vw;
+        flex-direction: column;
+    }
+    .alertcontainer {
+        margin-left: 70vw;
+        min-width: 50vw;
+    }
+    .onlinechart {
+        margin-left: 90vw;
+    }
+    .vehiclechart {
+        margin-left: 100vw;
+        max-width: fit-content;
+    }
+    .stickynotescontainer {
+        margin-left: 90vw;
+    }
+
+}

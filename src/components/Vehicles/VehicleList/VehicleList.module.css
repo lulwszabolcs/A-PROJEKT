@@ -1,0 +1,74 @@
+.vehicleTitle {
+    text-align: center;
+    margin-top: 15vh;
+    margin-bottom: 5vh;
+}
+
+.vehicleCard {
+    border: 1px solid gray;
+    border-radius: 5px;
+    width: 40vw;
+    min-height: 20vh;
+    padding-left: 15px;
+    padding-bottom: 15px;
+    display: flex;
+    flex-wrap: wrap-reverse;
+    flex-direction: row;
+    gap: 40px;
+    background:none;
+    justify-content: space-between;
+    box-shadow: 5px 5px 5px 5px rgba(173, 216, 230, 0.616);
+}
+
+.flexbox {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin-left: 10vh;
+    flex-wrap: wrap;
+    margin-bottom: 5vh;
+}
+.vehicleInfoContainer {
+    display: flex;
+    flex-direction: column;
+    column-gap: 0px;
+}
+
+p {
+    line-height: 0;
+    font-size: 13px;
+}
+
+.vehicleImage {
+    height: 150px;
+    width: 150px;
+    margin-top: 5vh;
+    margin-right: 3vw;
+    border-radius: 10px;
+}
+
+.addicon {
+    position: fixed;
+    bottom: 3vh;
+    right: 3vw;
+}
+
+.filtervehicles {
+    margin-bottom: 5vh;
+    display: flex;
+    gap: 4vw;
+    justify-content: center;
+    align-items: center;
+}
+
+.reporticon {
+    cursor: pointer;
+    margin-top: 2vh;
+}
+.vehiclestatus {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}

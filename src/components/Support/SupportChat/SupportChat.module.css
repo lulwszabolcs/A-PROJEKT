@@ -1,0 +1,81 @@
+.chatmaincontainer {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction:column;
+    width: 60vw;
+    min-width: fit-content;
+    height: 60vh;
+    border-radius: 10px;
+    justify-content: space-between;
+    padding: 2rem;
+    box-shadow: 5px 5px 5px 5px rgba(173, 216, 230, 0.616);
+    gap: 30px;
+    margin-top: 5vh;
+}
+
+.supportmaintext {
+    margin-top: 15vh;
+    margin-bottom: 3vh;
+}
+
+.chatinput {
+    margin-top: auto;
+    width: 80%;
+}
+
+.flexbox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5vh;
+}
+
+.sendcontainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1vw;
+}
+
+.messagecontainer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow: auto;
+    overflow-x: hidden;
+    padding-right: 20px;
+}
+
+.usertextcontainer {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-end;
+    width: fit-content;
+    max-width: 25vw;
+    justify-content: end;
+    padding: 1rem;
+    border-radius: 10px;
+    background-color: #7d7675;
+    color: white;
+}
+
+.systemtextcontainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; 
+    width: fit-content; 
+    max-width: 25vw; 
+    padding: 1rem;
+    border-radius: 10px;
+    background-color: #309ed9;
+    color: white;
+}
+
+.transitionedMsgContainer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    height: 100%;
+}
