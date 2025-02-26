@@ -1,32 +1,46 @@
 import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
-import { UserContext, UserProvider} from "./UserProvider";
+import { UserContext} from "./UserProvider";
+import { SnackbarContext } from "./SnackbarProvider";
+
 const TypeContext = createContext();
 
 const TypeProvider = ({children}) => {
+
     let {token} = useContext(UserContext);
+    let {displaySnackbar} = useContext(SnackbarContext)
+
     const [vehicleTypes,setVehicleTypes] = useState([]);
     const [vehicleStatuses,setVehicleStatuses] = useState([]);
     const [problemTypes,setProblemTypes] = useState([]);
     const [problemTypeDescriptions,setProblemTypeDescriptions] = useState([]);
-    const [problemTypeSeries,setProblemTypeSeries] = useState([]);
-    async function getVehicleTypes(auth) {
-        if (!auth) {
-            return;
-          }
-        const response = await axios.get("/vehicletypes/list",{
-            headers: {
-                'Authorization': `Bearer ${auth}`
-            }
-        }) 
-        setVehicleTypes([...response.data])
+
+    async function getVehicleTypes() {
+        try {
+            if (!token) {
+                return;
+              }
+            const response = await axios.get("/vehicletypes/list",{
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            }) 
+            setVehicleTypes([...response.data])
+            } catch (error) {
+            displaySnackbar("Hiba a jármű típusok lekérdezéskor!",false)
         }
+    }
+        
     async function getVehicleStatuses() {
-        setVehicleStatuses(((await axios.get("/vehiclestatuses/list",{
-            headers: {
-                'Authorization': token ? `Bearer ${token}` : ""
-            }
-        })).data))
+        try {
+            setVehicleStatuses(((await axios.get("/vehiclestatuses/list",{
+                headers: {
+                    'Authorization': token ? `Bearer ${token}` : ""
+                }
+            })).data))
+        } catch (error) {
+            displaySnackbar("Hiba a jármű állapotok lekérdezésekor!",false)
+        }
     }
     
     async function getProblemTypes() {
@@ -38,7 +52,7 @@ const TypeProvider = ({children}) => {
             }))
             setProblemTypes([...response.data])
         } catch (error) {
-            console.log(error)
+            displaySnackbar("Hiba a probléma típusok lekérdezésekor!",false)
         } 
     }
 
@@ -50,13 +64,13 @@ const TypeProvider = ({children}) => {
     
     useEffect(()=>{
         if (token) {
-            getVehicleTypes(token)
+            getVehicleTypes()
             getVehicleStatuses()
             getProblemTypes()
         }
     },[token])
     return (
-        <TypeContext.Provider value={{vehicleTypes,vehicleStatuses,problemTypes,getProblemTypeDescriptions,problemTypeDescriptions,problemTypeSeries,setProblemTypeDescriptions}}>
+        <TypeContext.Provider value={{vehicleTypes,vehicleStatuses,problemTypes,getProblemTypeDescriptions,problemTypeDescriptions,setProblemTypeDescriptions}}>
             {children}
         </TypeContext.Provider>
     )

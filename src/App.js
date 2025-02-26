@@ -14,6 +14,7 @@ import Login from './components/Login/Login';
 import { VehicleProvider } from './contexts/VehicleProvider';
 import { useContext } from 'react';
 import { ImageProvider } from './contexts/ImageProvider';
+import { WorkerProvider } from './contexts/WorkerProvider';
 
 // Védett útvonal komponens
 function ProtectedRoute({ children }) {

@@ -7,6 +7,12 @@ export default function Vehicles() {
         // profile tab: letoltes gomb megcsinalasa
         // chat: ne legyen buta, tudja folytatni a beszelgetest
         // reszponzivitas, atiras vite-re?
+        // tesztek irasa
+        // add-edit-torol lekorlatozasa
+
+        // holnap : code szepites befejezes, providerekben mindenhol try catch, remove felesleges dolgok, catch agban snackbarok
+        //          chat ne legyen buta
+        //          vite elkezdes
         <>
         <MiniDrawer></MiniDrawer>
             <SnackbarProvider>

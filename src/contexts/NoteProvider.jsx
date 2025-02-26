@@ -1,21 +1,29 @@
 import { createContext, useContext, useEffect, useState } from "react"
 import axios from 'axios'
-import { convertFieldResponseIntoMuiTextFieldProps } from "@mui/x-date-pickers/internals"
 import { SnackbarContext } from "./SnackbarProvider"
 import { UserContext } from "./UserProvider"
+
 const NoteContext = createContext()
+
 const NoteProvider = ({children}) => {
     let {displaySnackbar} = useContext(SnackbarContext)
     let {token} = useContext(UserContext)
+
     const [notes,setNotes] = useState([])
+
     async function getNotes() {
-        const response = await axios.get("/notes/list",{
-            headers: {
-                'Authorization': token ? `Bearer ${token}` : ""
-            }
-        })
-        setNotes(response.data)
+        try {
+            const response = await axios.get("/notes/list",{
+                headers: {
+                    'Authorization': token ? `Bearer ${token}` : ""
+                }
+            })
+            setNotes(response.data)
+        } catch (error) {
+            displaySnackbar("Hiba a jegyzetek lekérdezésekor!",false)
+        }   
     }
+
     async function addNote(data) {
         try {
             const response  = await axios.post("/notes",data,{
@@ -26,7 +34,7 @@ const NoteProvider = ({children}) => {
             setNotes([response.data,...notes])
             displaySnackbar("Jegyzet hozzáadva!",true)
         } catch (error) {
-            displaySnackbar("Hiba történet a jegyzet hozzáadásakor!",false)
+            displaySnackbar("Hiba a jegyzet hozzáadásakor!",false)
         }   
     }
     async function deleteNote(id) {
@@ -36,19 +44,20 @@ const NoteProvider = ({children}) => {
                     'Authorization': token ? `Bearer ${token}` : ""
                 }
             })).data
-        if (response) {
-            let modified = notes.filter((x)=>x.id !== response.id)
-            setNotes(modified)
-            displaySnackbar("Jegyzet törölve!",true)
-        }
+            if (response) {
+                let modified = notes.filter((x)=>x.id !== response.id)
+                setNotes(modified)
+                displaySnackbar("Jegyzet törölve!",true)
+            }
         } catch (error) {
             displaySnackbar("Hiba történet a jegyzet törlésekor!",false)
-        }
-        
+        }   
     }
+
     useEffect(()=>{
         getNotes();
     },[])
+    
     return <NoteContext.Provider value={{getNotes,addNote,notes,deleteNote}}>
         {children}
     </NoteContext.Provider>

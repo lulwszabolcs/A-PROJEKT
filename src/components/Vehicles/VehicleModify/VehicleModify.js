@@ -11,8 +11,7 @@ import { UserContext } from '../../../contexts/UserProvider';
 
 export default function VehicleModify({close}) {
     let {vehicleStatuses} = useContext(TypeContext);
-    let {vehicles,modifyVehicle,getVehicles} = useContext(VehicleContext)
-    let {token} = useContext(UserContext)
+    let {vehicles,modifyVehicle} = useContext(VehicleContext)
     const {
         register,
         handleSubmit,
@@ -22,7 +21,7 @@ export default function VehicleModify({close}) {
 
       const onSubmit = async (data) => {
         console.log(data)
-        await modifyVehicle(data.id, data.value,token);
+        await modifyVehicle(data.id, data.value);
         close();
       };
     return (

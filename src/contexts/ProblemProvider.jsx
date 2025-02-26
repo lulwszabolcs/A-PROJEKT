@@ -6,9 +6,11 @@ import { SnackbarContext } from "./SnackbarProvider";
 const ProblemContext = createContext()
 
 const ProblemProvider = ({children}) => {
+
     let {token} = useContext(UserContext)
     let {displaySnackbar} = useContext(SnackbarContext)
     const [problems,setProblems] = useState([])
+
     async function getProblems() {
         try {
             const response = await axios.get("/api/problem",{
@@ -18,7 +20,7 @@ const ProblemProvider = ({children}) => {
             })
             setProblems([...response.data])
         } catch (error) {
-            console.log(error)
+            displaySnackbar("Hiba a problémák lekérdezésekor!",false)
         }
     }
 
@@ -33,7 +35,7 @@ const ProblemProvider = ({children}) => {
             setProblems(deleted)
             displaySnackbar("Hiba sikeresen törölve!",true)
         } catch (error) {
-            console.log(error)
+            displaySnackbar("Hiba a probléma törlésekor!",false)
         } 
     }
     async function closeSelectedProblem(id) {
@@ -51,7 +53,7 @@ const ProblemProvider = ({children}) => {
             setProblems([...problems])
             displaySnackbar("Hiba sikeresen lezárva!",true)
         } catch (error) {
-            console.log(error)
+            displaySnackbar("Hiba a probléma lezárásakor!",false)
         }
     }
 
@@ -67,7 +69,7 @@ const ProblemProvider = ({children}) => {
             setProblems([...problems])
             displaySnackbar("Hiba sikeresen szerkesztve!",true)
         } catch (error) {
-            console.log(error)
+            displaySnackbar("Hiba a probléma szerkesztésekor!",false)
         } finally {
             getProblems()
         }
@@ -81,7 +83,7 @@ const ProblemProvider = ({children}) => {
             })
             setProblems([response.data,...problems])
         } catch (error) {
-            console.log(error)
+            displaySnackbar("Hiba a probléma hozzáadásakor!",false)
         } finally {
             getProblems()
         }
@@ -154,11 +156,13 @@ const ProblemProvider = ({children}) => {
           }
           return color;
       }
+
     useEffect(()=>{
         if (token) {
             getProblems()
         }
     },[token])
+    
     return <ProblemContext.Provider value={{problems,deleteSelectedProblem,closeSelectedProblem,problemColorPicker,editSelectedProblem,addNewProblem}}>
         {children}
     </ProblemContext.Provider>

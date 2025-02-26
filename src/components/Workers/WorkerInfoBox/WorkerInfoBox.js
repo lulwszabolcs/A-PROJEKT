@@ -5,9 +5,9 @@
   import Button from '@mui/material/Button';
   import Typography from '@mui/material/Typography';
   import InfoIcon from '@mui/icons-material/Info';
-  import styles from './WorkerInfoBox.css'
+  import styles from "./WorkerInfoBox.module.css"
   import WorkerDetails from './WorkerDetails/WorkerDetails';
-  import { MenuItem, Modal, Select, SnackbarContent, useColorScheme } from '@mui/material';
+  import { MenuItem, Modal, Select } from '@mui/material';
   import { useState,useEffect, useContext} from 'react';
   import { RoleProvider } from '../../../contexts/RoleProvider';
   import Fab from '@mui/material/Fab';
@@ -19,28 +19,32 @@
   import { SnackbarContext } from '../../../contexts/SnackbarProvider';
 
   export default function WorkerInfoBox() {
-      let {images,getImages,pickImageForWorker} = useContext(ImageContext)
+      let {getImages,pickImageForWorker} = useContext(ImageContext)
+      let {workers,getWorkers} = useContext(WorkerContext)
+      let {SnackbarOpen,closeSnackbar,SnackbarMessage,SnackbarSuccess} = useContext(SnackbarContext)
+
       const [openWorkerDetails,setOpenWorkerDetails] = useState(false)
       const [openAddWorker,setOpenAddWorker] = useState(false)
       const [selectedRole,setSelectedRole] = useState()
       const [selectedWorker,setSelectedWorker] = useState()
-      let {workers,getWorkers} = useContext(WorkerContext)
-      let {SnackbarOpen,closeSnackbar,SnackbarMessage,SnackbarSuccess} = useContext(SnackbarContext)
       const [imageUrls, setImageUrls] = useState({});
+
       function closeWorkerDetails() {
           setOpenWorkerDetails(false)
       }
-    const handleChange = (event) => {
+      const handleChange = (event) => {
         setSelectedRole(event.target.value);
         console.log(selectedRole);
       }
       const closeAddWorker = () => {
         setOpenAddWorker(false)
       }
+
     useEffect(()=>{
       getWorkers()
       getImages()
     },[])
+
     const filteredWorkers = selectedRole && selectedRole != "all"
       ? workers.filter((worker) => worker.title === selectedRole)
       : workers;
@@ -57,68 +61,68 @@
           loadImages();
         }
       }, [workers,pickImageForWorker]);
+
     return (
       <>
-      <h1 className='worker-main-text'>Dolgozók kezelése</h1>
-      <div style={{marginLeft:'10vw',marginBottom:'10vh'}}>
-      <Select style={{width:'20vw'}}
-      labelId="demo-simple-select"
-      id="demo-simple-select"
-      onChange={handleChange}
-      defaultValue={"all"}
-    > 
-    <MenuItem value={"all"}>
-        Minden alkalmazott
-      </MenuItem>
-      {[...new Set(workers.map((worker) => worker.title))].map((uniqueTitle) => (
-      <MenuItem key={uniqueTitle} value={uniqueTitle}>
-        {uniqueTitle}
-      </MenuItem>
-    ))}
-    </Select>
+      <h1 className={styles.workermaintext}>Dolgozók kezelése</h1>
+      <div className={styles.filtercontainer}>
+      <Select 
+          sx={{width:'20vw'}}
+          labelId="demo-simple-select"
+          id="demo-simple-select"
+          onChange={handleChange}
+          defaultValue={"all"}
+      > 
+          <MenuItem value={"all"}>
+            Minden alkalmazott
+          </MenuItem>
+          {[...new Set(workers.map((worker) => worker.title))].map((uniqueTitle) => (
+          <MenuItem key={uniqueTitle} value={uniqueTitle}>
+            {uniqueTitle}
+          </MenuItem>
+         ))}
+      </Select>
       </div>
-      <Box 
-      sx={{
-      marginLeft: '10vw',
-      marginBottom: '5vh',
-      textAlign: 'center',
-      borderRadius: 1,
-      display: 'flex',
-      flexDirection: 'row',
-      flexWrap: 'wrap',
-      gap: '40px'
-    }}>
-        {filteredWorkers.map((worker)=>( 
-          <Card variant="outlined" style={{paddingTop:10,position:'relative',boxShadow:'5px 5px 5px 5px rgba(173, 216, 230, 0.616)',width:'15rem'}}>
-          <CardContent>
-          <Button style={{position:'absolute',top:0,right:0}} onClick={()=>{setOpenWorkerDetails(true);setSelectedWorker(worker)}}><InfoIcon></InfoIcon></Button>
-          <img src={imageUrls[worker.workerId]} style={{width:150, height:150, borderRadius:100}}></img>
-          <Typography variant="h6" component="div">
-            {worker.name}
-          </Typography>
-          <Typography sx={{color: 'text.secondary', marginBottom:1}}>{worker.title}</Typography>
-        </CardContent>
-          </Card>
-        ))}  
-        </Box>
-      <Modal open={openWorkerDetails} className='flexcenter'>
-        <RoleProvider>
-        <WorkerDetails close={closeWorkerDetails} worker={selectedWorker} ></WorkerDetails>
-        </RoleProvider>
-      </Modal>
-      <Modal open={openAddWorker} className='flexcenter'>
-        <RoleProvider>
-        <AddWorker close={closeAddWorker}></AddWorker>
-        </RoleProvider>
-      </Modal>
-      <div className='addicon'>
-      <Fab color="primary" aria-label="add" onClick={()=>setOpenAddWorker(true)}>
-          <AddIcon/>
-      </Fab>
-
-      </div>
+            <Box 
+              sx={{
+              marginLeft: '10vw',
+              marginBottom: '5vh',
+              textAlign: 'center',
+              borderRadius: 1,
+              display: 'flex',
+              flexDirection: 'row',
+              flexWrap: 'wrap',
+              gap: '40px'
+            }}>
+              {filteredWorkers.map((worker)=>( 
+                <Card variant="outlined" style={{paddingTop:10,position:'relative',boxShadow:'5px 5px 5px 5px rgba(173, 216, 230, 0.616)',width:'15rem'}}>
+                <CardContent>
+                <Button style={{position:'absolute',top:0,right:0}} onClick={()=>{setOpenWorkerDetails(true);setSelectedWorker(worker)}}><InfoIcon></InfoIcon></Button>
+                <img src={imageUrls[worker.workerId]} style={{width:150, height:150, borderRadius:100}}></img>
+                <Typography variant="h6" component="div">
+                  {worker.name}
+                </Typography>
+                <Typography sx={{color: 'text.secondary', marginBottom:1}}>{worker.title}</Typography>
+              </CardContent>
+                </Card>
+              ))}  
+          </Box>
+          <Modal open={openWorkerDetails} className={styles.flexcenter}>
+            <RoleProvider>
+            <WorkerDetails close={closeWorkerDetails} worker={selectedWorker} ></WorkerDetails>
+            </RoleProvider>
+          </Modal>
+          <Modal open={openAddWorker} className={styles.flexcenter}>
+            <RoleProvider>
+            <AddWorker close={closeAddWorker}></AddWorker>
+            </RoleProvider>
+          </Modal>
+          <div className={styles.addicon}>
+          <Fab color="primary" aria-label="add" onClick={()=>setOpenAddWorker(true)}>
+              <AddIcon/>
+          </Fab>
+          </div>
         <SnackbarComponent snackbarOpen={SnackbarOpen} message={SnackbarMessage} close={closeSnackbar} success={SnackbarSuccess}/>
-      
       </>
     );
   }

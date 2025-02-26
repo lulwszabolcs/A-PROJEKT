@@ -2,11 +2,33 @@ import { createContext, useContext, useEffect, useState } from "react"
 import axios from 'axios'
 import { UserContext } from "./UserProvider"
 import { VehicleContext } from "./VehicleProvider"
+import { SnackbarContext } from "./SnackbarProvider"
+import { FlashlightOffRounded } from "@mui/icons-material"
+
 const ImageContext = createContext()
+
 const ImageProvider = ({children})=>{
     let [images,setImages] = useState([])
     let {token} = useContext(UserContext)
     let {convertType} = useContext(VehicleContext)
+    let {displaySnackbar} = useContext(SnackbarContext)
+
+    async function uploadImage(file,imageSave) {
+      try {
+        const formData = new FormData();
+        formData.append("file", file); 
+        formData.append("imageSave", JSON.stringify(imageSave)); 
+        const response = await axios.post("/images/upload", formData, {
+          headers: {
+            'Authorization': token ? `Bearer ${token}` : "",
+            "Content-Type": "multipart/form-data",
+          },
+        });      
+      } catch (error) {
+        displaySnackbar("Hiba a kép feltöltése közben!",FlashlightOffRounded)
+      }
+    }
+
     async function pickImageForVehicle(type) {
         try {
           const response = await axios.get(
@@ -21,7 +43,7 @@ const ImageProvider = ({children})=>{
           const imageUrl = URL.createObjectURL(response.data); 
           return imageUrl;
         } catch (error) {
-          console.error("Hiba a kép lekérésekor:", error);
+          displaySnackbar("Hiba a kép lekérésekor!",false)
         }
     }
     async function pickImageForWorker(workerId) {
@@ -38,17 +60,21 @@ const ImageProvider = ({children})=>{
         const imageUrl = URL.createObjectURL(response.data); 
         return imageUrl;
       } catch (error) {
-        console.error("Hiba a kép lekérésekor:", error);
+        displaySnackbar("Hiba a kép lekérésekor!",false)
       }
     }
     async function getImages() {
+      try {
         setImages(((await axios.get("/images")).data))
+      } catch (error) {
+        displaySnackbar("Hiba a képek lekérésekor!",false)
+      }
     }
     useEffect(()=>{
         getImages()
     },[])
 
-    return <ImageContext.Provider value={{images,getImages,setImages,pickImageForVehicle,pickImageForWorker}}>
+    return <ImageContext.Provider value={{images,getImages,setImages,pickImageForVehicle,pickImageForWorker,uploadImage}}>
         {children}
     </ImageContext.Provider>
 }

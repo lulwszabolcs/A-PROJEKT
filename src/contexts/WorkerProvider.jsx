@@ -7,32 +7,57 @@ const WorkerProvider = ({children})=>{
     let {token} = useContext(UserContext)
     let [workers,setWorkers] = useState([])
     let {displaySnackbar} = useContext(SnackbarContext)
-    console.log("token a workerben",token)
+
     async function getWorkers() {
-        const respone = await axios.get("/worker/list",{
-            headers: {
-                'Authorization': token ? `Bearer ${token}` : ""
-            }
-        })
-        setWorkers(respone.data);
+        try {
+            const respone = await axios.get("/worker/list",{
+                headers: {
+                    'Authorization': token ? `Bearer ${token}` : ""
+                }
+            })
+            setWorkers(respone.data);
+        } catch (error) {
+            displaySnackbar("Hiba a dolgozók lekérdezésekor!",false)
+        }
     }
+
     async function updateWorker(id,data) {
-        const respone = await axios.put(`/worker/${id}`,data,{
-            headers: {
-                'Authorization': token ? `Bearer ${token}` : ""
-            }
-        })
-        let modified = workers.find((x)=>x.id===id)
-        modified = respone.data;
-        setWorkers([modified,...workers])
-        displaySnackbar("Dolgozó frissítve",true)
-        getWorkers();
+        try {
+            const respone = await axios.put(`/worker/${id}`,data,{
+                headers: {
+                    'Authorization': token ? `Bearer ${token}` : ""
+                }
+            })
+            let modified = workers.find((x)=>x.id===id)
+            modified = respone.data;
+            setWorkers([modified,...workers])
+            displaySnackbar("Dolgozó frissítve",true)
+            getWorkers(); 
+        } catch (error) {
+            displaySnackbar("Hiba a dolgozó hozzáadásakor!",false)
+        }
     }
+
+    async function addWorker(data) {
+        try {
+            const response = await axios.post(`/worker/`,data,{
+                headers: {
+                    'Authorization': token ? `Bearer ${token}` : ""
+                } 
+            })
+            setWorkers([response.data,...workers])
+            getWorkers()
+            return response;
+        } catch (error) {
+            displaySnackbar("Hiba a dolgozó hozzáadásakor",false)
+        }
+    }
+
     useEffect(()=>{
         getWorkers()
     },[])
 
-    return <WorkerContext.Provider value={{workers,getWorkers,updateWorker}}>
+    return <WorkerContext.Provider value={{workers,getWorkers,updateWorker,addWorker}}>
         {children}
     </WorkerContext.Provider>
 }

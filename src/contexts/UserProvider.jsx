@@ -1,7 +1,7 @@
 import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
 import { SnackbarContext} from "./SnackbarProvider";
-import { useNavigate } from "react-router-dom";
+
 
 const UserContext = createContext();
 
@@ -16,6 +16,7 @@ const UserProvider = ({children}) => {
         role:"",
         workerId:""
     })
+
     async function userLogin(data) {
         try {
             const response = await axios.post(
@@ -38,7 +39,6 @@ const UserProvider = ({children}) => {
             if (response.headers.jwt_token || response.headers.Authorization) {
                 const token = response.headers.jwt_token
                 setToken(token)
-                console.log("JWT Token:", token);
             }
             return true;
         } catch (error) {
@@ -58,13 +58,17 @@ const UserProvider = ({children}) => {
     }
 
     async function getUsers() {
-        const response = await axios.get('/api/user', {
-            headers: {
-                'Accept': 'application/json',
-                'Authorization': token ? `Bearer ${token}` : ""
-            }
-        })
-        setUsers(response.data)
+        try {
+            const response = await axios.get('/api/user', {
+                headers: {
+                    'Accept': 'application/json',
+                    'Authorization': token ? `Bearer ${token}` : ""
+                }
+            })
+            setUsers(response.data)
+        } catch (error) {
+            displaySnackbar("Hiba a felhasználók lekérdezésekor!",false)
+        }
     }
 
     function getToken() {
@@ -104,21 +108,25 @@ const UserProvider = ({children}) => {
         }
     }
     async function changeUserStatus(id,changedStatus) {
-        let changingUser = users.find((x)=>x.id == id)
-        if (changingUser.status === userStatusConverter(changedStatus)) {
-            displaySnackbar(`Már ${changedStatus} vagy!`,false)
-        } else {
-            const response = await axios.patch(`/api/user/${id}`,{"key":"STATUS","value":changedStatus},{
-                headers: {
-                    'Authorization': token ? `Bearer ${token}` : ""
+        try {
+            let changingUser = users.find((x)=>x.id == id)
+            if (changingUser.status === userStatusConverter(changedStatus)) {
+                displaySnackbar(`Már ${changedStatus} vagy!`,false)
+            } else {
+                const response = await axios.patch(`/api/user/${id}`,{"key":"STATUS","value":changedStatus},{
+                    headers: {
+                        'Authorization': token ? `Bearer ${token}` : ""
+                    }
+                })
+                if (response) {
+                    let result = users.find((x)=>x.id === response.data.id)
+                    result.status = response.data.status
+                    setUsers([...users])
+                    displaySnackbar(`Mostantól ${userStatusConverter(response.data.status)} vagy!`,true)
                 }
-            })
-            if (response) {
-                let result = users.find((x)=>x.id === response.data.id)
-                result.status = response.data.status
-                setUsers([...users])
-                displaySnackbar(`Mostantól ${userStatusConverter(response.data.status)} vagy!`,true)
             }
+        } catch (error) {
+            displaySnackbar("Hiba a felhasználó állapot módosításnál!",false)
         }
     }
     useEffect(()=>{
@@ -126,6 +134,7 @@ const UserProvider = ({children}) => {
             getUsers()
         }
     },[token])
+    
     return <UserContext.Provider value={{users,getUsers,getOnlineUsers,getUsersLenght,generateUser,changeUserStatus,userLogin,userProfile,token,getToken,logout}}>
         {children}
     </UserContext.Provider>

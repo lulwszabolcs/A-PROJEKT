@@ -1,4 +1,4 @@
-.info_btn {
+.infobtn {
     position: absolute;
     top: 0;
     right: 0;
@@ -30,7 +30,7 @@ img {
     gap: 20px;
 }
 
-.worker-main-text {
+.workermaintext {
     text-align: center;
     margin-top: 15vh;
     margin-bottom: 5vh;
@@ -46,4 +46,9 @@ img {
     position: fixed;
     bottom: 3vh;
     right: 3vw;
+}
+
+.filtercontainer {
+    margin-left: 10vw;
+    margin-bottom: 10vh;
 }

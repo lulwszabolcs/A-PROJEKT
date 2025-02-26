@@ -60,7 +60,6 @@ export default function VehicleList() {
                 return <p className={styles.vehiclestatus} style={{color:'blue'}}>{vehicle.status}<LocalCarWashIcon/></p>
             case "Szemlén van":
                 return <p className={styles.vehiclestatus} style={{color:'brown'}}>{vehicle.status}<FormatListBulletedIcon/></p>
-        
             default:
                 break;
         }
