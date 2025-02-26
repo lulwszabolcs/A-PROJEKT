@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './SupportChat.module.css'
 import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material';
@@ -13,11 +13,13 @@ const openai = new OpenAI({
 export default function SupportChat() {
     const [input,setInput] = useState("")
     const [messages,setMessages] = useState([])
+    const [chatHistory,setChatHistory] = useState([])
     const [waitingForResponse,setWaitingForResponse] = useState(false);
     const handleSend = () => {
         if (input !== "" && !waitingForResponse) {
             setMessages((prev) => [...prev, { text: input, type: "sent" }]);
             setWaitingForResponse(true);
+            setChatHistory([...chatHistory,{role:"user",content:[{"type":"text","text":input}]}])
             setMessages((prev) => [...prev, { text: "...", type: "received", id: "loading" }]);
             sendChat(input)
             setInput("")
@@ -29,6 +31,7 @@ export default function SupportChat() {
                 model: "grok-2-vision-1212",
                 messages: [
                   { role: "system", content: "You are Grok, a chatbot who speaks Hungarian and answers people's questions" },
+                  ...chatHistory.map(msg => ({ role: msg.role, content: msg.content })),
                   { role: "user", content: message },
                 ],
             });
@@ -38,6 +41,7 @@ export default function SupportChat() {
                     msg.id === "loading" ? { text: completion.choices[0].message.content, type: "received" } : msg
                 )
             );
+            setChatHistory([...chatHistory,completion.choices[0].message])
         } catch (error) {
             console.error("Hiba történt a chat küldésekor:", error);
         } finally {
@@ -49,6 +53,11 @@ export default function SupportChat() {
         setInput(event.target.value);
     };
     
+    useEffect(()=>{
+        chatHistory.forEach((msg)=>{console.log(msg)})
+    },[chatHistory])
+
+
     return (
         <div className={styles.flexbox}>
         <h1 className={styles.supportmaintext}>Ügyfélszolgálat</h1>
