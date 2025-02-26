@@ -13,17 +13,13 @@ import Support from './components/Support/Support';
 import Login from './components/Login/Login';
 import { VehicleProvider } from './contexts/VehicleProvider';
 import { useContext } from 'react';
-import { ImageProvider } from './contexts/ImageProvider';
-import { WorkerProvider } from './contexts/WorkerProvider';
 
-// Védett útvonal komponens
 function ProtectedRoute({ children }) {
-  const { token } = useContext(UserContext);
 
+  const { token } = useContext(UserContext);
   if (!token) {
     return <Navigate to="/login" replace />;
   }
-
   return <VehicleProvider>{children}</VehicleProvider>;
 }
 
