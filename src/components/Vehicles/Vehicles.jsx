@@ -4,15 +4,10 @@ import MiniDrawer from "../Sidebar/Sidebar"
 import VehicleList from "./VehicleList/VehicleList"
 export default function Vehicles() {
     return (
-        // profile tab: letoltes gomb megcsinalasa
-        // chat: ne legyen buta, tudja folytatni a beszelgetest
-        // reszponzivitas, atiras vite-re?
-        // tesztek irasa
+        // reszponzivitas
         // add-edit-torol lekorlatozasa
-
-        // holnap : code szepites befejezes, providerekben mindenhol try catch, remove felesleges dolgok, catch agban snackbarok
-        //          chat ne legyen buta
-        //          vite elkezdes
+        // profile tab: letoltes gomb megcsinalasa
+        // tesztek irasa
         <>
         <MiniDrawer></MiniDrawer>
             <SnackbarProvider>

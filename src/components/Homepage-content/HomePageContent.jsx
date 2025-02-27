@@ -18,6 +18,8 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import AirIcon from '@mui/icons-material/Air';
 import Alert from '@mui/material/Alert';
 import AcUnitIcon from '@mui/icons-material/AcUnit';
+import { useMediaQuery } from '@mui/material';
+
 export default function HomePageContent() {
   let { getOnlineUsers, getUsersLenght, userProfile } = useContext(UserContext);
   let { getActiveVehicles, getInActiveVehicles } = useContext(VehicleContext);
@@ -26,6 +28,8 @@ export default function HomePageContent() {
 
   const [addStickyNotesOpen, setAddStickyNotesOpen] = useState(false);
   const [notePositions, setNotePositions] = useState({});
+  const isSmallScreen = useMediaQuery('(max-width: 600px)');
+  const isMobile = useMediaQuery('(max-width: 1024px)');
 
   const [draggingNote, setDraggingNote] = useState(null);
   const [relativeCoords, setRelativeCoords] = useState({ x: 0, y: 0 });
@@ -130,6 +134,11 @@ export default function HomePageContent() {
   return (
     <>
       <h1 className={styles.welcometext}>Üdvözöljük {userProfile.name}!</h1>
+      
+
+      
+
+      <div className={styles.flexbox}>
       {weatherAlertVisible && (
           <div className={styles.alertcontainer}>
             <Alert variant="filled" severity="warning" style={{ width: '50vw' }}>
@@ -137,7 +146,6 @@ export default function HomePageContent() {
             </Alert>
           </div>
       )}
-
       <div className={styles.weathercontainer}>
         <div className={styles.tempcontainer}>
           <WaterDropIcon></WaterDropIcon> 
@@ -160,8 +168,7 @@ export default function HomePageContent() {
           <p>{weatherData.snowfall} cm</p>
         </div>
       </div>
-
-      <div className={styles.flexbox}>
+      <div className={styles.chartcontainer}>
         <div className={styles.onlinechart}>
           <Gauge
             valueMax={getUsersLenght()}
@@ -188,10 +195,20 @@ export default function HomePageContent() {
                 faded: { innerRadius: 30, additionalRadius: -30, color: 'gray' },
               },
             ]}
-            height={200}
-            width={500}
+            slotProps={{
+              legend: isSmallScreen
+                ? { 
+                    position: { vertical: 'bottom', horizontal: 'middle' },
+                  }
+                : undefined,
+            }}
+            margin={isSmallScreen ? {bottom:100,left:100}: undefined}
+            height={isSmallScreen ?  300 : 200}
+            width={isSmallScreen ? 400 : 500}
+            className={styles.piechart}
           />
           <h3 className={styles.piecharttext}>Üzemképes járművek</h3>
+        </div>
         </div>
         <div className={styles.stickynotescontainer}>
           {notes.map((note,index) => {
@@ -200,16 +217,16 @@ export default function HomePageContent() {
               <div
                 key={note.id}
                 className={styles.stickynotes}
-                onPointerDown={(e) => handleDragStart(e, note.id)}
+                onPointerDown={isMobile ? undefined : (e) => handleDragStart(e, note.id)}
                 onPointerMove={handleDrag}
                 onPointerUp={handleDragEnd}
                 onPointerLeave={handleDragEnd}
                 style={{
                   cursor: 'pointer',
                   backgroundImage: `url('/assets/sticky.png')`,
-                  position: 'absolute',
-                  left: position.x + 'px',
-                  top: position.y + 'px',
+                  position: isMobile ? "" : 'absolute',
+                  left: isMobile ? "" : position.x + 'px',
+                  top: isMobile ? "" : position.y + 'px',
                 }}
               >
                 <DeleteIcon

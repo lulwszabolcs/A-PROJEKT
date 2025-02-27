@@ -7,6 +7,12 @@
 .mainelements {
     margin-left: 10vw;
 }
+.chartcontainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10vw;
+}
 
 .onlinechart {
     display: flex;
@@ -28,7 +34,6 @@
     gap: 40px;
     width: fit-content;
     min-height: fit-content;
-    margin-left: 30%;
     box-shadow: 5px 5px 5px 5px rgba(173, 216, 230, 0.616);
     border-radius: 10px;
     padding: 15px;
@@ -49,8 +54,7 @@
 .flexbox {
     display: flex;
     flex-direction: row;
-    gap: 10vw;
-    margin-top: 10vh;
+    gap: 7vw;
     margin-left: 10vw;
     justify-content: center;
     align-items: center;
@@ -59,9 +63,9 @@
     max-width: 80vw;
 }
 
-.piecharttext {
+/* .piecharttext {
     margin-right: 3vw;
-}
+} */
 
 .stickynotes {
     position: relative; 
@@ -82,6 +86,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
+    gap: 3vw;
 }
 
 .delete {
@@ -99,7 +104,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 5vh;
     margin-left: 5vw;
 }
 
@@ -114,29 +118,78 @@ body {
     justify-content: center;
     align-items: center;
 }
-
-@media (max-width: 320px) {
+html, body {
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+  }
+@media (max-width: 376px) {
     .welcometext {
-        margin-left: 70vw;
+        margin-left: 20vw;
     }
     .weathercontainer {
-        margin-left: 60vw;
-        width: 70vw;
+        margin-left: 10vw;
+        width: 60vw;
         flex-direction: column;
     }
     .alertcontainer {
-        margin-left: 70vw;
+        margin-left: 10vw;
         min-width: 50vw;
     }
     .onlinechart {
-        margin-left: 90vw;
+        margin-left: 15vw;
     }
     .vehiclechart {
-        margin-left: 100vw;
-        max-width: fit-content;
+        margin-left: 15vw;
+        width: 70vw;
     }
     .stickynotescontainer {
-        margin-left: 90vw;
+        margin-left: 15vw;
     }
 
+}
+
+@media (min-width: 376px) and (max-width: 600px) {
+
+
+    .weathercontainer {
+        margin-left: 10vw;
+        width: 70vw;
+    }
+    .welcometext {
+        margin-left: 15vw;
+    }
+    .vehiclechart {
+        margin-left: 15vw;
+        width: 60vw;
+    }
+    .onlinechart {
+        margin-left: 15vw;
+    }
+    .stickynotescontainer {
+        margin-left: 25vw;
+    }
+}
+
+@media (min-width: 601px) and (max-width: 1086px) {
+    .vehiclechart {
+        margin-left: 3vw;
+        width: 85vw;
+    }
+    .onlinechart {
+        margin-left: 25vw;
+    }
+    .weathercontainer {
+        margin-left: 10vw;
+    }
+}
+
+@media (max-width: 1086px) {
+    .flexbox {
+        flex-direction: column;
+    }
+    .chartcontainer {
+        flex-direction: column;
+    }
 }

@@ -33,6 +33,7 @@ import { SnackbarContext } from '../../contexts/SnackbarProvider';
 import SnackbarComponent from '../Snackbar/SnackbarComponent';
 import CircleIcon from '@mui/icons-material/Circle';
 import ChatIcon from '@mui/icons-material/Chat';
+import { useMediaQuery } from '@mui/material';
 const drawerWidth = 240;
 const openedMixin = (theme) => ({
   width: drawerWidth,
@@ -115,6 +116,7 @@ export default function MiniDrawer() {
   let {changeUserStatus,logout} = useContext(UserContext)
   let {SnackbarOpen,closeSnackbar,SnackbarMessage} = useContext(SnackbarContext)
 
+  const isSmallScreen = useMediaQuery('(max-width: 600px)');
   const [anchorEl, setAnchorEl] = useState(null);
   const openToolbar = Boolean(anchorEl);
   const handleClick = (event) => {
