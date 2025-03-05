@@ -72,3 +72,12 @@ p {
     align-items: center;
     gap: 5px;
 }
+
+@media (max-width: 1024px) {
+    .flexbox {
+        margin-left: 0vw;
+    }
+    .filtervehicles {
+        flex-direction: column;
+    }
+}

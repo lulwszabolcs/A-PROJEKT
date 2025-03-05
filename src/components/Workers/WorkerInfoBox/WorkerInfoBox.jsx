@@ -7,7 +7,7 @@
   import InfoIcon from '@mui/icons-material/Info';
   import styles from "./WorkerInfoBox.module.css"
   import WorkerDetails from './WorkerDetails/WorkerDetails';
-  import { MenuItem, Modal, Select } from '@mui/material';
+  import { MenuItem, Modal, Select, useMediaQuery } from '@mui/material';
   import { useState,useEffect, useContext} from 'react';
   import { RoleProvider } from '../../../contexts/RoleProvider';
   import Fab from '@mui/material/Fab';
@@ -28,6 +28,7 @@
       const [selectedRole,setSelectedRole] = useState()
       const [selectedWorker,setSelectedWorker] = useState()
       const [imageUrls, setImageUrls] = useState({});
+      const isMobile = useMediaQuery('(max-width: 1024px)');
 
       function closeWorkerDetails() {
           setOpenWorkerDetails(false)
@@ -70,7 +71,7 @@
       <h1 className={styles.workermaintext}>Dolgozók kezelése</h1>
       <div className={styles.filtercontainer}>
       <Select 
-          sx={{width:'20vw'}}
+          sx={{width: isMobile ? '40vw' : '20vw'}}
           labelId="demo-simple-select"
           id="demo-simple-select"
           onChange={handleChange}

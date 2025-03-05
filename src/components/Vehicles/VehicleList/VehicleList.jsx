@@ -3,7 +3,7 @@ import styles from './VehicleList.module.css'
 import {VehicleContext} from '../../../contexts/VehicleProvider'
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
-import {MenuItem, Modal, Select} from '@mui/material';
+import {MenuItem, Modal, Select, useMediaQuery} from '@mui/material';
 import {TypeContext} from '../../../contexts/TypeProvider';
 import ReportProblemIcon from '@mui/icons-material/ReportProblem';
 import VehicleModify from '../VehicleModify/VehicleModify';
@@ -30,6 +30,8 @@ export default function VehicleList() {
     const [selectedType, setSelectedType] = useState('all');
     const [selectedStatus, setSelectedStatus] = useState('all');
     const [imageUrls, setImageUrls] = useState({});
+    const isSmallScreen = useMediaQuery('(max-width: 425px)');
+    const isMobile = useMediaQuery('(max-width: 1024px)');
 
     function closeAddProblem() {
         setIsAddProblemOpen(false);
@@ -84,7 +86,7 @@ export default function VehicleList() {
         Járművek
         </h1>   
         <div className={styles.filtervehicles}>
-        <Select style={{width:'20vw'}}
+        <Select style={{width: isMobile ? '50vw':'20vw'}}
             labelId="demo-simple-select"
             id="demo-simple-select"
             onChange={(e) => setSelectedType(e.target.value)}
@@ -99,7 +101,7 @@ export default function VehicleList() {
                     </MenuItem>
                 ))}
         </Select>
-        <Select style={{width:'20vw'}}
+        <Select style={{width: isMobile ? '50vw':'20vw'}}
             labelId="demo-simple-select"
             id="demo-simple-select"
             onChange={(e) => setSelectedStatus(e.target.value)}
@@ -114,11 +116,11 @@ export default function VehicleList() {
                     </MenuItem>
                 ))}
         </Select>
-        <ReportProblemIcon onClick={()=>setIsAddProblemOpen(true)} className={styles.reporticon} sx={{color:'red'}}></ReportProblemIcon>
+        <ReportProblemIcon onClick={()=>setIsAddProblemOpen(true)} className={styles.reporticon} sx={{color:'red',fontSize:'40px'}}></ReportProblemIcon>
         </div>
         <div className={styles.flexbox}>
         {filteredVehicles.sort((a,b)=>(a.license.localeCompare(b.license))).map((vehicle)=>(
-            <div className={styles.vehicleCard} key={vehicle.vehicleId}>
+            <div className={styles.vehicleCard} key={vehicle.vehicleId} style={{width:isSmallScreen ? '60vw':undefined}}>
                 <div className={styles.vehicleInfoContainer}>
                     <h4>{vehicle.name}</h4>
                     <p>{vehicle.license}</p>

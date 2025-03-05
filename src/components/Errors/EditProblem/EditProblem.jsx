@@ -4,7 +4,7 @@ import FormControl from '@mui/material/FormControl';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import { useContext} from 'react';
-import {MenuItem,Select } from '@mui/material';
+import {ÖMenuItem,Select } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { TypeContext } from '../../../contexts/TypeProvider';
 import { ProblemContext } from '../../../contexts/ProblemProvider';
@@ -37,7 +37,7 @@ export default function EditProblem({close,problem}) {
                 <TextField defaultValue={problem.name} required name='name'  id="outlined-basic" label="Név" variant="outlined" {...register("name",{required:true})} />
                 <TextField defaultValue={problem.description} required name='description'  id="outlined-basic" label="Leírás" variant="outlined" {...register("description",{required:true})} />
                 <Select
-                    labelId="demo-simple-select"
+                    labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     defaultValue={problem.problemType || ''} 
                     name='problemType'
