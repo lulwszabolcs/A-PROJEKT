@@ -127,63 +127,36 @@ html, body {
     width: 100vw;
   }
 @media (max-width: 376px) {
-    .welcometext {
-        margin-left: 20vw;
-    }
     .weathercontainer {
-        margin-left: 10vw;
         width: 60vw;
         flex-direction: column;
     }
-    .alertcontainer {
-        margin-left: 10vw;
-        min-width: 50vw;
-    }
-    .onlinechart {
-        margin-left: 15vw;
-    }
     .vehiclechart {
-        margin-left: 15vw;
         width: 70vw;
     }
-    .stickynotescontainer {
-        margin-left: 15vw;
-    }
-
 }
 
 @media (min-width: 376px) and (max-width: 600px) {
 
-
     .weathercontainer {
-        margin-left: 10vw;
         width: 70vw;
     }
-    .welcometext {
-        margin-left: 15vw;
-    }
+    
     .vehiclechart {
-        margin-left: 15vw;
+        margin-left: 5vw;
         width: 60vw;
     }
     .onlinechart {
-        margin-left: 15vw;
+        margin-left: 5vw;
     }
     .stickynotescontainer {
-        margin-left: 25vw;
+        margin-left: 5vw;
     }
 }
 
 @media (min-width: 601px) and (max-width: 1086px) {
-    .vehiclechart {
-        margin-left: 3vw;
-        width: 85vw;
-    }
     .onlinechart {
-        margin-left: 25vw;
-    }
-    .weathercontainer {
-        margin-left: 10vw;
+        margin-left: 15vw;
     }
 }
 

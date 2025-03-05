@@ -118,7 +118,9 @@ export default function MiniDrawer() {
 
   const isSmallScreen = useMediaQuery('(max-width: 600px)');
   const [anchorEl, setAnchorEl] = useState(null);
+  const [isToolbarVisible,setIsToolbarVisible] = useState(false)
   const openToolbar = Boolean(anchorEl);
+  const isMobile = useMediaQuery('(max-width: 1024px)');
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -136,7 +138,12 @@ export default function MiniDrawer() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  
+  React.useEffect(()=>{
+    if (!isMobile) {
+      setIsToolbarVisible(true)
+      console.log(isToolbarVisible)
+    }
+  },[isMobile])
 const [primarytext,setPrimaryText] = useState();
 const handleChange = (text) =>{
   switch (text) {
@@ -257,17 +264,17 @@ const handleChange = (text) =>{
               open && { display: 'none' },
             ]}
           >
-            <MenuIcon />
+            <MenuIcon onClick={()=>setIsToolbarVisible(true)} />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
             {primarytext}
           </Typography>
         </Toolbar>
       </AppBar>
-      <Drawer variant="permanent" open={open}>
+      <Drawer variant="permanent" open={open} style={{visibility: isToolbarVisible ?  undefined:"hidden"}}>
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon onClick={()=>setIsToolbarVisible(false)} />}
           </IconButton>
         </DrawerHeader>
         <Divider />
@@ -304,7 +311,7 @@ const handleChange = (text) =>{
                         },
                   ]}
                 >
-                    {icons[index]}
+                    {isMobile ? undefined : icons[index]}
                 </ListItemIcon>
                 <ListItemText
                   primary={text}
