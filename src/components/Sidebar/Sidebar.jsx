@@ -150,6 +150,9 @@ const handleChange = (text) =>{
     case "Főoldal":
       navigate('/home')
       break;
+    case "Profil":
+      isMobile ? setAnchorEl(true) : undefined
+      break;
       case "Dolgozók":
         navigate('/workers')  
         break;
@@ -169,7 +172,7 @@ const handleChange = (text) =>{
     default:
       break;
   }
-  
+  console.log(text)
 }
   const icons = [<HomeIcon/>,
     <Tooltip title="Profil beállítások">
@@ -199,7 +202,7 @@ const handleChange = (text) =>{
             sx: {
               overflow: 'visible',
               filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-              mt: 1.5,
+              mt: isMobile ? 25:1.5,
               '& .MuiAvatar-root': {
                 width: 32,
                 height: 32,
@@ -211,7 +214,7 @@ const handleChange = (text) =>{
                 display: 'block',
                 position: 'absolute',
                 top: 0,
-                left: 14,
+                left: isMobile ? 114:14,
                 width: 10,
                 height: 10,
                 bgcolor: 'background.paper',
@@ -221,8 +224,8 @@ const handleChange = (text) =>{
             },
           },
         }}
-        transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+        transformOrigin={{ horizontal: 'right', vertical: isMobile ? 'bottom':'top'}}
+        anchorOrigin={{ horizontal: isMobile ? 'left':'right', vertical: isMobile ? 'top': 'bottom' }}
       >
         <MenuItem onClick={()=>{handleClose();navigate('/profile')}}>
           <Avatar style={{marginRight:'10px'}}/> Profil
