@@ -79,3 +79,28 @@
     align-items: flex-end;
     height: 100%;
 }
+
+@media (max-width: 1024px) {
+    .systemtextcontainer {
+        height: fit-content;
+        min-width: 80%;
+    }
+    .usertextcontainer {
+        max-width: 50%;
+    }
+    .chatmaincontainer {
+        flex-direction: row;
+        height: 100%;
+    }
+    .messagecontainer {
+        width: 100%;
+    }
+    .sendcontainer {
+        flex-wrap: nowrap;
+        width: 100%;
+        justify-content: space-between;
+    }
+    .transitionedMsgContainer {
+        min-width: 100%;
+    }
+}

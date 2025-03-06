@@ -63,7 +63,6 @@ export default function ErrorList() {
     setSeeClosedProblems(event.target.checked);
   };
   const handleRoleCheckboxChange = (event) => {
-    console.log(userProfile.role)
     setOnlySeeClosedProblems(event.target.checked);
   };
   return (
@@ -175,37 +174,33 @@ export default function ErrorList() {
         marginBottom:'14px'
         }}>
             {problem.problemType}
-        </div>
-        <Typography variant="body2">
-          {problem.description}
-        </Typography>
-      </CardContent>
-      <CardActions>
-      {problem.status !== "Lezárva" && (
-          <>
-            <Button onClick={() => openEditModal(problem)}>
-              <CreateIcon />
-            </Button>
-            
-            <Button
-              onClick={() => {
-                openDialogBox();
-                setCurrentProb(problem);
-                }}>
-              <DeleteIcon />
-            </Button>
-              <Button onClick={() => closeSelectedProblem(problem.problemId)}>
-              <CheckIcon />
-            </Button>
-          </>
+              </div>
+              <Typography variant="body2">
+                {problem.description}
+              </Typography>
+            </CardContent>
+            <CardActions>
+            {problem.status !== "Lezárva" && (
+                <>
+                  <Button onClick={() => openEditModal(problem)}>
+                    <CreateIcon />
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      openDialogBox();
+                      setCurrentProb(problem);
+                      }}>
+                    <DeleteIcon />
+                  </Button>
+                    <Button onClick={() => closeSelectedProblem(problem.problemId)}>
+                    <CheckIcon />
+                  </Button>
+                </>
         )}
       </CardActions>
     </Card>
   ))}
   </div>
-
-
-
       <div className={styles.fabicon}>
         <Fab color="primary" aria-label="add" onClick={()=>setIsAddNewProblemOpen(true)}>
           <AddIcon />

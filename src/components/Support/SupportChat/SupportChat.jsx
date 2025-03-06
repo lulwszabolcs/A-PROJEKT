@@ -53,11 +53,6 @@ export default function SupportChat() {
         setInput(event.target.value);
     };
     
-    useEffect(()=>{
-        chatHistory.forEach((msg)=>{console.log(msg)})
-    },[chatHistory])
-
-
     return (
         <div className={styles.flexbox}>
         <h1 className={styles.supportmaintext}>Ügyfélszolgálat</h1>
@@ -83,7 +78,6 @@ export default function SupportChat() {
                     className={styles.chatinput}
                     style={{ borderRadius: "10px" }}
                     rows={2}
-                    maxRows={5}
                     disabled={waitingForResponse}
                     onChange={handleInputChange}
                     sx={{resize:'vertical'}}
@@ -103,7 +97,6 @@ export default function SupportChat() {
                 className={styles.chatinput}
                 style={{ borderRadius: "10px" }}
                 rows={2}
-                maxRows={5}
                 disabled={waitingForResponse}
                 onChange={handleInputChange}
                 sx={{resize:'vertical'}}

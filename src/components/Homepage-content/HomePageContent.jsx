@@ -101,7 +101,6 @@ export default function HomePageContent() {
         snowfall:response.data.hourly.snowfall[hour]
       }
       setWeatherData(weatherData)
-      console.log(response.data)
   }
 
   function displayWeatherAlert() {
