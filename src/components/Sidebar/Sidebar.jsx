@@ -141,7 +141,8 @@ export default function MiniDrawer() {
   React.useEffect(()=>{
     if (!isMobile) {
       setIsToolbarVisible(true)
-      console.log(isToolbarVisible)
+    } else {
+      setIsToolbarVisible(false)
     }
   },[isMobile])
 const [primarytext,setPrimaryText] = useState();
@@ -172,7 +173,6 @@ const handleChange = (text) =>{
     default:
       break;
   }
-  console.log(text)
 }
   const icons = [<HomeIcon/>,
     <Tooltip title="Profil beállítások">

@@ -41,10 +41,28 @@
     max-height: 70vh;
     overflow: auto;
 }
+
+.problemcardcontainer {
+    width: 80vw;
+    margin-left: 10vw;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: center;
+    align-items: center;
+}
+
+.problemcard {
+    width: 20vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 250px
+}
 @media (max-width: 320px) {
-    .errorprimarytext {
-        margin-left: 20vw;
-    }
     .checkBoxErrors {
         margin-left: 20vw;
     }
@@ -52,3 +70,15 @@
         margin-left: 20vw;
     }
 }
+
+@media (max-width: 925px) {
+    .problemstable {
+        display: none;
+    }
+}
+@media (min-width: 925px) {
+    .problemcardcontainer {
+        display: none;
+    }
+}
+
