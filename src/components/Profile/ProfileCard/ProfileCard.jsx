@@ -7,7 +7,7 @@ import DownloadIcon from '@mui/icons-material/Download';
 import { ImageContext } from '../../../contexts/ImageProvider';
 
 export default function ProfileCard() {
-    let {userProfile} = useContext(UserContext)
+    let {userProfile,generatePdfFileForUser} = useContext(UserContext)
     let {pickImageForWorker} = useContext(ImageContext)
     let {SnackbarOpen,SnackbarMessage,closeSnackbar,SnackbarSuccess} = useContext(SnackbarContext)
 
@@ -21,7 +21,7 @@ export default function ProfileCard() {
     return ( 
         <>
             <div className={styles.cardcontainer}>
-                <DownloadIcon className={styles.downloadicon} sx={{color:'gray'}}/>
+                <DownloadIcon className={styles.downloadicon} sx={{color:'gray'}} onClick={()=>generatePdfFileForUser(userProfile.userId)}/>
                 <img src={workerImageUrl} className={styles.profilepic}></img>
                 <h2>{userProfile.name}</h2>
                 <p className={styles.infotext}>{userProfile.workerId}</p>

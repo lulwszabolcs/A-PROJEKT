@@ -84,6 +84,8 @@ const UserProvider = ({children}) => {
         return users.length
     }
     async function generateUser(userData,auth) {
+       
+
         try {
             const response = await (axios.post("/api/user",userData,{
                 headers: {
@@ -143,13 +145,28 @@ const UserProvider = ({children}) => {
             displaySnackbar("Hiba a jogosultság lekérdezésekor!",false)
         }
     }
+
+    function generatePdfFileForUser(id) {
+        try {
+            axios.get(`/api/user/pdf/${id}`,{
+                headers: {
+                    'Authorization': token ? `Bearer ${token}` : ""
+                }
+            }).then(()=>{
+                displaySnackbar("PDF sikeresen mentve!",true)
+            })
+        } catch (error) {
+            displaySnackbar("Hiba a PDF generálásánál!",false)
+        }
+    }
+
     useEffect(()=>{
         if (token) {
             getUsers()
         }
     },[token])
     
-    return <UserContext.Provider value={{users,getUsers,getOnlineUsers,getUsersLenght,generateUser,changeUserStatus,userLogin,userProfile,token,getToken,logout,checkIfUserHasPermission}}>
+    return <UserContext.Provider value={{users,getUsers,getOnlineUsers,getUsersLenght,generateUser,changeUserStatus,userLogin,userProfile,token,getToken,logout,checkIfUserHasPermission,generatePdfFileForUser}}>
         {children}
     </UserContext.Provider>
 }

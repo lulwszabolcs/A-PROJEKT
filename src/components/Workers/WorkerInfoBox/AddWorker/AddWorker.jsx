@@ -26,8 +26,10 @@ export default function AddWorker({close}) {
         watch,
         formState: { errors },
       } = useForm()
-
-      async function onSubmit(data) {
+    function removeAccents(str) {
+        return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    }
+    async function onSubmit(data) {
         let name = data.name
         try {
           if (!name.includes(" ")) {
@@ -49,9 +51,15 @@ export default function AddWorker({close}) {
               };
               setImages((prevImages) => [...prevImages, newImage]);
             }
-            const userData = {
-              "username":response.data.name,
-              "password":"asd123qwe",
+            
+          const fullName = response.data.name.trim(); 
+          const nameParts = fullName.split(" "); 
+          const lastName = removeAccents(nameParts[0]).toLowerCase();
+          const firstNameInitial = removeAccents(nameParts[nameParts.length - 1].charAt(0)).toLowerCase();
+          const formattedUsername = `${lastName}${firstNameInitial}`;
+             const userData = {
+              "username":formattedUsername,
+              "password":data.password,
               "role":response.data.title,
               "status":"User is currently online",
               "worker_id":response.data.workerId
@@ -69,7 +77,6 @@ export default function AddWorker({close}) {
     const handleFileChange = (event) => {
         const file = event.target.files[0]; 
         setSelectedFile(file)
-        
       };
       
     return (
@@ -78,6 +85,8 @@ export default function AddWorker({close}) {
         <form onSubmit={handleSubmit(onSubmit)}>
         <FormControl fullWidth className={styles.workerform}>  
             <TextField  name='name'  id="outlined-basic" label="Név" variant="outlined" required {...register("name",{required:true})}
+            />
+            <TextField  name='name'  id="outlined-basic" label="Jelszó" variant="outlined" type='password' required {...register("password",{required:true})}
             />
             <Select
                 labelId="demo-simple-select"
