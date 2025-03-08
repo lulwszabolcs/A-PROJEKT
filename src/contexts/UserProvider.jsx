@@ -14,7 +14,8 @@ const UserProvider = ({children}) => {
         email:"",
         phoneNumber:"",
         role:"",
-        workerId:""
+        workerId:"",
+        userId:""
     })
 
     async function userLogin(data) {
@@ -34,7 +35,7 @@ const UserProvider = ({children}) => {
                 "phoneNumber":response.data.worker.phoneNumber,
                 "role":response.data.worker.title,
                 "workerId":response.data.worker.workerId,
-
+                "userId":response.data.id
             });
             if (response.headers.jwt_token || response.headers.Authorization) {
                 const token = response.headers.jwt_token

@@ -6,7 +6,6 @@ export default function Vehicles() {
     return (
         // profile tab: letoltes gomb megcsinalasa
         // tesztek irasa
-        // api key eljertese
         <>
         <MiniDrawer></MiniDrawer>
             <SnackbarProvider>

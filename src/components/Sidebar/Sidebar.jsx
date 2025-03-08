@@ -113,10 +113,9 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function MiniDrawer() {
-  let {changeUserStatus,logout} = useContext(UserContext)
+  let {changeUserStatus,logout,userProfile} = useContext(UserContext)
   let {SnackbarOpen,closeSnackbar,SnackbarMessage} = useContext(SnackbarContext)
 
-  const isSmallScreen = useMediaQuery('(max-width: 600px)');
   const [anchorEl, setAnchorEl] = useState(null);
   const [isToolbarVisible,setIsToolbarVisible] = useState(false)
   const openToolbar = Boolean(anchorEl);
@@ -231,17 +230,17 @@ const handleChange = (text) =>{
           <Avatar style={{marginRight:'10px'}}/> Profil
         </MenuItem>
         <Divider />
-        <MenuItem onClick={()=>{handleClose();changeUserStatus(1,"ONLINE")}}>
+        <MenuItem onClick={()=>{handleClose();changeUserStatus(userProfile.userId,"ONLINE")}}>
           <CircleIcon style={{marginRight:'1vw',color:'green'}} sx={{height:'18px'}}>
           </CircleIcon>
           Online
         </MenuItem>
-        <MenuItem onClick={()=>{handleClose();changeUserStatus(1,"OFFLINE")}}>
+        <MenuItem onClick={()=>{handleClose();changeUserStatus(userProfile.userId,"OFFLINE")}}>
           <CircleIcon style={{marginRight:'1vw',color:'gray'}} sx={{height:'18px'}}>
           </CircleIcon>
           Offline
         </MenuItem>
-        <MenuItem onClick={()=>{handleClose();changeUserStatus(78,"ON_VACATION")}}>
+        <MenuItem onClick={()=>{handleClose();changeUserStatus(userProfile.userId,"ON_VACATION")}}>
           <CircleIcon style={{marginRight:'1vw',color:'orange'}} sx={{height:'18px'}}>
           </CircleIcon>
         Szabadságon
