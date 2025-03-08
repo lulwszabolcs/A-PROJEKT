@@ -74,9 +74,9 @@ const ImageProvider = ({children})=>{
         displaySnackbar("Hiba a képek lekérésekor!",false)
       }
     }
-    useEffect(()=>{
-        getImages()
-    },[])
+    // useEffect(()=>{
+    //     getImages()
+    // },[])
 
     return <ImageContext.Provider value={{images,getImages,setImages,pickImageForVehicle,pickImageForWorker,uploadImage}}>
         {children}

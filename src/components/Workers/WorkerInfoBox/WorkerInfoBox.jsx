@@ -17,11 +17,13 @@
   import { ImageContext } from '../../../contexts/ImageProvider';
   import SnackbarComponent from "../../Snackbar/SnackbarComponent";
   import { SnackbarContext } from '../../../contexts/SnackbarProvider';
+import { UserContext } from '../../../contexts/UserProvider';
 
   export default function WorkerInfoBox() {
       let {getImages,pickImageForWorker} = useContext(ImageContext)
       let {workers,getWorkers} = useContext(WorkerContext)
       let {SnackbarOpen,closeSnackbar,SnackbarMessage,SnackbarSuccess} = useContext(SnackbarContext)
+      let {checkIfUserHasPermission} = useContext(UserContext)
 
       const [openWorkerDetails,setOpenWorkerDetails] = useState(false)
       const [openAddWorker,setOpenAddWorker] = useState(false)
@@ -29,6 +31,9 @@
       const [selectedWorker,setSelectedWorker] = useState()
       const [imageUrls, setImageUrls] = useState({});
       const isMobile = useMediaQuery('(max-width: 1024px)');
+
+      const [canAddWorker,setCanAddWorker] = useState(false)
+      const [canEditWorker,setCanEditWorker] = useState(false)
 
       function closeWorkerDetails() {
           setOpenWorkerDetails(false)
@@ -44,6 +49,12 @@
     useEffect(()=>{
       getWorkers()
       getImages()
+      checkIfUserHasPermission("CREATE_WORKER").then(permission =>{
+        setCanAddWorker(permission)
+      })
+      checkIfUserHasPermission("UPDATE_WORKER").then(permission =>{
+        setCanEditWorker(permission)
+      })
     },[])
 
     const filteredWorkers = selectedRole && selectedRole != "all"
@@ -63,9 +74,6 @@
         }
       }, [workers,pickImageForWorker]);
 
-      useEffect(()=>{
-        console.log(workers)
-      },[workers])
     return (
       <>
       <h1 className={styles.workermaintext}>Dolgozók kezelése</h1>
@@ -113,7 +121,7 @@
           </Box>
           <Modal open={openWorkerDetails} className={styles.flexcenter}>
             <RoleProvider>
-            <WorkerDetails close={closeWorkerDetails} worker={selectedWorker} ></WorkerDetails>
+            <WorkerDetails close={closeWorkerDetails} worker={selectedWorker} canEditWorker={canEditWorker} ></WorkerDetails>
             </RoleProvider>
           </Modal>
           <Modal open={openAddWorker} className={styles.flexcenter}>
@@ -121,11 +129,13 @@
             <AddWorker close={closeAddWorker}></AddWorker>
             </RoleProvider>
           </Modal>
+            {canAddWorker &&
           <div className={styles.addicon}>
           <Fab color="primary" aria-label="add" onClick={()=>setOpenAddWorker(true)}>
               <AddIcon/>
           </Fab>
           </div>
+          }
         <SnackbarComponent snackbarOpen={SnackbarOpen} message={SnackbarMessage} close={closeSnackbar} success={SnackbarSuccess}/>
       </>
     );

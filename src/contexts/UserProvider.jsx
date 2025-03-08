@@ -129,13 +129,26 @@ const UserProvider = ({children}) => {
             displaySnackbar("Hiba a felhasználó állapot módosításnál!",false)
         }
     }
+
+    async function checkIfUserHasPermission(permission) {
+        try {
+            const response = await axios.get(`api/check-permission?permission=${permission}`,{
+                headers: {
+                    'Authorization': token ? `Bearer ${token}` : ""
+                }
+            })
+            return response.data
+        } catch (error) {
+            displaySnackbar("Hiba a jogosultság lekérdezésekor!",false)
+        }
+    }
     useEffect(()=>{
         if (token) {
             getUsers()
         }
     },[token])
     
-    return <UserContext.Provider value={{users,getUsers,getOnlineUsers,getUsersLenght,generateUser,changeUserStatus,userLogin,userProfile,token,getToken,logout}}>
+    return <UserContext.Provider value={{users,getUsers,getOnlineUsers,getUsersLenght,generateUser,changeUserStatus,userLogin,userProfile,token,getToken,logout,checkIfUserHasPermission}}>
         {children}
     </UserContext.Provider>
 }

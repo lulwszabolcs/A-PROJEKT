@@ -13,7 +13,7 @@ import AddIcon from '@mui/icons-material/Add';
 import CheckIcon from '@mui/icons-material/Check';
 import Fab from '@mui/material/Fab';
 import Modal from '@mui/material/Modal';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import Addproblem from '../AddProblem/Addproblem';
@@ -33,7 +33,7 @@ import Typography from '@mui/material/Typography';
 export default function ErrorList() {
   let {SnackbarOpen,closeSnackbar,SnackbarMessage} = useContext(SnackbarContext)
   let {problems,deleteSelectedProblem,closeSelectedProblem,problemColorPicker} = useContext(ProblemContext)
-  let {userProfile} = useContext(UserContext)
+  let {userProfile,checkIfUserHasPermission} = useContext(UserContext)
 
   const [IsaddNewProblemOpen,setIsAddNewProblemOpen] = useState(false);
   const [IsEditModalOpen,setIsEditModalIOpen] = useState(false);
@@ -41,6 +41,11 @@ export default function ErrorList() {
   const [seeClosedProblems,setSeeClosedProblems] = useState(false);
   const [onlySeeClosedProblems,setOnlySeeClosedProblems] = useState(false);
   const [openDialog,setOpenDialog] = useState(false)
+
+  const [canUpdateProblem,setCanUpdateProblem] = useState(false)
+  const [canDeleteProblem,setCanDeleteProblem] = useState(false)
+  const [canCreateProblem,setCanCreateProblem] = useState(false)
+  const [canCloseProblem,setCanCloseProblem] = useState(false)
 
   const openDialogBox = () =>{
       setOpenDialog(true)
@@ -65,6 +70,20 @@ export default function ErrorList() {
   const handleRoleCheckboxChange = (event) => {
     setOnlySeeClosedProblems(event.target.checked);
   };
+  useEffect(()=>{
+    checkIfUserHasPermission("UPDATE_PROBLEM").then(permission =>{
+      setCanUpdateProblem(permission)
+    })
+    checkIfUserHasPermission("DELETE_PROBLEM").then(permission =>{
+      setCanDeleteProblem(permission)
+    })
+    checkIfUserHasPermission("CREATE_PROBLEM").then(permission =>{
+      setCanCreateProblem(permission)
+    })
+    checkIfUserHasPermission("MODIFY_PROBLEM_STATUS").then(permission =>{
+      setCanCloseProblem(permission)
+    })
+  },[])
   return (
     <>
         <div className={styles.tablecontainer}>
@@ -122,20 +141,25 @@ export default function ErrorList() {
       <TableCell>
         {problem.status !== "Lezárva" && (
           <>
-            <Button onClick={() => openEditModal(problem)}>
-              <CreateIcon />
-            </Button>
-            
-            <Button
-              onClick={() => {
-                openDialogBox();
-                setCurrentProb(problem);
-                }}>
-              <DeleteIcon />
-            </Button>
+              { canUpdateProblem && (
+                <Button onClick={() => openEditModal(problem)}>
+                  <CreateIcon />
+                </Button>
+              ) }
+              {canDeleteProblem &&
+                  (<Button
+                    onClick={() => {
+                      openDialogBox();
+                      setCurrentProb(problem);
+                      }}>
+                    <DeleteIcon />
+                  </Button>)
+              }
+              {canCloseProblem &&
               <Button onClick={() => closeSelectedProblem(problem.problemId)}>
               <CheckIcon />
             </Button>
+              }
           </>
         )}
       </TableCell>
@@ -182,9 +206,10 @@ export default function ErrorList() {
             <CardActions>
             {problem.status !== "Lezárva" && (
                 <>
-                  <Button onClick={() => openEditModal(problem)}>
+                  {canUpdateProblem && <Button onClick={() => openEditModal(problem)}>
                     <CreateIcon />
-                  </Button>
+                  </Button>}
+                  {canDeleteProblem &&
                   <Button
                     onClick={() => {
                       openDialogBox();
@@ -192,20 +217,24 @@ export default function ErrorList() {
                       }}>
                     <DeleteIcon />
                   </Button>
+}                   {canCloseProblem &&
                     <Button onClick={() => closeSelectedProblem(problem.problemId)}>
                     <CheckIcon />
                   </Button>
+                    }
                 </>
         )}
       </CardActions>
     </Card>
   ))}
   </div>
+        {canCreateProblem &&
       <div className={styles.fabicon}>
         <Fab color="primary" aria-label="add" onClick={()=>setIsAddNewProblemOpen(true)}>
           <AddIcon />
         </Fab>
         </div>
+        }
         <Modal open={IsaddNewProblemOpen} className={styles.flexcenter}>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <Addproblem close={closeAddProblemModal} ></Addproblem>

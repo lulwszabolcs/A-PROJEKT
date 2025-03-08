@@ -19,12 +19,15 @@ import LocalGasStationIcon from '@mui/icons-material/LocalGasStation';
 import SnackbarComponent from '../../Snackbar/SnackbarComponent'
 import { SnackbarContext } from '../../../contexts/SnackbarProvider';
 import { ImageContext } from '../../../contexts/ImageProvider';
+import { UserContext } from '../../../contexts/UserProvider';
 
 export default function VehicleList() {
     let { vehicles } = useContext(VehicleContext)
     let {pickImageForVehicle} = useContext(ImageContext)
     let {vehicleTypes,vehicleStatuses} = useContext(TypeContext)
     let {SnackbarOpen,SnackbarMessage,closeSnackbar,SnackbarSuccess} = useContext(SnackbarContext)
+    let {checkIfUserHasPermission} = useContext(UserContext)
+
     const [isAddProblemOpen,setIsAddProblemOpen] = useState(false)
     const [isAddVehicleOpen,setIsAddVehicleOpen] = useState(false)
     const [selectedType, setSelectedType] = useState('all');
@@ -32,6 +35,8 @@ export default function VehicleList() {
     const [imageUrls, setImageUrls] = useState({});
     const isSmallScreen = useMediaQuery('(max-width: 425px)');
     const isMobile = useMediaQuery('(max-width: 1024px)');
+    const [canAddVehicle,setCanAddVehicle] = useState(false)
+    const [canModifyVehicleStatus,setCanModifyVehicleStatus] = useState(false)
 
     function closeAddProblem() {
         setIsAddProblemOpen(false);
@@ -79,7 +84,14 @@ export default function VehicleList() {
           loadImages();
         }
       }, [pickImageForVehicle]);
-    
+    useEffect(()=>{
+          checkIfUserHasPermission("CREATE_VEHICLE").then(permission =>{
+            setCanAddVehicle(permission)
+          })
+          checkIfUserHasPermission("MODIFY_VEHICLE_STATUS").then(permission =>{
+            setCanModifyVehicleStatus(permission)
+          })
+    },[])
     return (
         <>
         <h1 className={styles.vehicleTitle}>  
@@ -116,7 +128,8 @@ export default function VehicleList() {
                     </MenuItem>
                 ))}
         </Select>
-        <ReportProblemIcon onClick={()=>setIsAddProblemOpen(true)} className={styles.reporticon} sx={{color:'red',fontSize:'40px'}}></ReportProblemIcon>
+        {canModifyVehicleStatus &&
+        <ReportProblemIcon onClick={()=>setIsAddProblemOpen(true)} className={styles.reporticon} sx={{color:'red',fontSize:'40px'}}></ReportProblemIcon>}
         </div>
         <div className={styles.flexbox}>
         {filteredVehicles.sort((a,b)=>(a.license.localeCompare(b.license))).map((vehicle)=>(
@@ -134,11 +147,12 @@ export default function VehicleList() {
             </div>
         ))}
         </div>
+            {canAddVehicle &&
         <div className={styles.addicon}>
         <Fab color="primary" aria-label="add">
             <AddIcon onClick={()=>setIsAddVehicleOpen(true)} />
         </Fab>
-        </div>
+        </div>}
         <Modal open={isAddProblemOpen}>
             <VehicleModify close={closeAddProblem}></VehicleModify>
         </Modal>
