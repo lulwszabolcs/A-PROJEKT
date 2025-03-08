@@ -5,8 +5,9 @@ import { Button } from '@mui/material';
 import OpenAI from "openai";
 import SendIcon from '@mui/icons-material/Send';
 
+const key = import.meta.env.VITE_XAI_API_KEY;
 const openai = new OpenAI({
-    apiKey: "xai-0pqtoeMTuAzR9k9bS9fnZMQKtGqpwAjlHZZjGBGlbSoQ4JnnhgjFAHJ7QUKHfieb00J7KYOXrhns3rbw",dangerouslyAllowBrowser: true, 
+    apiKey: key,dangerouslyAllowBrowser: true, 
     baseURL: "https://api.x.ai/v1",
   });
 
@@ -61,8 +62,8 @@ export default function SupportChat() {
                 <div className={styles.systemtextcontainer}>
                     {"Írj be egy üzenetet és én megválaszolom!"}
                 </div>
-                {messages.map((msg)=>(
-                    <div className={msg.type == "sent" ? styles.usertextcontainer : styles.systemtextcontainer}>
+                {messages.map((msg,index)=>(
+                    <div className={msg.type == "sent" ? styles.usertextcontainer : styles.systemtextcontainer} key={index}>
                     {msg.text}
                     </div>
                 ))}
