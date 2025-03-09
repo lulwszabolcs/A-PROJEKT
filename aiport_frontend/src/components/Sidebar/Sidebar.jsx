@@ -240,7 +240,7 @@ const handleChange = (text) =>{
           </CircleIcon>
           Offline
         </MenuItem>
-        <MenuItem onClick={()=>{handleClose();changeUserStatus(userProfile.userId,"ON_VACATION")}}>
+        <MenuItem onClick={()=>{handleClose();changeUserStatus(userProfile.userId,"ON_HOLIDAY")}}>
           <CircleIcon style={{marginRight:'1vw',color:'orange'}} sx={{height:'18px'}}>
           </CircleIcon>
         Szabadságon

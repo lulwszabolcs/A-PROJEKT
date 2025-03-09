@@ -40,7 +40,7 @@ export default function Loginpage() {
                 <FormControl fullWidth style={{gap:'40px'}}>
                     <TextField id="outlined-basic" label="Felhasználónév" variant="outlined" defaultValue={"viccelek"} required {...register("username",{required:true})}/>
                     <TextField id="outlined-basic" label="Jelszó" variant="outlined" type='password' defaultValue={"viccelek123"} required {...register("password",{required:true})} />
-                    <Button type='submit' variant="contained" className={styles.loginbutton}>Login</Button>
+                    <Button type='submit' variant="contained" className={styles.loginbutton}>Belépés</Button>
                 </FormControl>  
             </form>
             </div>

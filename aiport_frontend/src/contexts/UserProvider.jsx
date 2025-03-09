@@ -104,10 +104,14 @@ const UserProvider = ({children}) => {
             return "OFFLINE"
         } else if (status === "User is currently online") {
             return "ONLINE"
+        } else if (status === "User is currently on holiday") {
+            return "SZABADSÁGON"
         } else if (status === "ONLINE") {
             return "User is currently online"
         } else if (status === "OFFLINE") {
             return "User is currently offline"
+        } else if (status === "ON_HOLIDAY") {
+            return "User is currently on holiday"
         }
     }
     async function changeUserStatus(id,changedStatus) {
