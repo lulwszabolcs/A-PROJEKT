@@ -1,0 +1,16 @@
+insert into vehicle_type (id, description)
+values ('AIRCRAFT', 'Repülőgép'),
+       ('HELICOPTER', 'Helikopter'),
+       ('PUSHBACK_TRUCK', 'Tolató traktor'),
+       ('TUG', 'Vontató'),
+       ('FUEL_TRUCK', 'Üzemanyag-szállító'),
+       ('FOOD_SERVICE_TRUCK', 'Étel kiszolgáló jármű'),
+       ('BELT_LOADER', 'Szállítószalag'),
+       ('DEICING_TRUCK', 'Jégtelenítő'),
+       ('FIRE_TRUCK', 'Tűzoltóautó'),
+       ('SHUTTLE_BUS', 'Busz'),
+       ('MOBILE_LOUNGE', 'Mobil váróterem'),
+       ('AMBULIFT', 'Emelőkocsi'),
+       ('MAINTENANCE_TRUCK', 'Karbantartó jármű'),
+       ('SECURITY_VEHICLE', 'Biztonsági jármű'),
+       ('AIRFIELD_SWEEPER', 'Pályatakarító');

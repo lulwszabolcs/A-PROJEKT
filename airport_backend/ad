@@ -1,0 +1,242 @@
+[33mcommit 9b7be334b3df1824d99bb05d3642108106a6f3eb[m[33m ([m[1;36mHEAD[m[33m, [m[1;31morigin/auth_teszteles[m[33m, [m[1;32mauth_teszteles[m[33m)[m
+Author: lulwszabolcs <szabolcs050318@gmail.com>
+Date:   Wed Feb 12 11:14:19 2025 +0100
+
+    Cors error fixed
+
+[33mcommit b3609bc908d5a4b2ca1e322294e34a09788f93ff[m
+Author: Bazsa <tothfalusibalazs11@gmail.com>
+Date:   Tue Feb 11 22:59:08 2025 +0100
+
+    auth
+
+[33mcommit 06917a851983cf6bd6ae272e23e4d6d19adc2b02[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmaster[m[33m)[m
+Author: lulwszabolcs <szabolcs050318@gmail.com>
+Date:   Thu Feb 6 16:10:57 2025 +0100
+
+    CORS added to UserController
+
+[33mcommit 44b3ba755426a0aa4a68de23ec87b72e45bc398b[m
+Author: Szabolcs Nagy <20c_nagys@NYIRSZIKSZI.lan>
+Date:   Tue Feb 4 11:20:08 2025 +0100
+
+    Removed unnecessary files
+
+[33mcommit a295a5a72053579ccf6faef17aafda7aea325d11[m
+Author: Bazsa <tothfalusibalazs11@gmail.com>
+Date:   Mon Feb 3 22:03:24 2025 +0100
+
+    workerid fix
+
+[33mcommit 82dbffc5233657360a17ab441ee54e98af7b9e9e[m
+Author: lulwszabolcs <szabolcs050318@gmail.com>
+Date:   Mon Feb 3 21:50:07 2025 +0100
+
+    Worker not found exception added
+
+[33mcommit 613ace5e16b52b89ebdc1d6b2b45317c524a0234[m
+Author: Bazsa <tothfalusibalazs11@gmail.com>
+Date:   Mon Feb 3 21:37:23 2025 +0100
+
+    fix
+
+[33mcommit 4c8e6b2a752ccc9233750a2c97fe0c0a66e6daa9[m
+Author: Bazsa <tothfalusibalazs11@gmail.com>
+Date:   Mon Feb 3 19:01:19 2025 +0100
+
+    admin user for testing
+
+[33mcommit ba4f89a2b8decddcca776e38d8e55e7b03f28929[m
+Author: killervarju <harcsavin@gmail.com>
+Date:   Mon Feb 3 18:24:10 2025 +0100
+
+    Worker added to user
+
+[33mcommit 267ba1e7d7128d6fecfee8f37905d6a7cb1b2d42[m
+Author: Bazsa <tothfalusibalazs11@gmail.com>
+Date:   Mon Feb 3 17:59:32 2025 +0100
+
+    auth exception handler
+
+[33mcommit e99d0d2bd9d254ae671ef6d415314970c9ddc901[m
+Author: Bazsa <tothfalusibalazs11@gmail.com>
+Date:   Mon Feb 3 16:08:42 2025 +0100
+
+    jwt 3.10.0, spring security dependency add
+
+[33mcommit cf87c0a6d37a17c101eb489727846ff2570d8e94[m
+Author: lulwszabolcs <szabolcs050318@gmail.com>
+Date:   Sat Feb 1 21:46:03 2025 +0100
+
+    Problem type series added
+
+[33mcommit 4f9d973cc1e4697313c3dc4e2bdb88aff3a1aa3d[m
+Author: lulwszabolcs <szabolcs050318@gmail.com>
+Date:   Fri Jan 31 21:44:58 2025 +0100
+
+    Image typo fix
+
+[33mcommit 307a4eea073a664da2b92b9fa9acf7ac79ecdcf8[m
+Author: killervarju <harcsavin@gmail.com>
+Date:   Fri Jan 31 13:24:08 2025 +0100
+
+    Fix role in problem, problem service and master.xml fixes
+
+[33mcommit 119b100bcc55c55c675b2c5fa9cd34bf18237ccc[m
+Author: lulwszabolcs <szabolcs050318@gmail.com>
+Date:   Wed Jan 29 22:41:08 2025 +0100
+
+    Generate user changes
+
+[33mcommit ab13f69c5f040108959d81e2ad2d1b0eec178c4a[m
+Author: lulwszabolcs <szabolcs050318@gmail.com>
+Date:   Wed Jan 29 21:26:28 2025 +0100
+
+    Generate user added
+
+[33mcommit 8a709ce56f0b5c18a59aa1d1ff27e257c6655f98[m
+Author: lulwszabolcs <szabolcs050318@gmail.com>
+Date:   Wed Jan 29 21:02:02 2025 +0100
+
+    Delete note fix
+
+[33mcommit bb2da6f7d8bceca786a617404c92896172bb6277[m
+Author: lulwszabolcs <szabolcs050318@gmail.com>
+Date:   Wed Jan 29 20:07:18 2025 +0100
+
+    Note added
+
+[33mcommit 4960793c91694f2263cd9a1251696d7b445c52f5[m
+Merge: cadcbc8 e77d3b0
+Author: lulwszabolcs <szabolcs050318@gmail.com>
+Date:   Wed Jan 29 11:33:20 2025 +0100
+
+    Img bg removed
+
+[33mcommit cadcbc8b6ae4ad9aa64d025e2ee96cc535d24c77[m
+Author: lulwszabolcs <szabolcs050318@gmail.com>
+Date:   Wed Jan 29 10:59:42 2025 +0100
+
+    Needed
+
+[33mcommit e77d3b0da8cea21a33f08018e51f051e296e7a70[m
+Author: Vince Harcsa <20c_harcsav@NYIRSZIKSZI.lan>
+Date:   Wed Jan 29 10:58:39 2025 +0100
+
+    Image background removed
+
+[33mcommit be4574a15c8aacd74c7a79785c9e09e57573d507[m
+Author: lulwszabolcs <szabolcs050318@gmail.com>
+Date:   Wed Jan 29 09:40:03 2025 +0100
+
+    Vehicle images created
+
+[33mcommit af958075e76cc53f373597bae8cf8f910fa5ff05[m
+Author: Bazsa <tothfalusibalazs11@gmail.com>
+Date:   Tue Jan 28 16:55:01 2025 +0100
+
+    enum package error fix
+
+[33mcommit c87476364ea346b71d931b715b42e6d2f448c313[m
+Author: Bazsa <tothfalusibalazs11@gmail.com>
+Date:   Tue Jan 28 16:37:53 2025 +0100
+
+    Vehicle status patch, enum packages
+
+[33mcommit 3eb66be74d685a3c46be1e1899895d41e938db20[m
+Author: lulwszabolcs <szabolcs050318@gmail.com>
+Date:   Tue Jan 28 13:05:59 2025 +0100
+
+    License added to SQL
+
+[33mcommit 745e6fa4e3b1065c02f7437091772c45bb335b37[m
+Merge: 99d2e7b 7cfe0d8
+Author: lulwszabolcs <szabolcs050318@gmail.com>
+Date:   Mon Jan 27 23:24:53 2025 +0100
+
+    Vehicle license added
+
+[33mcommit 99d2e7b19cdee2cb600428aa08c3fb4331edc63b[m
+Author: lulwszabolcs <szabolcs050318@gmail.com>
+Date:   Mon Jan 27 23:23:39 2025 +0100
+
+    Vehicle license added
+
+[33mcommit 7cfe0d83bf7c2c78b7c886caaecda4b97288ee19[m
+Author: Bazsa <tothfalusibalazs11@gmail.com>
+Date:   Mon Jan 27 23:12:28 2025 +0100
+
+    User status add + patch + list
+
+[33mcommit e8a6512515a0e8dc5b293e44002cf50113244e3e[m
+Author: lulwszabolcs <szabolcs050318@gmail.com>
+Date:   Mon Jan 27 17:37:09 2025 +0100
+
+    Image filename is workerid
+
+[33mcommit ded2d52568abbcf453b374805b676fcc770b8ad4[m
+Author: Bazsa <tothfalusibalazs11@gmail.com>
+Date:   Sun Jan 26 23:11:58 2025 +0100
+
+    Get all uploaded images + via link
+
+[33mcommit 8050b8d54a2a8cfe8a507c27633768a0497f4706[m
+Author: lulwszabolcs <szabolcs050318@gmail.com>
+Date:   Fri Jan 24 20:09:24 2025 +0100
+
+    Role type list created
+
+[33mcommit 7ad61c62ed93992f2e70410ab060b8766586d544[m
+Merge: 67622fe accf452
+Author: Bazsa <tothfalusibalazs11@gmail.com>
+Date:   Thu Jan 23 23:24:54 2025 +0100
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit 67622fe88ac252134251b2b653007792bceaa01b[m
+Author: Bazsa <tothfalusibalazs11@gmail.com>
+Date:   Thu Jan 23 23:23:55 2025 +0100
+
+    MySQL database works
+
+[33mcommit accf452bc240cf13ed373e2dc29e8f916a3b6361[m
+Author: lulwszabolcs <szabolcs050318@gmail.com>
+Date:   Thu Jan 23 21:18:45 2025 +0100
+
+    Vehicletype and status list added
+
+[33mcommit 6224bee3ea3a5ab124f48b612066de97350eabdc[m
+Author: lulwszabolcs <szabolcs050318@gmail.com>
+Date:   Thu Jan 23 10:24:18 2025 +0100
+
+    Problem type select fix
+
+[33mcommit f16b440996189871b811146497565c18d62f26a8[m
+Author: lulwszabolcs <szabolcs050318@gmail.com>
+Date:   Wed Jan 22 21:15:49 2025 +0100
+
+    Problem type list modify
+
+[33mcommit 5b7372e237fb37bdbb6e705db266ffcb64ae0ebe[m
+Author: lulwszabolcs <szabolcs050318@gmail.com>
+Date:   Wed Jan 22 15:21:22 2025 +0100
+
+    Problem type list implement
+
+[33mcommit 6687f5eaaf719ded1cde31d98465afac8687dd73[m
+Author: Bazsa <tothfalusibalazs11@gmail.com>
+Date:   Mon Jan 20 22:01:50 2025 +0100
+
+    List problems by type
+
+[33mcommit 8c76a5738b83ad149528c61546eb7875f5619c97[m
+Author: Bazsa <tothfalusibalazs11@gmail.com>
+Date:   Mon Jan 20 21:25:57 2025 +0100
+
+    the status of problems can be modified by PatchMapping
+
+[33mcommit b55a5103ec8090bb3e7a8e24c265f0fdb57d8549[m
+Author: lulwszabolcs <szabolcs050318@gmail.com>
+Date:   Tue Jan 14 15:53:20 2025 +0100
+
+    Project created

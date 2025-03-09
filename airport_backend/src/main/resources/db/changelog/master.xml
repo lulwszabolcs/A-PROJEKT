@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="0" author="admin">
+
+    </changeSet>
+
+
+    <changeSet id="1" author="yourname">
+        <sqlFile path="db/changelog/create_table_role.sql" />
+    </changeSet>
+    <include file="create_table_permission.sql" relativeToChangelogFile="true"/>
+    <include file="create_table_workers.sql" relativeToChangelogFile="true"/>
+    <include file="create_table_allocate.sql" relativeToChangelogFile="true"/>
+    <changeSet id="2" author="yourname">
+        <sqlFile path="db/changelog/create_table_user_status.sql" />
+    </changeSet>
+    <include file="create_table_users.sql" relativeToChangelogFile="true"/>
+    <include file="create_table_image.sql" relativeToChangelogFile="true"/>
+    <include file="create_table_problem_type.sql" relativeToChangelogFile="true"/>
+    <include file="create_table_problem_status.sql" relativeToChangelogFile="true"/>
+    <include file="create_table_problem.sql" relativeToChangelogFile="true"/>
+    <include file="create_table_vehicle_status.sql" relativeToChangelogFile="true"/>
+    <include file="create_table_vehicle_type.sql" relativeToChangelogFile="true"/>
+    <include file="create_table_vehicles.sql" relativeToChangelogFile="true"/>
+    <include file="create_table_note.sql" relativeToChangelogFile="true"/>
+
+    <changeSet id="3" author="yourname">
+        <sqlFile path="db/changelog/insert_into_role.sql" />
+    </changeSet>
+    <include file="insert_into_permission.sql" relativeToChangelogFile="true"/>
+    <include file="insert_into_workers.sql" relativeToChangelogFile="true"/>
+    <include file="insert_into_allocate.sql" relativeToChangelogFile="true"/>
+    <changeSet id="4" author="yourname">
+        <sqlFile path="db/changelog/insert_into_user_status.sql" />
+    </changeSet>
+    <include file="insert_into_users.sql" relativeToChangelogFile="true"/>
+    <include file="insert_into_image.sql" relativeToChangelogFile="true"/>
+    <include file="insert_into_problem_type.sql" relativeToChangelogFile="true"/>
+    <include file="insert_into_problem_status.sql" relativeToChangelogFile="true"/>
+    <include file="insert_into_problem.sql" relativeToChangelogFile="true"/>
+    <include file="insert_into_vehicle_status.sql" relativeToChangelogFile="true"/>
+    <include file="insert_into_vehicle_type.sql" relativeToChangelogFile="true"/>
+    <include file="insert_into_vehicles.sql" relativeToChangelogFile="true"/>
+
+
+</databaseChangeLog>

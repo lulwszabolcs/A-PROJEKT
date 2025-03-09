@@ -1,0 +1,3 @@
+INSERT INTO workers(worker_id, worker_name, worker_title, phone_number, email, wage) VALUES
+                                                                                         (1, 'Gipsz Jakab', 'MAINTENANCE_TECHNICIAN', '0620000000', 'gipszjakab@repter.eu', 500000),
+                                                                                         (2, 'OLajos', 'FIREFIGHTER', '06301111111', 'olajos@repter.eu', 100);

@@ -1,0 +1,19 @@
+package com.example.airport.dto.vehicle;
+
+import com.example.airport.enumeration.vehicle.VehicleStatus;
+import com.example.airport.enumeration.vehicle.VehicleType;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
+public class VehicleList {
+    private Integer vehicleId;
+    private String name;
+    private String license;
+    private VehicleType type;
+    private Integer vehicleYear;
+    private VehicleStatus status;
+}
