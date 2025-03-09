@@ -1,0 +1,5 @@
+= Technikai modellek
+
+* link:technical-models/database-technical-model.adoc[Adatbázis felépítése és működése]
+
+link:system-plan.adoc[Vissza]

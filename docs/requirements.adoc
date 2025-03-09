@@ -1,0 +1,55 @@
+= Követelmény specifikáció
+
+[cols="5,3,2"]
+|===
+|Követelmény|Használati esetek|Állapot
+
+| *Problémák kezelése*
+
+Egy listában megjelennek az adatbázisban eltárolt reptéren felmerülő problémák.
+A felhasználók tudnak új problémát felvenni a problémát meg tudják tekinteni.
+A problémákat státusz szerint különböztetkük meg.
+
+| * Probléma megtekintése
+
+* Összes probléma listázása
+|Elkészült
+
+| *Munkavállalók kezelése*
+
+Egy listában megjelenik a dolgozók adatai amit megtekinthetnek
+és módosíthatnak a megfelelő jogkörrel rendelkező felhasználók.
+Minden munkavállalónak van saját profilképe ami szintén megjelenik
+listázáskor.
+
+|* Munkavállaló adatainak megtekintése
+
+* Munkavállalók adatainak módosítása
+
+* Munkavállalók törlése a rendszerből
+| Fejlesztés alatt
+
+|*Járművek kezelése*
+
+Egy listában megjelennek a járművek az adataikkal együtt a megfelelő
+jogkörrel rendelkező felhasználó megtekintheti, módosíthatja vagy
+törölheti a listából a járműveket.
+
+|* Jármű adatainak megtekintése
+
+* Jármű adatainak módosítása
+
+* Jármű törlése a rendszerből
+|Fejlesztésre vár
+
+| *Felhasználó bejelentkezés*
+
+A rendszerbe csak felhasználónév és jelszó párossal lehet bejelentkezni.
+Több szerepkör van, a munkakörök szerint, mindenki más felületet fog
+kapni a bejelentkezés után.
+
+| Bejelentkezés, Kijelentkezés
+| Elkészítésre vár
+
+|===
+link:README.adoc[Vissza]
