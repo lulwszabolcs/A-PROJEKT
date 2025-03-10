@@ -1,7 +1,7 @@
 = Alkalmazás Dokumentáció
 
-link:requirements.adoc[Követelmény specifikáció]
+link:docs/requirements.adoc[Követelmény specifikáció]
 
-link:system-plan.adoc[Fejlesztői dokumentáció - rendszerterv]
+link:docs/system-plan.adoc[Fejlesztői dokumentáció - rendszerterv]
 
 Felhasználói dokumentáció

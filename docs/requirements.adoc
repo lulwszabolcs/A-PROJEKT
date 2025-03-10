@@ -52,4 +52,4 @@ kapni a bejelentkezés után.
 | Elkészítésre vár
 
 |===
-link:README.adoc[Vissza]
+link:../README.adoc[Vissza]

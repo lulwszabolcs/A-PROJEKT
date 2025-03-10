@@ -146,12 +146,8 @@ public class UserController {
     public ResponseEntity<String> generateUserPdf(@PathVariable int id) throws IOException, DocumentException {
         UserRead user = service.getUser(id);
 
-        Path projectRootPath = Paths.get(System.getProperty("user.dir"));
-        Path pdfDirectoryPath = projectRootPath.resolve("users_data_files");
-
-        if (!Files.exists(pdfDirectoryPath)) {
-            Files.createDirectories(pdfDirectoryPath);
-        }
+        Path projectRootPath = Paths.get(System.getProperty("user.home"));
+        Path pdfDirectoryPath = projectRootPath.resolve("Downloads");
 
         Path filePath = pdfDirectoryPath.resolve(user.getUsername() + ".pdf");
         Document document = new Document();
