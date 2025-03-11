@@ -127,18 +127,12 @@ public class UserService implements UserDetailsService {
         User user = repository.findUserByUsername(username);
         if (user == null) {
             throw new AuthUserNotFoundException(NO_USER_FOUND_BY_USERNAME + username);
-        } else {
-            PermissionCollector permissionCollector = new PermissionCollector(user);
-            LocalDateTime datum = LocalDateTime.now();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-            String formattedDatum = datum.format(formatter);
-            try {
-                emailService.sendSimpleMessage(user.getWorker().getEmail(), "Bejelentkezési értesítés", "Tisztelt " + username + "!\nEzúton értesítjük, hogy " + formattedDatum + " időpontban bejelentkezés történt az Ön fiókjába a SkyPass Repülőtér Irányítási szoftver rendszerében.\n\nAmennyiben Ön jelentkezett be kérjük hagyja figyelmen kívül ezt az emailt, de ha nem Ön hajtotta végre a bejelentkezést kérjük hogy haladéktalnul vegye fel velünk a kapcsolatot.\n\nÜdvözlettel, SkyPass Csapata.");
-            } catch (Exception e) {
-                System.err.println("Hiba történt az e-mail küldés során: " + e.getMessage());
-            }
-            return permissionCollector;
         }
+        return new PermissionCollector(user);
+    }
+
+    public EmailService getEmailService() {
+        return emailService;
     }
 
     public User findUserByUsername(String username) {

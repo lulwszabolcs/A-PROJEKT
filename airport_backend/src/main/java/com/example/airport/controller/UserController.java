@@ -118,6 +118,20 @@ public class UserController {
         HttpHeaders jwtHeader = getJWTHeader(collector);
         String jwtToken = jwtTokenProvider.generateJwtToken(collector);
         UserRead userRead = UserConverter.convertModelToRead(user, jwtToken);
+
+        LocalDateTime datum = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String formattedDatum = datum.format(formatter);
+        try {
+            service.getEmailService().sendSimpleMessage(
+                    user.getWorker().getEmail(),
+                    "Bejelentkezési értesítés",
+                    "Tisztelt " + loginRequest.getUsername() + "!\nEzúton értesítjük, hogy " + formattedDatum + " időpontban bejelentkezés történt az Ön fiókjába a SkyPass Repülőtér irányítási szoftver rendszerében."
+            );
+        } catch (Exception e) {
+            System.err.println("Hiba történt az e-mail küldés során: " + e.getMessage());
+        }
+
         return new ResponseEntity<>(userRead, jwtHeader, HttpStatus.OK);
     }
 
