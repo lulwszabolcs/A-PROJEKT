@@ -112,23 +112,13 @@ public class UserController {
     @PostMapping("/user/login")
     @Operation(summary = "User login")
     public ResponseEntity<UserRead> login(@RequestBody LoginRequest loginRequest) {
-        try {
-            authenticate(loginRequest.getUsername(), loginRequest.getPassword());
-            User user = service.findUserByUsername(loginRequest.getUsername());
-            PermissionCollector collector = new PermissionCollector(user);
-            HttpHeaders jwtHeader = getJWTHeader(collector);
-            String jwtToken = jwtTokenProvider.generateJwtToken(collector);
-            UserRead userRead = UserConverter.convertModelToRead(user, jwtToken);
-            return new ResponseEntity<>(userRead, jwtHeader, HttpStatus.OK);
-        } catch (AuthenticationException e) {
-            ExceptionResponse exceptionResponse = new ExceptionResponse(
-                    HttpStatus.BAD_REQUEST.value(),
-                    HttpStatus.BAD_REQUEST,
-                    HttpStatus.BAD_REQUEST.getReasonPhrase().toUpperCase(),
-                    "Username / password incorrect. Please try again"
-            );
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
-        }
+        authenticate(loginRequest.getUsername(), loginRequest.getPassword());
+        User user = service.findUserByUsername(loginRequest.getUsername());
+        PermissionCollector collector = new PermissionCollector(user);
+        HttpHeaders jwtHeader = getJWTHeader(collector);
+        String jwtToken = jwtTokenProvider.generateJwtToken(collector);
+        UserRead userRead = UserConverter.convertModelToRead(user, jwtToken);
+        return new ResponseEntity<>(userRead, jwtHeader, HttpStatus.OK);
     }
 
     private HttpHeaders getJWTHeader(PermissionCollector collector) {
