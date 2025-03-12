@@ -133,7 +133,6 @@ const UserProvider = ({children}) => {
                     let result = users.find((x)=>x.id === response.data.id)
                     result.status = response.data.status
                     setUsers([...users])
-                    setUserStatus(response.data.status)
                     displaySnackbar(`Mostantól ${userStatusConverter(response.data.status)} vagy!`,true)
                 }
             }
@@ -187,7 +186,7 @@ const UserProvider = ({children}) => {
         }
     },[token])
     
-    return <UserContext.Provider value={{users,getUsers,getOnlineUsers,getUsersLenght,generateUser,changeUserStatus,userLogin,userProfile,token,getToken,logout,checkIfUserHasPermission,generatePdfFileForUser,getUserStatus,userStatus}}>
+    return <UserContext.Provider value={{users,getUsers,getOnlineUsers,getUsersLenght,generateUser,changeUserStatus,userLogin,userProfile,token,getToken,logout,checkIfUserHasPermission,generatePdfFileForUser,getUserStatus}}>
         {children}
     </UserContext.Provider>
 }

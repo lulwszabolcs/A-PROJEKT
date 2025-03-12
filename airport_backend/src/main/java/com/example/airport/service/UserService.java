@@ -148,5 +148,10 @@ public class UserService implements UserDetailsService {
         Long result = allocateRepository.hasPermission(role.name(), permission.name());
         return result != null && result == 1L;
     }
+
+    public UserStatus getUserStatus(int id) {
+        User user = repository.getReferenceById(id);
+        return user.getStatus();
+    }
 }
 

@@ -145,6 +145,13 @@ public class UserController {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
     }
 
+    @GetMapping("/user/getstatus/{id}")
+    @Operation(summary = "Get the users status")
+    @PreAuthorize("hasAuthority('READ_USER_STATUS')")
+    public UserStatus getUserStatus(@PathVariable int id) {
+        return service.getUserStatus(id);
+    }
+
     @GetMapping("/user/pdf/{id}")
     @Operation(summary = "Generate PDF of user data")
     public ResponseEntity<String> generateUserPdf(@PathVariable int id) throws IOException, DocumentException {
