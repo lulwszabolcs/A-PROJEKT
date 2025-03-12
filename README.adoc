@@ -1,4 +1,30 @@
-= Alkalmazás Dokumentáció
+= SkyPass repülőtér menedzsment rendszer
+
+== 📒 Összegzés:
+
+A megvalósított alkalmazás képes biztosítani a repülőtér optimalizált működését egy integrált könnyen használható felület segítségével, amely átfogó megoldást kínál a repülőgépek igazgatására, a hibák gyors elhárítására és a repülőtér dolgozóinak hatékony kezelésére.
+
+Ezáltal javul az üzemeltetési folyamatok átláthatósága, csökken a késések és fennakadások kockázata, valamint növekszik a repülőtér által nyújtott szolgáltatások minősége.
+
+== ⬇️ Telepítés:
+=== Szükséges programok:
+* MySQL connector
+* IntelliJ IDEA
+* NodeJS 18+
+
+    1. Navigáljunk az _airport_frontend_ mappába: +
+`cd .\aiport_frontend\`
+    2. Telepítsük fel a szükséges függőségeket: +
+`npm install`
+    3. Illesszük be a kapott környezeti változó filet.
+    4. Futtassuk a vite fejlesztői szervert egy tetszőleges terminálban: +
+`npm run dev`
+    5. Indítsuk el az _IntelliJ IDEA_ programot.
+    6. Töltsük be a projektünket, majd keressük meg az `src/java/main` mappában található `AirportApplication` filet.
+    7. A jobb felső sarokban található futtatás ikonnal futtassuk.
+    8. Látogassunk el a http://localhost:5173 oldalra.
+
+== 📚 További dokumentációk:
 
 link:docs/requirements.adoc[Követelmény specifikáció]
 
