@@ -15,8 +15,10 @@ const UserProvider = ({children}) => {
         phoneNumber:"",
         role:"",
         workerId:"",
-        userId:""
+        userId:"",
+        status:""
     })
+    const [userStatus,setUserStatus] = useState()
 
     async function userLogin(data) {
         try {
@@ -35,7 +37,8 @@ const UserProvider = ({children}) => {
                 "phoneNumber":response.data.worker.phoneNumber,
                 "role":response.data.worker.title,
                 "workerId":response.data.worker.workerId,
-                "userId":response.data.id
+                "userId":response.data.id,
+                "status":response.data.status
             });
             if (response.headers.jwt_token || response.headers.Authorization) {
                 const token = response.headers.jwt_token
@@ -54,7 +57,8 @@ const UserProvider = ({children}) => {
             email:"",
             phoneNumber:"",
             role:"",
-            workerId:""
+            workerId:"",
+            status:""
         })
     }
 
@@ -129,6 +133,7 @@ const UserProvider = ({children}) => {
                     let result = users.find((x)=>x.id === response.data.id)
                     result.status = response.data.status
                     setUsers([...users])
+                    setUserStatus(response.data.status)
                     displaySnackbar(`Mostantól ${userStatusConverter(response.data.status)} vagy!`,true)
                 }
             }
@@ -163,6 +168,18 @@ const UserProvider = ({children}) => {
             displaySnackbar("Hiba a PDF generálásánál!",false)
         }
     }
+    async function getUserStatus(id) {
+        try {
+            const response = (await axios.get(`/api/user/getstatus/${id}`,{
+                headers: {
+                    'Authorization': token ? `Bearer ${token}` : ""
+                }
+            }))
+            return response
+        } catch (error) {
+            displaySnackbar("Hiba a felhasználó állapot lekérdezésekor",true)
+        }
+    }
 
     useEffect(()=>{
         if (token) {
@@ -170,7 +187,7 @@ const UserProvider = ({children}) => {
         }
     },[token])
     
-    return <UserContext.Provider value={{users,getUsers,getOnlineUsers,getUsersLenght,generateUser,changeUserStatus,userLogin,userProfile,token,getToken,logout,checkIfUserHasPermission,generatePdfFileForUser}}>
+    return <UserContext.Provider value={{users,getUsers,getOnlineUsers,getUsersLenght,generateUser,changeUserStatus,userLogin,userProfile,token,getToken,logout,checkIfUserHasPermission,generatePdfFileForUser,getUserStatus,userStatus}}>
         {children}
     </UserContext.Provider>
 }
