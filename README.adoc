@@ -1,10 +1,17 @@
-= SkyPass repülőtér menedzsment rendszer
+= SkyPass repülőtér menedzsment és irányítási rendszer
 
 == 📒 Összegzés:
 
 A megvalósított alkalmazás képes biztosítani a repülőtér optimalizált működését egy integrált könnyen használható felület segítségével, amely átfogó megoldást kínál a repülőgépek igazgatására, a hibák gyors elhárítására és a repülőtér dolgozóinak hatékony kezelésére.
 
 Ezáltal javul az üzemeltetési folyamatok átláthatósága, csökken a késések és fennakadások kockázata, valamint növekszik a repülőtér által nyújtott szolgáltatások minősége.
+
+== 🛠️ Használt technológia:
+* *Frontend:* React + Vite
+* *Styling:* CSS, Mui
+* *Backend:* Spring Boot
+* *Database:* MySQL
+* *Large Language Model:* Grok
 
 == ⬇️ Telepítés:
 === Szükséges programok:
