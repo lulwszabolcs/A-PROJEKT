@@ -20,12 +20,19 @@ Ezáltal javul az üzemeltetési folyamatok átláthatósága, csökken a késé
 * NodeJS 18+
 
     1. Navigáljunk az _airport_frontend_ mappába: +
-`cd .\aiport_frontend\`
+----
+cd .\aiport_frontend\
+----
     2. Telepítsük fel a szükséges függőségeket: +
+----
 `npm install`
+----
     3. Illesszük be a kapott környezeti változó filet.
     4. Futtassuk a vite fejlesztői szervert egy tetszőleges terminálban: +
+----
 `npm run dev`
+----
+
     5. Indítsuk el az _IntelliJ IDEA_ programot.
     6. Töltsük be a projektünket, majd keressük meg az `src/java/main` mappában található `AirportApplication` filet.
     7. A jobb felső sarokban található futtatás ikonnal futtassuk.
