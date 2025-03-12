@@ -4,4 +4,5 @@ link:docs/requirements.adoc[Követelmény specifikáció]
 
 link:docs/system-plan.adoc[Fejlesztői dokumentáció - rendszerterv]
 
-Felhasználói dokumentáció
+link:docs/user_manual.pdf[Felhasználói dokumentáció]
+
