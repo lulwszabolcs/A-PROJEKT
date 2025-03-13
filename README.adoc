@@ -1,7 +1,60 @@
-= Alkalmazás Dokumentáció
+= SkyPass repülőtér menedzsment és irányítási rendszer
+
+== 📒 Összegzés:
+
+A megvalósított alkalmazás képes biztosítani a repülőtér optimalizált működését egy integrált könnyen használható felület segítségével, amely átfogó megoldást kínál a repülőgépek igazgatására, a hibák gyors elhárítására és a repülőtér dolgozóinak hatékony kezelésére.
+
+Ezáltal javul az üzemeltetési folyamatok átláthatósága, csökken a késések és fennakadások kockázata, valamint növekszik a repülőtér által nyújtott szolgáltatások minősége.
+
+== 🛠️ Használt technológia:
+* *Frontend:* React + Vite
+* *Styling:* CSS, Mui
+* *Backend:* Spring Boot
+* *Database:* MySQL
+* *Large Language Model:* Grok
+
+== ⬇️ Telepítés:
+=== Szükséges programok:
+* MySQL connector
+* IntelliJ IDEA
+* NodeJS 18+
+
+. Navigáljunk az _airport_frontend_ mappába:
++
+[source,batch]
+----
+cd .\aiport_frontend\
+----
+
+. Telepítsük fel a szükséges függőségeket:
++
+[source,batch]
+----
+npm install
+----
+
+. Illesszük be a kapott környezeti változó filet.
+
+. Futtassuk a vite fejlesztői szervert egy tetszőleges terminálban:
++
+[source,batch]
+----
+npm run dev
+----
+
+. Indítsuk el az _IntelliJ IDEA_ programot.
+
+. Töltsük be a projektünket, majd keressük meg az `src/java/main` mappában található `AirportApplication` filet.
+
+. A jobb felső sarokban található futtatás ikonnal futtassuk.
+
+. Látogassunk el a http://localhost:5173 oldalra.
+
+== 📚 További dokumentációk:
 
 link:docs/requirements.adoc[Követelmény specifikáció]
 
 link:docs/system-plan.adoc[Fejlesztői dokumentáció - rendszerterv]
 
-Felhasználói dokumentáció
+link:docs/user_manual.pdf[Felhasználói dokumentáció]
+

@@ -190,6 +190,8 @@ INSERT INTO allocate (role_id, permission_id) VALUES
 
                                                   ('MAINTENANCE_TECHNICIAN', 'READ_VEHICLE'),
                                                   ('MAINTENANCE_TECHNICIAN', 'READ_USER'),
+                                                  ('MAINTENANCE_TECHNICIAN', 'READ_USER_STATUS'),
+                                                  ('MAINTENANCE_TECHNICIAN', 'LIST_USER'),
                                                   ('MAINTENANCE_TECHNICIAN', 'LIST_NOTES'),
                                                   ('MAINTENANCE_TECHNICIAN', 'SAVE_NOTE'),
                                                   ('MAINTENANCE_TECHNICIAN', 'DELETE_NOTE'),
@@ -212,6 +214,7 @@ INSERT INTO allocate (role_id, permission_id) VALUES
                                                   ('VIP_SERVICE_AGENT', 'UPDATE_USER'),
                                                   ('VIP_SERVICE_AGENT', 'MODIFY_USER_STATUS'),
                                                   ('VIP_SERVICE_AGENT', 'DELETE_USER'),
+                                                  ('VIP_SERVICE_AGENT', 'READ_USER_STATUS'),
                                                   ('VIP_SERVICE_AGENT', 'CREATE_WORKER'),
                                                   ('VIP_SERVICE_AGENT', 'READ_WORKER'),
                                                   ('VIP_SERVICE_AGENT', 'LIST_WORKER'),

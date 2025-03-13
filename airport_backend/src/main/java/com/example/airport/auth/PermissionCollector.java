@@ -1,5 +1,6 @@
 package com.example.airport.auth;
 
+import com.example.airport.enumeration.role.Role;
 import com.example.airport.model.User;
 import com.example.airport.service.SpringContext;
 import com.example.airport.service.UserService;
@@ -10,34 +11,39 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class PermissionCollector implements UserDetails {
 
     private User user;
-    private UserService userService = SpringContext.getBean(UserService.class);
+    private Collection<SimpleGrantedAuthority> authorities;
 
     public PermissionCollector(User user) {
         this.user = user;
+        this.authorities = loadAuthorities(user);
+    }
+
+    public PermissionCollector(String username, String role, List<String> permissions) {
+        this.user = new User();
+        this.user.setUsername(username);
+        this.user.setRole(Role.valueOf(role));
+        this.authorities = permissions.stream()
+                .map(SimpleGrantedAuthority::new)
+                .collect(Collectors.toList());
+    }
+
+    private Collection<SimpleGrantedAuthority> loadAuthorities(User user) {
+        UserService userService = SpringContext.getBean(UserService.class);
+        List<String> permissions = userService.findPermissionsByRole(user.getRole());
+        return permissions.stream()
+                .map(SimpleGrantedAuthority::new)
+                .collect(Collectors.toList());
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<String> permissions = userService.findPermissionsByRole(this.user.getRole());
-        System.out.println("Role: " + this.user.getRole());
-        System.out.println("Permissions found: " + permissions);
-        Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
-        if (permissions != null && !permissions.isEmpty()) {
-            permissions.forEach(permission -> {
-                System.out.println("Adding permission: " + permission);
-                authorities.add(new SimpleGrantedAuthority(permission));
-            });
-        } else {
-            System.out.println("No permissions found for role: " + this.user.getRole());
-        }
         return authorities;
     }
-
-
 
     @Override
     public String getPassword() {

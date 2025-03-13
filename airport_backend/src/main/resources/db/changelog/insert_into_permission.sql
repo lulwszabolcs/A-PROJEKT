@@ -6,6 +6,7 @@ INSERT INTO permission (id) VALUES
                                 ('UPDATE_USER'),
                                 ('MODIFY_USER_STATUS'),
                                 ('DELETE_USER'),
+                                ('READ_USER_STATUS'),
 
                                 ('CREATE_WORKER'),
                                 ('READ_WORKER'),

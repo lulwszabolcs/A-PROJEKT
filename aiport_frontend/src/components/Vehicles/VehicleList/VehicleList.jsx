@@ -51,7 +51,7 @@ export default function VehicleList() {
     });
     function pickIcon(vehicle) {
         switch (vehicle.status) {
-            case "Működőképes":
+            case "Jármű működőképes":
                 return <p className={styles.vehiclestatus} style={{color:'green'}}>{vehicle.status}<CheckCircleIcon/></p>
             case "Karbantartás alatt":
                 return <p className={styles.vehiclestatus} style={{color:'gray'}}>{vehicle.status}<ReportIcon/></p>

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState,useContext } from 'react';
+import { useState,useContext,useEffect } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
@@ -18,7 +18,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import HomeIcon from '@mui/icons-material/Home';
-import { AccountBox, Home, Logout } from '@mui/icons-material';
+import { AccountBox } from '@mui/icons-material';
 import BadgeIcon from '@mui/icons-material/Badge';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 import ErrorIcon from '@mui/icons-material/Error';
@@ -113,11 +113,12 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function MiniDrawer() {
-  let {changeUserStatus,logout,userProfile} = useContext(UserContext)
+  let {changeUserStatus,logout,userProfile,getUserStatus} = useContext(UserContext)
   let {SnackbarOpen,closeSnackbar,SnackbarMessage} = useContext(SnackbarContext)
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [isToolbarVisible,setIsToolbarVisible] = useState(false)
+  const [status,setStatus] = useState(userProfile.status)
   const openToolbar = Boolean(anchorEl);
   const isMobile = useMediaQuery('(max-width: 1024px)');
   const handleClick = (event) => {
@@ -137,13 +138,7 @@ export default function MiniDrawer() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  React.useEffect(()=>{
-    if (!isMobile) {
-      setIsToolbarVisible(true)
-    } else {
-      setIsToolbarVisible(false)
-    }
-  },[isMobile])
+
 const [primarytext,setPrimaryText] = useState();
 const handleChange = (text) =>{
   switch (text) {
@@ -187,6 +182,19 @@ const handleChange = (text) =>{
   </Tooltip>
   ,<BadgeIcon/>,<DirectionsCarIcon/>,<ErrorIcon/>,<ChatIcon/>,<LogoutIcon/>];
   
+  useEffect(()=>{
+    if (!isMobile) {
+      setIsToolbarVisible(true)
+    } else {
+      setIsToolbarVisible(false)
+    }
+  },[isMobile])
+
+  useEffect(()=>{
+    getUserStatus(userProfile.userId).then((response)=>{
+      setStatus(response.data)
+    })
+  },[changeUserStatus])
   return (
     <div>
     <Menu
@@ -230,17 +238,17 @@ const handleChange = (text) =>{
           <Avatar style={{marginRight:'10px'}}/> Profil
         </MenuItem>
         <Divider />
-        <MenuItem onClick={()=>{handleClose();changeUserStatus(userProfile.userId,"ONLINE")}}>
+        <MenuItem style={{backgroundColor:status == "User is currently online" ? "lightgray":undefined}} onClick={()=>{handleClose();changeUserStatus(userProfile.userId,"ONLINE")}}>
           <CircleIcon style={{marginRight:'1vw',color:'green'}} sx={{height:'18px'}}>
           </CircleIcon>
           Online
         </MenuItem>
-        <MenuItem onClick={()=>{handleClose();changeUserStatus(userProfile.userId,"OFFLINE")}}>
+        <MenuItem style={{backgroundColor:status == "User is currently offline" ? "lightgray":undefined}} onClick={()=>{handleClose();changeUserStatus(userProfile.userId,"OFFLINE")}}>
           <CircleIcon style={{marginRight:'1vw',color:'gray'}} sx={{height:'18px'}}>
           </CircleIcon>
           Offline
         </MenuItem>
-        <MenuItem onClick={()=>{handleClose();changeUserStatus(userProfile.userId,"ON_HOLIDAY")}}>
+        <MenuItem style={{backgroundColor:status == "User is currently on holiday" ? "lightgray":undefined}} onClick={()=>{handleClose();changeUserStatus(userProfile.userId,"ON_HOLIDAY")}}>
           <CircleIcon style={{marginRight:'1vw',color:'orange'}} sx={{height:'18px'}}>
           </CircleIcon>
         Szabadságon

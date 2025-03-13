@@ -26,7 +26,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
+import static com.example.airport.auth.JwtAuthorizationFilter.TOKEN_PREFIX;
 import static java.util.Arrays.stream;
+import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 
 @Component
 public class JWTTokenProvider {
@@ -41,7 +43,7 @@ public class JWTTokenProvider {
     private static final String ISSUER = "Issuer";
     private static final String AUDIENCE = "Skypass airport management webservice";
     public static final String AUTHORITIES = "authorities";
-    public static final long EXPIRATION_TIME = 1000 * 60 * 60 * 24 * 5; // 5 days expressed in milliseconds 432 000 000
+    public static final long EXPIRATION_TIME = 1000 * 60 * 60 * 24 * 5;
 
     public String generateJwtToken(PermissionCollector permissionCollector) {
         String[] claims = getClaimsFromUser(permissionCollector);
@@ -50,7 +52,8 @@ public class JWTTokenProvider {
                 .withAudience(AUDIENCE)
                 .withIssuedAt(new Date())
                 .withSubject(permissionCollector.getUsername())
-                .withArrayClaim(AUTHORITIES, claims)  // Beállítjuk a jogosultságokat
+                .withClaim("role", permissionCollector.getUser().getRole().name())
+                .withArrayClaim(AUTHORITIES, claims)
                 .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .sign(HMAC512(secret.getBytes()));
     }
@@ -62,11 +65,16 @@ public class JWTTokenProvider {
     }
 
     public Authentication getAuthentication(String username, List<GrantedAuthority> authorities, HttpServletRequest request) {
-        UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-        UsernamePasswordAuthenticationToken userPasswordAuthToken = new
-                UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-        userPasswordAuthToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-        return userPasswordAuthToken;
+        String token = request.getHeader(AUTHORIZATION).substring(TOKEN_PREFIX.length());
+        String role = JWT.decode(token).getClaim("role").asString();
+        List<String> permissionList = authorities.stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.toList());
+
+        PermissionCollector permissionCollector = new PermissionCollector(username, role, permissionList);
+        UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(permissionCollector, null, authorities);
+        authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+        return authToken;
     }
 
     public boolean isTokenValid(String username, String token) {

@@ -24,7 +24,6 @@ export default function ProfileCard() {
                 <DownloadIcon className={styles.downloadicon} sx={{color:'gray'}} onClick={()=>generatePdfFileForUser(userProfile.userId)}/>
                 <img src={workerImageUrl} className={styles.profilepic}></img>
                 <h2>{userProfile.name}</h2>
-                <p className={styles.infotext}>{userProfile.workerId}</p>
                 <p className={styles.infotext}>{userProfile.role}</p>
                 <p className={styles.infotext}>{userProfile.email}</p>
                 <p className={styles.infotext}>{userProfile.phoneNumber}</p>

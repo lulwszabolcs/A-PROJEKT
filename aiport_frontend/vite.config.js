@@ -14,5 +14,10 @@ export default defineConfig({
         changeOrigin: true,              
       }
     }
-  }
+  },
+  test: {
+    globals:true,
+    setupFiles: './src/setupTests.js',
+    environment: 'jsdom',
+  },
 })
