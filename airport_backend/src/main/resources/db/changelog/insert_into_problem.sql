@@ -1,2 +1,2 @@
-insert into problem (problem_id, name, description, datum, problem_type, status, role)
+insert into problem (problem_id, name, description, date, problem_type, status, role)
 values (1, 'Traktor hiba', 'A tolató traktor kereke defektes', '2024.11.20', 'VEHICLE_FAILURE', 'PENDING', 'RAMP_AGENT');

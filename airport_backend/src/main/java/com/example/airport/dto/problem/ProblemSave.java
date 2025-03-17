@@ -14,8 +14,7 @@ import lombok.Setter;
 public class ProblemSave {
     private String name;
     private String description;
-    private String datum;
+    private String date;
     private ProblemType problemType;
     private ProblemStatus status;
-    //private Role role;
 }

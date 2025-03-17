@@ -18,7 +18,7 @@ public class Problem {
     private int problemId;
     private String name;
     private String description;
-    private String  datum;
+    private String date;
     @Enumerated(EnumType.STRING)
     private ProblemType problemType;
     @Enumerated(EnumType.STRING)

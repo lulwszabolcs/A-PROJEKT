@@ -14,7 +14,7 @@ public class ProblemConverter {
         Problem problem = new Problem();
         problem.setName(problemSave.getName());
         problem.setDescription(problemSave.getDescription());
-        problem.setDatum(problemSave.getDatum());
+        problem.setDate(problemSave.getDate());
         problem.setProblemType(problemSave.getProblemType());
         problem.setStatus(problemSave.getStatus());
         problem.setRole(role);
@@ -26,7 +26,7 @@ public class ProblemConverter {
         problemRead.setProblemId(problem.getProblemId());
         problemRead.setName(problem.getName());
         problemRead.setDescription(problem.getDescription());
-        problemRead.setDatum(problem.getDatum());
+        problemRead.setDate(problem.getDate());
         problemRead.setProblemType(problem.getProblemType());
         problemRead.setStatus(problem.getStatus());
         problemRead.setRole(problem.getRole());
@@ -38,7 +38,7 @@ public class ProblemConverter {
         problem.setProblemId(id);
         problem.setName(problemSave.getName());
         problem.setDescription(problemSave.getDescription());
-        problem.setDatum(problemSave.getDatum());
+        problem.setDate(problemSave.getDate());
         problem.setProblemType(problemSave.getProblemType());
         problem.setStatus(problemSave.getStatus());
         problem.setRole(role);
@@ -57,7 +57,7 @@ public class ProblemConverter {
         problemList.setProblemId(problem.getProblemId());
         problemList.setName(problem.getName());
         problemList.setDescription(problem.getDescription());
-        problemList.setDatum(problem.getDatum());
+        problemList.setDate(problem.getDate());
         problemList.setProblemType(problem.getProblemType());
         problemList.setStatus(problem.getStatus());
         problemList.setRole(problem.getRole());
