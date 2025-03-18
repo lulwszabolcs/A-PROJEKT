@@ -38,8 +38,7 @@ public class ImageController {
 
             return ResponseEntity.ok("Image uploaded successfully");
         } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("FAILED_TO_UPLOAD_IMAGE: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("FAILED_TO_UPLOAD_IMAGE");
         }
     }
 
