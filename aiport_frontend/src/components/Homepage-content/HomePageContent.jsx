@@ -133,19 +133,15 @@ export default function HomePageContent() {
   return (
     <>
       <h1 className={styles.welcometext}>Üdvözöljük {userProfile.name}!</h1>
-      
-
-      
-
       <div className={styles.flexbox}>
       {weatherAlertVisible && (
           <div className={styles.alertcontainer}>
-            <Alert variant="filled" severity="warning" style={{ width: '50vw' }}>
+            <Alert variant="filled" severity="warning" data-testid={"weatherAlert"} style={{ width: '50vw' }}>
               {weatherAlertMessage}
             </Alert>
           </div>
       )}
-      <div className={styles.weathercontainer}>
+      <div className={styles.weathercontainer} data-testid={"weatherContainer"}>
         <div className={styles.tempcontainer}>
           <WaterDropIcon></WaterDropIcon> 
           <p>{weatherData.rain} mm</p>
@@ -178,6 +174,7 @@ export default function HomePageContent() {
               [`& .${gaugeClasses.valueArc}`]: { fill: '#52b202' },
               [`& .${gaugeClasses.referenceArc}`]: { fill: theme.palette.text.disabled },
             })}
+            data-testid={"userChart"}
           />
           <h3>Online felhasználók</h3>
         </div>
@@ -205,11 +202,12 @@ export default function HomePageContent() {
             height={isSmallScreen ?  300 : 200}
             width={isSmallScreen ? 400 : 500}
             className={styles.piechart}
+            data-testid={"vehicleChart"}
           />
           <h3 className={styles.piecharttext}>Üzemképes járművek</h3>
         </div>
         </div>
-        <div className={styles.stickynotescontainer}>
+        <div className={styles.stickynotescontainer} data-testid={"stickyNotes"}>
           {notes.map((note,index) => {
             const position = notePositions[note.id] || { x: 250 + (index * 250), y: 775 };
             return (

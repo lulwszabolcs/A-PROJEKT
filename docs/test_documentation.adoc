@@ -38,7 +38,7 @@ npm run test
 | A belépési funkció sikeresen végbemegy
 | unit
 
-| Rossz bejelentkezési adat esetének tesztelése
+| Sikertelen bejelentkezés tesztelése
 | A bejelentkezés nem megy végbe
 
 | unit

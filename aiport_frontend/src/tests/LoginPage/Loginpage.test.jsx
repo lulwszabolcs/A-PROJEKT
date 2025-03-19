@@ -41,7 +41,7 @@ describe('Loginpage', () => {
       </SnackbarContext.Provider>
     </MemoryRouter>
   );
-
+  describe('Loginpage tests',()=>{
   it('renders login form correctly', () => {
     render(<Loginpage />, { wrapper: Wrapper });
 
@@ -106,4 +106,5 @@ describe('Loginpage', () => {
     expect(usernameInput).toHaveValue('newuser');
     expect(passwordInput).toHaveValue('newpass123');
   });
+  })
 });
