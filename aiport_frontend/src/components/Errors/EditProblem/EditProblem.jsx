@@ -20,7 +20,7 @@ export default function EditProblem({close,problem}) {
           } = useForm()
     const onSubmit = (data) => {
         data.status = "Függőben"
-        data.datum = problem.datum
+        data.date = problem.date
         try {
             editSelectedProblem(problem.problemId,data)
         } catch (error) {

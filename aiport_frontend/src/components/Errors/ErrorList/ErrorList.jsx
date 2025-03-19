@@ -126,7 +126,7 @@ export default function ErrorList() {
         {problem.description}
       </TableCell>
       <TableCell style={{ fontStyle: problem.status === "Lezárva" ? "italic" : "normal"}}>
-        {problem.datum}
+        {problem.date}
       </TableCell>
       <TableCell style={{ fontStyle: problem.status === "Lezárva" ? "italic" : "normal",color: problemColorPicker(problem.problemType)}}>
       <div style={{ 
@@ -188,7 +188,7 @@ export default function ErrorList() {
         <Typography variant="h5" component="div">
           {problem.name}
         </Typography>
-        <Typography sx={{ color: 'text.secondary', mb: 1.5 }}>{problem.datum}</Typography>
+        <Typography sx={{ color: 'text.secondary', mb: 1.5 }}>{problem.date}</Typography>
         <div style={{ 
         display: "inline-block", 
         padding: "6px", 

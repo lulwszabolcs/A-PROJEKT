@@ -29,7 +29,7 @@ export default function Addproblem({close}) {
 
     const onSubmit = (data) => {
         try {
-            data.datum = formatDate(new Date())
+            data.date = formatDate(new Date())
             data.status = "Függőben"
             addNewProblem(data)
         } catch (error) {
