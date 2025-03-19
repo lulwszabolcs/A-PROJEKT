@@ -5,7 +5,6 @@ import Loginpage from '../../components/Login/LoginPage/Loginpage';
 import { SnackbarContext } from '../../contexts/SnackbarProvider';
 import { UserContext } from '../../contexts/UserProvider';
 
-// Mock the contexts
 const mockSnackbarContext = {
   displaySnackbar: vi.fn(),
   SnackbarMessage: '',
@@ -18,10 +17,8 @@ const mockUserContext = {
   userLogin: vi.fn(),
 };
 
-// Create a mock navigate function at the top level
 const mockNavigate = vi.fn();
 
-// Mock react-router-dom
 vi.mock('react-router-dom', async () => {
   const actual = await vi.importActual('react-router-dom');
   return {
@@ -35,7 +32,6 @@ describe('Loginpage', () => {
     vi.clearAllMocks();
   });
 
-  // Wrapper component to provide contexts
   const Wrapper = ({ children }) => (
     <MemoryRouter>
       <SnackbarContext.Provider value={mockSnackbarContext}>
