@@ -1,0 +1,50 @@
+= Tesztelési dokumentáció
+
+== User interface tesztek:
+
+=== Tesztkörnyezet futttása:
+
+. Navigáljunk az _airport_frontend_ mappába:
++
+[source,batch]
+----
+cd .\aiport_frontend\
+----
+. Futtassuk a tesztkörnyezetet:
++
+[source,batch]
+----
+npm run test
+----
+
+== Teszteredmények leírása:
+=== Belépés oldal:
+[cols="1,3,3"]
+|===
+
+|Teszt fajtája
+
+|Teszt leírása
+
+|Teszteredmény
+|A felhasználó listázza a problémákat
+
+|Felhasználók
+|Általános felhasználók, Adminisztrátorok
+
+|Elsődleges lefutás
+|1. A felhasználó a Problémák listázásamenüpontra kattint
+
+|Kivételek és alternetívák
+| -
+
+|Utófeltétel
+|A rendszerben a problémák listája előállt
+
+|Eredmény
+|A felhasználó látja a problémák listáját, kiválaszthat közülük egyet
+
+|Használati eset realizáció
+|Technikai modell
+
+|===
