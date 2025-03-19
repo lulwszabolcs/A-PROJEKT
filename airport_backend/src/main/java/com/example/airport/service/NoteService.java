@@ -4,6 +4,7 @@ import com.example.airport.converter.NoteConverter;
 import com.example.airport.dto.note.NoteList;
 import com.example.airport.dto.note.NoteRead;
 import com.example.airport.dto.note.NoteSave;
+import com.example.airport.exception.NoteNotFoundException;
 import com.example.airport.model.Note;
 import com.example.airport.repository.NoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,11 +28,11 @@ public class NoteService {
     }
 
     public NoteRead deleteNote(int id) {
-        if (noteRepository.existsById(id)) {
-            Note deletingNote = noteRepository.findById(id).get();
-            noteRepository.delete(deletingNote);
-            return NoteConverter.convertModelToRead(deletingNote);
+        if (!noteRepository.existsById(id)) {
+            throw new NoteNotFoundException();
         }
-        return null;
+        Note deletingNote = noteRepository.findById(id).get();
+        noteRepository.delete(deletingNote);
+        return NoteConverter.convertModelToRead(deletingNote);
     }
 }
