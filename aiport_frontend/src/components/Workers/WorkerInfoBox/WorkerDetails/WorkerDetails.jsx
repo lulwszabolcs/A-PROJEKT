@@ -25,7 +25,7 @@ export default function WorkerDetails({close,worker,canEditWorker}) {
     }
     useEffect(()=>{
         getWorkers()
-    })
+    },[])
     return (
         <div className={styles.modalworker}>
         <h3 className={styles.detailstitle}>Dolgozó információ</h3>
