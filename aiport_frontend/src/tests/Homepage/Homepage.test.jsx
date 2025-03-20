@@ -27,7 +27,10 @@ const mockVehicleContext = {
 };
 
 const mockNoteContext = {
-    notes: [],
+    notes: [{
+      id:1,
+      text:'example note for testing'
+    }],
     deleteNote: vi.fn(),
 }
 vi.mock('axios');
@@ -60,7 +63,7 @@ describe('Homepage',()=>{
             vi.useRealTimers();
           });
 
-        it('Renders the Homepage correctly',async ()=>{
+        it('renders the Homepage correctly',async ()=>{
             axios.get.mockResolvedValue({
                 data: {
                   hourly: {
@@ -81,7 +84,7 @@ describe('Homepage',()=>{
             })
         })
 
-        it('Renders the weather alert if the temperature is below 2 celsius ',async ()=>{
+        it('renders the weather alert if the temperature is below 2 celsius ',async ()=>{
             axios.get.mockResolvedValue({
                 data: {
                   hourly: {
@@ -103,7 +106,7 @@ describe('Homepage',()=>{
                   ).toBeInTheDocument();
             });
         })
-        it('Does not render the weather alert if the temperature is above 2 celsius ',async ()=>{
+        it('does not render the weather alert if the temperature is above 2 celsius ',async ()=>{
             axios.get.mockResolvedValue({
                 data: {
                   hourly: {
@@ -125,7 +128,19 @@ describe('Homepage',()=>{
                   ).not.toBeInTheDocument();
             });
         })
+        it('note delete function calls only once',async ()=>{
+          render(<HomePageContent/>, { wrapper: Wrapper });
+          const deleteButton = screen.getByTestId('deleteButton');
+          fireEvent.click(deleteButton)
+          expect(mockNoteContext.deleteNote).toHaveBeenCalledTimes(1)
 
-        // törlés szimulálás, add note fgv hivas szimulalas toHaveBennCalledTimes(1)
+          
+        })
+        it('clicking the note add button displays the add note modal',()=>{
+          render(<HomePageContent/>, { wrapper: Wrapper });
+          const addNoteButton = screen.getByTestId('addNoteButton');
+          fireEvent.click(addNoteButton)
+          expect(screen.getByText("Új jegyzet hozzáadása")).toBeInTheDocument()
+        })
     })
 })

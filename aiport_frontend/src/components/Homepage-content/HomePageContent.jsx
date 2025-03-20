@@ -230,6 +230,7 @@ export default function HomePageContent() {
                   className={styles.delete}
                   onClick={() => deleteNote(note.id)}
                   sx={{ color: 'gray' }}
+                  data-testid={"deleteButton"}
                 />
                 <h4>{note.text}</h4>
               </div>
@@ -239,6 +240,7 @@ export default function HomePageContent() {
               className={styles.stickynotes}
               style={{ backgroundImage: `url('/assets/sticky.png')`, cursor: 'pointer' }}
               onClick={() => setAddStickyNotesOpen(true)}
+              data-testid={"addNoteButton"}
             >
             <AddIcon />
           </div>

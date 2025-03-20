@@ -21,12 +21,12 @@ export default function ProfileCard() {
     return ( 
         <>
             <div className={styles.cardcontainer}>
-                <DownloadIcon className={styles.downloadicon} sx={{color:'gray'}} onClick={()=>generatePdfFileForUser(userProfile.userId)}/>
-                <img src={workerImageUrl} className={styles.profilepic}></img>
-                <h2>{userProfile.name}</h2>
-                <p className={styles.infotext}>{userProfile.role}</p>
-                <p className={styles.infotext}>{userProfile.email}</p>
-                <p className={styles.infotext}>{userProfile.phoneNumber}</p>
+                <DownloadIcon className={styles.downloadicon} sx={{color:'gray'}} onClick={()=>generatePdfFileForUser(userProfile.userId)} data-testid={"downloadIcon"}/>
+                <img src={workerImageUrl} className={styles.profilepic} data-testid={"profilePicture"}></img>
+                <h2 data-testid={"nameField"}>{userProfile.name}</h2>
+                <p className={styles.infotext} data-testid={"roleField"}>{userProfile.role}</p>
+                <p className={styles.infotext} data-testid={"emailField"}>{userProfile.email}</p>
+                <p className={styles.infotext} data-testid={"phoneNumberField"}>{userProfile.phoneNumber}</p>
             </div>
             <SnackbarComponent snackbarOpen={SnackbarOpen} message={SnackbarMessage} close={closeSnackbar} success={SnackbarSuccess}/> 
         </>

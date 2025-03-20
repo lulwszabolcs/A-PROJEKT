@@ -19,7 +19,7 @@
   import { SnackbarContext } from '../../../contexts/SnackbarProvider';
 import { UserContext } from '../../../contexts/UserProvider';
 
-  export default function WorkerInfoBox() {
+  export default function WorkerInfoBox({canAddWorkerInitial}) {
       let {getImages,pickImageForWorker} = useContext(ImageContext)
       let {workers,getWorkers} = useContext(WorkerContext)
       let {SnackbarOpen,closeSnackbar,SnackbarMessage,SnackbarSuccess} = useContext(SnackbarContext)
@@ -32,7 +32,7 @@ import { UserContext } from '../../../contexts/UserProvider';
       const [imageUrls, setImageUrls] = useState({});
       const isMobile = useMediaQuery('(max-width: 1024px)');
 
-      const [canAddWorker,setCanAddWorker] = useState(false)
+      const [canAddWorker,setCanAddWorker] = useState(canAddWorkerInitial||false)
       const [canEditWorker,setCanEditWorker] = useState(false)
 
       function closeWorkerDetails() {
@@ -84,6 +84,7 @@ import { UserContext } from '../../../contexts/UserProvider';
           id="demo-simple-select"
           onChange={handleChange}
           defaultValue={"all"}
+          data-testid={"selectRole"}
       > 
           <MenuItem value={"all"}>
             Minden alkalmazott
@@ -107,9 +108,9 @@ import { UserContext } from '../../../contexts/UserProvider';
               gap: '40px'
             }}>
               {filteredWorkers.map((worker)=>( 
-                <Card variant="outlined" style={{paddingTop:10,position:'relative',boxShadow:'5px 5px 5px 5px rgba(173, 216, 230, 0.616)',width:'15rem'}}>
+                <Card variant="outlined" data-testid={"workerCard"} style={{paddingTop:10,position:'relative',boxShadow:'5px 5px 5px 5px rgba(173, 216, 230, 0.616)',width:'15rem'}}>
                 <CardContent>
-                <Button style={{position:'absolute',top:0,right:0}} onClick={()=>{setOpenWorkerDetails(true);setSelectedWorker(worker)}}><InfoIcon></InfoIcon></Button>
+                <Button style={{position:'absolute',top:0,right:0}} onClick={()=>{setOpenWorkerDetails(true);setSelectedWorker(worker)}} ><InfoIcon data-testid={"detailIcon"}></InfoIcon></Button>
                 <img src={imageUrls[worker.workerId]} style={{width:150, height:150, borderRadius:100}}></img>
                 <Typography variant="h6" component="div">
                   {worker.name}
@@ -131,7 +132,7 @@ import { UserContext } from '../../../contexts/UserProvider';
           </Modal>
             {canAddWorker &&
           <div className={styles.addicon}>
-          <Fab color="primary" aria-label="add" onClick={()=>setOpenAddWorker(true)}>
+          <Fab color="primary" aria-label="add" data-testid={"addIcon"} onClick={()=>setOpenAddWorker(true)}>
               <AddIcon/>
           </Fab>
           </div>
