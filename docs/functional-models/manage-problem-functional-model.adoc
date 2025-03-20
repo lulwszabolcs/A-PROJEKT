@@ -201,12 +201,18 @@ image::../static/UC_diagrams/manageProblemsUseCases.drawio.png[Használati eset 
 == Felületi terv
 
 === Problémák listázása felület
-image::../static/premlemListUI.PNG[[Problémák listázása felület]]
+image::../static/UI/premlemListUI.PNG[[Problémák listázása felület]]
 ==== Felületen lévő mezők
 
 [cols="1,1,1,1,1"]
 |===
 |Név|Típus|Kötelező?|Szerkezthető?|Megjelenés
+
+|Probléma azonosítója
+|Címke
+|-
+|-
+|Találati lista ablakrész
 
 |Probléma neve
 |Címke
@@ -226,7 +232,7 @@ image::../static/premlemListUI.PNG[[Problémák listázása felület]]
 |-
 |Találati lista ablakrész
 
-|Probléma hibakódja
+|Probléma típusa
 |Címke
 |-
 |-
@@ -290,7 +296,8 @@ A felhasználó a megtekintő felületen látja a kiválasztott Probléma adatai
 
 
 === Probléma rögzítése és módosítása felület
-==== Arculat
+image::../static/UI/problemCreateUI.PNG[Probléma létrehozása felület]
+image::../static/UI/problemUpdateUI.PNG[Probléma szerkesztése felület]
 ==== A felületen elérhető műveletek
 [cols="1,1,1,1"]
 |===

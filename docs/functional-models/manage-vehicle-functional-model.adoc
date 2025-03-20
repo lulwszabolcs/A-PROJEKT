@@ -208,7 +208,7 @@ image::../static/UC_diagrams/manageVehiclesUseCases.drawio.png[Használati eset 
 == Felületi terv
 
 === Járművek listázása felület
-image::../static/vehicleListUI.PNG[Járművek listázása felület]
+image::../static/UI/vehicleListUI.PNG[Járművek listázása felület]
 ==== Felületen lévő mezők
 
 [cols="1,1,1,1,1"]
@@ -234,6 +234,12 @@ image::../static/vehicleListUI.PNG[Járművek listázása felület]
 |Találati lista ablakrész
 
 |Jármű állapota
+|Címke
+|-
+|-
+|Találati lista ablakrész
+
+|Jármű évjárata
 |Címke
 |-
 |-
@@ -284,7 +290,8 @@ A felhasználó a megtekintő felületen látja a kiválasztott jármű adatait.
 |===
 
 === Járművek rögzítése és módosítása felület
-==== Arculat
+image::../static/UI/vehicleCreateUI.PNG[Jármű felvétele felület]
+image::../static/UI/vehicleStatusUpdateUI.PNG[Jármű állapotának módosítása felület]
 ==== A felületen elérhető műveletek
 [cols="1,1,1,1"]
 |===

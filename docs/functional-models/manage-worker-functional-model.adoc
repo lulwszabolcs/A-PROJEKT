@@ -170,7 +170,7 @@ image::../static/UC_diagrams/manageWorkersUseCases.drawio.png[Használati eset d
 == Felületi terv
 
 === Dolgozók listázása felület
-image::../static/workerListUI.PNG[Dolgozók listázása felület]
+image::../static/UI/workerListUI.PNG[Dolgozók listázása felület]
 ==== Felületen lévő mezők
 
 [cols="1,1,1,1,1"]
@@ -264,7 +264,8 @@ A felhasználó a megtekintő felületen látja a kiválasztott dolgozó adatait
 |===
 
 === Dolgozó rögzítése és módosítása felület
-==== Arculat
+image::../static/UI/workerCreateUI.PNG[Dolgozó rögzítése felület]
+image::../static/UI/workerUpdateUI.PNG[Dolgozó adatainak szerkesztése és mektekintése felület]
 ==== A felületen elérhető műveletek
 [cols="1,1,1,1"]
 |===
@@ -288,7 +289,7 @@ A felhasználó a dolgozó megtekintése fülre jut.
 |===
 
 === Dolgozó megtekintése felület
-==== Arculat
+image::../static/UI/workerUpdateUI.PNG[Dolgozó adatainak megtekintése és szerkesztése felület]
 
 ==== A felületen lévő mezők
 [cols="1,1"]
