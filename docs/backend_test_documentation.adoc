@@ -1,0 +1,178 @@
+= Tesztelési dokumentáció az Apache JMeter tesztek alapján
+
+Ez a dokumentáció az alkalmazás backendjében található Controller osztályok végpontjainak tesztelésére szolgál, amelyeket Apache JMeter segítségével készítettünk és futtattunk. A dokumentáció célja, hogy átfogó képet nyújtson az alkalmazás REST API végpontjainak működéséről és megbízhatóságáról.
+
+== Bevezetés
+
+=== Cél
+A tesztelési dokumentáció célja, hogy átfogó képet nyújtson az alkalmazás REST API végpontjainak működéséről és megbízhatóságáról. Az Apache JMeter-rel végzett tesztek a végpontok helyes működését, hibakezelését és jogosultsági ellenőrzéseit validálják.
+
+=== Tesztkörnyezet
+- **Kiszolgáló**: Helyi fejlesztőkörnyezet (`localhost:8080`)
+- **Protokoll**: HTTP
+- **Tesztelő eszköz**: Apache JMeter 5.6.3
+- **Tesztek futtatása**: Egy szálon (`Thread Group.num_threads = 1`), egyszeri végrehajtással (`LoopController.loops = 1`)
+
+== Általános információk
+
+=== Hitelesítés
+A tesztek többsége JWT (JSON Web Token) alapú hitelesítést használ. Az első lépés minden tesztcsomagban egy sikeres bejelentkezés (`/api/user/login`), amely során a rendszer visszaad egy tokent. Ezt a tokent a további kérésekben az `Authorization` fejlécben (`Bearer ${token}`) használjuk fel.
+
+=== Válaszellenőrzés
+Minden tesztesetben a JMeter `Response Assertion` komponenseivel ellenőrizzük a HTTP válaszkódokat (pl. 200, 201, 400, 403, 404, 418, 500) és esetenként a válaszüzeneteket (pl. "Username / password incorrect", "Image uploaded successfully").
+
+== Tesztcsomagok
+
+Az alábbiakban az egyes entitásokhoz tartozó teszteseteket részletezzük, a JMX fájlok alapján.
+
+=== User tesztek
+
+==== Tesztcsomag leírása
+A `User` tesztek a felhasználói műveleteket (bejelentkezés, létrehozás, lekérdezés, módosítás, törlés) és jogosultságkezelést ellenőrzik.
+
+==== Tesztkörnyezet specifikus beállítások
+- **Végpontok**: `/api/user/*`
+- **Hitelesítés**: Admin és nem admin token használata (`token`, `token_nonadmin`)
+
+==== Tesztelési forgatókönyvek
+[cols="1,2,1,1,2,2"]
+|===
+| **Teszteset neve** | **Leírás** | **Metódus** | **Végpont** | **Bemenet** | **Várt kimenet**
+
+| Sikeres bejelentkezés | Egy létező felhasználó bejelentkezése helyes adatokkal | POST | `/api/user/login` | `{"username": "viccelek", "password": "viccelek123"}` | HTTP 200, JWT token visszaadása
+| Sikertelen bejelentkezés | Helytelen jelszóval történő bejelentkezés | POST | `/api/user/login` | `{"username": "viccelek", "password": "akarmijelszo"}` | HTTP 400, "Username / password incorrect. Please try again" üzenet
+| Felhasználó létrehozása | Új felhasználó létrehozása admin jogosultsággal | POST | `/api/user` | `{"username": "testuser", "password": "testpassword123", "role": "Légiforgalmi irányító"}` | HTTP 201, új felhasználó sikeres létrehozása
+| Felhasználó lekérdezése | Létező felhasználó adatainak lekérdezése azonosítóval | GET | `/api/user/1` | - | HTTP 200, felhasználó adatai visszaadása
+| Nem létező felhasználó | Nem létező felhasználó lekérdezése | GET | `/api/user/999` | - | HTTP 404
+| Felhasználó módosítása | Létező felhasználó adatainak frissítése | PUT | `/api/user/1` | `{"username": "viccelek", "role": "VIP szolgáltatási ügynök"}` | HTTP 200, módosított adatok visszaadása
+| Nem admin módosítási kísérlet | Nem admin felhasználó próbál módosítani egy másik felhasználót | PUT | `/api/user/1` | `Bearer ${token_nonadmin}`, új adatok | HTTP 403, "You do not have enough permission" üzenet
+| Felhasználó törlése | Létező felhasználó törlése admin jogosultsággal | DELETE | `/api/user/3` | - | HTTP 200
+| Nem létező felhasználó törlése | Nem létező felhasználó törlési kísérlete | DELETE | `/api/user/999` | - | HTTP 404
+| Nem admin törlési kísérlet | Nem admin felhasználó próbál törölni egy másik felhasználót | DELETE | `/api/user/10` | `Bearer ${token_nonadmin}` | HTTP 403, "You do not have enough permission" üzenet
+|===
+
+=== Worker tesztek
+
+==== Tesztcsomag leírása
+A `Worker` tesztek a dolgozók kezelésére szolgáló végpontokat tesztelik (létrehozás, lekérdezés, módosítás, törlés, lista).
+
+==== Tesztkörnyezet specifikus beállítások
+- **Végpontok**: `/api/worker/*`
+- **Hitelesítés**: Admin token (`token`)
+
+==== Tesztelési forgatókönyvek
+[cols="1,2,1,1,2,2"]
+|===
+| **Teszteset neve** | **Leírás** | **Metódus** | **Végpont** | **Bemenet** | **Várt kimenet**
+
+| Dolgozó létrehozása | Új dolgozó létrehozása | POST | `/api/worker/` | `{"name": "Csin Csilla", "title": "VIP szolgáltatási ügynök"}` | HTTP 201, dolgozó azonosító visszaadása
+| Létrehozott dolgozó lekérdezése | Létrehozott dolgozó adatainak lekérdezése | GET | `/api/worker/${workerId}` | - | HTTP 200, dolgozó adatai visszaadása
+| Dolgozó módosítása | Létező dolgozó adatainak frissítése | PUT | `/api/worker/${workerId}` | `{"name": "Elektrom Ágnes", "title": "Kapcsolati ügynök"}` | HTTP 200, módosított adatok visszaadása
+| Dolgozó törlése | Létező dolgozó törlése | DELETE | `/api/worker/${workerId}` | - | HTTP 200
+| Törölt dolgozó lekérdezése | Törölt dolgozó lekérdezési kísérlete | GET | `/api/worker/${workerId}` | - | HTTP 418, "WORKER_NOT_FOUND" üzenet
+| Dolgozók listázása | Összes dolgozó lekérdezése | GET | `/api/worker/list` | - | HTTP 200, dolgozók listája
+| Nem létező dolgozó lekérdezése | Nem létező dolgozó lekérdezése | GET | `/api/worker/9999` | - | HTTP 418, "WORKER_NOT_FOUND" üzenet
+| Nem létező dolgozó módosítása | Nem létező dolgozó módosítási kísérlete | PUT | `/api/worker/9999` | `{"name": "Elektrom Ágnes"}` | HTTP 418, "WORKER_NOT_FOUND" üzenet
+| Nem létező dolgozó törlése | Nem létező dolgozó törlési kísérlete | DELETE | `/api/worker/9999` | - | HTTP 418, "WORKER_NOT_FOUND" üzenet
+|===
+
+=== Vehicle tesztek
+
+==== Tesztcsomag leírása
+A `Vehicle` tesztek a járművek kezelésére szolgáló végpontokat tesztelik, beleértve a státuszmódosítást is.
+
+==== Tesztkörnyezet specifikus beállítások
+- **Végpontok**: `/api/vehicle/*`
+- **Hitelesítés**: Admin token (`token`)
+
+==== Tesztelési forgatókönyvek
+[cols="1,2,1,1,2,2"]
+|===
+| **Teszteset neve** | **Leírás** | **Metódus** | **Végpont** | **Bemenet** | **Várt kimenet**
+
+| Jármű létrehozása | Új jármű létrehozása | POST | `/api/vehicle/` | `{"name": "Vontató", "type": "Vontató", "vehicleYear": 2020}` | HTTP 200, jármű azonosító visszaadása
+| Létrehozott jármű lekérdezése | Létrehozott jármű adatainak lekérdezése | GET | `/api/vehicle/${vehicleId}` | - | HTTP 200, jármű adatai visszaadása
+| Járművek listázása | Összes jármű lekérdezése | GET | `/api/vehicle/list` | - | HTTP 200, járművek listája
+| Jármű módosítása | Létező jármű adatainak frissítése | PUT | `/api/vehicle/${vehicleId}` | `{"name": "Tolató traktor", "vehicleYear": 2025}` | HTTP 200, módosított adatok visszaadása
+| Jármű státusz módosítása | Jármű státuszának részleges frissítése | PATCH | `/api/vehicle/${vehicleId}` | `{"key": "STATUS", "value": "UNDER_INSPECTION"}` | HTTP 200, módosított státusz visszaadása
+| Nem létező jármű lekérdezése | Nem létező jármű lekérdezése | GET | `/api/vehicle/9999` | - | HTTP 418, "VEHICLE_NOT_FOUND" üzenet
+| Nem létező jármű módosítása | Nem létező jármű módosítási kísérlete | PUT | `/api/vehicle/9999` | `{"name": "Tolató traktor HIBÁS"}` | HTTP 418, "VEHICLE_NOT_FOUND" üzenet
+| Jármű törlése | Létező jármű törlése | DELETE | `/api/vehicle/${vehicleId}` | - | HTTP 200
+| Törölt jármű lekérdezése | Törölt jármű lekérdezési kísérlete | GET | `/api/vehicle/${vehicleId}` | - | HTTP 418, "VEHICLE_NOT_FOUND" üzenet
+| Nem létező jármű törlése | Nem létező jármű törlési kísérlete | DELETE | `/api/vehicle/9999` | - | HTTP 418, "VEHICLE_NOT_FOUND" üzenet
+|===
+
+=== Problem tesztek
+
+==== Tesztcsomag leírása
+A `Problem` tesztek a problémák kezelésére szolgáló végpontokat tesztelik, beleértve a típus szerinti szűrést.
+
+==== Tesztkörnyezet specifikus beállítások
+- **Végpontok**: `/api/problem/*`
+- **Hitelesítés**: Admin token (`token`)
+
+==== Tesztelési forgatókönyvek
+[cols="1,2,1,1,2,2"]
+|===
+| **Teszteset neve** | **Leírás** | **Metódus** | **Végpont** | **Bemenet** | **Várt kimenet**
+
+| Probléma létrehozása | Új probléma létrehozása | POST | `/api/problem` | `{"name": "Tűzoltó jármű sziréna hiba", "problemType": "Járműhiba"}` | HTTP 201, probléma azonosító visszaadása
+| Létrehozott probléma lekérdezése | Létrehozott probléma adatainak lekérdezése | GET | `/api/problem/${problemId}` | - | HTTP 200, probléma adatai visszaadása
+| Problémák listázása | Összes probléma lekérdezése | GET | `/api/problem` | - | HTTP 200, problémák listája
+| Probléma módosítása | Létező probléma adatainak frissítése | PUT | `/api/problem/${problemId}` | `{"name": "Tűzoltó jármű sziréna hiba javítás", "status": "Megoldva"}` | HTTP 200, módosított adatok visszaadása
+| Probléma státusz módosítása | Probléma státuszának részleges frissítése | PATCH | `/api/problem/${problemId}` | `{"key": "STATUS", "value": "RESOLVED"}` | HTTP 200, módosított státusz visszaadása
+| Típus szerinti listázás | Problémák lekérdezése típus szerint | GET | `/api/problem/type/VEHICLE_FAILURE` | - | HTTP 200, járműhibák listája
+| Nem létező probléma lekérdezése | Nem létező probléma lekérdezése | GET | `/api/problem/9999` | - | HTTP 418, "PROBLEM_NOT_FOUND" üzenet
+| Nem létező probléma módosítása | Nem létező probléma módosítási kísérlete | PUT | `/api/problem/9999` | `{"name": "Érvénytelen"}` | HTTP 418, "PROBLEM_NOT_FOUND" üzenet
+| Probléma törlése | Létező probléma törlése | DELETE | `/api/problem/${problemId}` | - | HTTP 200
+| Nem létező probléma törlése | Nem létező probléma törlési kísérlete | DELETE | `/api/problem/9999` | - | HTTP 418, "PROBLEM_NOT_FOUND" üzenet
+|===
+
+
+=== Image tesztek
+
+==== Tesztcsomag leírása
+Az `Image` tesztek a képek feltöltését és listázását ellenőrzik.
+
+==== Tesztkörnyezet specifikus beállítások
+- **Végpontok**: `/api/images/*`
+- **Hitelesítés**: Admin token (`token`)
+- **Fájlformátum**: JPEG (`image/jpeg`)
+
+==== Tesztelési forgatókönyvek
+[cols="1,2,1,1,2,2"]
+|===
+| **Teszteset neve** | **Leírás** | **Metódus** | **Végpont** | **Bemenet** | **Várt kimenet**
+
+| Kép feltöltése - érvényes dolgozó | Kép feltöltése létező dolgozóhoz | POST | `/api/images/upload` | Fájl: `test-image.jpg`, `{"fileName": "test-image.jpg", "worker_id": 1}` | HTTP 200, "Image uploaded successfully" üzenet
+| Képek listázása | Összes kép lekérdezése | GET | `/api/images` | - | HTTP 200, képek listája
+| Kép feltöltése - érvénytelen dolgozó | Kép feltöltése nem létező dolgozóhoz | POST | `/api/images/upload` | Fájl: `test-image.jpg`, `{"fileName": "test-image.jpg", "worker_id": 9999}` | HTTP 500, "FAILED_TO_UPLOAD_IMAGE" üzenet
+|===
+
+=== Note tesztek
+
+==== Tesztcsomag leírása
+A `Note` tesztek a jegyzetek kezelésére szolgáló végpontokat tesztelik, beleértve a listázást, létrehozást és törlést. A tesztek ellenőrzik a sikeres műveleteket és a hibakezelést is.
+
+==== Tesztkörnyezet specifikus beállítások
+- **Végpontok**: `/api/notes/*`, `/api/note/*`
+- **Hitelesítés**: Admin token (`token`)
+
+==== Tesztelési forgatókönyvek
+[cols="1,2,1,1,2,2"]
+|===
+| **Teszteset neve** | **Leírás** | **Metódus** | **Végpont** | **Bemenet** | **Várt kimenet**
+
+| Jegyzetek listázása | Összes jegyzet lekérdezése | GET | `/api/notes/list` | - | HTTP 200, jegyzetek listája
+| Jegyzet létrehozása | Új jegyzet létrehozása | POST | `/api/notes` | `{"text": "Test Note"}` | HTTP 200, jegyzet azonosító visszaadása
+| Jegyzetek listázása létrehozás után | Ellenőrzi, hogy az újonnan létrehozott jegyzet szerepel-e a listában | GET | `/api/notes/list` | - | HTTP 200, jegyzetek listája (tartalmazza az új jegyzetet)
+| Jegyzet törlése | Létező jegyzet törlése | DELETE | `/api/note/${noteId}` | - | HTTP 200
+| Jegyzetek listázása törlés után | Ellenőrzi, hogy a jegyzet sikeresen törölve lett-e | GET | `/api/notes/list` | - | HTTP 200, jegyzetek listája (nem tartalmazza a törölt jegyzetet)
+| Nem létező jegyzet törlése | Nem létező jegyzet törlési kísérlete | DELETE | `/api/note/9999` | - | HTTP 418, "NOTE_NOT_FOUND" üzenet
+|===
+
+== Összegzés
+
+A tesztelési dokumentáció az Apache JMeter JMX fájlok alapján készült, és teljes körűen lefedi a `User`, `Worker`, `Vehicle`, `Problem`, `Image` és `Note` végpontok tesztelését. A tesztek ellenőrzik a sikeres műveleteket, a hibakezelést (pl. nem létező entitások, jogosultsági hibák) és az API általános stabilitását.
+
+A dokumentáció AsciiDoc formátumban készült, amely alkalmas verziókezelésre és PDF/HTML exportra, így könnyen integrálható a fejlesztési folyamatokba.
