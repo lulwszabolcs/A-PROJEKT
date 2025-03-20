@@ -201,7 +201,7 @@ image::../static/UC_diagrams/manageProblemsUseCases.drawio.png[Használati eset 
 == Felületi terv
 
 === Problémák listázása felület
-==== Arculat
+image::../static/premlemListUI.PNG[[Problémák listázása felület]]
 ==== Felületen lévő mezők
 
 [cols="1,1,1,1,1"]

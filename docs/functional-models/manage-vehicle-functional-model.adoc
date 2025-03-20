@@ -208,7 +208,7 @@ image::../static/UC_diagrams/manageVehiclesUseCases.drawio.png[Használati eset 
 == Felületi terv
 
 === Járművek listázása felület
-==== Arculat
+image::../static/vehicleListUI.PNG[Járművek listázása felület]
 ==== Felületen lévő mezők
 
 [cols="1,1,1,1,1"]

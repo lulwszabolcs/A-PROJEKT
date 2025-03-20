@@ -169,8 +169,8 @@ image::../static/UC_diagrams/manageWorkersUseCases.drawio.png[Használati eset d
 
 == Felületi terv
 
-=== Problémák listázása felület
-==== Arculat
+=== Dolgozók listázása felület
+image::../static/workerListUI.PNG[Dolgozók listázása felület]
 ==== Felületen lévő mezők
 
 [cols="1,1,1,1,1"]
