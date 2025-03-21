@@ -6,10 +6,10 @@ import OpenAI from "openai";
 import SendIcon from '@mui/icons-material/Send';
 
 const key = import.meta.env.VITE_XAI_API_KEY;
-const openai = new OpenAI({
-    apiKey: key,dangerouslyAllowBrowser: true, 
-    baseURL: "https://api.x.ai/v1",
-  });
+    const openai = new OpenAI({
+        apiKey: key ? key:null,dangerouslyAllowBrowser: true, 
+        baseURL: "https://api.x.ai/v1",
+    });
 
 export default function SupportChat() {
     const [input,setInput] = useState("")
@@ -60,7 +60,7 @@ export default function SupportChat() {
         <div className={styles.chatmaincontainer}>
             <div className={styles.messagecontainer}>
                 <div className={styles.systemtextcontainer}>
-                    {"Írj be egy üzenetet és én megválaszolom!"}
+                    {!key ? "Nem található környezeti változó. Kérje a rendszergazda segítségét.":"Írjon be egy üzenetet és én megválaszolom!"}
                 </div>
                 {messages.map((msg,index)=>(
                     <div className={msg.type == "sent" ? styles.usertextcontainer : styles.systemtextcontainer} key={index}>
@@ -98,11 +98,11 @@ export default function SupportChat() {
                 className={styles.chatinput}
                 style={{ borderRadius: "10px" }}
                 rows={2}
-                disabled={waitingForResponse}
+                disabled={!key || waitingForResponse}
                 onChange={handleInputChange}
                 sx={{resize:'vertical'}}
                 />
-                <Button onClick={handleSend}><SendIcon/></Button>
+                <Button onClick={handleSend} disabled={!key}><SendIcon/></Button>
             </div>
             )}
             </div>

@@ -11,7 +11,7 @@ Ezáltal javul az üzemeltetési folyamatok átláthatósága, csökken a késé
 * *Styling:* CSS, Mui
 * *Backend:* Spring Boot
 * *Database:* MySQL
-* *Large Language Model:* Grok
+* *Large Language Model:* grok-2-vision-1212
 
 == ⬇️ Telepítés:
 === Szükséges programok:
