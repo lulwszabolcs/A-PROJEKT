@@ -176,3 +176,5 @@ A `Note` tesztek a jegyzetek kezelésére szolgáló végpontokat tesztelik, bel
 A tesztelési dokumentáció az Apache JMeter JMX fájlok alapján készült, és teljes körűen lefedi a `User`, `Worker`, `Vehicle`, `Problem`, `Image` és `Note` végpontok tesztelését. A tesztek ellenőrzik a sikeres műveleteket, a hibakezelést (pl. nem létező entitások, jogosultsági hibák) és az API általános stabilitását.
 
 A dokumentáció AsciiDoc formátumban készült, amely alkalmas verziókezelésre és PDF/HTML exportra, így könnyen integrálható a fejlesztési folyamatokba.
+
+link:../README.adoc[Vissza]

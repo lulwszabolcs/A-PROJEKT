@@ -46,3 +46,5 @@ npm run test
 | A változtatás sikeresen végbemegy
 
 |===
+
+link:../README.adoc[Vissza]

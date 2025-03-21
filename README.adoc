@@ -137,3 +137,7 @@ link:docs/system-plan.adoc[Fejlesztői dokumentáció - rendszerterv]
 
 link:docs/user_manual.pdf[Felhasználói dokumentáció]
 
+link:docs/test_documentation[Felhasználói felület teszt dokumentáció]
+
+link:docs/backend_test_documentation.adoc[Végpont teszt dokumentáció]
+
