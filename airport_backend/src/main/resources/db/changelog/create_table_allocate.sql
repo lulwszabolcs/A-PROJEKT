@@ -1,7 +1,8 @@
-  create table if not exists allocate(
-      role_id varchar(30) not null,
-      permission_id varchar(30) not null,
+CREATE TABLE IF NOT EXISTS allocate (
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    role_id VARCHAR(30) NOT NULL,
+    permission_id VARCHAR(30) NOT NULL,
 
-      foreign key (role_id) references role(id),
-      foreign key (permission_id) references permission(id)
-  );
+    FOREIGN KEY (role_id) REFERENCES role(id),
+    FOREIGN KEY (permission_id) REFERENCES permission(id)
+);

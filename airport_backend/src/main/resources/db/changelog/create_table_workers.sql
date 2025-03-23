@@ -5,5 +5,6 @@ CREATE TABLE IF NOT EXISTS workers (
     phone_number VARCHAR(30),
     email VARCHAR(30),
     wage INT,
+
     FOREIGN KEY (worker_title) REFERENCES role(id)
-    );
+);

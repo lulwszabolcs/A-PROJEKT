@@ -1,5 +1,5 @@
-insert into vehicle_status (id, description)
-values ('OPERATIONAL', 'Jármű működőképes'),
+INSERT INTO vehicle_status (id, description)
+VALUES ('OPERATIONAL', 'Jármű működőképes'),
        ('UNDER_MAINTENANCE', 'Karbantartás alatt'),
        ('IN_REPAIR', 'Javítás alatt'),
        ('OUT_OF_SERVICE', 'Üzemen kívül'),

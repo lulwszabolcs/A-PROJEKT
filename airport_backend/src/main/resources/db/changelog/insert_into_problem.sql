@@ -1,4 +1,4 @@
-insert into problem (problem_id, name, description, date, problem_type, status, role) values
+INSERT INTO problem (problem_id, name, description, date, problem_type, status, role) VALUES
                                                                                           (1, 'Traktor hiba', 'A tolató traktor kereke defektes', '2024-11-20', 'VEHICLE_FAILURE', 'PENDING', 'RAMP_AGENT'),
                                                                                           (2, 'Csomagszalag meghibásodás', 'A 4-es szalagnál motorhiba lépett fel', '2024-11-21', 'EQUIPMENT_FAILURE', 'IN_PROGRESS', 'MAINTENANCE_TECHNICIAN'),
                                                                                           (3, 'Üzemanyag szivárgás', 'Tankolás közben szivárgást észleltek a tartályautón', '2024-11-22', 'FUEL_LEAK', 'PENDING', 'REFUELING_OPERATOR'),

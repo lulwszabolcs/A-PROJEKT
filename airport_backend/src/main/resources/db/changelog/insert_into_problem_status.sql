@@ -1,5 +1,5 @@
-insert into problem_status (id, description)
-values ('PENDING', 'Függőben'),
+INSERT INTO problem_status (id, description)
+VALUES ('PENDING', 'Függőben'),
        ('IN_PROGRESS', 'Folyamatban'),
        ('RESOLVED', 'Megoldva'),
        ('CLOSED', 'Lezárva'),
