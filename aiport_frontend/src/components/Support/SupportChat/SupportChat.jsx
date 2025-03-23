@@ -7,7 +7,7 @@ import SendIcon from '@mui/icons-material/Send';
 
 const key = import.meta.env.VITE_XAI_API_KEY;
     const openai = new OpenAI({
-        apiKey: key ? key:null,dangerouslyAllowBrowser: true, 
+        apiKey: key || null,dangerouslyAllowBrowser: true, 
         baseURL: "https://api.x.ai/v1",
     });
 
@@ -16,6 +16,8 @@ export default function SupportChat() {
     const [messages,setMessages] = useState([])
     const [chatHistory,setChatHistory] = useState([])
     const [waitingForResponse,setWaitingForResponse] = useState(false);
+    const [systemContent, setSystemContent] = useState(`You are Grok, a chatbot who speaks Hungarian and answers people's questions.`);
+
     const handleSend = () => {
         if (input !== "" && !waitingForResponse) {
             setMessages((prev) => [...prev, { text: input, type: "sent" }]);
@@ -31,7 +33,7 @@ export default function SupportChat() {
             const completion = await openai.chat.completions.create({
                 model: "grok-2-vision-1212",
                 messages: [
-                  { role: "system", content: "You are Grok, a chatbot who speaks Hungarian and answers people's questions" },
+                  { role: "system", content:systemContent},
                   ...chatHistory.map(msg => ({ role: msg.role, content: msg.content })),
                   { role: "user", content: message },
                 ],
@@ -53,7 +55,16 @@ export default function SupportChat() {
         event.persist(); 
         setInput(event.target.value);
     };
-    
+    useEffect(() => {
+        fetch('/xai_skypass_manual.txt')
+          .then((response) => response.text())
+          .then((text) => {
+            setSystemContent(
+              `You are Grok, a chatbot who speaks Hungarian and answers people's questions. Here is additional context: ${text}`
+            );
+          })
+          .catch((error) => console.error("Hiba a fájl betöltésekor:", error));
+      }, []);
     return (
         <div className={styles.flexbox}>
         <h1 className={styles.supportmaintext}>Ügyfélszolgálat</h1>

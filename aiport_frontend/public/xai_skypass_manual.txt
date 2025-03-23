@@ -1,0 +1,1 @@
+A repülőtér menedzsment szoftverben a hibák száma 10.
