@@ -1,0 +1,297 @@
+= Végpontok dokumentációja
+
+== Probléma típusok listázása
+[cols="1h,3"]
+|===
+
+|Végpont
+|LIST_PROBLEM_BY_TYPE
+
+|HTTP-módszer
+|GET
+
+|URL
+|http://localhost:8080/api/problemtypes/list
+
+|Leírás
+|Ez a végpont egy listát ad vissza az összes probléma típusáról leírással együtt.
+
+|Autentikáció
+|A kéréshez autentikáció és egy érvényes token szükséges.
+
+|===
+
+== User functions
+=== Egy felhasználó adatainak lekérdezése
+[cols="1h,3"]
+|===
+
+|Végpont
+|READ_USER
+
+|HTTP-módszer
+|GET
+
+|URL
+|http://localhost:8080/api/user/{id}
+
+|Leírás
+|Ez a végpont visszaadja egy adott felhasználó adatait.
+
+|Autentikáció
+|A kéréshez autentikáció és egy érvényes token szükséges.
+
+|===
+
+==== Útvonal paraméterek
+[cols="1,1,1, 1"]
+|===
+|Paraméter|Típus|Kötelező|Leírás
+
+|id
+|int
+|igen
+|A felhasználó azonosítója.
+|===
+
+==== Példa Válasz
+[source,batch]
+{
+  "id": 1,
+  "username": "viccelek",
+  "password": "$2a$10$bVqisLc3Q8XVGIoSC3NcC.2T2YETOk0eI3PXf3i8ScDmCSlUTZDP2",
+  "role": "VIP szolgáltatási ügynök",
+  "status": "User is currently online",
+  "worker": {
+    "workerId": 1,
+    "name": "Gipsz Jakab",
+    "title": "Karbantartó technikus",
+    "phoneNumber": "0620000000",
+    "email": "viccelek@repter.eu",
+    "wage": "500000"
+  },
+  "jwtToken": null
+}
+
+=== Egy felhasználó adatainak módosítása
+[cols="1h,3"]
+|===
+
+|Végpont
+|UPDATE_USER
+
+|HTTP-módszer
+|PUT
+
+|URL
+|http://localhost:8080/api/user/{id}
+
+|Leírás
+|Ez a végpont lehetővé teszi a felhasználó adatainak módosítását id alapján.
+
+|Autentikáció
+|A kéréshez autentikáció és egy érvényes token szükséges.
+
+|===
+
+==== Útvonal paraméterek
+[cols="1,1,1, 1"]
+|===
+|Paraméter|Típus|Kötelező|Leírás
+
+|id
+|int
+|igen
+|A felhasználó azonosítója.
+|===
+
+==== Bemeneti paraméterek
+[cols="1,1,1, 1"]
+|===
+|Paraméter|Típus|Kötelező|Leírás
+
+|username
+|string
+|igen
+|Felhasználónév
+
+|password
+|string
+|igen
+|Jelszó
+
+|role
+|string
+|igen
+|A felhasználóhoz tartozó jogkör
+
+|status
+|string
+|igen
+|A felhasználó állapota
+
+|worker_id
+|int
+|igen
+|A felhasználóhoz tartozó dolgozó azonosítója
+|===
+
+==== Példa kérés
+[source,batch]
+{
+  "username": "olajos",
+  "password": "jelszo",
+  "role": "Légiforgalmi irányító",
+  "status": "User is currently online",
+  "worker_id": 1
+}
+
+==== Példa válasz
+[source,batch]
+{
+  "id": 1,
+  "username": "olajos",
+  "password": "jelszo",
+  "role": "Légiforgalmi irányító",
+  "status": "User is currently online",
+  "worker": {
+    "workerId": 1,
+    "name": "Olajos",
+    "title": "Légiforgalmi irányító",
+    "phoneNumber": "06300000000",
+    "email": "olajos@repter.eu",
+    "wage": "120000"
+  },
+  "jwtToken": "string"
+}
+
+=== Felhasználó törlése
+[cols="1h,3"]
+|===
+
+|Végpont
+|DELETE_USER
+
+|HTTP-módszer
+|DELETE
+
+|URL
+|http://localhost:8080/api/user/{id}
+
+|Leírás
+|Ez a végpont lehetővé teszi egy adott felhasználó törlését id alapján.
+
+|Autentikáció
+|A kéréshez autentikáció és egy érvényes token szükséges.
+
+|===
+
+==== Útvonal paraméterek
+[cols="1,1,1, 1"]
+|===
+|Paraméter|Típus|Kötelező|Leírás
+
+|id
+|int
+|igen
+|A felhasználó azonosítója.
+|===
+
+==== Példa válasz
+[source,batch]
+{
+  "id": 1,
+  "username": "olajos",
+  "password": "jelszo",
+  "role": "Légiforgalmi irányító",
+  "status": "User is currently online",
+  "worker": {
+    "workerId": 1,
+    "name": "Olajos",
+    "title": "Légiforgalmi irányító",
+    "phoneNumber": "06300000000",
+    "email": "olajos@repter.eu",
+    "wage": "120000"
+  },
+  "jwtToken": "string"
+}
+
+=== Felhasználó státuszának módosítása
+[cols="1h,3"]
+|===
+
+|Végpont
+|MODIFY_USER_STATUS
+
+|HTTP-módszer
+|PATCH
+
+|URL
+|http://localhost:8080/api/user/{id}
+
+|Leírás
+|Ez a végpont lehetővé teszi egy adott felhasználó státuszának módosítását id alapján.
+
+|Autentikáció
+|A kéréshez autentikáció és egy érvényes token szükséges.
+
+|===
+
+==== Útvonal paraméterek
+[cols="1,1,1, 1"]
+|===
+|Paraméter|Típus|Kötelező|Leírás
+
+|id
+|int
+|igen
+|A felhasználó azonosítója.
+|===
+
+==== Bemeneti paraméterek
+[cols="1,1,1, 1"]
+|===
+|Paraméter|Típus|Kötelező|Leírás
+
+|key
+|string
+|igen
+|A felhasználó státusza.
+
+|value
+|string
+|igen
+|A felhasználó státusza.
+
+|===
+
+==== Példa kérés
+[source,batch]
+{
+  "key": "STATUS",
+  "value": "User is currently online"
+}
+
+==== Példa válasz
+[source,batch]
+{
+  "id": 1,
+  "username": "olajos",
+  "password": "jelszo",
+  "role": "Légiforgalmi irányító",
+  "status": "User is currently online",
+  "worker": {
+    "workerId": 1,
+    "name": "Olajos",
+    "title": "Légiforgalmi irányító",
+    "phoneNumber": "06300000000",
+    "email": "olajos@repter.eu",
+    "wage": "120000"
+  },
+  "jwtToken": "string"
+}
+
+
+
+
+
