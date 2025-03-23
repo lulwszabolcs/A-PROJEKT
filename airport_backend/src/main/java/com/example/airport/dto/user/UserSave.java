@@ -2,13 +2,9 @@ package com.example.airport.dto.user;
 
 import com.example.airport.enumeration.role.Role;
 import com.example.airport.enumeration.user.UserStatus;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 

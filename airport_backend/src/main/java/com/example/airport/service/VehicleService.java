@@ -23,26 +23,25 @@ public class VehicleService {
 
     @Autowired
     private VehicleRepository repository;
+
     public static String generateLicensePlate() {
         Random random = new Random();
 
-        // Generáljunk 4 nagybetűt
         StringBuilder letters = new StringBuilder();
         for (int i = 0; i < 4; i++) {
-            char letter = (char) ('A' + random.nextInt(26)); // A-Z
+            char letter = (char) ('A' + random.nextInt(26));
             letters.append(letter);
         }
 
-        // Generáljunk 3 számjegyet
         StringBuilder numbers = new StringBuilder();
         for (int i = 0; i < 3; i++) {
-            int digit = random.nextInt(10); // 0-9
+            int digit = random.nextInt(10);
             numbers.append(digit);
         }
 
-        // Összeállítjuk a rendszámot
         return letters.toString() + "-" + numbers.toString();
     }
+
     public VehicleRead readVehicle(int id) {
         throwVehicleNotFoundException(id);
         Vehicle vehicle = repository.getReferenceById(id);

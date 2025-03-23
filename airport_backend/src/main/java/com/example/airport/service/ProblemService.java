@@ -13,7 +13,6 @@ import com.example.airport.exception.ProblemNotFoundException;
 import com.example.airport.exception.StatusNotFoundException;
 import com.example.airport.model.Problem;
 import com.example.airport.repository.ProblemRepository;
-import com.example.airport.repository.WorkerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,8 +23,6 @@ public class ProblemService {
 
     @Autowired
     ProblemRepository repository;
-    @Autowired
-    private WorkerRepository workerRepository;
 
     @Autowired
     private ProblemRepository problemRepository;

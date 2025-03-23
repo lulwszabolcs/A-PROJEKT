@@ -18,10 +18,9 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api")
-
 @Tag(name = "Role operations", description = "Make operations with the role enumeration")
 public class RoleController {
-    @CrossOrigin(origins = "http://localhost:3000")
+
     @Operation(summary = "List all role names")
     @GetMapping("/roles/list")
     @PreAuthorize("hasAuthority('LIST_ROLES_NAME')")

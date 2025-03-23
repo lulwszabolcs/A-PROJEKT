@@ -1,12 +1,12 @@
 package com.example.airport.dto;
 
+import lombok.Data;
 import org.springframework.http.HttpStatus;
 import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
+@Data
 public class ExceptionResponse {
     private Date timestamp;
     private int httpStatusCode;

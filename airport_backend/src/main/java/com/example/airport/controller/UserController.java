@@ -41,7 +41,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 @Tag(name = "User functions", description = "Manage users")
-@CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
 
     @Autowired

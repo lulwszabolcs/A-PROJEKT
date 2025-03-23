@@ -3,7 +3,6 @@ package com.example.airport.enumeration.role;
 import com.fasterxml.jackson.annotation.JsonValue;
 import jakarta.persistence.*;
 
-
 public enum Role {
     // Air Traffic and Technical Roles
     AIR_TRAFFIC_CONTROLLER("Légiforgalmi irányító"),

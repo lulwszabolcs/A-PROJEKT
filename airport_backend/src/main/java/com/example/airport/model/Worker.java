@@ -3,16 +3,11 @@ package com.example.airport.model;
 import com.example.airport.enumeration.role.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-
 @Entity
 @Table(name = "workers")
 public class Worker {

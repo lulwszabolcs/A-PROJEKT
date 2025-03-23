@@ -3,13 +3,9 @@ package com.example.airport.dto.problem;
 import com.example.airport.enumeration.problem.ProblemStatus;
 import com.example.airport.enumeration.problem.ProblemType;
 import com.example.airport.enumeration.role.Role;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProblemRead {

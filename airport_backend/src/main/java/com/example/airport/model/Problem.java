@@ -6,8 +6,7 @@ import com.example.airport.enumeration.role.Role;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
