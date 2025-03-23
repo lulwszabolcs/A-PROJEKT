@@ -7,8 +7,8 @@ import com.example.airport.dto.user.UserPatch;
 import com.example.airport.dto.user.UserRead;
 import com.example.airport.dto.user.UserSave;
 import com.example.airport.enumeration.Permission;
+import com.example.airport.enumeration.StatusPatchKey;
 import com.example.airport.enumeration.role.Role;
-import com.example.airport.enumeration.user.UserPatchKey;
 import com.example.airport.enumeration.user.UserStatus;
 import com.example.airport.exception.AuthUserNotFoundException;
 import com.example.airport.exception.StatusNotFoundException;
@@ -95,7 +95,8 @@ public class UserService implements UserDetailsService {
     public UserRead modifyUserStatus(int id, UserPatch userPatch) {
         throwUserNotFoundException(id);
         User user = repository.getReferenceById(id);
-        if (userPatch.getKey() == UserPatchKey.STATUS){
+
+        if (userPatch.getKey() == StatusPatchKey.STATUS){
             try{
                 UserStatus newStatus = UserStatus.valueOf(userPatch.getValue());
                 user.setStatus(newStatus);

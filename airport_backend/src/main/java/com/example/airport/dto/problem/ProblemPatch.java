@@ -1,13 +1,13 @@
 package com.example.airport.dto.problem;
 
-import com.example.airport.enumeration.problem.ProblemPatchKey;
+import com.example.airport.enumeration.StatusPatchKey;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
 public class ProblemPatch {
     @NotNull
-    private ProblemPatchKey key;
+    private StatusPatchKey key;
     @NotNull
     private String value;
 }

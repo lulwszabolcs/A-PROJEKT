@@ -5,7 +5,7 @@ import com.example.airport.dto.problem.ProblemList;
 import com.example.airport.dto.problem.ProblemPatch;
 import com.example.airport.dto.problem.ProblemRead;
 import com.example.airport.dto.problem.ProblemSave;
-import com.example.airport.enumeration.problem.ProblemPatchKey;
+import com.example.airport.enumeration.StatusPatchKey;
 import com.example.airport.enumeration.problem.ProblemStatus;
 import com.example.airport.enumeration.problem.ProblemType;
 import com.example.airport.enumeration.role.Role;
@@ -181,7 +181,7 @@ public class ProblemService {
 
         Problem problem = problemRepository.getReferenceById(id);
 
-        if (problemPatch.getKey() == ProblemPatchKey.STATUS) {
+        if (problemPatch.getKey() == StatusPatchKey.STATUS) {
             try {
                 ProblemStatus newStatus = ProblemStatus.valueOf(problemPatch.getValue().toUpperCase());
                 problem.setStatus(newStatus);
