@@ -1,3 +1,21 @@
 INSERT INTO workers(worker_id, worker_name, worker_title, phone_number, email, wage) VALUES
-                                                                                         (1, 'Gipsz Jakab', 'MAINTENANCE_TECHNICIAN', '0620000000', 'wiwew20047@isorax.com', 500000),
-                                                                                         (2, 'OLajos', 'FIREFIGHTER', '06301111111', 'olajos@repter.eu', 100);
+                                                                                         (1, 'Gipsz Jakab', 'MAINTENANCE_TECHNICIAN', '06 30 123 4567', 'gipszjakab@skypass.hu', 315000),
+                                                                                         (2, 'Kovács Béla', 'FIREFIGHTER', '06 20 234 5678', 'kovacsbela@skypass.hu', 752000),
+                                                                                         (3, 'Szabó István', 'SECURITY_SCREENING_OFFICER', '06 70 345 6789', 'szaboistvan@skypass.hu', 428000),
+                                                                                         (4, 'Nagy László', 'AIR_TRAFFIC_CONTROLLER', '06 30 456 7890', 'nagylaszlo@skypass.hu', 601000),
+                                                                                         (5, 'Tóth Gábor', 'RAMP_AGENT', '06 20 567 8901', 'tothgabor@skypass.hu', 390000),
+                                                                                         (6, 'Kiss József', 'NAVIGATION_SYSTEM_TECHNICIAN', '06 70 678 9012', 'kissjozsef@skypass.hu', 842000),
+                                                                                         (7, 'Varga Dóra', 'CUSTOMER_SERVICE_AGENT', '06 30 789 0123', 'vargadora@skypass.hu', 478000),
+                                                                                         (8, 'Horváth Anna', 'CARGO_HANDLER', '06 20 890 1234', 'horvathanna@skypass.hu', 589000),
+                                                                                         (9, 'Molnár Péter', 'CHECK_IN_AGENT', '06 70 901 2345', 'molnarpeter@skypass.hu', 690000),
+                                                                                         (10, 'Németh Zoltán', 'JETWAY_OPERATOR', '06 30 234 5670', 'nemethzoltan@skypass.hu', 505000),
+                                                                                         (11, 'Farkas Katalin', 'VIP_SERVICE_AGENT', '06 20 345 6781', 'farkaskatalin@skypass.hu', 362000),
+                                                                                         (12, 'Balogh Márton', 'GROUND_CONTROL_OPERATOR', '06 70 456 7892', 'baloghmarton@skypass.hu', 813000),
+                                                                                         (13, 'Papp Réka', 'BAGGAGE_HANDLER', '06 30 567 8903', 'pappreka@skypass.hu', 274000),
+                                                                                         (14, 'Lakatos Bence', 'AIRPORT_SECURITY_GUARD', '06 20 678 9014', 'lakatosbence@skypass.hu', 637000),
+                                                                                         (15, 'Fekete Edit', 'REFUELING_OPERATOR', '06 70 789 0125', 'feketeedit@skypass.hu', 530000),
+                                                                                         (16, 'Takács Attila', 'LOGISTICS_COORDINATOR', '06 30 890 1236', 'takacsattila@skypass.hu', 799000),
+                                                                                         (17, 'Fehér Zsófia', 'MAINTENANCE_TECHNICIAN', '06 20 901 2347', 'feherzsofia@skypass.hu', 450000),
+                                                                                         (18, 'Kocsis Richárd', 'GATE_AGENT', '06 70 234 5678', 'kocsisrichard@skypass.hu', 888000),
+                                                                                         (19, 'Bodnár Eszter', 'CUSTOMER_SERVICE_AGENT', '06 30 345 6789', 'bodnareszter@skypass.hu', 521000),
+                                                                                         (20, 'Kelemen Tamás', 'SECURITY_SCREENING_OFFICER', '06 20 456 7890', 'kelementamas@skypass.hu', 386000);
