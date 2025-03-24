@@ -16,7 +16,7 @@ export default function SupportChat() {
     const [messages,setMessages] = useState([])
     const [chatHistory,setChatHistory] = useState([])
     const [waitingForResponse,setWaitingForResponse] = useState(false);
-    const [systemContent, setSystemContent] = useState(`You are Grok, a chatbot who speaks Hungarian and answers people's questions.`);
+    const [systemContent, setSystemContent] = useState(`You are Grok, a chatbot who speaks Hungarian and answers people's questions. You only reply in plain text, no need for special formatting.`);
 
     const handleSend = () => {
         if (input !== "" && !waitingForResponse) {

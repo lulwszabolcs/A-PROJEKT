@@ -34,3 +34,4 @@ INSERT INTO problem (problem_id, name, description, date, problem_type, status, 
                                                                                           (33, 'Rakomány biztonsági rés', 'Sérült rakományt találtak', '2024-12-09', 'CARGO_SECURITY_BREACH', 'PENDING', 'CARGO_HANDLER'),
                                                                                           (34, 'Poggyászátvilágítási hiba', 'Az átvilágító gép hibát jelzett', '2024-12-09', 'BAGGAGE_SCREENING_ERROR', 'IN_PROGRESS', 'SECURITY_SCREENING_OFFICER'),
                                                                                           (35, 'Vészkijárat problémája', 'A 3-as kapu vészkijárata nem nyílik', '2024-12-10', 'EMERGENCY_EXIT_PROBLEM', 'PENDING', 'GATE_AGENT');
+    
