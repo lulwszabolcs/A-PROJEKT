@@ -19,9 +19,8 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api")
 @Tag(name = "Problem type operations", description = "Make operations with the problem types enumeration")
-@CrossOrigin(origins = "http://localhost:3000")
-
 public class ProblemTypeController {
+
     @Operation(summary = "List all problem type names")
     @GetMapping("/problemtypes/list")
     @PreAuthorize("hasAuthority('LIST_PROBLEM_TYPES_NAME')")

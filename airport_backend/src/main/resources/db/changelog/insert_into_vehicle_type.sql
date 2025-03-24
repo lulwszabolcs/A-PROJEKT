@@ -1,5 +1,5 @@
-insert into vehicle_type (id, description)
-values ('AIRCRAFT', 'Repülőgép'),
+INSERT INTO vehicle_type (id, description)
+VALUES ('AIRCRAFT', 'Repülőgép'),
        ('HELICOPTER', 'Helikopter'),
        ('PUSHBACK_TRUCK', 'Tolató traktor'),
        ('TUG', 'Vontató'),

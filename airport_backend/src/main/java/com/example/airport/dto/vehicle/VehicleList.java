@@ -2,12 +2,12 @@ package com.example.airport.dto.vehicle;
 
 import com.example.airport.enumeration.vehicle.VehicleStatus;
 import com.example.airport.enumeration.vehicle.VehicleType;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 public class VehicleList {
     private Integer vehicleId;

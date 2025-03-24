@@ -1,13 +1,13 @@
-create table if not exists problem(
-    problem_id int not null primary key auto_increment,
-    name varchar(50) not null,
-    description varchar(100),
-    date varchar(30),
-    problem_type varchar(30) not null,
-    status varchar(30),
-    role varchar(30),
+CREATE TABLE IF NOT EXISTS problem (
+    problem_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(50) NOT NULL,
+    description VARCHAR(100),
+    date VARCHAR(30),
+    problem_type VARCHAR(30) NOT NULL,
+    status VARCHAR(30),
+    role VARCHAR(30),
 
-    foreign key (problem_type) references problem_type(id),
-    foreign key (status) references problem_status(id),
-    foreign key (role) references role(id)
+    FOREIGN KEY (problem_type) REFERENCES problem_type(id),
+    FOREIGN KEY (status) REFERENCES problem_status(id),
+    FOREIGN KEY (role) REFERENCES role(id)
 );

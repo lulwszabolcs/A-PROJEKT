@@ -3,15 +3,14 @@ package com.example.airport.enumeration.problem;
 import com.fasterxml.jackson.annotation.JsonValue;
 import jakarta.persistence.JoinColumn;
 
-
 public enum ProblemStatus {
-    PENDING("Függőben"),        // Függőben
-    IN_PROGRESS("Folyamatban"),    // Folyamatban
-    RESOLVED("Megoldva"),       // Megoldva
-    CLOSED("Lezárva"),         // Lezárva
-    ON_HOLD("Felfüggesztve"),        // Felfüggesztve
-    CANCELED("Törölve"),       // Törölve
-    FAILED("Sikertelen");          // Sikertelen
+    PENDING("Függőben"),
+    IN_PROGRESS("Folyamatban"),
+    RESOLVED("Megoldva"),
+    CLOSED("Lezárva"),
+    ON_HOLD("Felfüggesztve"),
+    CANCELED("Törölve"),
+    FAILED("Sikertelen");
 
     @JoinColumn(name = "description")
     private final String description;

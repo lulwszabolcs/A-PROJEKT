@@ -1,3 +1,3 @@
-create table if not exists permission (
-    id  varchar(30) not null primary key
+CREATE TABLE IF NOT EXISTS permission (
+    id VARCHAR(30) NOT NULL PRIMARY KEY
 );

@@ -47,5 +47,4 @@ public enum Permission {
     LIST_NOTES,
     SAVE_NOTE,
     DELETE_NOTE,
-
 }

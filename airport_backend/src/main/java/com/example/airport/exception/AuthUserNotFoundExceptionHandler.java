@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @Hidden
 @RestControllerAdvice
 public class AuthUserNotFoundExceptionHandler implements ErrorController {
-
         private ResponseEntity<ExceptionResponse> createHttpResponse(HttpStatus httpStatus, String message) {
             return new ResponseEntity<>(new ExceptionResponse(httpStatus.value(), httpStatus,
                     httpStatus.getReasonPhrase().toUpperCase(), message), httpStatus);

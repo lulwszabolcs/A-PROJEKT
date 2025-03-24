@@ -1,11 +1,11 @@
-create table if not exists vehicles(
-    vehicle_id int not null primary key auto_increment,
-    name varchar(30),
-    license varchar(10),
-    vehicle_type varchar(100),
-    vehicle_year int,
-    vehicle_status varchar(30),
+CREATE TABLE IF NOT EXISTS vehicles (
+    vehicle_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(30),
+    license VARCHAR(10),
+    vehicle_type VARCHAR(100),
+    vehicle_year INT,
+    vehicle_status VARCHAR(30),
 
-    foreign key (vehicle_type) references vehicle_type(id),
-    foreign key (vehicle_status) references vehicle_status(id)
+    FOREIGN KEY (vehicle_type) REFERENCES vehicle_type(id),
+    FOREIGN KEY (vehicle_status) REFERENCES vehicle_status(id)
 );

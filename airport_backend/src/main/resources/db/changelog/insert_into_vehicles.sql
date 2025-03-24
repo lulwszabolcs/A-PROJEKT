@@ -1,4 +1,4 @@
-insert into vehicles (vehicle_id, name, license, vehicle_type, vehicle_year, vehicle_status) values
+INSERT INTO vehicles (vehicle_id, name, license, vehicle_type, vehicle_year, vehicle_status) VALUES
                                                                                                  (1, 'Cobus 3000', 'BUS-201', 'SHUTTLE_BUS', 2018, 'OPERATIONAL'),
                                                                                                  (2, 'Goldhofer AST-1X', 'PBT-312', 'PUSHBACK_TRUCK', 2016, 'UNDER_MAINTENANCE'),
                                                                                                  (3, 'Douglas DC-12', 'TUG-404', 'TUG', 2015, 'IN_REPAIR'),

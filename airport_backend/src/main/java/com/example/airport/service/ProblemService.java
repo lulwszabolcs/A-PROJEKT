@@ -5,7 +5,7 @@ import com.example.airport.dto.problem.ProblemList;
 import com.example.airport.dto.problem.ProblemPatch;
 import com.example.airport.dto.problem.ProblemRead;
 import com.example.airport.dto.problem.ProblemSave;
-import com.example.airport.enumeration.problem.ProblemPatchKey;
+import com.example.airport.enumeration.StatusPatchKey;
 import com.example.airport.enumeration.problem.ProblemStatus;
 import com.example.airport.enumeration.problem.ProblemType;
 import com.example.airport.enumeration.role.Role;
@@ -13,7 +13,6 @@ import com.example.airport.exception.ProblemNotFoundException;
 import com.example.airport.exception.StatusNotFoundException;
 import com.example.airport.model.Problem;
 import com.example.airport.repository.ProblemRepository;
-import com.example.airport.repository.WorkerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,8 +23,6 @@ public class ProblemService {
 
     @Autowired
     ProblemRepository repository;
-    @Autowired
-    private WorkerRepository workerRepository;
 
     @Autowired
     private ProblemRepository problemRepository;
@@ -184,7 +181,7 @@ public class ProblemService {
 
         Problem problem = problemRepository.getReferenceById(id);
 
-        if (problemPatch.getKey() == ProblemPatchKey.STATUS) {
+        if (problemPatch.getKey() == StatusPatchKey.STATUS) {
             try {
                 ProblemStatus newStatus = ProblemStatus.valueOf(problemPatch.getValue().toUpperCase());
                 problem.setStatus(newStatus);

@@ -23,7 +23,6 @@ public class ProblemController {
     @Autowired
     ProblemService service;
 
-    @CrossOrigin(origins = "http://localhost:3000")
     @ResponseStatus(value = HttpStatus.CREATED)
     @Operation(summary = "Create new problem")
     @PostMapping("/problem")
@@ -31,7 +30,7 @@ public class ProblemController {
     public ProblemRead createProblem(@RequestBody ProblemSave problemSave) {
         return service.createProblem(problemSave);
     }
-    @CrossOrigin(origins = "http://localhost:3000")
+
     @Operation(summary = "Get problem by id")
     @GetMapping("/problem/{id}")
     @PreAuthorize("hasAuthority('READ_PROBLEM')")
@@ -39,7 +38,6 @@ public class ProblemController {
         return service.getProblem(id);
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
     @Operation(summary = "List all problems")
     @GetMapping("/problem")
     @PreAuthorize("hasAuthority('LIST_PROBLEM')")
@@ -47,7 +45,6 @@ public class ProblemController {
         return service.listProblems();
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
     @Operation(summary = "Update problem by id")
     @PutMapping("/problem/{id}")
     @PreAuthorize("hasAuthority('UPDATE_PROBLEM')")
@@ -55,7 +52,6 @@ public class ProblemController {
         return service.updateProblem(id, problemSave);
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
     @Operation(summary = "Modify the status of problem")
     @PatchMapping("/problem/{id}")
     @PreAuthorize("hasAuthority('MODIFY_PROBLEM_STATUS')")
@@ -63,14 +59,13 @@ public class ProblemController {
         return service.modifyProblem(id, problemPatch);
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
     @Operation(summary = "List problems by type")
     @GetMapping("/problem/type/{problemType}")
     @PreAuthorize("hasAuthority('LIST_PROBLEM_BY_TYPE')")
     public List<ProblemList> listProblemsByType(@PathVariable ProblemType problemType) {
         return service.listProblemsByType(problemType);
     }
-    @CrossOrigin(origins = "http://localhost:3000")
+
     @Operation(summary = "Delete problem by id")
     @DeleteMapping("/problem/{id}")
     @PreAuthorize("hasAuthority('DELETE_PROBLEM')")

@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/api")
 @Tag(name = "Vehicle status operations", description = "Make operations with the vehicle status enumeration")
 public class VehicleStatusController {
-    @CrossOrigin(origins = "http://localhost:3000")
+
     @Operation(summary = "List all vehicle status names")
     @GetMapping("/vehiclestatuses/list")
     @PreAuthorize("hasAuthority('LIST_VEHICLE_STATUSES_NAME')")
