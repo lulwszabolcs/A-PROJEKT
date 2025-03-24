@@ -116,19 +116,19 @@ export default function ErrorList() {
   onlySeeClosedProblems || problem.role === userProfile.role)
   .map((problem) => (
     <TableRow key={problem.problemId}>
-      <TableCell style={{ fontStyle: problem.status === "Lezárva" ? "italic" : "normal" }}>
+      <TableCell style={{ fontStyle: problem.status !== "Függőben" ? "italic" : "normal" }}>
         {problem.problemId}
       </TableCell>
-      <TableCell style={{ fontStyle: problem.status === "Lezárva" ? "italic" : "normal" }}>
+      <TableCell style={{ fontStyle: problem.status !== "Függőben" ? "italic" : "normal" }}>
         {problem.name}
       </TableCell>
-      <TableCell style={{ fontStyle: problem.status === "Lezárva" ? "italic" : "normal" }}>
+      <TableCell style={{ fontStyle: problem.status !== "Függőben" ? "italic" : "normal" }}>
         {problem.description}
       </TableCell>
-      <TableCell style={{ fontStyle: problem.status === "Lezárva" ? "italic" : "normal"}}>
+      <TableCell style={{ fontStyle: problem.status !== "Függőben" ? "italic" : "normal"}}>
         {problem.date}
       </TableCell>
-      <TableCell style={{ fontStyle: problem.status === "Lezárva" ? "italic" : "normal",color: problemColorPicker(problem.problemType)}}>
+      <TableCell style={{ fontStyle: problem.status !== "Függőben" ? "italic" : "normal",color: problemColorPicker(problem.problemType)}}>
       <div style={{ 
         display: "inline-block", 
         padding: "6px", 
