@@ -30,7 +30,7 @@ import { UserContext } from '../../../contexts/UserProvider';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-export default function ErrorList() {
+export default function ErrorList({canUpdateProblemInitial,canDeleteProblemInitial,canCreateProblemInitial,canCloseProblemInitial}) {
   let {SnackbarOpen,closeSnackbar,SnackbarMessage} = useContext(SnackbarContext)
   let {problems,deleteSelectedProblem,closeSelectedProblem,problemColorPicker} = useContext(ProblemContext)
   let {userProfile,checkIfUserHasPermission} = useContext(UserContext)
@@ -42,10 +42,10 @@ export default function ErrorList() {
   const [onlySeeClosedProblems,setOnlySeeClosedProblems] = useState(false);
   const [openDialog,setOpenDialog] = useState(false)
 
-  const [canUpdateProblem,setCanUpdateProblem] = useState(false)
-  const [canDeleteProblem,setCanDeleteProblem] = useState(false)
-  const [canCreateProblem,setCanCreateProblem] = useState(false)
-  const [canCloseProblem,setCanCloseProblem] = useState(false)
+  const [canUpdateProblem,setCanUpdateProblem] = useState(canUpdateProblemInitial || false)
+  const [canDeleteProblem,setCanDeleteProblem] = useState(canDeleteProblemInitial || false)
+  const [canCreateProblem,setCanCreateProblem] = useState(canCreateProblemInitial || false)
+  const [canCloseProblem,setCanCloseProblem] = useState(canCloseProblemInitial || false)
 
   const openDialogBox = () =>{
       setOpenDialog(true)
@@ -89,10 +89,12 @@ export default function ErrorList() {
         <div className={styles.tablecontainer}>
         <h1 className={styles.errorprimarytext}>Folyamatban lévő hibák</h1>
         <div className={styles.checkBoxErrors}>
-        <FormControlLabel control={<Checkbox checked={seeClosedProblems} onChange={handleCheckboxChange}/>} label="Megoldott problémák mutatása" style={{fontSize:10}}/>
-        <FormControlLabel control={<Checkbox/>} checked={onlySeeClosedProblems} onChange={handleRoleCheckboxChange} label="Beosztáshoz tartozó problémák" style={{fontSize:10}}/>
+        <FormControlLabel control={<Checkbox checked={seeClosedProblems} onChange={handleCheckboxChange}/>} label="Megoldott problémák mutatása" style={{fontSize:10}} data-testid={"filterClosed"}
+        />
+        <FormControlLabel control={<Checkbox/>} checked={onlySeeClosedProblems} onChange={handleRoleCheckboxChange} label="Beosztáshoz tartozó problémák" style={{fontSize:10}} data-testid={"filterByRole"}
+        />
         </div>
-        <TableContainer component={Paper} className={styles.problemstable}>
+        <TableContainer component={Paper} className={styles.problemstable} data-testid={"problemTable"}>
         <Table>
           <TableHead className={styles.fixedtable}>
             <TableRow>
@@ -143,7 +145,7 @@ export default function ErrorList() {
           <>
               { canUpdateProblem && (
                 <Button onClick={() => openEditModal(problem)}>
-                  <CreateIcon />
+                  <CreateIcon data-testid={"updateIcon"}/>
                 </Button>
               ) }
               {canDeleteProblem &&
@@ -152,12 +154,12 @@ export default function ErrorList() {
                       openDialogBox();
                       setCurrentProb(problem);
                       }}>
-                    <DeleteIcon />
+                    <DeleteIcon data-testid={"deleteIcon"} />
                   </Button>)
               }
               {canCloseProblem &&
               <Button onClick={() => closeSelectedProblem(problem.problemId)}>
-              <CheckIcon />
+              <CheckIcon data-testid={"closeIcon"} />
             </Button>
               }
           </>
@@ -231,7 +233,7 @@ export default function ErrorList() {
         {canCreateProblem &&
       <div className={styles.fabicon}>
         <Fab color="primary" aria-label="add" onClick={()=>setIsAddNewProblemOpen(true)}>
-          <AddIcon />
+          <AddIcon data-testid={"addIcon"} />
         </Fab>
         </div>
         }
