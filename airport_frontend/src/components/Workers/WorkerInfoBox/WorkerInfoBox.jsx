@@ -105,7 +105,7 @@ import { UserContext } from '../../../contexts/UserProvider';
               display: 'flex',
               flexDirection: 'row',
               flexWrap: 'wrap',
-              gap: '50px'
+              gap: isMobile? '50px':'4vw '
             }}>
               {filteredWorkers.map((worker)=>( 
                 <Card variant="outlined" data-testid={"workerCard"} style={{paddingTop:10,position:'relative',boxShadow:'5px 5px 5px 5px rgba(173, 216, 230, 0.616)',width:'15rem'}}>
