@@ -16,7 +16,7 @@ export default function SupportChat() {
     const [messages,setMessages] = useState([])
     const [chatHistory,setChatHistory] = useState([])
     const [waitingForResponse,setWaitingForResponse] = useState(false);
-    const [systemContent, setSystemContent] = useState(`You are Grok, a chatbot who speaks Hungarian and answers people's questions. You only reply in plain text, no need for special formatting.`);
+    const [systemContent, setSystemContent] = useState(`You are SkyPassAI, a chatbot who speaks Hungarian and answers people's questions. You only reply in plain text, no need for special formatting.`);
 
     const handleSend = () => {
         if (input !== "" && !waitingForResponse) {
@@ -60,7 +60,7 @@ export default function SupportChat() {
           .then((response) => response.text())
           .then((text) => {
             setSystemContent(
-              `You are Grok, a chatbot who speaks Hungarian and answers people's questions. Here is additional context: ${text}`
+              `You are SkyPassAI, a chatbot who speaks Hungarian and answers people's questions. Here is additional context: ${text}`
             );
           })
           .catch((error) => console.error("Hiba a fájl betöltésekor:", error));

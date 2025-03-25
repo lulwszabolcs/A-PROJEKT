@@ -21,7 +21,7 @@ import { SnackbarContext } from '../../../contexts/SnackbarProvider';
 import { ImageContext } from '../../../contexts/ImageProvider';
 import { UserContext } from '../../../contexts/UserProvider';
 
-export default function VehicleList() {
+export default function VehicleList({canAddVehicleInitial,canChangeStatusInitial}) {
     let { vehicles } = useContext(VehicleContext)
     let {pickImageForVehicle} = useContext(ImageContext)
     let {vehicleTypes,vehicleStatuses} = useContext(TypeContext)
@@ -35,8 +35,8 @@ export default function VehicleList() {
     const [imageUrls, setImageUrls] = useState({});
     const isSmallScreen = useMediaQuery('(max-width: 425px)');
     const isMobile = useMediaQuery('(max-width: 1024px)');
-    const [canAddVehicle,setCanAddVehicle] = useState(false)
-    const [canModifyVehicleStatus,setCanModifyVehicleStatus] = useState(false)
+    const [canAddVehicle,setCanAddVehicle] = useState(canAddVehicleInitial || false)
+    const [canModifyVehicleStatus,setCanModifyVehicleStatus] = useState(canChangeStatusInitial || false)
 
     function closeAddProblem() {
         setIsAddProblemOpen(false);
@@ -103,6 +103,7 @@ export default function VehicleList() {
             id="demo-simple-select"
             onChange={(e) => setSelectedType(e.target.value)}
             defaultValue={"all"}
+            data-testid={"typeFilterSelect"}
             > 
             <MenuItem value={"all"}>
                 Minden típus
@@ -118,6 +119,7 @@ export default function VehicleList() {
             id="demo-simple-select"
             onChange={(e) => setSelectedStatus(e.target.value)}
             defaultValue={"all"}
+            data-testid={"statusFilterSelect"}
             > 
             <MenuItem value={"all"}>
                 Minden állapot
@@ -129,12 +131,12 @@ export default function VehicleList() {
                 ))}
         </Select>
         {canModifyVehicleStatus &&
-        <ReportProblemIcon onClick={()=>setIsAddProblemOpen(true)} className={styles.reporticon} sx={{color:'red',fontSize:'40px'}}></ReportProblemIcon>}
+        <ReportProblemIcon onClick={()=>setIsAddProblemOpen(true)} className={styles.reporticon} sx={{color:'red',fontSize:'40px'}} data-testid={"statusChangeIcon"}></ReportProblemIcon>}
         </div>
         <div className={styles.flexbox}>
         {filteredVehicles.sort((a,b)=>(a.license.localeCompare(b.license))).map((vehicle)=>(
-            <div className={styles.vehicleCard} key={vehicle.vehicleId} style={{width:isSmallScreen ? '60vw':undefined}}>
-                <div className={styles.vehicleInfoContainer}>
+            <div className={styles.vehicleCard} key={vehicle.vehicleId} style={{width:isSmallScreen ? '60vw':undefined}} data-testid={"vehicleCard"}>
+                <div className={styles.vehicleInfoContainer} >
                     <h4>{vehicle.name}</h4>
                     <p>{vehicle.license}</p>
                     <p>{vehicle.type}</p>
@@ -150,7 +152,7 @@ export default function VehicleList() {
             {canAddVehicle &&
         <div className={styles.addicon}>
         <Fab color="primary" aria-label="add">
-            <AddIcon onClick={()=>setIsAddVehicleOpen(true)} />
+            <AddIcon onClick={()=>setIsAddVehicleOpen(true)} data-testid={"addVehicleIcon"} />
         </Fab>
         </div>}
         <Modal open={isAddProblemOpen}>

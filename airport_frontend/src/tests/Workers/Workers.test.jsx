@@ -29,13 +29,6 @@ const mockWorkers = [
     phoneNumber: "0620000000",
     wage: 500000 
   },
-  { workerId: 2, 
-    name: 'John Doe', 
-    title: 'Robot',
-    email: "wiwiwiw@isorax.com",
-    phoneNumber: "0620000000",
-    wage: 500000 
-  },
 ];
 const mockWorkerContext = {
     getWorkers: vi.fn(),
@@ -64,6 +57,13 @@ const Wrapper = ({ children }) => (
         expect(screen.getByTestId('selectRole')).toBeInTheDocument();
         expect(screen.getAllByTestId('workerCard')[0]).toBeInTheDocument(); 
         expect(screen.getByTestId('addIcon')).toBeInTheDocument();
+      });
+    });
+    it('renders a worker correctly', async () => {
+      render(<WorkerInfoBox />, { wrapper: Wrapper });
+      await waitFor(() => {
+        expect(screen.getByText('John Doe')).toBeInTheDocument();
+        expect(screen.getByText('Developer')).toBeInTheDocument();
       });
     });
 

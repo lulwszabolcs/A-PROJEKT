@@ -177,4 +177,4 @@ A tesztelési dokumentáció az Apache JMeter JMX fájlok alapján készült, é
 
 A dokumentáció AsciiDoc formátumban készült, amely alkalmas verziókezelésre és PDF/HTML exportra, így könnyen integrálható a fejlesztési folyamatokba.
 
-link:../README.adoc[Vissza]
+link:../../README.adoc[Vissza]

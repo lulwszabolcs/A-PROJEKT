@@ -291,6 +291,8 @@
   "jwtToken": "string"
 }
 
+link:../../README.adoc[Vissza]
+
 
 
 
