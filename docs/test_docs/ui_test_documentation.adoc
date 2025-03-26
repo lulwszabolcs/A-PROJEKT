@@ -46,5 +46,155 @@ npm run test
 | A változtatás sikeresen végbemegy
 
 |===
+=== Profil oldal:
+[cols="1,3,3"]
+|===
+
+|Teszt fajtája
+|Teszt leírása
+|Teszteredmény
+
+| unit
+| A Profil oldal megfelelően betöltődik
+| A profil űrlap elemei (letöltés ikon, profilkép, név, szerepkör, email, telefonszám) sikeresen betöltődnek
+
+| unit
+| PDF generáló függvény egyszeri meghívásának ellenőrzése
+| A PDF generáló függvény pontosan egyszer hívódik meg a letöltés ikonra kattintáskor
+
+|===
+=== Kezdőlap:
+[cols="1,3,3"]
+|===
+
+|Teszt fajtája
+|Teszt leírása
+|Teszteredmény
+
+| unit
+| A Kezdőlap megfelelően betöltődik
+| Az időjárás konténer, felhasználói diagram, jármű diagram és jegyzetek sikeresen betöltődnek
+
+| unit
+| Időjárási figyelmeztetés megjelenik, ha a hőmérséklet 2 Celsius-fok alatt van
+| A figyelmeztető üzenet megjelenik a DOM-ban alacsony hőmérséklet esetén
+
+| unit
+| Időjárási figyelmeztetés nem jelenik meg, ha a hőmérséklet 2 Celsius-fok felett van
+| A figyelmeztető üzenet nem jelenik meg a DOM-ban magasabb hőmérséklet esetén
+
+| unit
+| Jegyzet törlő függvény egyszeri meghívásának ellenőrzése
+| A jegyzet törlő függvény pontosan egyszer hívódik meg a törlés gombra kattintáskor
+
+| unit
+| Jegyzet hozzáadó gomb megnyomása megjeleníti a jegyzet hozzáadása modalt
+| A "Új jegyzet hozzáadása" szöveg megjelenik a DOM-ban a gombra kattintás után
+
+|===
+=== Dolgozók oldal:
+[cols="1,3,3"]
+|===
+
+|Teszt fajtája
+|Teszt leírása
+|Teszteredmény
+
+| unit
+| A Dolgozók oldal megfelelően betöltődik
+| A szerepkör választó, dolgozó kártya és hozzáadás ikon sikeresen betöltődnek
+
+| unit
+| Egy dolgozó adatai megfelelően megjelennek
+| A dolgozó neve ("John Doe") és címe ("Developer") megjelenik a DOM-ban
+
+| unit
+| Új dolgozó hozzáadása menü megnyitása
+| Az "Új dolgozó felvétele" szöveg megjelenik a DOM-ban a hozzáadás ikonra kattintás után
+
+| unit
+| Dolgozó információ menü megnyitása
+| A "Dolgozó információ" szöveg megjelenik a DOM-ban a részletek ikonra kattintás után
+
+|===
+=== Járművek oldal:
+[cols="1,3,3"]
+|===
+
+|Teszt fajtája
+|Teszt leírása
+|Teszteredmény
+
+| unit
+| A Járművek oldal megfelelően betöltődik
+| A típus szűrő, állapot szűrő, állapotváltoztató ikon, jármű kártya és jármű hozzáadó ikon sikeresen betöltődnek
+
+| unit
+| Egy jármű adatai megfelelően megjelennek
+| A jármű neve ("Cobus 3000"), rendszáma ("BUS-201"), típusa ("Busz"), évjárata ("2018") és állapota ("Jármű működőképes") megjelenik a DOM-ban
+
+| unit
+| Jármű hozzáadása menü megnyitása
+| A "Jármű hozzáadása", "Bezár" és "Mentés" szövegek megjelennek a DOM-ban a hozzáadó ikonra kattintás után
+
+| unit
+| Jármű állapot változtatása menü megnyitása
+| A "Jármű állapot változtatása", "Mentés" és "Bezár" szövegek megjelennek a DOM-ban az állapotváltoztató ikonra kattintás után
+
+|===
+=== Problémák oldal:
+[cols="1,3,3"]
+|===
+
+|Teszt fajtája
+|Teszt leírása
+|Teszteredmény
+
+| unit
+| A Problémák oldal megfelelően betöltődik
+| A lezárt szűrő, szerepkör szerinti szűrő, probléma tábla, szerkesztés ikon, törlés ikon, lezárás ikon és hozzáadás ikon sikeresen betöltődnek
+
+| unit
+| Egy probléma adatai megfelelően megjelennek
+| A probléma neve ("Rádió kapcsolat megszakadt"), leírása ("A földi irányítással megszakadt a rádiókapcsolat"), dátuma ("2024-11-23") és típusa ("Kommunikációs hiba") megjelenik a DOM-ban
+
+| unit
+| Probléma törlése csak egyszer hívja meg a függvényt
+| A törlés függvény pontosan egyszer hívódik meg a törlés ikonra és a "Törlés" gombra kattintás után
+
+| unit
+| Probléma szerkesztése menü megnyitása
+| A "Probléma szerkesztése", "Bezár" és "Mentés" szövegek megjelennek a DOM-ban a szerkesztés ikonra kattintás után
+
+| unit
+| Új probléma hozzáadása menü megnyitása
+| Az "Új probléma hozzáadása", "Bezár" és "Mentés" szövegek megjelennek a DOM-ban a hozzáadás ikonra kattintás után
+
+| unit
+| Probléma lezárása csak egyszer hívja meg a függvényt
+| A lezárás függvény pontosan egyszer hívódik meg a lezárás ikonra kattintás után
+
+| unit
+| A lezárt problémák megjelenítése szűrő helyes működése
+| A lezárt probléma neve ("Tűzriadó a C terminálon"), leírása ("Riasztás történt, kiürítették az épületet"), dátuma ("2024-12-01") és típusa ("Tűzriadó") megjelenik a DOM-ban a szűrő bekapcsolása után
+
+|===
+=== Ügyfélszolgálat oldal:
+[cols="1,3,3"]
+|===
+
+|Teszt fajtája
+|Teszt leírása
+|Teszteredmény
+
+| unit
+| Az Ügyfélszolgálat oldal megfelelően betöltődik
+| Az üzenetbevitel mező és a küldés ikon sikeresen betöltődnek
+
+| integration
+| A bevitt üzenet megjelenik a csevegőnaplóban
+| Az "Example message" szöveg megjelenik a DOM-ban az üzenet bevitele és a küldés ikonra kattintás után
+
+|===
 
 link:../../README.adoc[Vissza]
