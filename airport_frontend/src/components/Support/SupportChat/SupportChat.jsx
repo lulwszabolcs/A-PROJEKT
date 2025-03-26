@@ -67,7 +67,7 @@ export default function SupportChat() {
       }, []);
     return (
         <div className={styles.flexbox}>
-        <h1 className={styles.supportmaintext}>Ügyfélszolgálat - SkyPassAI</h1>
+        <h1 className={styles.supportmaintext}>Ügyfélszolgálat</h1>
         <div className={styles.chatmaincontainer}>
             <div className={styles.messagecontainer}>
                 <div className={styles.systemtextcontainer}>
