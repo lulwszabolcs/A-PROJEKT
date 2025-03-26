@@ -8,7 +8,7 @@
 +
 [source,batch]
 ----
-cd .\aiport_frontend\
+cd .\airport_frontend\
 ----
 . Futtassuk a tesztkörnyezetet:
 +
