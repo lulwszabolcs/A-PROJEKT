@@ -1,5 +1,5 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { describe, it, expect, vi, beforeEach} from 'vitest';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { SnackbarContext } from '../../contexts/SnackbarProvider';
 import { UserContext } from '../../contexts/UserProvider';
 import { ImageContext } from '../../contexts/ImageProvider';
@@ -50,10 +50,10 @@ describe('Profile page tests',()=>{
         expect(screen.getByTestId('emailField')).toBeInTheDocument();
         expect(screen.getByTestId('phoneNumberField')).toBeInTheDocument();
     })
-    // it('generate pdf function only calls once',()=>{
-    //     render(<ProfileCard/>, {wrapper:Wrapper})
-    //     const downloadIcon = screen.getByTestId('downloadIcon')
-    //     fireEvent.click(downloadIcon)
-    //     expect(mockUserContext.generatePdfFileForUser).toHaveBeenCalledTimes(1)
-    // })
+    it('generate pdf function only calls once',()=>{
+        render(<ProfileCard/>, {wrapper:Wrapper})
+        const downloadIcon = screen.getByTestId('downloadIcon')
+        fireEvent.click(downloadIcon)
+        expect(mockUserContext.generatePdfFileForUser).toHaveBeenCalledTimes(1)
+    })
 })

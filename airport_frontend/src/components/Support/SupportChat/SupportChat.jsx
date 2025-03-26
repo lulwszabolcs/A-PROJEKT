@@ -95,7 +95,7 @@ export default function SupportChat() {
                     sx={{resize:'vertical'}}
                     />
                     <Button onClick={handleSend} disabled={waitingForResponse}>
-                        {waitingForResponse ? <SendIcon style={{ color: "gray" }} /> : <SendIcon />}
+                        {waitingForResponse ? <SendIcon style={{ color: "gray" }} /> : <SendIcon data-testid={"sendIcon"} />}
                     </Button>                
                     </div>
             </div>
@@ -112,8 +112,9 @@ export default function SupportChat() {
                 disabled={!key || waitingForResponse}
                 onChange={handleInputChange}
                 sx={{resize:'vertical'}}
+                data-testid={"messageInput"}
                 />
-                <Button onClick={handleSend} disabled={!key}><SendIcon/></Button>
+                <Button onClick={handleSend} disabled={!key}><SendIcon data-testid={"sendIcon"}/></Button>
             </div>
             )}
             </div>

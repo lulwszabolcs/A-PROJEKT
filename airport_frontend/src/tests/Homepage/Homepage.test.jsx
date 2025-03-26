@@ -133,8 +133,6 @@ describe('Homepage',()=>{
           const deleteButton = screen.getByTestId('deleteButton');
           fireEvent.click(deleteButton)
           expect(mockNoteContext.deleteNote).toHaveBeenCalledTimes(1)
-
-          
         })
         it('clicking the note add button displays the add note modal',()=>{
           render(<HomePageContent/>, { wrapper: Wrapper });
