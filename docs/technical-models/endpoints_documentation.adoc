@@ -291,6 +291,173 @@
   "jwtToken": "string"
 }
 
+=== Felhasználók listázása
+[cols="1h,3"]
+|===
+
+|Végpont
+|LIST_USER
+
+|HTTP-módszer
+|GET
+
+|URL
+|http://localhost:8080/api/user
+
+|Leírás
+|Ennek a végpontnak a segítségével listázhatjuk az összes felhasználó adatait.
+
+|Autentikáció
+|A kéréshez autentikáció és egy érvényes token szükséges.
+
+|===
+
+=== Felhasználó létrehozása
+[cols="1h,3"]
+|===
+
+|Végpont
+|CREATE_USER
+
+|HTTP-módszer
+|POST
+
+|URL
+|http://localhost:8080/api/user
+
+|Leírás
+|Ez a végpont lehetővé teszi, hogy új felhasználót vegyünk fel a rendszerbe.
+
+|Autentikáció
+|A kéréshez autentikáció és egy érvényes token szükséges.
+
+|===
+
+==== Bemeneti paraméterek
+[cols="1,1,1, 1"]
+|===
+|Paraméter|Típus|Kötelező|Leírás
+
+|username
+|string
+|igen
+|Felhasználónév
+
+|password
+|string
+|igen
+|A felhasználó jelszava
+
+|role
+|string
+|igen
+|A felhasználó jogköre
+
+|status
+|string
+|igen
+|A felhasználó státusza
+
+|worker_id
+|int
+|igen
+|A felhasználóhoz tartozó dolgozó egyedi azonosítója
+
+|===
+
+==== Példa kérés
+[source,batch]
+{
+  "username": "olajos",
+  "password": "jelszo",
+  "role": "Légiforgalmi irányító",
+  "status": "User is currently online",
+  "worker_id": 1
+}
+
+==== Példa válasz
+[source,batch]
+{
+  "id": 1,
+  "username": "olajos",
+  "password": "jelszo",
+  "role": "Légiforgalmi irányító",
+  "status": "User is currently online",
+  "worker": {
+    "workerId": 1,
+    "name": "Olajos",
+    "title": "Légiforgalmi irányító",
+    "phoneNumber": "06300000000",
+    "email": "olajos@repter.eu",
+    "wage": "120000"
+  },
+  "jwtToken": "string"
+}
+
+=== Felhasználó bejelentkezés
+[cols="1h,3"]
+|===
+
+|Végpont
+|LOGIN_USER
+
+|HTTP-módszer
+|POST
+
+|URL
+|http://localhost:8080/api/user/login
+
+|Leírás
+|Ez a végpont lehetővé teszi, hogy a megfelelő felhasználó és jelszó párossal bejelentkezzünk a rendszerbe.
+
+|Autentikáció
+|A kéréshez autentikáció és egy érvényes token szükséges.
+
+|===
+
+==== Bemeneti paraméterek
+[cols="1,1,1, 1"]
+|===
+|Paraméter|Típus|Kötelező|Leírás
+
+|username
+|string
+|igen
+|A felhasználó felhasználóneve.
+
+|password
+|string
+|igen
+|A felhasználó jelszava.
+
+|===
+
+==== Példa kérés
+[source,batch]
+{
+  "username": "olajos",
+  "password": "jelszo"
+}
+
+==== Példa válasz
+[source,batch]
+{
+  "id": 1,
+  "username": "olajos",
+  "password": "jelszo",
+  "role": "VIP szolgáltatási ügynök",
+  "status": "User is currently online",
+  "worker": {
+    "workerId": 1,
+    "name": "Olajos",
+    "title": "Karbantartó technikus",
+    "phoneNumber": "0620000000",
+    "email": "olajos@repter.eu",
+    "wage": "500000"
+  },
+  "jwtToken": "string"
+}
+
 link:../../README.adoc[Vissza]
 
 
