@@ -802,6 +802,381 @@ PDF generated and saved to:"path"
   "status": "Jármű működőképes"
 }
 
+=== Új jármű felvétele
+[cols="1h,3"]
+|===
+
+|Végpont
+|CREATE_VEHICLE
+
+|HTTP-módszer
+|POST
+
+|URL
+|http://localhost:8080/api/vehicle/
+
+|Leírás
+|Ez a végpont lehetővé teszi, hogy új járművet rögzítsünk a rendszerbe.
+
+|Autentikáció
+|A kéréshez autentikáció és egy érvényes token szükséges.
+
+|===
+
+==== Bemeneti paraméterek
+[cols="1,1,1, 1"]
+|===
+|Paraméter|Típus|Kötelező|Leírás
+
+|name
+|string
+|igen
+|A jármű neve.
+
+|type
+|string
+|igen
+|A jármű típusa
+
+|vehicleYear
+|int
+|igen
+|A jármű életkora
+
+|status
+|string
+|igen
+|A jármű státusza
+|===
+
+==== Példa kérés
+[source,batch]
+{
+  "name": "repulo011",
+  "type": "Repülőgép",
+  "vehicleYear": 2015,
+  "status": "Jármű működőképes"
+}
+
+==== Példa válasz
+[source,batch]
+{
+  "vehicleId": 1,
+  "name": "repulo011",
+  "license": "AAGF-011",
+  "type": "Repülőgép",
+  "vehicleYear": 2015,
+  "status": "Jármű működőképes"
+}
+
+=== Az összes jármű listázása
+[cols="1h,3"]
+|===
+
+|Végpont
+|LIST_VEHICLE
+
+|HTTP-módszer
+|GET
+
+|URL
+|http://localhost:8080/api/vehicle/list
+
+|Leírás
+|Ez a végpont lehetővé teszi, hogy listázzuk az összes járművet.
+
+|Autentikáció
+|A kéréshez autentikáció és egy érvényes token szükséges.
+
+|===
+
+== Vehicle type operation
+=== Az összes járműtípus listázása
+[cols="1h,3"]
+|===
+
+|Végpont
+|LIST_VEHICLE_TYPES_NAME
+
+|HTTP-módszer
+|GET
+
+|URL
+|http://localhost:8080/api/vehicletypes/list
+
+|Leírás
+|Ez a végpont lehetővé teszi, hogy listázzuk az összes járműtípust.
+
+|Autentikáció
+|A kéréshez autentikáció és egy érvényes token szükséges.
+
+|===
+
+== Worker functions
+=== Egy adott dolgozó adatainak lekérdezése
+[cols="1h,3"]
+|===
+
+|Végpont
+|READ_WORKER
+
+|HTTP-módszer
+|GET
+
+|URL
+|http://localhost:8080/api/worker/{id}
+
+|Leírás
+|Ez a végpont lehetővé teszi, hogy lekérdezzük egy adott dolgozó adatait id alapján.
+
+|Autentikáció
+|A kéréshez autentikáció és egy érvényes token szükséges.
+
+|===
+
+==== Útvonal paraméterek
+[cols="1,1,1, 1"]
+|===
+|Paraméter|Típus|Kötelező|Leírás
+
+|id
+|int
+|igen
+|A dolgozó egyedi azonosítója.
+|===
+
+==== Példa válasz
+[source,batch]
+{
+  "workerId": 1,
+  "name": "Gipsz Jakab",
+  "title": "Karbantartó technikus",
+  "phoneNumber": "0620000000",
+  "email": "gipszj@repter.eu",
+  "wage": "500000"
+}
+
+=== Dolgozó adatainak módosítása
+[cols="1h,3"]
+|===
+
+|Végpont
+|UPDATE_WORKER
+
+|HTTP-módszer
+|PUT
+
+|URL
+|http://localhost:8080/api/worker/{id}
+
+|Leírás
+|Ez a végpont lehetővé teszi, hogy módosítsuk egy adott felhasználó adatait id alapján.
+
+|Autentikáció
+|A kéréshez autentikáció és egy érvényes token szükséges.
+
+|===
+
+==== Útvonal paraméterek
+[cols="1,1,1, 1"]
+|===
+|Paraméter|Típus|Kötelező|Leírás
+
+|id
+|int
+|igen
+|A dolgozó egyedi azonosítója.
+|===
+
+==== Bemeneti paraméterek
+[cols="1,1,1, 1"]
+|===
+|Paraméter|Típus|Kötelező|Leírás
+
+|name
+|string
+|igen
+|A dolgozó neve
+
+|title
+|string
+|igen
+|A dolgozó munkaköre
+
+|phoneNumber
+|string
+|igen
+|A dolgoó telefonszáma
+
+|email
+|string
+|igen
+|A dolgozó email címe
+
+|wage
+|int
+|igen
+|A dolgozó fizetése
+|===
+
+==== Példa kérés
+[source,batch]
+{
+  "name": "Olajos",
+  "title": "Légiforgalmi irányító",
+  "phoneNumber": "06300000000",
+  "email": "olajos@repter.eu",
+  "wage": 120000
+}
+
+==== Példa válasz
+[source,batch]
+{
+  "workerId": 1,
+  "name": "Olajos",
+  "title": "Légiforgalmi irányító",
+  "phoneNumber": "06300000000",
+  "email": "olajos@repter.eu",
+  "wage": "120000"
+}
+
+=== Dolgozó törlése a rendszerből
+[cols="1h,3"]
+|===
+
+|Végpont
+|DELETE_WORKER
+
+|HTTP-módszer
+|DELETE
+
+|URL
+|http://localhost:8080/api/worker/{id}
+
+|Leírás
+|Ez a végpont lehetővé teszi, hogy töröljünk egy adott felhasználót a rendszerből id alapján.
+
+|Autentikáció
+|A kéréshez autentikáció és egy érvényes token szükséges.
+
+|===
+
+==== Útvonal paraméterek
+[cols="1,1,1, 1"]
+|===
+|Paraméter|Típus|Kötelező|Leírás
+
+|id
+|int
+|igen
+|A dolgozó egyedi azonosítója.
+|===
+
+==== Példa válasz
+[source,batch]
+{
+  "workerId": 1,
+  "name": "Olajos",
+  "title": "Légiforgalmi irányító",
+  "phoneNumber": "06300000000",
+  "email": "olajos@repter.eu",
+  "wage": "120000"
+}
+
+=== Dolgozó felvétele a rendszerbe
+[cols="1h,3"]
+|===
+
+|Végpont
+|CREATE_WORKER
+
+|HTTP-módszer
+|POST
+
+|URL
+|http://localhost:8080/api/worker/
+
+|Leírás
+|Ez a végpont lehetővé teszi, hogy felvegyünk egy új dolgozót a rendszerbe.
+
+|Autentikáció
+|A kéréshez autentikáció és egy érvényes token szükséges.
+
+|===
+
+==== Bemeneti paraméterek
+[cols="1,1,1, 1"]
+|===
+|Paraméter|Típus|Kötelező|Leírás
+
+|name
+|string
+|igen
+|A dolgozó neve
+
+|title
+|string
+|igen
+|A dolgozó munkaköre
+
+|phoneNumber
+|string
+|igen
+|A dolgoó telefonszáma
+
+|email
+|string
+|igen
+|A dolgozó email címe
+
+|wage
+|int
+|igen
+|A dolgozó fizetése
+|===
+
+==== Példa kérés
+[source,batch]
+{
+  "name": "Olajos",
+  "title": "Légiforgalmi irányító",
+  "phoneNumber": "06300000000",
+  "email": "olajos@repter.eu",
+  "wage": 120000
+}
+
+==== Példa válasz
+[source,batch]
+{
+  "workerId": 1,
+  "name": "Olajos",
+  "title": "Légiforgalmi irányító",
+  "phoneNumber": "06300000000",
+  "email": "olajos@repter.eu",
+  "wage": "120000"
+}
+
+=== Az összes dolgozó listázása
+[cols="1h,3"]
+|===
+
+|Végpont
+|LIST_WORKER
+
+|HTTP-módszer
+|GET
+
+|URL
+|http://localhost:8080/api/worker/list
+
+|Leírás
+|Ez a végpont lehetővé teszi, hogy listázzuk az összes dolgozó adatait.
+
+|Autentikáció
+|A kéréshez autentikáció és egy érvényes token szükséges.
+
+|===
+
 link:../../README.adoc[Vissza]
 
 
