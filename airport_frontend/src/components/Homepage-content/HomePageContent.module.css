@@ -63,10 +63,6 @@
     max-width: 80vw;
 }
 
-/* .piecharttext {
-    margin-right: 3vw;
-} */
-
 .stickynotes {
     position: relative; 
     background-size:cover;
@@ -98,9 +94,6 @@
     cursor: pointer; 
 }
 
-body {
-    user-select: none;
-}
 
 .alertcontainer {
     display: flex;
