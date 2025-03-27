@@ -458,6 +458,350 @@
   "jwtToken": "string"
 }
 
+=== Felhasználók listázása státusz alapján
+[cols="1h,3"]
+|===
+
+|Végpont
+|LIST_USER_BY_STATUS
+
+|HTTP-módszer
+|GET
+
+|URL
+|http://localhost:8080/api/user/status/
+
+|Leírás
+|Ez a végpont lehetővé teszi, hogy listázzuk a felhasználókat státusz alapján.
+
+|Autentikáció
+|A kéréshez autentikáció és egy érvényes token szükséges.
+
+|===
+
+==== Útvonal paraméterek
+[cols="1,1,1, 1"]
+|===
+|Paraméter|Típus|Kötelező|Leírás
+
+|userStatus
+|string
+|igen
+|A felhasználó státusza.
+|===
+
+==== Példa válasz
+[source,batch]
+[
+  {
+    "id": 1,
+    "username": "olajos",
+    "password": "jelszo",
+    "role": "Légiforgalmi irányító",
+    "status": "User is currently online",
+    "worker_id": 1
+  }
+]
+
+=== Felhasználó adatairól PDF fájl generálása
+[cols="1h,3"]
+|===
+
+|Végpont
+|GENERATE_PDF_USER
+
+|HTTP-módszer
+|GET
+
+|URL
+|http://localhost:8080/api/user/pdf/{id}
+
+|Leírás
+|Ez a végpont lehetővé teszi, hogy PDF fájlt generáljunk a felhasználó adataival.
+
+|Autentikáció
+|A kéréshez autentikáció és egy érvényes token szükséges.
+
+|===
+
+==== Útvonal paraméterek
+[cols="1,1,1, 1"]
+|===
+|Paraméter|Típus|Kötelező|Leírás
+
+|id
+|int
+|igen
+|A felhasználó egyedi azonosítója.
+|===
+
+==== Példa válasz
+[source,batch]
+PDF generated and saved to:"path"
+
+=== Egy felhasználó státuszának lekérése
+[cols="1h,3"]
+|===
+
+|Végpont
+|READ_USER_STATUS
+
+|HTTP-módszer
+|GET
+
+|URL
+|http://localhost:8080/api/user/getstatus/{id}
+
+|Leírás
+|Ez a végpont lehetővé teszi, hogy lekérjük egy adott felhasználó státuszát id alapján.
+
+|Autentikáció
+|A kéréshez autentikáció és egy érvényes token szükséges.
+
+|===
+
+==== Útvonal paraméterek
+[cols="1,1,1, 1"]
+|===
+|Paraméter|Típus|Kötelező|Leírás
+
+|id
+|int
+|igen
+|A felhasználó egyedi azonosítója.
+|===
+
+==== Példa válasz
+[source,batch]
+"User is currently online"
+
+== Vehicle status operations
+=== Az összes jármű típusának listázása
+[cols="1h,3"]
+|===
+
+|Végpont
+|LIST_VEHICLE_TYPES_NAME
+
+|HTTP-módszer
+|GET
+
+|URL
+|http://localhost:8080/api/vehiclestatuses/list
+
+|Leírás
+|Ez a végpont lehetővé teszi, hogy listázzuk az összes rendszerben lévő járműtípust.
+
+|Autentikáció
+|A kéréshez autentikáció és egy érvényes token szükséges.
+
+|===
+
+== Vehicle functions
+=== Egy jármű adatainak lekérdezése
+[cols="1h,3"]
+|===
+
+|Végpont
+|READ_VEHICLE
+
+|HTTP-módszer
+|GET
+
+|URL
+|http://localhost:8080/api/vehicle/{id}
+
+|Leírás
+|Ez a végpont lehetővé teszi, hogy lekérdezzük egy adott jármű adatait id alapján.
+
+|Autentikáció
+|A kéréshez autentikáció és egy érvényes token szükséges.
+
+|===
+
+==== Útvonal paraméterek
+[cols="1,1,1, 1"]
+|===
+|Paraméter|Típus|Kötelező|Leírás
+
+|id
+|int
+|igen
+|A jármű egyedi azonosítója.
+|===
+
+==== Példa válasz
+[source,batch]
+{
+  "vehicleId": 1,
+  "name": "SHUTTLE_BUS",
+  "license": "AAAA-123",
+  "type": "Busz",
+  "vehicleYear": 2010,
+  "status": "Jármű működőképes"
+}
+
+=== Jármű adatainak módosítása
+[cols="1h,3"]
+|===
+
+|Végpont
+|UPDATE_VEHICLE
+
+|HTTP-módszer
+|PUT
+
+|URL
+|http://localhost:8080/api/vehicle/{id}
+
+|Leírás
+|Ez a végpont lehetővé teszi, hogy módosítsuk egy adott jármű adatait id alapján.
+
+|Autentikáció
+|A kéréshez autentikáció és egy érvényes token szükséges.
+
+|===
+
+==== Útvonal paraméterek
+[cols="1,1,1, 1"]
+|===
+|Paraméter|Típus|Kötelező|Leírás
+
+|id
+|int
+|igen
+|A jármű egyedi azonosítója.
+|===
+
+==== Példa kérés
+[source,batch]
+{
+  "name": "repulo011",
+  "type": "Repülőgép",
+  "vehicleYear": 2015,
+  "status": "Jármű működőképes"
+}
+
+==== Példa válasz
+[source,batch]
+{
+  "vehicleId": 1,
+  "name": "repulo011",
+  "license": "AAGF-011",
+  "type": "Repülőgép",
+  "vehicleYear": 2015,
+  "status": "Jármű működőképes"
+}
+
+=== Jármű törlése a rendszerből
+[cols="1h,3"]
+|===
+
+|Végpont
+|DELETE_VEHICLE
+
+|HTTP-módszer
+|DELETE
+
+|URL
+|http://localhost:8080/api/vehicle/{id}
+
+|Leírás
+|Ez a végpont lehetővé teszi, hogy töröljünk egy adott járművet a rendszerből id alapján.
+
+|Autentikáció
+|A kéréshez autentikáció és egy érvényes token szükséges.
+
+|===
+
+==== Útvonal paraméterek
+[cols="1,1,1, 1"]
+|===
+|Paraméter|Típus|Kötelező|Leírás
+
+|id
+|int
+|igen
+|A jármű egyedi azonosítója.
+|===
+
+==== Példa válasz
+[source,batch]
+{
+  "vehicleId": 1,
+  "name": "repulo011",
+  "license": "AAGF-011",
+  "type": "Repülőgép",
+  "vehicleYear": 2015,
+  "status": "Jármű működőképes"
+}
+
+=== Jármű státuszának módosítása
+[cols="1h,3"]
+|===
+
+|Végpont
+|MODIFY_VEHICLE_STATUS
+
+|HTTP-módszer
+|PATCH
+
+|URL
+|http://localhost:8080/api/vehicle/{id}
+
+|Leírás
+|Ez a végpont lehetővé teszi, hogy töröljünk egy adott járművet a rendszerből id alapján.
+
+|Autentikáció
+|A kéréshez autentikáció és egy érvényes token szükséges.
+
+|===
+
+==== Útvonal paraméterek
+[cols="1,1,1, 1"]
+|===
+|Paraméter|Típus|Kötelező|Leírás
+
+|id
+|int
+|igen
+|A jármű egyedi azonosítója.
+|===
+
+==== Bemeneti paraméterek
+[cols="1,1,1, 1"]
+|===
+|Paraméter|Típus|Kötelező|Leírás
+
+|key
+|string
+|igen
+|A jármű státusza.
+
+|value
+|string
+|igen
+|A jármű státusza.
+|===
+
+==== Példa kérés
+[source,batch]
+{
+  "key": "STATUS",
+  "value": "Jármű működőképes"
+}
+
+==== Példa válasz
+[source,batch]
+{
+  "vehicleId": 1,
+  "name": "repulo011",
+  "license": "AAGF-011",
+  "type": "Repülőgép",
+  "vehicleYear": 2015,
+  "status": "Jármű működőképes"
+}
+
 link:../../README.adoc[Vissza]
 
 
