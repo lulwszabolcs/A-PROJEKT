@@ -2,5 +2,6 @@
 
 * link:technical-models/database-technical-model.adoc[Adatbázis felépítése és működése]
 * link:technical-models/endpoints_documentation.adoc[Végpontok leírása]
+* link:technical-models/enum-documentation.adoc[Előre definiált értékek(enumok) leírásai]
 
 link:system-plan.adoc[Vissza]

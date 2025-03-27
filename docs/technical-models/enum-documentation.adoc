@@ -1,0 +1,444 @@
+= Enum értékek dokumentációja
+
+== ProblemStatus enum
+A `ProblemStatus` egy enumeráció, amely a problémák lehetséges állapotait tartalmazza.
+
+[cols="1,1"]
+|===
+|Érték|Leírás
+
+|PENDING
+|Függőben
+
+|IN_PROGRESS
+|Folyamatban
+
+|RESOLVED
+|Megoldva
+
+|CLOSED
+|Lezárva
+
+|ON_HOLD
+|Felfüggesztve
+
+|CANCELED
+|Törölve
+
+|FAILED
+|Sikertelen
+|===
+
+== ProblemType enum
+A `ProblemType` egy enumeráció, amely a különböző probléma típusokat tartalmazza.
+
+[cols="1,1"]
+|===
+|Érték|Leírás
+
+|VEHICLE_FAILURE
+|Járműhiba
+
+|EQUIPMENT_FAILURE
+|Berendezés meghibásodása
+
+|FUEL_LEAK
+|Üzemanyag szivárgás
+
+|COMMUNICATION_BREAKDOWN
+|Kommunikációs hiba
+
+|NAVIGATION_ERROR
+|Navigációs hiba
+
+|POWER_OUTAGE
+|Áramszünet
+
+|RUNWAY_OBSTRUCTION
+|Kifutópálya akadály
+
+|WEATHER_DISRUPTION
+|Időjárási zavar
+
+|AIR_TRAFFIC_CONTROL_ERROR
+|Légi forgalomirányítási hiba
+
+|FUEL_SUPPLY_PROBLEM
+|Üzemanyag ellátási probléma
+
+|SYSTEM_FAILURE
+|Rendszerhiba
+
+|BAGGAGE_MISPLACEMENT
+|Elveszett poggyász
+
+|CUSTOMS_DELAY
+|Vámdelay
+
+|LIGHTING_FAILURE
+|Világítási hiba
+
+|CHECK_IN_ERROR
+|Check-in hiba
+
+|BOARDING_DELAY
+|Beszállási késés
+
+|DEICING_PROBLEM
+|Jégtelenítési probléma
+
+|FUEL_TRUCK_DELAY
+|Üzemanyag teherautó késés
+
+|FIRE_ALARM
+|Tűzriadó
+
+|LAVATORY_MALFUNCTION
+|Mellékhelyiség meghibásodás
+
+|TICKETING_ERROR
+|Jegykezelési hiba
+
+|SECURITY_SYSTEM_FAILURE
+|Biztonsági rendszer hiba
+
+|LOST_CHILD
+|Elveszett gyermek
+
+|MEDICAL_EMERGENCY
+|Orvosi vészhelyzet
+
+|RUNWAY_CRACK
+|Kifutópálya repedés
+
+|SNOW_CLEARANCE_ISSUE
+|Hóeltakarítási probléma
+
+|BIRD_STRIKE
+|Madárütközés
+
+|HEATING_FAILURE
+|Fűtési hiba
+
+|COOLING_FAILURE
+|Hűtési hiba
+
+|RADIO_FAILURE
+|Rádió meghibásodás
+
+|UNAUTHORIZED_PERSONNEL
+|Illetéktelen személy
+
+|RUNWAY_OVERRUN
+|Kifutópálya túlfutás
+
+|PARKING_SHORTAGE
+|Parkolóhely hiány
+
+|CARGO_SECURITY_BREACH
+|Rakomány biztonsági rés
+
+|BAGGAGE_SCREENING_ERROR
+|Poggyászátvilágítási hiba
+
+|EMERGENCY_EXIT_PROBLEM
+|Vészkijárat probléma
+|===
+
+== Role enum
+A `Role` egy enumeráció, amely a különböző szerepköröket tartalmazza.
+
+[cols="1,1"]
+|===
+|Érték|Leírás
+
+|AIR_TRAFFIC_CONTROLLER
+|Légiforgalmi irányító
+
+|GROUND_CONTROL_OPERATOR
+|Földi irányító operátor
+
+|NAVIGATION_SYSTEM_TECHNICIAN
+|Navigációs rendszer technikus
+
+|MAINTENANCE_TECHNICIAN
+|Karbantartó technikus
+
+|RAMP_AGENT
+|Rampa ügynök
+
+|BAGGAGE_HANDLER
+|Poggyászkézbesítő
+
+|REFUELING_OPERATOR
+|Tankoló operátor
+
+|JETWAY_OPERATOR
+|Jetway operátor
+
+|CHECK_IN_AGENT
+|Bejelentkezési ügynök
+
+|CUSTOMER_SERVICE_AGENT
+|Ügyfélszolgálati ügynök
+
+|GATE_AGENT
+|Kapcsolati ügynök
+
+|VIP_SERVICE_AGENT
+|VIP szolgáltatási ügynök
+
+|SECURITY_SCREENING_OFFICER
+|Biztonsági ellenőrző tiszt
+
+|AIRPORT_SECURITY_GUARD
+|Repülőtéri biztonsági őr
+
+|FIREFIGHTER
+|Tűzoltó
+
+|CARGO_HANDLER
+|Árukezelő
+
+|LOGISTICS_COORDINATOR
+|Logisztikai koordinátor
+|===
+
+== UserStatus enum
+A `UserStatus` egy enumeráció, amely a felhasználók jelenlegi állapotait írja le.
+
+[cols="1,1"]
+|===
+|Érték|Leírás
+
+|ONLINE
+|A felhasználó jelenleg online
+
+|OFFLINE
+|A felhasználó jelenleg offline
+
+|ON_HOLIDAY
+|A felhasználó jelenleg szabadságon van
+|===
+
+== VehicleStatus enum
+A `VehicleStatus` egy enumeráció, amely a járművek állapotait tartalmazza.
+
+[cols="1,1"]
+|===
+|Érték|Leírás
+
+|OPERATIONAL
+|Jármű működőképes
+
+|UNDER_MAINTENANCE
+|Karbantartás alatt
+
+|IN_REPAIR
+|Javítás alatt
+
+|OUT_OF_SERVICE
+|Üzemen kívül
+
+|AWAITING_INSPECTION
+|Várakozik a szemlére
+
+|FUELING
+|Tankolás alatt
+
+|CLEANING
+|Tisztítás alatt
+
+|UNDER_INSPECTION
+|Szemlén van
+|===
+
+== VehicleType enum
+A `VehicleType` egy enumeráció, amely a repülőterek különböző járműtípusait tartalmazza.
+
+[cols="1,1"]
+|===
+|Érték|Leírás
+
+|AIRCRAFT
+|Repülőgép
+
+|HELICOPTER
+|Helikopter
+
+|PUSHBACK_TRUCK
+|Tolató traktor
+
+|TUG
+|Vontató
+
+|FUEL_TRUCK
+|Üzemanyag-szállító
+
+|FOOD_SERVICE_TRUCK
+|Étel kiszolgáló jármű
+
+|BELT_LOADER
+|Szállítószalag
+
+|DEICING_TRUCK
+|Jégtelenítő
+
+|FIRE_TRUCK
+|Tűzoltóautó
+
+|SHUTTLE_BUS
+|Busz
+
+|MOBILE_LOUNGE
+|Mobil váróterem
+
+|AMBULIFT
+|Emelőkocsi
+
+|MAINTENANCE_TRUCK
+|Karbantartó jármű
+
+|SECURITY_VEHICLE
+|Biztonsági jármű
+
+|AIRFIELD_SWEEPER
+|Pályatakarító
+|===
+
+== Permission enum
+Az `Permission` egy enumeráció, amely a különböző műveleteket és funkciókat írja le.
+
+[cols="1,1"]
+|===
+|Érték|Leírás
+
+|CREATE_USER
+|Felhasználó létrehozása
+
+|READ_USER
+|Felhasználó adatainak megtekintése
+
+|LIST_USER
+|Felhasználók listázása
+
+|LIST_USER_BY_STATUS
+|Felhasználók listázása állapot szerint
+
+|UPDATE_USER
+|Felhasználó adatainak frissítése
+
+|MODIFY_USER_STATUS
+|Felhasználói állapot módosítása
+
+|DELETE_USER
+|Felhasználó törlése
+
+|READ_USER_STATUS
+|Felhasználói állapot megtekintése
+
+|CREATE_WORKER
+|Munkavállaló létrehozása
+
+|READ_WORKER
+|Munkavállaló adatainak megtekintése
+
+|LIST_WORKER
+|Munkavállalók listázása
+
+|UPDATE_WORKER
+|Munkavállaló adatainak frissítése
+
+|DELETE_WORKER
+|Munkavállaló törlése
+
+|CREATE_PROBLEM
+|Probléma létrehozása
+
+|READ_PROBLEM
+|Probléma adatainak megtekintése
+
+|LIST_PROBLEM
+|Problémák listázása
+
+|MODIFY_PROBLEM_STATUS
+|Probléma állapotának módosítása
+
+|LIST_PROBLEM_BY_TYPE
+|Problémák listázása típus szerint
+
+|GET_PROBLEM_NUMBER_BY_TYPE
+|Problémák számának lekérése típus szerint
+
+|GET_PROBLEM_NUMBER_SERIES
+|Problémaszám sorozat lekérése
+
+|UPDATE_PROBLEM
+|Probléma adatainak frissítése
+
+|DELETE_PROBLEM
+|Probléma törlése
+
+|LIST_PROBLEM_TYPES_NAME
+|Problématípusok neveinek listázása
+
+|LIST_ROLES_NAME
+|Szerepkörök neveinek listázása
+
+|CREATE_VEHICLE
+|Jármű létrehozása
+
+|READ_VEHICLE
+|Jármű adatainak megtekintése
+
+|LIST_VEHICLE
+|Járművek listázása
+
+|UPDATE_VEHICLE
+|Jármű adatainak frissítése
+
+|MODIFY_VEHICLE_STATUS
+|Jármű állapotának módosítása
+
+|DELETE_VEHICLE
+|Jármű törlése
+
+|LIST_VEHICLE_STATUSES_NAME
+|Jármű állapotok neveinek listázása
+
+|LIST_VEHICLE_TYPES_NAME
+|Jármű típusok neveinek listázása
+
+|READ_IMAGES
+|Képek megtekintése
+
+|UPLOAD_IMAGES
+|Képek feltöltése
+
+|LIST_NOTES
+|Jegyzetek listázása
+
+|SAVE_NOTE
+|Jegyzet mentése
+
+|DELETE_NOTE
+|Jegyzet törlése
+|===
+
+== StatusPatchKey enum
+A `StatusPatchKey` egy enumeráció, amely a státusz módosítására használható kulcsokat tartalmazza.
+
+[cols="1,1"]
+|===
+|Érték|Leírás
+
+|STATUS
+|A státusz módosításának kulcsa
+|===
+
+link:../technical-models.adoc[Vissza]
+
+
+
+
+
