@@ -55,7 +55,7 @@
 |===
 
 ==== Példa Válasz
-[source,batch]
+[source,json]
 {
   "id": 1,
   "username": "viccelek",
@@ -137,7 +137,7 @@
 |===
 
 ==== Példa kérés
-[source,batch]
+[source,json]
 {
   "username": "olajos",
   "password": "jelszo",
@@ -147,7 +147,7 @@
 }
 
 ==== Példa válasz
-[source,batch]
+[source,json]
 {
   "id": 1,
   "username": "olajos",
@@ -198,7 +198,7 @@
 |===
 
 ==== Példa válasz
-[source,batch]
+[source,json]
 {
   "id": 1,
   "username": "olajos",
@@ -266,14 +266,14 @@
 |===
 
 ==== Példa kérés
-[source,batch]
+[source,json]
 {
   "key": "STATUS",
   "value": "User is currently online"
 }
 
 ==== Példa válasz
-[source,batch]
+[source,json]
 {
   "id": 1,
   "username": "olajos",
@@ -366,7 +366,7 @@
 |===
 
 ==== Példa kérés
-[source,batch]
+[source,json]
 {
   "username": "olajos",
   "password": "jelszo",
@@ -376,7 +376,7 @@
 }
 
 ==== Példa válasz
-[source,batch]
+[source,json]
 {
   "id": 1,
   "username": "olajos",
@@ -433,14 +433,14 @@
 |===
 
 ==== Példa kérés
-[source,batch]
+[source,json]
 {
   "username": "olajos",
   "password": "jelszo"
 }
 
 ==== Példa válasz
-[source,batch]
+[source,json]
 {
   "id": 1,
   "username": "olajos",
@@ -491,7 +491,7 @@
 |===
 
 ==== Példa válasz
-[source,batch]
+[source,json]
 [
   {
     "id": 1,
@@ -631,7 +631,7 @@ PDF generated and saved to:"path"
 |===
 
 ==== Példa válasz
-[source,batch]
+[source,json]
 {
   "vehicleId": 1,
   "name": "SHUTTLE_BUS",
@@ -674,7 +674,7 @@ PDF generated and saved to:"path"
 |===
 
 ==== Példa kérés
-[source,batch]
+[source,json]
 {
   "name": "repulo011",
   "type": "Repülőgép",
@@ -683,7 +683,7 @@ PDF generated and saved to:"path"
 }
 
 ==== Példa válasz
-[source,batch]
+[source,json]
 {
   "vehicleId": 1,
   "name": "repulo011",
@@ -726,7 +726,7 @@ PDF generated and saved to:"path"
 |===
 
 ==== Példa válasz
-[source,batch]
+[source,json]
 {
   "vehicleId": 1,
   "name": "repulo011",
@@ -785,14 +785,14 @@ PDF generated and saved to:"path"
 |===
 
 ==== Példa kérés
-[source,batch]
+[source,json]
 {
   "key": "STATUS",
   "value": "Jármű működőképes"
 }
 
 ==== Példa válasz
-[source,batch]
+[source,json]
 {
   "vehicleId": 1,
   "name": "repulo011",
@@ -850,7 +850,7 @@ PDF generated and saved to:"path"
 |===
 
 ==== Példa kérés
-[source,batch]
+[source,json]
 {
   "name": "repulo011",
   "type": "Repülőgép",
@@ -859,7 +859,7 @@ PDF generated and saved to:"path"
 }
 
 ==== Példa válasz
-[source,batch]
+[source,json]
 {
   "vehicleId": 1,
   "name": "repulo011",
@@ -946,7 +946,7 @@ PDF generated and saved to:"path"
 |===
 
 ==== Példa válasz
-[source,batch]
+[source,json]
 {
   "workerId": 1,
   "name": "Gipsz Jakab",
@@ -1020,7 +1020,7 @@ PDF generated and saved to:"path"
 |===
 
 ==== Példa kérés
-[source,batch]
+[source,json]
 {
   "name": "Olajos",
   "title": "Légiforgalmi irányító",
@@ -1030,7 +1030,7 @@ PDF generated and saved to:"path"
 }
 
 ==== Példa válasz
-[source,batch]
+[source,json]
 {
   "workerId": 1,
   "name": "Olajos",
@@ -1073,7 +1073,7 @@ PDF generated and saved to:"path"
 |===
 
 ==== Példa válasz
-[source,batch]
+[source,json]
 {
   "workerId": 1,
   "name": "Olajos",
@@ -1136,7 +1136,7 @@ PDF generated and saved to:"path"
 |===
 
 ==== Példa kérés
-[source,batch]
+[source,json]
 {
   "name": "Olajos",
   "title": "Légiforgalmi irányító",
@@ -1146,7 +1146,7 @@ PDF generated and saved to:"path"
 }
 
 ==== Példa válasz
-[source,batch]
+[source,json]
 {
   "workerId": 1,
   "name": "Olajos",
