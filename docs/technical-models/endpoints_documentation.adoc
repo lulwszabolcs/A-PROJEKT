@@ -1177,6 +1177,587 @@ PDF generated and saved to:"path"
 
 |===
 
+== Role operations
+=== Az összes jogkör nevének listázása
+[cols="1h,3"]
+|===
+
+|Végpont
+|LIST_ROLES_NAME
+
+|HTTP-módszer
+|GET
+
+|URL
+|http://localhost:8080/api/roles/list
+
+|Leírás
+|Ez a végpont lehetővé teszi, hogy az összes jogkör nevét.
+
+|Autentikáció
+|A kéréshez autentikáció és egy érvényes token szükséges.
+
+|===
+
+== Problem functions
+=== Egy adott probléma lekérdezése
+[cols="1h,3"]
+|===
+
+|Végpont
+|READ_PROBLEM
+
+|HTTP-módszer
+|GET
+
+|URL
+|http://localhost:8080/api/problem/{id}
+
+|Leírás
+|Ez a végpont lehetővé teszi, hogy lekérdezzük egy adott probléma adatait id alapján.
+
+|Autentikáció
+|A kéréshez autentikáció és egy érvényes token szükséges.
+
+|===
+
+==== Útvonal paraméterek
+[cols="1,1,1, 1"]
+|===
+|Paraméter|Típus|Kötelező|Leírás
+
+|id
+|int
+|igen
+|A probléma egyedi azonosítója.
+|===
+
+==== Példa válasz
+[source,json]
+{
+  "problemId": 1,
+  "name": "Traktor hiba",
+  "description": "A tolató traktor kereke defektes",
+  "date": 2025-01-01,
+  "problemType": "Járműhiba",
+  "status": "Függőben",
+  "role": "Rampa ügynök"
+}
+
+=== Egy ptobléma adatainak módosítása
+[cols="1h,3"]
+|===
+
+|Végpont
+|UPDATE_PROBLEM
+
+|HTTP-módszer
+|PUT
+
+|URL
+|http://localhost:8080/api/problem/{id}
+
+|Leírás
+|Ez a végpont lehetővé teszi, hogy módosítsuk egy adott probléma adatait id alapján.
+
+|Autentikáció
+|A kéréshez autentikáció és egy érvényes token szükséges.
+
+|===
+
+==== Útvonal paraméterek
+[cols="1,1,1, 1"]
+|===
+|Paraméter|Típus|Kötelező|Leírás
+
+|id
+|int
+|igen
+|A probléma egyedi azonosítója.
+|===
+
+==== Bemeneti paraméterek
+[cols="1,1,1, 1"]
+|===
+|Paraméter|Típus|Kötelező|Leírás
+
+|name
+|string
+|igen
+|A probléma neve
+
+|description
+|string
+|igen
+|A probléma leírása
+
+|date
+|string
+|igen
+|A probléma felvételének dátuma
+
+|problemType
+|string
+|igen
+|A probléma típusa
+
+|status
+|string
+|igen
+|A probléma státusza
+|===
+
+==== Példa kérés
+[source,json]
+{
+  "name": "Traktor hiba",
+  "description": "A tolató traktor kereke defektes",
+  "date": 2025-01-01,
+  "problemType": "Járműhiba",
+  "status": "Függőben"
+}
+
+==== Példa válasz
+[source,json]
+{
+  "problemId": 1,
+  "name": "Traktor hiba",
+  "description": "A tolató traktor kereke defektes",
+  "date": 2025-01-01,
+  "problemType": "Járműhiba",
+  "status": "Függőben",
+  "role": "Rampa ügynök"
+}
+
+=== Probléma törlése a rendszerből
+[cols="1h,3"]
+|===
+
+|Végpont
+|DELETE_PROBLEM
+
+|HTTP-módszer
+|DELETE
+
+|URL
+|http://localhost:8080/api/problem/{id}
+
+|Leírás
+|Ez a végpont lehetővé teszi, hogy töröljünk egy adott problémát a rendszerből id alapján.
+
+|Autentikáció
+|A kéréshez autentikáció és egy érvényes token szükséges.
+
+|===
+
+==== Útvonal paraméterek
+[cols="1,1,1, 1"]
+|===
+|Paraméter|Típus|Kötelező|Leírás
+
+|id
+|int
+|igen
+|A probléma egyedi azonosítója.
+|===
+
+==== Példa válasz
+[source,json]
+{
+  "problemId": 1,
+  "name": "Traktor hiba",
+  "description": "A tolató traktor kereke defektes",
+  "date": 2025-01-01,
+  "problemType": "Járműhiba",
+  "status": "Függőben",
+  "role": "Rampa ügynök"
+}
+
+=== Egy probléma státuszának módosítása
+[cols="1h,3"]
+|===
+
+|Végpont
+|MODIFY_PROBLEM_STATUS
+
+|HTTP-módszer
+|PATCH
+
+|URL
+|http://localhost:8080/api/problem/{id}
+
+|Leírás
+|Ez a végpont lehetővé teszi, hogy módosítsuk egy adott probléma státuszát id alapján.
+
+|Autentikáció
+|A kéréshez autentikáció és egy érvényes token szükséges.
+
+|===
+
+==== Útvonal paraméterek
+[cols="1,1,1, 1"]
+|===
+|Paraméter|Típus|Kötelező|Leírás
+
+|id
+|int
+|igen
+|A probléma egyedi azonosítója.
+|===
+
+==== Bemeneti paraméterek
+[cols="1,1,1, 1"]
+|===
+|Paraméter|Típus|Kötelező|Leírás
+
+|key
+|string
+|igen
+|A probléma státusza.
+
+|value
+|string
+|igen
+|A probléma státusza.
+|===
+
+==== Példa kérés
+[source,json]
+{
+  "key": "STATUS",
+  "value": "Függőben"
+}
+
+==== Példa válasz
+[source,json]
+{
+  "problemId": 1,
+  "name": "Traktor hiba",
+  "description": "A tolató traktor kereke defektes",
+  "date": 2025-01-01,
+  "problemType": "Járműhiba",
+  "status": "Függőben",
+  "role": "Rampa ügynök"
+}
+
+=== Az összes probléma listázása
+[cols="1h,3"]
+|===
+
+|Végpont
+|LIST_PROBLEM
+
+|HTTP-módszer
+|GET
+
+|URL
+|http://localhost:8080/api/problem
+
+|Leírás
+|Ez a végpont lehetővé teszi, hogy listázzuk az összes probléma adatait.
+
+|Autentikáció
+|A kéréshez autentikáció és egy érvényes token szükséges.
+
+|===
+
+=== Új probléma felvétele a rendszerbe
+[cols="1h,3"]
+|===
+
+|Végpont
+|CREATE_PROBLEM
+
+|HTTP-módszer
+|POST
+
+|URL
+|http://localhost:8080/api/problem
+
+|Leírás
+|Ez a végpont lehetővé teszi, hogy egy új problémát rögzítsünk a rendszerbe.
+
+|Autentikáció
+|A kéréshez autentikáció és egy érvényes token szükséges.
+
+|===
+
+==== Bemeneti paraméterek
+[cols="1,1,1, 1"]
+|===
+|Paraméter|Típus|Kötelező|Leírás
+
+|name
+|string
+|igen
+|A probléma neve
+
+|description
+|string
+|igen
+|A probléma leírása
+
+|date
+|string
+|igen
+|A probléma felvételének dátuma
+
+|problemType
+|string
+|igen
+|A probléma típusa
+
+|status
+|string
+|igen
+|A probléma státusza
+|===
+
+==== Példa kérés
+[source,json]
+{
+  "name": "Traktor hiba",
+  "description": "A tolató traktor kereke defektes",
+  "date": 2025-01-01,
+  "problemType": "Járműhiba",
+  "status": "Függőben"
+}
+
+==== Példa válasz
+[source,json]
+{
+  "problemId": 1,
+  "name": "Traktor hiba",
+  "description": "A tolató traktor kereke defektes",
+  "date": 2025-01-01,
+  "problemType": "Járműhiba",
+  "status": "Függőben",
+  "role": "Rampa ügynök"
+}
+
+=== Provlémák listázása típus szerint
+[cols="1h,3"]
+|===
+
+|Végpont
+|LIST_PROBLEM_BY_TYPE
+
+|HTTP-módszer
+|GET
+
+|URL
+|http://localhost:8080/api/problem/type/
+
+|Leírás
+|Ez a végpont lehetővé teszi, hogy listáttuk az összes problémát típua szerint.
+
+|Autentikáció
+|A kéréshez autentikáció és egy érvényes token szükséges.
+
+|===
+
+== Note functions
+=== Jegyzet felvétele
+[cols="1h,3"]
+|===
+
+|Végpont
+|SAVE_NOTE
+
+|HTTP-módszer
+|POST
+
+|URL
+|http://localhost:8080/api/notes
+
+|Leírás
+|Ez a végpont lehetővé teszi, hogy új jegyzetet vegyünk fel a rendszerbe.
+
+|Autentikáció
+|A kéréshez autentikáció és egy érvényes token szükséges.
+
+|===
+
+==== Bemeneti paraméterek
+[cols="1,1,1, 1"]
+|===
+|Paraméter|Típus|Kötelező|Leírás
+
+|text
+|string
+|igen
+|A jegyzet szövege
+|===
+
+==== Példa kérés
+[source,json]
+{
+  "text": "10:00 meeting!"
+}
+
+==== Példa válasz
+[source,json]
+{
+  "id": 1,
+  "text": "10:00 meeting!"
+}
+
+=== Jegyzetek listázása
+[cols="1h,3"]
+|===
+
+|Végpont
+|LIST_NOTES
+
+|HTTP-módszer
+|GET
+
+|URL
+|http://localhost:8080/api/notes/list
+
+|Leírás
+|Ez a végpont lehetővé teszi, hogy listázzuk az összes jegyzet adatait.
+
+|Autentikáció
+|A kéréshez autentikáció és egy érvényes token szükséges.
+
+|===
+
+=== Jegyzet törlése a rendszerből
+[cols="1h,3"]
+|===
+
+|Végpont
+|DELETE_NOTE
+
+|HTTP-módszer
+|DELETE
+
+|URL
+|http://localhost:8080/api/note/{id}
+
+|Leírás
+|Ez a végpont lehetővé teszi, hogy töröljünk egy adott jegyzetet a rendszerből id alapján.
+
+|Autentikáció
+|A kéréshez autentikáció és egy érvényes token szükséges.
+
+|===
+
+==== Útvonal paraméterek
+[cols="1,1,1, 1"]
+|===
+|Paraméter|Típus|Kötelező|Leírás
+
+|id
+|int
+|igen
+|A jegyzet egyedi azonosítója.
+|===
+
+==== Példa válasz
+[source,json]
+{
+  "id": 1,
+  "text": "10:00 meeting!"
+}
+
+== Upload images
+=== Profilkép feltöltése egy adott dolgozóhoz
+[cols="1h,3"]
+|===
+
+|Végpont
+|UPLOAD_IMAGES
+
+|HTTP-módszer
+|POST
+
+|URL
+|http://localhost:8080/api/images/upload?imageSave={}
+
+|Leírás
+|Ez a végpont lehetővé teszi, hogy profilképet töltsünk fel egy dolgozóhoz.
+
+|Autentikáció
+|A kéréshez autentikáció és egy érvényes token szükséges.
+
+|===
+
+==== Útvonal paraméterek
+[cols="1,1,1, 1"]
+|===
+|Paraméter|Típus|Kötelező|Leírás
+
+|imageSave
+|string
+|igen
+|
+|===
+
+==== Bemeneti paraméterek
+[cols="1,1,1, 1"]
+|===
+|Paraméter|Típus|Kötelező|Leírás
+
+|file
+|string
+|igen
+|A kép útvonala.
+|===
+
+==== Példa kérés
+[source,json]
+{
+  "file": "path"
+}
+
+=== Az összes feltöltött kép listázása
+[cols="1h,3"]
+|===
+
+|Végpont
+|LIST_IMAGE
+
+|HTTP-módszer
+|GET
+
+|URL
+|http://localhost:8080/api/images
+
+|Leírás
+|Ez a végpont lehetővé teszi, hogy listázzuk at összes feltöltött képet a rendszerből.
+
+|Autentikáció
+|A kéréshez autentikáció és egy érvényes token szükséges.
+
+|===
+
+== Check permissions for role
+[cols="1h,3"]
+|===
+
+|Végpont
+|CHECK_PERMISSION
+
+|HTTP-módszer
+|GET
+
+|URL
+|http://localhost:8080/api/check-permission?permission={}
+
+|Leírás
+|Ez a végpont lehetővé teszi, hogy ellenőrizzük a bejelentkezett felhasználónak van e jogköre a feladatot végrehajtani.
+
+|Autentikáció
+|A kéréshez autentikáció és egy érvényes token szükséges.
+
+|===
+
+==== Példa válasz
+[source,json]
+true
+
 link:../../README.adoc[Vissza]
 
 
