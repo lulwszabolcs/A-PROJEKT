@@ -17,7 +17,7 @@ image::../static/databaseUml.png[Adatbázis UML diagram]
 |VARCHAR(30)
 |A jármű neve
 
-|licence
+|license
 |VARCHAR(10)
 |A jármű rendszáma
 
