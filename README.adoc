@@ -44,7 +44,13 @@ npm run dev
 
 . Indítsuk el az _IntelliJ IDEA_ programot.
 
-. Töltsük be a projektünket, majd keressük meg az `src/java/main` mappában található `AirportApplication` filet.
+. Töltsük be a projektünket, majd, a jobb felső sarokban kattintsunk a három ponra majd válasszuk az `Edit...` lehetőséget.
+
+. Kattintsunk `Build and Run` rész jobb oldalán található `Modify options` lehetőségre, majd keressük meg az `Environment variables` lehetőséget és válasszuk ki.
+
+. Az ezután felugró mezőbe illesszük be a kapott környezeti változót, majd zárjuk be az ablakot.
+
+. Ezután keressük meg az `src/java/main` mappában található `AirportApplication` filet.
 
 . A jobb felső sarokban található futtatás ikonnal futtassuk.
 
