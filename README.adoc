@@ -15,9 +15,9 @@ Ezáltal javul az üzemeltetési folyamatok átláthatósága, csökken a késé
 
 == ⬇️ Telepítés:
 === Szükséges programok:
-* MySQL connector
-* IntelliJ IDEA
-* NodeJS 18+
+* https://dev.mysql.com/downloads/installer/[MySQL connector]
+* https://www.jetbrains.com/idea/download/?section=windows[IntelliJ IDEA]
+* https://nodejs.org/en[NodeJS v18+]
 
 . Navigáljunk az _airport_frontend_ mappába:
 +
