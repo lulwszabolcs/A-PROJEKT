@@ -23,7 +23,7 @@ Ezáltal javul az üzemeltetési folyamatok átláthatósága, csökken a késé
 +
 [source,batch]
 ----
-cd .\aiport_frontend\
+cd .\airport_frontend\
 ----
 
 . Telepítsük fel a szükséges függőségeket:
@@ -59,37 +59,6 @@ npm run dev
 == 🌳 Mappa struktúra
 [source,batch]
 
-├───aiport_frontend
-│   ├───public
-│   │   └───assets
-│   └───src
-│       ├───components
-│       │   ├───Errors
-│       │   │   ├───AddProblem
-│       │   │   ├───EditProblem
-│       │   │   └───ErrorList
-│       │   ├───Homepage-content
-│       │   │   └───AddStickyNote
-│       │   ├───Login
-│       │   │   └───LoginPage
-│       │   ├───NotFound
-│       │   ├───Profile
-│       │   │   └───ProfileCard
-│       │   ├───Sidebar
-│       │   ├───Snackbar
-│       │   ├───Support
-│       │   │   └───SupportChat
-│       │   ├───Vehicles
-│       │   │   ├───AddVehicle
-│       │   │   ├───VehicleList
-│       │   │   └───VehicleModify
-│       │   └───Workers
-│       │       └───WorkerInfoBox
-│       │           ├───AddWorker
-│       │           └───WorkerDetails
-│       ├───contexts
-│       └───tests
-│           └───LoginPage
 ├───airport_backend
 │   └───src
 │       ├───main
@@ -126,11 +95,51 @@ npm run dev
 │               └───com
 │                   └───example
 │                       └───airport
+├───airport_frontend
+│   ├───public
+│   │   └───assets
+│   └───src
+│       ├───components
+│       │   ├───Errors
+│       │   │   ├───AddProblem
+│       │   │   ├───EditProblem
+│       │   │   └───ErrorList
+│       │   ├───Homepage-content
+│       │   │   └───AddStickyNote
+│       │   ├───Login
+│       │   │   └───LoginPage
+│       │   ├───NotFound
+│       │   ├───Profile
+│       │   │   └───ProfileCard
+│       │   ├───Sidebar
+│       │   ├───Snackbar
+│       │   ├───Support
+│       │   │   └───SupportChat
+│       │   ├───Vehicles
+│       │   │   ├───AddVehicle
+│       │   │   ├───VehicleList
+│       │   │   └───VehicleModify
+│       │   └───Workers
+│       │       └───WorkerInfoBox
+│       │           ├───AddWorker
+│       │           └───WorkerDetails
+│       ├───contexts
+│       └───tests
+│           ├───Errors
+│           ├───Homepage
+│           ├───LoginPage
+│           ├───Profile
+│           ├───Support
+│           ├───Vehicles
+│           └───Workers
 ├───docs
 │   ├───functional-models
 │   ├───static
-│   │   └───UC_diagrams
-│   └───technical-models
+│   │   ├───UC_diagrams
+│   │   └───UI
+│   ├───technical-models
+│   ├───test_docs
+│   └───user_manual
 ├───fonts
 └───images
     └───vehicle_images
