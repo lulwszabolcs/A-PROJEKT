@@ -10,6 +10,7 @@ import com.example.airport.dto.user.UserRead;
 import com.example.airport.dto.user.UserSave;
 import com.example.airport.enumeration.user.UserStatus;
 import com.example.airport.model.User;
+import com.example.airport.service.PdfService;
 import com.example.airport.service.UserService;
 import com.example.airport.token.JWTTokenProvider;
 import com.itextpdf.text.*;
@@ -154,78 +155,9 @@ public class UserController {
     @GetMapping("/user/pdf/{id}")
     @Operation(summary = "Generate PDF of user data")
     public ResponseEntity<String> generateUserPdf(@PathVariable int id) throws IOException, DocumentException {
-        UserRead user = service.getUser(id);
-
-        Path projectRootPath = Paths.get(System.getProperty("user.home"));
-        Path pdfDirectoryPath = projectRootPath.resolve("Downloads");
-
-        Path filePath = pdfDirectoryPath.resolve(user.getUsername() + ".pdf");
-        Document document = new Document();
-        PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(filePath.toFile()));
-        document.open();
-
-        String logoPath = "images/LOGO.png";
-        Image logo = Image.getInstance(logoPath);
-        logo.scaleToFit(80, 80);
-        logo.setAbsolutePosition(10, document.getPageSize().getHeight() - logo.getScaledHeight() - 10);
-        document.add(logo);
-
-        document.add(new Paragraph(" "));
-        document.add(new Paragraph(" "));
-        document.add(new Paragraph(" "));
-        document.add(new Paragraph(" "));
-        document.add(new com.itextpdf.text.pdf.draw.LineSeparator());
-
-        BaseFont baseFont = BaseFont.createFont("fonts/ARIAL.TTF", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
-        Font normalFont = new Font(baseFont, 12);
-        Font boldFont = new Font(baseFont, 12, Font.BOLD);
-
-        document.add(new Paragraph(" "));
-
-        String imagePath = "images/" + id + ".jpg";
-        Image photo = Image.getInstance(imagePath);
-        photo.scaleToFit(150, 150);
-
-        photo.setAlignment(Element.ALIGN_CENTER);
-        document.add(photo);
-
-        document.add(new Paragraph(" "));
-
-        Paragraph userDetails = new Paragraph();
-        userDetails.add(new Chunk("Név: ", boldFont));
-        userDetails.add(new Chunk(user.getWorker().getName(), normalFont));
-        userDetails.add(Chunk.NEWLINE);
-        userDetails.add(new Chunk("Munkakör: ", boldFont));
-        userDetails.add(new Chunk(user.getWorker().getTitle().getDescription(), normalFont));
-        userDetails.add(Chunk.NEWLINE); // Add a new line
-
-        userDetails.add(new Chunk("Email: ", boldFont));
-        userDetails.add(new Chunk(user.getWorker().getEmail(), normalFont));
-        userDetails.add(Chunk.NEWLINE); // Add a new line
-
-        userDetails.add(new Chunk("Telefonszám: ", boldFont));
-        userDetails.add(new Chunk(user.getWorker().getPhoneNumber(), normalFont));
-        userDetails.add(Chunk.NEWLINE); // Add a new line
-
-        userDetails.add(new Chunk("Fizetés: ", boldFont));
-        userDetails.add(new Chunk(user.getWorker().getWage() + " Ft", normalFont));
-        userDetails.setAlignment(Element.ALIGN_CENTER);
-        document.add(userDetails);
-
-        document.add(new Paragraph(" "));
-
-        document.add(new Paragraph(" "));
-
-        LineSeparator lineSeparator = new LineSeparator();
-        lineSeparator.setOffset(-360); // Adjust this value to position the line correctly
-        document.add(new Chunk(lineSeparator));
-
-        String currentDateAndTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-        ColumnText.showTextAligned(writer.getDirectContent(), Element.ALIGN_LEFT,
-                new Phrase(currentDateAndTime, normalFont), 36, 13, 0);
-
-        document.close();
-        return new ResponseEntity<>("PDF generated and saved to: " + filePath.toString(), HttpStatus.OK);
+        UserRead user = service.getUser(id); // Fetch user data
+        String pdfPath = PdfService.generateUserPdf(user);
+        return new ResponseEntity<>("PDF generated and saved to: " + pdfPath, HttpStatus.OK);
     }
 }
 
