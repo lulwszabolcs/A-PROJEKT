@@ -145,7 +145,7 @@ public class UserController {
     @GetMapping("/user/pdf/{id}")
     @Operation(summary = "Generate PDF of user data")
     public ResponseEntity<String> generateUserPdf(@PathVariable int id) throws IOException, DocumentException {
-        UserRead user = service.getUser(id); // Fetch user data
+        UserRead user = service.getUser(id);
         String pdfPath = PdfService.generateUserPdf(user);
         return new ResponseEntity<>("PDF generated and saved to: " + pdfPath, HttpStatus.OK);
     }
