@@ -38,8 +38,8 @@ export default function Loginpage() {
             <h2 style={{textAlign:'center'}}>Belépés</h2>
             <form onSubmit={handleSubmit(onSubmit)} data-testid={"loginForm"}>
                 <FormControl fullWidth style={{gap:'40px'}}>
-                    <TextField id="outlined-basic" label="Felhasználónév" variant="outlined" defaultValue={"viccelek"} data-testid={"userNameField"} required {...register("username",{required:true})} />
-                    <TextField id="outlined-basic" label="Jelszó" variant="outlined" type='password' defaultValue={"viccelek123"} data-testid={"passwordField"} required {...register("password",{required:true})}     />
+                    <TextField id="outlined-basic" label="Felhasználónév" variant="outlined" data-testid={"userNameField"} required {...register("username",{required:true})} />
+                    <TextField id="outlined-basic" label="Jelszó" variant="outlined" type='password' data-testid={"passwordField"} required {...register("password",{required:true})}     />
                     <Button type='submit' variant="contained" className={styles.loginbutton} data-testid={"loginButton"}>Belépés</Button>
                 </FormControl>  
             </form>
