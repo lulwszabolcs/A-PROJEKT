@@ -156,3 +156,5 @@ link:docs/test_docs/ui_test_documentation.adoc[Felhasználói felület teszt dok
 
 link:docs/test_docs/backend_test_documentation.adoc[Végpont teszt dokumentáció]
 
+link:docs/projektnaplo.pdf[Projektnapló]
+
